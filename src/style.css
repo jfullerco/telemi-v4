@@ -1,0 +1,102 @@
+:root {
+  --speed: 500ms
+  
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.page {
+  display: flex;
+  
+}
+.box {
+  min-height: 55vh;
+}
+
+.drawerPaper {
+  width: 85vw;
+  padding: 1rem;
+}
+
+.notification {
+  background-color: rgba(230, 230, 230, 0.3);
+  background-blend-mode: screen;
+  backdrop-filter: blur(10px);
+}
+
+.footerblur {
+  background-color: rgba(230, 230, 230, 0.3);
+  background-blend-mode: overlay;
+  backdrop-filter: blur(10px);
+  
+}
+
+body {
+        display: flex;
+        flex-direction: column;
+        scroll-behavior: smooth;
+        background-image: url("https://image.freepik.com/free-vector/vector-network-background-abstract-polygon-triangle_2065-76.jpg");
+        
+        background-repeat: repeat-x;
+        background-attachment: fixed;
+        background-blend-mode: lighten;
+      }
+ 
+#wrapper {
+          flex: 1;
+          
+          min-width: 50vw;
+      }
+
+.dropdown {
+          display: flex;
+         
+      }
+
+.container {
+  min-height: 78vh;
+}
+.textarea {
+  border-radius: 20px;
+  white-space: nowrap;
+  font-size: .75rem;
+}
+
+.textareafield {
+  white-space: pre-wrap;
+}
+
+.loading {
+  height: 0;
+  width: 0;
+  padding: 15px;
+  border: 6px solid #ccc;
+  border-right-color: #888;
+  border-radius: 22px;
+  -webkit-animation: rotate 1s infinite linear;
+  /* left, top and position just for the demo! */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  
+}
+
+@-webkit-keyframes rotate {
+  /* 100% keyframe for  clockwise. 
+     use 0% instead for anticlockwise */
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@keyframes dropDown {
+  0% {max-height:0%;}
+  100% {max-height:100%;}
+}
