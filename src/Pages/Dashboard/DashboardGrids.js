@@ -152,7 +152,7 @@ const DashboardGrids = ({visible}) => {
                       }
                     })
   }
-
+  
 {/**Add Buttons */}
   const handleAddServiceBtn = (id) => {
                     history.push({
