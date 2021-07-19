@@ -89,9 +89,10 @@ const DetailModule = (state) => {
   
 
   useEffect(() => {
+    checkForNew(isDrawerActive, isNew)
     setLoading(true)
     handlePageFields(isModule)
-    checkForNew(isDrawerActive, isNew)
+    
     fetchPage()
     fetchBills()
     fetchNotes()
@@ -156,6 +157,10 @@ const DetailModule = (state) => {
       case "Bills":
         return (
           setPageFields(billsDetailFields)
+        )
+      case "Notes": 
+        return (
+          setPageFields(notesDetailFields)
         )
     }
   }
@@ -404,22 +409,8 @@ return (
                       </Column>
                      
                       <Column size="pl-5">
-                      
-                        <CheckIfNeedsCache 
-                          value={accounts} 
-                          setValue={setAccounts} 
-                          handleSetCache={(value, setValue)=>handleSetCache(value, setValue)} fallbackValue={cachedAccounts}
-                        >  
-                        <CheckIfNeedsCache 
-                          value={locations} 
-                          setValue={setLocations} 
-                          handleSetCache={(value, setValue)=>handleSetCache(value, setValue)} fallbackValue={cachedLocations}
-                        >
-                        <CheckIfNeedsCache 
-                          value={services} 
-                          setValue={setServices} 
-                          handleSetCache={(value, setValue)=>handleSetCache(value, setValue)} fallbackValue={cachedServices}
-                        >     
+                        
+                        
                           <PageField 
                             field={field}
                             fieldData={docItem}
@@ -432,9 +423,7 @@ return (
                             isViewRelatedActive={isRelatedActive}
                             handleClick={(e)=>handleClick(e)}
                           />
-                        </CheckIfNeedsCache>
-                        </CheckIfNeedsCache>
-                        </CheckIfNeedsCache>
+                       
                       </Column>
                     </Columns>
                       

@@ -6,6 +6,7 @@ import React from 'react'
   let orders = []
   let accounts = []
   let services = []
+  let notes = []
   let serviceStatusType = []
   let vendorList
   let serviceTypes = []

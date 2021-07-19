@@ -161,7 +161,7 @@ const DashboardGrids = ({visible}) => {
                       currentCompanyID: currentCompanyID,
                       isNew: "true",
                       isDrawerActive: "true",
-                      cacheLocations: locations
+                      cacheLocations: locations && locations
                       }
                     })
   }
