@@ -7,6 +7,7 @@ import { stateContext } from '../../Contexts/stateContext'
 import { db } from '../../Contexts/firebase'
 
 import GridComponent from './Components/GridComponent'
+import GridGroup from '../../Components/Grids/GridGroup'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 import {serviceGridColumns,
         ticketGridColumns,
@@ -334,8 +335,9 @@ return (
     />
     <p/>
     </Loading>
-  </>
   
+  <GridGroup data={services} groupBy='Type' />
+  </>
   
   )
 }
