@@ -8,11 +8,14 @@ const GridGroup = ({data, groupBy, grid}) => {
     return acc
   },{})
   const groupedArr = arrGroup(data, groupBy)
+  const groupedKeys = Object.keys(groupedArr)
+  console.log(groupedKeys)
   return(
   
   <>
-  {console.log("test:", groupedArr && groupedArr['Data Only'].map(i => console.log(i)))}
-  {groupedArr != undefined ? [groupedArr].filter(f => console.log(f)).map(item => console.log(item)) : null }
+  {console.log("test:", groupedKeys && [groupedArr].map(key => 
+  key.indexOf(groupedKeys)))}
+  
     {/**groupedArr && [groupedArr].map(item => <>{item.LocationName} - {item.AssetID}</>)**/}
   </>
     

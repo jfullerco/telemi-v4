@@ -63,27 +63,7 @@ const DashboardGrids = ({visible}) => {
   const [loadingGrid, setLoadingGrid] = useState()
   const [checked, setChecked] = useState(false)
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
-  
-  useEffect(() => {
-    setLoadingGrid(true)
-    const timer = setTimeout(() => {
-      fetchLocations(),
-      fetchServices(),
-      fetchTickets(),
-      fetchOrders(),
-      fetchAccounts()
-      fetchUsers()
-      fetchContracts()
-      cancelLoading()
-    }, 1000)
-    
-    return () => clearTimeout(timer)
-    
-  }, [currentCompany])
 
-  const cancelLoading = () => {
-    setTimeout(() => {setLoadingGrid(false)}, 1000) 
-  }
 
   const handleChangeSearchServices = (e) => {
     
@@ -247,7 +227,7 @@ const DashboardGrids = ({visible}) => {
 
 return (
   <>
-    <Loading active={loadingGrid} >
+    
 
     <SelectInputProps placeholder="Change Current View" onChange={(e)=>handleGridChange(e)}>
       <option value="SERVICES">Services</option>
@@ -334,9 +314,9 @@ return (
       toggleIsVisible={()=>{setContractIsVisible(!contractIsVisible)}}
     />
     <p/>
-    </Loading>
+    
   
-  <GridGroup data={services} groupBy='Type' />
+  
   </>
   
   )

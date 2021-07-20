@@ -1,16 +1,17 @@
 import React from 'react'
 import { FaAngleDown } from "react-icons/fa"
 
-const CompanyDropDown = ({currentOption, options, isActive, handleClick, handleToggle}) => {
+const CompanyDropDown = ({currentOption, options, isActive, handleClick, handleToggle, currentCompany}) => {
   
   return(
     <>
+    {!currentCompany & currentCompany != "" ?
       <div className={isActive === true ? `dropdown is-active`: `dropdown`}>
         <div className="dropdown-trigger " >
-          <div className="title has-text-black" style={{textTransform: "uppercase"}} onClick={handleToggle}>
+          <div className="title has-text-black" onClick={handleToggle}>
           {currentCompany}
             <span className="icon is-large">
-              {currentCompany && <FaAngleDown onClick={handleToggle} style={{marginTop: 'auto'}} />}
+               <FaAngleDown onClick={handleToggle} style={{marginTop: 'auto'}} />
             </span>
         </div>
       </div>
@@ -30,6 +31,7 @@ const CompanyDropDown = ({currentOption, options, isActive, handleClick, handleT
         </div>
 
       </div>
+       : ""}
     </>
   )
 }

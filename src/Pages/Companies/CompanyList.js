@@ -6,11 +6,9 @@ import {stateContext} from '../../Contexts/stateContext'
 
 import { db } from '../../Contexts/firebase'
 
-import SelectInputProps from '../../Components/Forms/SelectInputProps'
+
 import CompanyDropDown from '../../Components/DropDowns/CompanyDropDown'
-import Columns from '../../Components/Layout/Columns'
-import Column from '../../Components/Layout/Column'
-import Button from '../../Components/Buttons/Button'
+
 
 const CompanyList = () => {
 
@@ -120,7 +118,7 @@ const CompanyList = () => {
         </>
         : <span className="title is-size-4 has-text-black">{currentCompany}</span>
       }
-      {!companies ? <button className="button is-rounded is-link" onClick={() => history.push("/addcompany")}>Add a Company Name</button> : null}
+      {companies === null ? <button className="button is-rounded is-link" onClick={() => history.push("/addcompany")}>Add a Company Name</button> : null}
     </>
   )
 }
