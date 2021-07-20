@@ -28,7 +28,7 @@ body {
 
 .footerblur {
   background-color: rgba(230, 230, 230, 0.3);
-  background-blend-mode: screen;
+  
   backdrop-filter: blur(10px);
   
 }
@@ -41,7 +41,7 @@ body {
         
         background-repeat: repeat-x;
         background-attachment: fixed;
-        background-blend-mode: lighten;
+        
       }
  
 #wrapper {

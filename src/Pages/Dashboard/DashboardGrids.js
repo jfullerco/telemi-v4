@@ -241,6 +241,8 @@ return (
     <GridGroup
       data={services}
       isGrid='Services'
+      headerFields={serviceGridColumns}
+      handleClick={(e)=> handleClick(e)}
     />
       
     
