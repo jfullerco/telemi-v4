@@ -123,7 +123,7 @@ const Dashboard = () => {
     setDataLoading(false)
     
   }
-console.log(services)
+
   const fetchCompaniesAdmin = async() => {
     const companiesRef = await db.collection("Companies").get() 
     

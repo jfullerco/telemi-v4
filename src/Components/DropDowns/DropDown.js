@@ -5,7 +5,7 @@ const CompanyDropDown = ({currentOption, options, isActive, handleClick, handleT
   
   return(
     <>
-    <Suspense fallback={<div>Loading Company</div>} >
+    
       <div className={isActive === true ? `dropdown is-active`: `dropdown`}>
         <div className="dropdown-trigger " >
           <div className="title has-text-black" onClick={handleToggle}>
@@ -31,7 +31,7 @@ const CompanyDropDown = ({currentOption, options, isActive, handleClick, handleT
         </div>
 
       </div>
-      </Suspense>
+      
     </>
   )
 }
