@@ -28,7 +28,7 @@ body {
 
 .footerblur {
   background-color: rgba(230, 230, 230, 0.3);
-  background-blend-mode: overlay;
+  background-blend-mode: screen;
   backdrop-filter: blur(10px);
   
 }
@@ -46,7 +46,6 @@ body {
  
 #wrapper {
           flex: 1;
-          
           min-width: 50vw;
       }
 

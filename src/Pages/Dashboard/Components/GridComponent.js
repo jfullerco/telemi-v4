@@ -20,24 +20,19 @@ const GridComponent = ({
   isGrid, 
   toggleIsVisible}) => {
 
-  
-
-  const headerStyle = {
-        bottomBorderColor: "black"
-      }
 
   return(
       
       <div className={isGrid === isVisible ? "box" : "is-hidden"}>
       
-        <div className="is-size-4" style={headerStyle}> 
+        <div className="is-size-4" > 
           <strong>{label} </strong>
           <div className="is-pulled-right is-clearfix">
             <button className="button is-small is-link is-rounded mr-1" onClick={handleAddBtn}>Add</button>
 
             {/**Print Report Button */}            
             <Report>
-              <div className="title" style={headerStyle}>{label}</div>
+              <div className="title">{label}</div>
               <div className="table-container">
                   <table className="table is-hoverable is-fullwidth ">
                     <thead className="is-size-6">

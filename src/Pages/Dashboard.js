@@ -10,6 +10,7 @@ import CompanyList from './Companies/CompanyList'
 import Loading from '../Components/Loading'
 
 import DashboardGrids from './Dashboard/DashboardGrids'
+import GridGroup from '../Components/Grids/GridGroup'
 
 import Login from './Login'
 
@@ -137,7 +138,7 @@ const Dashboard = () => {
   }
   
   return (   
-      <Loading active={loading}> 
+    <Loading active={loading}>
 
       {currentUser != undefined ?
         <>
@@ -149,30 +150,26 @@ const Dashboard = () => {
             </div>
           </section>
 
-        <div className={toggleCompanyList != false ? "block" : "is-hidden"} id="companyList">
+          <div className={toggleCompanyList != false ? "block" : "is-hidden"} id="companyList">
 
-          <CompanyList /> 
+            <CompanyList />
 
-        </div>     
+          </div>
 
-        <div>
+          <div>
 
-          <DashboardGrids 
+            <DashboardGrids />
             
-            
-          />
 
-        </div>
-      </>
-      : 
-      <>
-
-{/**      If not logged in          */        }  
+          </div>
+        </>
+        :
+        <>
 
           <Login />
 
         </>
-        }    
+      }
     </Loading>
   )
 }

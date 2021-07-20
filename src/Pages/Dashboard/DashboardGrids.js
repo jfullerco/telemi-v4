@@ -238,6 +238,14 @@ return (
       <option value="CONTRACTS">Contracts</option>
     </SelectInputProps>
 
+    <GridGroup
+      data={services}
+      isGrid='Services'
+    />
+      
+    
+
+
     <GridComponent 
       label="SERVICES"
       headerFields={serviceGridColumns}
