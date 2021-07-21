@@ -5,13 +5,13 @@ import Columns from './Layout/Columns'
 import Column from './Layout/Column'
 import { FaArrowLeft } from 'react-icons/fa'
 
-const Page = ({title, subtitle, active, pageError, pageSuccess, handleSubmit, handleToggle, autoClose, status, backbtn, children}) => {
+const Page = ({title, subtitle, pageError, pageSuccess, children}) => {
 
   const history = useHistory()
   
   return(
       <div className="wrapper">
-        <FaArrowLeft className="icon pl-1" onClick={()=>history.goBack()}/>
+        <FaArrowLeft className="icon pl-1 mx-2 my-2" onClick={()=>history.goBack()}/>
         {/**<section className="hero is-small">
         <div className="hero-body">
           <Columns options="is-mobile">

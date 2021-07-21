@@ -8,10 +8,10 @@ import { db } from '../../Contexts/firebase'
 
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
+import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 
 import { serviceGridColumns,
-         serviceGroupByFields,
          ticketGridColumns,
          ticketGroupByFields,
          orderGridColumns,
@@ -23,7 +23,10 @@ import { serviceGridColumns,
          contractGridColumns,
          contractGroupByFields } from '../../Contexts/initialFields'
 
-import SelectInputProps from '../../Components/Forms/SelectInputProps'
+import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFields'
+
+import SelectView from '../../Components/Grids/SelectView'
+import TabBar from '../../Components/Tabs/TabBar'
 
 
 
@@ -68,12 +71,13 @@ const DashboardGrids = ({visible}) => {
 
   const searchRef = useRef("")
 
-  
-  const [isGroupedBy, setIsGroupedBy] = useState(serviceGroupByFields[0].Value)
-
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
+  const [groupBy, setGroupBy] = useState('Type')
+  
 
-
+   
+    
+  
   const handleChangeSearchServices = (e) => {
     
     const {value} = e.target
@@ -239,15 +243,24 @@ const DashboardGrids = ({visible}) => {
 return (
   <>
     
-
-    <SelectInputProps placeholder="Change Current View" onChange={(e)=>handleGridChange(e)}>
+<TabBar>
+    <SelectView placeholder="Change Current View" onChange={(e)=>handleGridChange(e)}>
       <option value="SERVICES">Services</option>
       <option value="TICKETS">Tickets</option>
       <option value="ORDERS">Orders</option>
       <option value="ACCOUNTS">Accounts</option>
       <option value="USERS">Users</option>
       <option value="CONTRACTS">Contracts</option>
-    </SelectInputProps>
+    </SelectView>
+
+    <div className="select is-rounded">
+      <select onChange={(e) => setGroupBy(e.target.value)}>
+        {groupByOptions.map(groupOption => (
+          <option value={groupOption.Value}>Group by {groupOption.Label}</option>
+        ))}
+      </select>
+    </div> 
+  </TabBar>
     {/** 
      * 
      * 
@@ -261,6 +274,14 @@ return (
     
       
     
+
+      <GridGroup
+      data={grid === "SERVICES" ? services : null}
+      isGrid='Services'
+      headerFields={serviceGridColumns}
+      handleClick={(e)=> handleServiceClick(e)}
+      groupBy={groupBy}
+      />
 
 
     <GridComponent 

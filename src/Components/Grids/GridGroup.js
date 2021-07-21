@@ -5,6 +5,7 @@ const GridGroup = ({ data,
                      headerFields,
                      handleClick, 
                      handleAddBtn,
+                     groupBy
                      }) => {
 
   const groupByOptions = [
@@ -18,27 +19,24 @@ const GridGroup = ({ data,
      } 
   ]
 
-  const [groupBy, setGroupBy] = useState(groupByOptions[0].Value)
+  
+
   const arrGroup = (arr, el) => arr && arr.reduce((acc, item) => {
     let key = item[el]
     !acc[key] ? acc[key] = [] :
     acc[key].push(item)
     return acc
   },{})
-  const groupedArr = arrGroup(data, groupBy)
+
+  const groupedArr = data != undefined ? arrGroup(data, groupBy) : ""
   const groupedKeys = Object.keys(groupedArr)
   
-  
+  console.log(groupedKeys, groupBy)
+
   return(
   
   <>
-      <div className="select is-rounded">
-        <select onClick={(e) => setGroupBy(e.target.value)}>
-          {groupedKeys && groupByOptions.map(groupOption => (
-            <option value={groupOption.Value}>Group by {groupOption.Label}</option>
-          ))}
-        </select>
-      </div>
+      
     {groupedKeys && groupedKeys.map((group) => 
       <>                                          {/**Box */}
         <div className="box">
