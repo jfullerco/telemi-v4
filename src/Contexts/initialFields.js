@@ -47,6 +47,24 @@ import React from 'react'
         filterable: true
       }
     ]
+    const serviceGroupByFields = [
+      {
+        Label: 'Type',
+        Value: 'Type'
+      },
+      {
+        Label: 'Location',
+        Value: 'LocationName'
+      },
+      {
+        Label: 'Vendor',
+        Value: 'Vendor'
+      },
+      {
+        Label: 'Status',
+        Value: 'Status'
+      }
+    ]
 
     const ticketGridColumns = [
       {
@@ -182,6 +200,7 @@ import React from 'react'
         key: "4"
       }
     ]
+    
 /** Page Fields */
     const serviceDetailFields = [
    
@@ -1031,6 +1050,7 @@ import React from 'react'
 
 export {
     serviceGridColumns, 
+    serviceGroupByFields,
     ticketGridColumns, 
     orderGridColumns, 
     accountGridColumns, 

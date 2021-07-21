@@ -9,14 +9,22 @@ import { db } from '../../Contexts/firebase'
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
-import {serviceGridColumns,
-        ticketGridColumns,
-        orderGridColumns,
-        accountGridColumns,
-        userGridColumns,
-        contractGridColumns} from '../../Contexts/initialFields'
+
+import { serviceGridColumns,
+         serviceGroupByFields,
+         ticketGridColumns,
+         ticketGroupByFields,
+         orderGridColumns,
+         orderGroupByFields,
+         accountGridColumns,
+         accountGroupByFields,
+         userGridColumns,
+         userGroupByFields,
+         contractGridColumns,
+         contractGroupByFields } from '../../Contexts/initialFields'
+
 import SelectInputProps from '../../Components/Forms/SelectInputProps'
-import Loading from '../../Components/Loading'
+
 
 
 const DashboardGrids = ({visible}) => {
@@ -60,8 +68,9 @@ const DashboardGrids = ({visible}) => {
 
   const searchRef = useRef("")
 
-  const [loadingGrid, setLoadingGrid] = useState()
-  const [checked, setChecked] = useState(false)
+  
+  const [isGroupedBy, setIsGroupedBy] = useState(serviceGroupByFields[0].Value)
+
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
 
 
@@ -225,6 +234,8 @@ const DashboardGrids = ({visible}) => {
     setCurrentGrid(value)
   }
 
+  
+
 return (
   <>
     
@@ -237,12 +248,12 @@ return (
       <option value="USERS">Users</option>
       <option value="CONTRACTS">Contracts</option>
     </SelectInputProps>
-
+    
     <GridGroup
       data={services}
       isGrid='Services'
       headerFields={serviceGridColumns}
-      handleClick={(e)=> handleClick(e)}
+      handleClick={(e)=> handleServiceClick(e)}
     />
       
     
