@@ -248,13 +248,17 @@ return (
       <option value="USERS">Users</option>
       <option value="CONTRACTS">Contracts</option>
     </SelectInputProps>
-    
-    <GridGroup
+    {/** 
+     * 
+     * 
+     * <GridGroup
       data={services}
       isGrid='Services'
       headerFields={serviceGridColumns}
       handleClick={(e)=> handleServiceClick(e)}
     />
+    */}
+    
       
     
 
