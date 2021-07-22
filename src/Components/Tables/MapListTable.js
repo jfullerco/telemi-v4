@@ -12,7 +12,7 @@ const MapListTable = ({
 }) => {
   return(
     <>
-      <table className="table is-hoverable">
+      <table className="table is-hoverable is-fullwidth">
         <thead className="is-size-6">
           <tr>
             {headerFields && headerFields.map(col => 

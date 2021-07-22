@@ -387,30 +387,34 @@ return (
                   {[active].map(docItem => 
                     <div className={field.visible != false & field.tab === tab ? "" : "is-hidden" }> 
                     <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
+                    
                     <Columns options="is-mobile">
+                    {field.inputFieldType === "map-list" ? 
+                            "" :
                       <Column size="is-two-fifths pl-5">
 
                         <FieldLabel>
-                          <Columns options="is-mobile">
-                            <Column size="is-11">
-                              <div key={field.label}>{field.label} 
-
-                                {field.inputFieldType === "map-list" ? 
-                                  <a className="link has-text-weight-normal is-size-7 pl-2" 
-                                    onClick={() => handleRelatedDrawer(field)}>   
-                                    (add) 
-                                  </a> : null}
-                                </div>
-                              </Column>
-                              <Column>:</Column>
-                            </Columns>
+                          
+                              <Columns options="is-mobile">
+                                <Column size="is-11">
+                                  <div key={field.label}>{field.label}</div>
+                                </Column>
+                                <Column>:</Column>
+                              </Columns>
+                          
                         </FieldLabel>
 
                       </Column>
-                     
+                    }
                       <Column size="pl-5">
                         
-                        
+                          {field.inputFieldType === "map-list" ? 
+                            <>
+                              <div key={field.label}>{field.label}
+                                <a className="link has-text-weight-normal is-size-7 pl-2" 
+                                  onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
+                            </> : null}
+                          
                           <PageField 
                             field={field}
                             fieldData={docItem}
