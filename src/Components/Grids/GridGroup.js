@@ -47,11 +47,12 @@ const GridGroup = ({ data,
               </div>
             </div>
         </div>
+        <div className="table-container">
         <table className="table is-hoverable is-fullwidth">
             <thead className="is-size-6">
               <tr>
                 {headerFields && headerFields.map(col => 
-                  <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
+                  <th className={col.headerName === groupBy ? "is-hidden": ""} style={{textAlign: "left"}} key={col.keyProp}>
 
                     {
                       col.mobile != true ? 
@@ -68,17 +69,17 @@ const GridGroup = ({ data,
               {data && data != undefined ? data.filter(f=> f[groupBy] === group).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
                   {headerFields && headerFields.map(col => 
-                    <td className={col.headerName === groupBy ? "is-hidden" : "py-3"} style={{width: "15%"}} key={item[col.headerName]} >
+                    <td className={col.headerName === groupBy ? "is-hidden" : "py-3"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 
                     </td>
                   )}
-                  {/**Insert Expanding Table Field Here */}
                 </tr>
               ) : ""}
           </tbody>   
         </table>
+        </div>
       </div>
         
         
