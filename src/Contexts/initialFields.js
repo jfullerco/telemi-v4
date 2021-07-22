@@ -66,6 +66,36 @@ import React from 'react'
       }
     ]
 
+    const serviceMobileGridColumns = [
+      {
+        docField: 'Vendor', 
+        headerName: 'Vendor', 
+        key: "1", 
+        filterable: true
+      },
+      {
+        docField: 'LocationName', 
+        headerName: 'Location', 
+        key: "3", 
+        filterable: true,
+        mobile: true
+      },
+      {
+        docField: 'AssetID', 
+        headerName: 'Asset ID', 
+        key: "4", 
+        filterable: false,
+        mobile: true
+      },
+      {
+        docField: 'Type', 
+        headerName: 'Type', 
+        key: "5", 
+        filterable: true
+      }
+    ]
+  
+
     const ticketGridColumns = [
       {
         docField: 'Status', 
@@ -99,7 +129,73 @@ import React from 'react'
       }
     ]
 
+    const ticketMobileGridColumns = [
+      {
+        docField: 'Status', 
+        headerName: 'Status', 
+        key: "1", 
+        filterable: true
+      },
+      {
+        docField: 'TicketNum', 
+        headerName: 'Ticket', 
+        key: "2", 
+        filterable: false
+      },
+      {
+        docField: 'LocationName', 
+        headerName: 'Location', 
+        key: "3", 
+        filterable: true
+      },
+      {
+        docField: 'Type', 
+        headerName: 'Type', 
+        key: "4", 
+        filterable: true
+      },
+      {
+        docField: 'Details', 
+        headerName: 'Details', 
+        key: "5", 
+        filterable: false
+      }
+    ]
+
     const orderGridColumns = [
+      {
+        docField: 'OrderDate',
+        headerName: 'Date',
+        key: "1",
+        filterable: true
+      },
+      {
+        docField: 'Vendor',
+        headerName: 'Vendor',
+        key: "2",
+        filterable: true
+      },
+      { 
+        docField: 'VendorServiceName', 
+        headerName: 'Product', 
+        key: "3", 
+        filterable: true 
+      },
+      { 
+        docField: 'LocationName', 
+        headerName: 'Location', 
+        key: "4", 
+        filterable: true 
+      },
+      { 
+        docField: 'OrderNum', 
+        headerName: 'Order Number', 
+        key: "5", 
+        filterable: false 
+      }
+    ]
+
+    const orderMobileGridColumns = [
       {
         docField: 'OrderDate',
         headerName: 'Date',
@@ -627,16 +723,16 @@ import React from 'react'
                           Name: "Active" 
                         },
                         { 
-                          id: "Completed",
+                          id: "Closed",
                           Name: "Completed" 
                         },
                         { 
-                          id: "Cancelled",
-                          Name: "Cancelled" 
+                          id: "ClosedResolved",
+                          Name: "Closed - Resolved" 
                         },
                         { 
-                          id: "Closed",
-                          Name: "Closed" 
+                          id: "ClosedNotResolved",
+                          Name: "Closed - Not Resolved" 
                         }
           ], 
         inputID: "id", 
@@ -1050,9 +1146,12 @@ import React from 'react'
 
 export {
     serviceGridColumns, 
+    serviceMobileGridColumns,
     serviceGroupByFields,
     ticketGridColumns, 
+    ticketMobileGridColumns,
     orderGridColumns, 
+    orderMobileGridColumns,
     accountGridColumns, 
     userGridColumns, 
     contractGridColumns,

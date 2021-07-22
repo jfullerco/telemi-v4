@@ -12,9 +12,12 @@ import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 
 import { serviceGridColumns,
+         serviceMobileGridColumns,
          ticketGridColumns,
+         ticketMobileGridColumns,
          ticketGroupByFields,
          orderGridColumns,
+         orderMobileGridColumns,
          orderGroupByFields,
          accountGridColumns,
          accountGroupByFields,
@@ -247,7 +250,7 @@ return (
 
     <Columns options="is-mobile is-justify-content-flex-end">
       <Column size="is-narrow">
-        <SelectView placeholder="Change Current View" onChange={(e)=>handleGridChange(e)}>
+        <SelectView onChange={(e)=>handleGridChange(e)}>
         <option value="SERVICES">Services</option>
         <option value="TICKETS">Tickets</option>
         <option value="ORDERS">Orders</option>
@@ -285,19 +288,36 @@ return (
     />
     */}
     
-      
-    
 
-      <GridGroup
+    <GridGroup
       data={grid === "SERVICES" ? services : null}
       isGrid='Services'
       headerFields={serviceGridColumns}
-      handleClick={(e)=> handleServiceClick(e)}
+      mobileHeaderFields={serviceMobileGridColumns}
+      handleClick={(e) => handleServiceClick(e)}
       groupBy={groupBy}
-      />
+    />
 
+    <GridGroup
+      data={grid === "TICKETS" ? tickets : null}
+      isGrid='Tickets'
+      headerFields={ticketGridColumns}
+      mobileHeaderFields={ticketMobileGridColumns}
+      handleClick={(e) => handleTicketClick(e)}
+      groupBy={groupBy}
+    />
 
-    <GridComponent 
+    <GridGroup
+      data={grid === "ORDERS" ? orders : null}
+      isGrid='Orders'
+      headerFields={orderGridColumns}
+      mobileHeaderFields={orderMobileGridColumns}
+      handleClick={(e) => handleOrderClick(e)}
+      groupBy={groupBy}
+    />
+
+{/** 
+ * <GridComponent 
       label="SERVICES"
       headerFields={serviceGridColumns}
       data={services}
@@ -372,6 +392,8 @@ return (
       isGrid="CONTRACTS"
       toggleIsVisible={()=>{setContractIsVisible(!contractIsVisible)}}
     />
+*/}
+    
     <p/>
     
   
