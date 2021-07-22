@@ -81,6 +81,10 @@ const Dashboard = () => {
     fetchPageData()
   },[loading])
 
+  useEffect(()=> {
+    fetchPageData()
+  },[currentCompany])
+
   const fetchUser = async(email) => {
     
     const userRef = await db.collection("Users").where("Email", "==", email).get()
