@@ -38,7 +38,7 @@ const GridGroup = ({ data,
   <>
       
     {groupedKeys && groupedKeys.map((group) => 
-      <>                                          {/**Box */}
+                                           
         <div className="box">
           <div className="columns is-mobile">     {/**Header */}
             <div className="column is-narrow">
@@ -47,11 +47,11 @@ const GridGroup = ({ data,
               </div>
             </div>
         </div>
-        <table className="table is-hoverable is-fullwidth ">
+        <table className="table is-hoverable is-fullwidth">
             <thead className="is-size-6">
               <tr>
                 {headerFields && headerFields.map(col => 
-                  <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: "15%", textAlign: "left"}} key={col.keyProp}>
+                  <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
 
                     {
                       col.mobile != true ? 
@@ -82,7 +82,7 @@ const GridGroup = ({ data,
       </div>
         
         
-      </> 
+      
         )}
   </>
     

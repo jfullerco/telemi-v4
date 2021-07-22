@@ -2,7 +2,7 @@ import React from 'react'
 
 const TabBar = ({children}) => {
   return(
-    <div className="tabs">
+    <div className="tabs is-right">
       {children}
     </div>
   )

@@ -27,6 +27,8 @@ import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFiel
 
 import SelectView from '../../Components/Grids/SelectView'
 import TabBar from '../../Components/Tabs/TabBar'
+import Columns from '../../Components/Layout/Columns'
+import Column from '../../Components/Layout/Column'
 
 
 
@@ -242,25 +244,36 @@ const DashboardGrids = ({visible}) => {
 
 return (
   <>
-    
-<TabBar>
-    <SelectView placeholder="Change Current View" onChange={(e)=>handleGridChange(e)}>
-      <option value="SERVICES">Services</option>
-      <option value="TICKETS">Tickets</option>
-      <option value="ORDERS">Orders</option>
-      <option value="ACCOUNTS">Accounts</option>
-      <option value="USERS">Users</option>
-      <option value="CONTRACTS">Contracts</option>
-    </SelectView>
 
-    <div className="select is-rounded">
-      <select onChange={(e) => setGroupBy(e.target.value)}>
-        {groupByOptions.map(groupOption => (
-          <option value={groupOption.Value}>Group by {groupOption.Label}</option>
-        ))}
-      </select>
-    </div> 
-  </TabBar>
+    <Columns options="is-mobile is-justify-content-flex-end">
+      <Column size="is-narrow">
+        <SelectView placeholder="Change Current View" onChange={(e)=>handleGridChange(e)}>
+        <option value="SERVICES">Services</option>
+        <option value="TICKETS">Tickets</option>
+        <option value="ORDERS">Orders</option>
+        <option value="ACCOUNTS">Accounts</option>
+        <option value="USERS">Users</option>
+        <option value="CONTRACTS">Contracts</option>
+        </SelectView>
+      </Column>
+      <Column size="is-narrow">
+        <div className="select is-rounded is-small">
+        <select onChange={(e) => setGroupBy(e.target.value)}>
+          {groupByOptions.map(groupOption => (
+            <option value={groupOption.Value} >Group by {groupOption.Label}</option>
+          ))}
+        </select>
+        </div>
+      </Column>
+      <Column size="is-narrow">
+        <button className="button is-rounded is-link is-small">Add</button>
+      </Column>
+      <Column size="is-narrow">
+       <span className="pr-5"> <button className="button is-rounded is-small">Print</button></span>
+      </Column>
+    </Columns>
+   
+
     {/** 
      * 
      * 

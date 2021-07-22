@@ -6,7 +6,7 @@ const SelectView = ({onChange, children}) => {
   return(
       <div className="field">
         <div className="control">
-        <div className='select is-rounded'>
+        <div className='select is-rounded is-small'>
           <select type="select" onChange={onChange} >
             
           {children}
