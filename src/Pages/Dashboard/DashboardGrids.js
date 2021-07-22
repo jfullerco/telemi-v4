@@ -160,7 +160,6 @@ const DashboardGrids = ({visible}) => {
                       currentCompanyID: currentCompanyID,
                       isNew: "true",
                       isDrawerActive: "true",
-                      cacheLocations: locations && locations
                       }
                     })
   }
@@ -242,6 +241,21 @@ const DashboardGrids = ({visible}) => {
     setGrid(value)
     setCurrentGrid(value)
   }
+  const modGridStr = (str) => {
+    const strLower = str.toLowerCase()
+    return str.charAt(0).toUpperCase() + strLower.slice(1)
+  }
+  const handleAddClick = (id) => {
+    const isModule = modGridStr(grid)
+    history.push({
+      pathname: `/${isModule}/${currentCompanyID}/${id}`,
+      state: {
+      currentCompanyID: currentCompanyID,
+      isNew: "true",
+      isDrawerActive: "true",
+      }
+    })
+  }
 
   
 
@@ -268,12 +282,10 @@ return (
         </select>
         </div>
       </Column>
-      <Column size="is-narrow">
-        <button className="button is-rounded is-link is-small">Add</button>
+      <Column size="is-1">
+        <button className="button is-rounded is-link is-small" onClick={()=>handleAddClick()}>Add</button>
       </Column>
-      <Column size="is-narrow">
-       <span className="pr-5"> <button className="button is-rounded is-small">Print</button></span>
-      </Column>
+      
     </Columns>
    
 

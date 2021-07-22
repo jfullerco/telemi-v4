@@ -377,9 +377,10 @@ return (
             isActive={viewDropDown}
             handleView={(e)=>setTab(e)}
             value={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])}
+            title={isModule}
             handleEditDrawer={()=>handleToggle()}
           />
-          <div className="box is-rounded has-text-black">
+          <div className="box is-rounded has-text-black" style={{minHeight: '50vh'}}>
 
               {/** Refactor as ViewPageFields Component */}
               {active && pageFields.map(field => 

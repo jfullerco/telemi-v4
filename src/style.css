@@ -11,9 +11,7 @@ body {
   display: flex;
   
 }
-.box {
-  min-height: 55vh;
-}
+
 
 .drawerPaper {
   width: 85vw;
@@ -37,11 +35,14 @@ body {
         display: flex;
         flex-direction: column;
         scroll-behavior: smooth;
-        background-image: url("https://image.freepik.com/free-vector/vector-network-background-abstract-polygon-triangle_2065-76.jpg");
+        
+        
+        background-image: url("https://img.freepik.com/free-vector/vector-network-background-abstract-polygon_2065-126.jpg");
         
         background-repeat: repeat-x;
         background-attachment: fixed;
         
+        background-color: white;
       }
  
 #wrapper {

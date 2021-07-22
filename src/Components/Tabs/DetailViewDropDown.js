@@ -4,7 +4,7 @@ import { FaChevronCircleDown } from "react-icons/fa"
 import { FaChevronCircleUp } from "react-icons/fa"
 
 
-const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handleView, value, handleEditDrawer}) => {
+const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handleView, value, title, handleEditDrawer}) => {
   const history = useHistory()
 
   return(
@@ -13,7 +13,8 @@ const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handle
     <div className="notification is-rounded is-12">
       
       <nav className="level">
-      <span className="is-size-4"><strong>{value}</strong></span>
+      <div className="content"><span className="is-size-6">{title}</span><br/>
+      <span className="is-size-4 title">{value}</span></div>
       <div className={isActive === true ? `dropdown is-active` : `dropdown`}>
         <div className="dropdown-trigger" >
           <div className="pl-1" onClick={handleToggle}>
