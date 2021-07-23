@@ -360,7 +360,7 @@ return (
     <Loading active={loading}>
 
     <Page 
-      title={isModule.toUpperCase() || "DETAILS"}
+      title={currentCompany}
       subtitle={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])} 
       status="view" 
       handleToggle={()=> handleToggle()} 

@@ -24,7 +24,7 @@ const PageField = ({
           case "text":
             return (
               
-              <>  {[fieldData].map(data => data[item.dataField])} </>
+              <>  {[fieldData].map(data => data[item.dataField] != "" ? data[item.dataField] : "--"  )} </>
               
             )
           case "text-area":

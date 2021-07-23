@@ -11,7 +11,19 @@ const Page = ({title, subtitle, pageError, pageSuccess, children}) => {
   
   return(
       <div className="wrapper">
-        <FaArrowLeft className="icon pl-1 mx-2 my-2" onClick={()=>history.goBack()}/>
+        <div className="is-block" >
+        <Columns options="is-mobile is-vcentered" >
+          <Column size="is-narrow">
+            <FaArrowLeft className="icon pl-1 mx-2 my-2" onClick={()=>history.goBack()}/> 
+          </Column>
+          <Column>
+            <span className="title pl-2" >{title}</span>
+          </Column>
+        </Columns>
+        </div>
+       
+        
+        
         {/**<section className="hero is-small">
         <div className="hero-body">
           <Columns options="is-mobile">
@@ -59,7 +71,9 @@ const Page = ({title, subtitle, pageError, pageSuccess, children}) => {
           </div>
         </section>*/}
           
-            <div className="">{children}</div>
+            <div >
+              
+              {children}</div>
             <div className="block">
             <div className={pageSuccess && pageSuccess != false ? "notification is-success" : "is-hidden"}>{pageSuccess}</div>
             <div className={pageError && pageError != false ? "notification is-danger" : "is-hidden"}>{pageError}</div>

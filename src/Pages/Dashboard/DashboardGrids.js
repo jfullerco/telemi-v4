@@ -79,7 +79,7 @@ const DashboardGrids = ({visible}) => {
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
   const [groupBy, setGroupBy] = useState('Type')
   
-
+console.log(orders)
    
     
   
