@@ -37,12 +37,12 @@ body {
         scroll-behavior: smooth;
         
         
-        background-image: url("https://img.freepik.com/free-vector/vector-network-background-abstract-polygon_2065-126.jpg");
         
+        background: rgba(240, 240, 240, 0.5);
         background-repeat: repeat-x;
         background-attachment: fixed;
         
-        background-color: white;
+        
       }
  
 #wrapper {

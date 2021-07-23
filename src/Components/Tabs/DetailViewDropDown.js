@@ -10,7 +10,7 @@ const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handle
   return(
     <>
     
-    <div className="notification is-rounded is-12">
+    <div className="b is-rounded is-12">
       
       <nav className="level">
       <div className="content"><span className="is-size-6">{title}</span><br/>
