@@ -261,8 +261,8 @@ console.log(orders)
 
 return (
   <>
-
-    <Columns options="is-mobile is-justify-content-flex-end">
+    <div className="is-flex is-justify-content-flex-end">
+    <Columns options="is-mobile pr-3 pb-3">
       <Column size="is-narrow">
         <SelectView onChange={(e)=>handleGridChange(e)}>
         <option value="SERVICES">Services</option>
@@ -287,6 +287,7 @@ return (
       </Column>
       
     </Columns>
+    </div>
    
 
     {/** 

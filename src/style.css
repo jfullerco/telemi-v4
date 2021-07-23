@@ -9,6 +9,7 @@ body {
   flex-direction: column;
   scroll-behavior: smooth;
   background: rgba(240, 240, 240, 0.5);
+  margin: 0;
 }
 
 .page {

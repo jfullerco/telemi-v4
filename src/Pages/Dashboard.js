@@ -160,7 +160,7 @@ const Dashboard = () => {
 
           </div>
 
-          <div>
+          <div className="">
 
             <DashboardGrids />
             
