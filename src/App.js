@@ -57,7 +57,7 @@ export default function App() {
         <div className="column is-1 is-hidden-mobile"></div>
         </div>  
         
-      <Footer />
+      
       
     </Router>
     </AuthProvider>
