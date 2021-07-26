@@ -48,6 +48,7 @@ import React, { useContext } from 'react'
         filterable: true
       }
     ]
+
     const serviceGroupByFields = [
       {
         Label: 'Type',
@@ -95,8 +96,61 @@ import React, { useContext } from 'react'
         filterable: true
       }
     ]
-    
 
+    const locationGridColumns = [
+      {
+        docField: 'LocationName',
+        headerName: 'Location Name',
+        key: "1",
+        filterable: false
+      },
+      {
+        docField: 'Address1',
+        headerName: 'Address 1',
+        key: "2",
+        filterable: false
+      },
+      { 
+        docField: 'Address2', 
+        headerName: 'Address 2', 
+        key: "3", 
+        filterable: false 
+      },
+      { 
+        docField: 'City', 
+        headerName: 'City', 
+        key: "4", 
+        filterable: true 
+      },
+      { 
+        docField: 'State', 
+        headerName: 'State', 
+        key: "5", 
+        filterable: true 
+      },
+      { 
+        docField: 'Zip', 
+        headerName: 'Zip', 
+        key: "6", 
+        filterable: true 
+      }
+    ]
+
+    const locationGroupByFields = [
+      {
+        Label: 'City',
+        Value: 'City'
+      },
+      {
+        Label: 'State',
+        Value: 'State'
+      },
+      {
+        Label: 'Zip',
+        Value: 'Zip'
+      },
+    ]
+    
     const ticketGridColumns = [
       {
         docField: 'Status', 
@@ -215,7 +269,7 @@ import React, { useContext } from 'react'
       }
     ]
 
-    const ticketGroupByFields = [
+    const orderGroupByFields = [
       {
         Label: 'Vendor',
         Value: 'Vendor'
@@ -291,7 +345,12 @@ import React, { useContext } from 'react'
       }
     ]
 
-    
+    const accountGroupByFields = [
+      {
+        Label: 'Vendor',
+        Value: 'Vendor'
+      },
+    ]
 
     const userGridColumns = [
       {
@@ -1185,11 +1244,16 @@ export {
     serviceGridColumns, 
     serviceMobileGridColumns,
     serviceGroupByFields,
+    locationGridColumns,
+    locationGroupByFields,
     ticketGridColumns, 
+    ticketGroupByFields,
     ticketMobileGridColumns,
     orderGridColumns, 
+    orderGroupByFields,
     orderMobileGridColumns,
     accountGridColumns, 
+    accountGroupByFields,
     userGridColumns, 
     contractGridColumns,
     serviceDetailFields,
