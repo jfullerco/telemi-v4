@@ -348,7 +348,7 @@ return (
       isGrid='Accounts'
       headerFields={accountGridColumns}
       mobileHeaderFields={accountMobileGridColumns}
-      handleClick={(e) => handleOrderClick(e)}
+      handleClick={(e) => handleAccountClick(e)}
       groupBy={groupBy}
     />
 
