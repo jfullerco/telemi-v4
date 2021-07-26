@@ -95,7 +95,7 @@ import React, { useContext } from 'react'
         filterable: true
       }
     ]
-  
+    
 
     const ticketGridColumns = [
       {
@@ -127,6 +127,25 @@ import React, { useContext } from 'react'
         headerName: 'Details', 
         key: "5", 
         filterable: false
+      }
+    ]
+    
+    const ticketGroupByFields = [
+      {
+        Label: 'Type',
+        Value: 'Type'
+      },
+      {
+        Label: 'Location',
+        Value: 'LocationName'
+      },
+      {
+        Label: 'Vendor',
+        Value: 'Vendor'
+      },
+      {
+        Label: 'Status',
+        Value: 'Status'
       }
     ]
 
@@ -196,6 +215,21 @@ import React, { useContext } from 'react'
       }
     ]
 
+    const ticketGroupByFields = [
+      {
+        Label: 'Vendor',
+        Value: 'Vendor'
+      },
+      {
+        Label: 'Status',
+        Value: 'Status',
+      },
+      {
+        Label: 'Location',
+        Value: 'LocationName'
+      }
+    ]
+
     const orderMobileGridColumns = [
       {
         docField: 'OrderDate',
@@ -256,6 +290,8 @@ import React, { useContext } from 'react'
         type: "currency"
       }
     ]
+
+    
 
     const userGridColumns = [
       {
