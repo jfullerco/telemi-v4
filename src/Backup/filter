@@ -1,0 +1,29 @@
+
+
+  const handleFilterServiceClick = (data, colRef, filterRef) => {
+     
+    const filteredArray = useFilterArray(data, colRef, filterRef)
+    setServices(filteredArray)
+
+  }
+
+  const handleFilterTicketClick = (data, colRef, filterRef) => {
+     
+    const filteredArray = useFilterArray(data, colRef, filterRef)
+    setTickets(filteredArray)
+
+  }
+
+  const handleFilterOrderClick = (data, colRef, filterRef) => {
+     
+    const filteredArray = useFilterArray(data, colRef, filterRef)
+    setOrders(filteredArray)
+
+  }
+
+  const handleFilterAccountClick = (data, colRef, filterRef) => {
+     
+    const filteredArray = useFilterArray(data, colRef, filterRef)
+    setAccounts(filteredArray)
+
+  }

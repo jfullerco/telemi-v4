@@ -85,28 +85,16 @@ const DashboardGrids = ({visible}) => {
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState(groupByOptions[0].Value)
-
-
-   
-    
+  const [groupBy, setGroupBy] = useState(groupByOptions[0].Value)  
   
-  const handleChangeSearchServices = (e) => {
-    
-    const {value} = e.target
-    value == "" ? fetchServices() : ""
-    const servicesAC = services.filter(({LocationName, AssetID, Vendor, Type}) => LocationName.indexOf(value) > -1 || AssetID.indexOf(value) > -1 || Vendor.indexOf(value) > -1 || Type.indexOf(value) > -1 )
-    searchRef.current = value
-    setServices(servicesAC)   
-  }
-
-  const handleServicesSuggestedRef = (name, id) => {
-    console.log(name)
-    console.log(id)
-    ticketLocationID.current = id
-    ticketLocationName.current = name
-    setDropDown("")
-  }
+  useEffect(() => {
+    grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
+    grid === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
+    grid === 'ORDERS' ? setGroupByOptions(orderGroupByFields) :
+    grid === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
+    grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
+    setGroupByOptions(serviceGroupByFields)
+  },[g])
   
 /**Row Clicks */
   const handleServiceClick = (id) => {
@@ -160,105 +148,25 @@ const DashboardGrids = ({visible}) => {
                     })
   }
   
-{/**Add Buttons */}
-  const handleAddServiceBtn = (id) => {
-                    history.push({
-                      pathname: `/Services/${currentCompanyID}/${id}`,
-                      state: {
-                      currentCompanyID: currentCompanyID,
-                      isNew: "true",
-                      isDrawerActive: "true",
-                      }
-                    })
-  }
+  /** Handle Change when choosing different Grid via Selector */
 
-  const handleAddOrderBtn = (id) => {
-                    history.push({
-                      pathname: `/Orders/${currentCompanyID}/${id}`,
-                      state: {
-                      isNew: "true",
-                      isDrawerActive: "true",
-                      services: services,
-                      locations: locations,
-                      orders: orders
-                      }
-                    })
-  }
-
-  const handleAddTicketBtn = (id) => {
-                    history.push({
-                      pathname: `/Tickets/${currentCompanyID}/${id}`,
-                      state: {
-                      isNew: "true",
-                      isDrawerActive: "true",
-                      services: services,
-                      locations: locations,
-                      accounts: accounts,
-                      tickets: tickets
-                      }
-                    })
-  }
-
-  const handleAddAccountBtn = (id) => {
-                    {
-                    history.push({
-                      pathname: `/Accounts/${currentCompanyID}/${id}`,
-                      state: {
-                      isNew: "true",
-                      isDrawerActive: "true",
-                      services: services,
-                      locations: locations,
-                      accounts: accounts,
-                      tickets: tickets
-                      }
-                    })
-  }
-  }
-
-  const handleFilterServiceClick = (data, colRef, filterRef) => {
-     
-    const filteredArray = useFilterArray(data, colRef, filterRef)
-    setServices(filteredArray)
-
-  }
-
-  const handleFilterTicketClick = (data, colRef, filterRef) => {
-     
-    const filteredArray = useFilterArray(data, colRef, filterRef)
-    setTickets(filteredArray)
-
-  }
-
-  const handleFilterOrderClick = (data, colRef, filterRef) => {
-     
-    const filteredArray = useFilterArray(data, colRef, filterRef)
-    setOrders(filteredArray)
-
-  }
-
-  const handleFilterAccountClick = (data, colRef, filterRef) => {
-     
-    const filteredArray = useFilterArray(data, colRef, filterRef)
-    setAccounts(filteredArray)
-
-  }
-  
   const handleGridChange = (e) => {
     const {value} = e.target
     console.log(value)
     setGrid(value)
     setCurrentGrid(value)
-    value === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
-    value === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
-    value === 'ORDERS' ? setGroupByOptions(orderGroupByFields) :
-    value === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
-    value === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
-    setGroupByOptions(serviceGroupByFields)
+    
   }
+  
+  /** Modifty Grid Name to Title Case */
+
   const modGridStr = (str) => {
     const strLower = str.toLowerCase()
     return str.charAt(0).toUpperCase() + strLower.slice(1)
   }
+
+  /** Add New Document Button */
+
   const handleAddClick = (id) => {
     const isModule = modGridStr(grid)
     history.push({

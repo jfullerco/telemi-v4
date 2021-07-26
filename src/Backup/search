@@ -1,0 +1,16 @@
+ const handleChangeSearchServices = (e) => {
+    
+    const {value} = e.target
+    value == "" ? fetchServices() : ""
+    const servicesAC = services.filter(({LocationName, AssetID, Vendor, Type}) => LocationName.indexOf(value) > -1 || AssetID.indexOf(value) > -1 || Vendor.indexOf(value) > -1 || Type.indexOf(value) > -1 )
+    searchRef.current = value
+    setServices(servicesAC)   
+  }
+
+  const handleServicesSuggestedRef = (name, id) => {
+    console.log(name)
+    console.log(id)
+    ticketLocationID.current = id
+    ticketLocationName.current = name
+    setDropDown("")
+  }
