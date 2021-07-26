@@ -271,12 +271,12 @@ import React, { useContext } from 'react'
 
     const orderGroupByFields = [
       {
-        Label: 'Vendor',
-        Value: 'Vendor'
-      },
-      {
         Label: 'Status',
         Value: 'Status',
+      },
+      {
+        Label: 'Vendor',
+        Value: 'Vendor'
       },
       {
         Label: 'Location',

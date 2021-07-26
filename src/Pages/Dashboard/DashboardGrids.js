@@ -12,11 +12,15 @@ import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 
 import { serviceGridColumns,
+         serviceGroupByFields,
          serviceMobileGridColumns,
+         locationGridColumns,
+         locationGroupByFields,
          ticketGridColumns,
-         ticketMobileGridColumns,
          ticketGroupByFields,
+         ticketMobileGridColumns,
          orderGridColumns,
+         orderGroupByFields,
          orderMobileGridColumns,
          orderGroupByFields,
          accountGridColumns,
@@ -78,8 +82,9 @@ const DashboardGrids = ({visible}) => {
 
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
   const [groupBy, setGroupBy] = useState('Type')
-  
-console.log(orders)
+  const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
+
+
    
     
   
@@ -240,6 +245,12 @@ console.log(orders)
     console.log(value)
     setGrid(value)
     setCurrentGrid(value)
+    value === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
+    value === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
+    value === 'ORDERS' ? setGroupByOptions(orderGroupByFields) :
+    value === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
+    value === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
+    setGroupByOptions(serviceGroupByFields)
   }
   const modGridStr = (str) => {
     const strLower = str.toLowerCase()
