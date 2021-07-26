@@ -46,6 +46,12 @@ import React, { useContext } from 'react'
         headerName: 'Type', 
         key: "5", 
         filterable: true
+      },
+      {
+        docField: 'Status', 
+        headerName: 'Status', 
+        key: "6", 
+        filterable: true
       }
     ]
 
@@ -95,6 +101,7 @@ import React, { useContext } from 'react'
         key: "5", 
         filterable: true
       }
+      
     ]
 
     const locationGridColumns = [
