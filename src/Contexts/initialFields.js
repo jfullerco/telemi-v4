@@ -51,16 +51,16 @@ import React, { useContext } from 'react'
 
     const serviceGroupByFields = [
       {
+        Label: 'Vendor',
+        Value: 'Vendor'
+      },
+      {
         Label: 'Type',
         Value: 'Type'
       },
       {
         Label: 'Location',
         Value: 'LocationName'
-      },
-      {
-        Label: 'Vendor',
-        Value: 'Vendor'
       },
       {
         Label: 'Status',
@@ -271,12 +271,12 @@ import React, { useContext } from 'react'
 
     const orderGroupByFields = [
       {
-        Label: 'Status',
-        Value: 'Status',
-      },
-      {
         Label: 'Vendor',
         Value: 'Vendor'
+      },
+      {
+        Label: 'Status',
+        Value: 'Status',
       },
       {
         Label: 'Location',
@@ -350,6 +350,38 @@ import React, { useContext } from 'react'
         Label: 'Vendor',
         Value: 'Vendor'
       },
+      {
+        Label: 'All',
+        Value: ""
+      }
+    ]
+
+    const accountMobileGridColumns = [
+      {
+        docField: 'Vendor',
+        headerName: 'Vendor',
+        key: "1",
+        filterable: true,
+        visible: true,
+        mobile: true
+      },
+      {
+        docField: 'AccountNum',
+        headerName: 'Account',
+        key: "2",
+        filterable: false,
+        visible: true,
+        mobile: false
+      },
+      {
+        docField: 'PostTaxMRC',
+        headerName: 'Cost',
+        key: "5",
+        filterable: false,
+        visible: true,
+        mobile: true,
+        type: "currency"
+      }
     ]
 
     const userGridColumns = [
@@ -1254,6 +1286,7 @@ export {
     orderMobileGridColumns,
     accountGridColumns, 
     accountGroupByFields,
+    accountMobileGridColumns,
     userGridColumns, 
     contractGridColumns,
     serviceDetailFields,

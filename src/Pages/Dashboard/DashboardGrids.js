@@ -25,6 +25,7 @@ import { serviceGridColumns,
          orderGroupByFields,
          accountGridColumns,
          accountGroupByFields,
+         accountMobileGridColumns,
          userGridColumns,
          userGroupByFields,
          contractGridColumns,
@@ -81,8 +82,10 @@ const DashboardGrids = ({visible}) => {
   const searchRef = useRef("")
 
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
-  const [groupBy, setGroupBy] = useState('Type')
+  
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
+
+  const [groupBy, setGroupBy] = useState(groupByOptions[0].Value)
 
 
    
@@ -336,6 +339,15 @@ return (
       isGrid='Orders'
       headerFields={orderGridColumns}
       mobileHeaderFields={orderMobileGridColumns}
+      handleClick={(e) => handleOrderClick(e)}
+      groupBy={groupBy}
+    />
+
+    <GridGroup
+      data={grid === "ACCOUNTS" ? accounts : null}
+      isGrid='Accounts'
+      headerFields={accountGridColumns}
+      mobileHeaderFields={accountMobileGridColumns}
       handleClick={(e) => handleOrderClick(e)}
       groupBy={groupBy}
     />
