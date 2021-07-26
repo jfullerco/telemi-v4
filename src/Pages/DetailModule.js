@@ -318,7 +318,9 @@ const handleClick = (e) => {
     }
   }) 
 }
-console.log(relatedInputData)
+
+
+
 const handleRelatedDrawer = (field) => {
   field.inputFieldType === "map-list" ? (
   setRelatedInputData({
@@ -356,6 +358,9 @@ const handleRelatedInputChange = (e) => {
       [name]: value,
     }})
 }
+
+console.log(relatedInputData)
+
 return (
     <Loading active={loading}>
 

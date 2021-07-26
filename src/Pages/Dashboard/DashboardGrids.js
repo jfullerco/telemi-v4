@@ -94,7 +94,7 @@ const DashboardGrids = ({visible}) => {
     grid === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
     grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
     setGroupByOptions(serviceGroupByFields)
-  },[g])
+  },[grid])
   
 /**Row Clicks */
   const handleServiceClick = (id) => {

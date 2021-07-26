@@ -12,7 +12,8 @@ const PageField = ({
     toggleViewDrawer, 
     isViewRelatedActive, 
     toggleFieldDropDown, 
-    handleClick }) => {
+    handleClick 
+  }) => {
   const history = useHistory()
   const params = useParams()
   
@@ -72,15 +73,12 @@ const PageField = ({
           case "map-list":
             return (
               <>
-              
-
                 <MapListTable 
                   headerFields={item.relatedInputFields}
                   data={relatedDataMap}
                   colRef={item.relatedCollection}
                   handleClick={(e)=>handleClick(e)}
-                />
-                
+                /> 
               </>
             )
 
