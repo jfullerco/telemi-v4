@@ -31,7 +31,7 @@ const GridGroup = ({ data,
 
   const groupedArr = data != undefined ? arrGroup(data, groupBy) : ""
   const groupedKeys = Object.keys(groupedArr)
-  console.log(data)
+  
   
 
   return(
@@ -45,7 +45,7 @@ const GridGroup = ({ data,
             <div className="column is-narrow">
               <div className="is-size-6">{isGrid && isGrid}</div>
               <div className="title">
-                <strong>{group || "Not Assigned"}{console.log(group)}</strong>
+                <strong>{group || "Not Assigned"}</strong>
               </div>
               
             </div>

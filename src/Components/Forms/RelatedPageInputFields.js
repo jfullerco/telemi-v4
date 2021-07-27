@@ -50,8 +50,8 @@ const RelatedPageInputFields = ({
                 type="date"
                 name={related.docField}
                 className="input is-rounded is-small"
-                value={""}
-                fieldChanged={handleChange}
+                value={related.docField}
+                fieldChanged={(e)=>handleChange(e)}
               />
             )
             

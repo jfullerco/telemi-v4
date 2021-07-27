@@ -11,6 +11,8 @@ import GridGroup from '../../Components/Grids/GridGroup'
 import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 
+import NetworkGraphComponent from '../../Components/NetworkGraph/NetworkGraphComponent'
+
 import { serviceGridColumns,
          serviceGroupByFields,
          serviceMobileGridColumns,
@@ -95,7 +97,7 @@ const DashboardGrids = ({visible}) => {
     grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
     setGroupByOptions(serviceGroupByFields)
   },[grid])
-  
+  console.log(locations)
 /**Row Clicks */
   const handleServiceClick = (id) => {
                   
@@ -339,7 +341,10 @@ return (
 */}
     
     <p/>
-    
+
+    <NetworkGraphComponent 
+      data={locations}
+    />
   
   
   </>
