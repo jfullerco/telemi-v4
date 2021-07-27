@@ -1,7 +1,10 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import {useHistory, Link} from 'react-router-dom'
-import {useAuth} from '../Contexts/AuthContext'
 
+import { useAuth } from '../Contexts/AuthContext'
+
+import { useHistory } from 'react-router-dom'
+import Columns from '../Components/Layout/Columns'
+import Column from '../Components/Layout/Column'
 
 export default function Login() {
 
@@ -15,7 +18,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (emailRef.current.value && passwordRef.current.value === null) {
+    if (emailRef.current.value || passwordRef.current.value === "") {
       return setLoginError('Both email and password required')
     }
     try {
@@ -58,22 +61,27 @@ export default function Login() {
           
         
             <div className={loginError != "" ? "block notification is-danger" : "block"}>
-              <div className="level-item is-centered">{loginError != "" ? loginError : ""}</div>
+              <div>{loginError != "" ? loginError : ""}</div>
             </div>
         
         <div className="modal-card-foot">
+          <Columns options="is-mobile">
+            <Column>
+              <button 
+              type="submit" 
+              className={loading !== true ? "button is-rounded is-link level-item" : "button is-rounded is-loading"} 
+              disabled={loading}
+              >
+                Login
+              </button>
+            </Column>
+            <Column>
+              <button className="button is-rounded" onClick={()=>history.push("/register")}>
+                Create account 
+              </button>
+            </Column>
+          </Columns>
           
-          <button 
-            type="submit" 
-            className={loading !== true ? "button is-rounded is-link level-item" : "button is-loading"} 
-            disabled={loading}
-          >
-            Login
-          </button>
-          
-          <button className="button is-rounded" onClick={()=>history.push("/register")}>
-            Create account 
-          </button>
         
         </div>
         </form>
