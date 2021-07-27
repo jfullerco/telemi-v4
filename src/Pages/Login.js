@@ -18,7 +18,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (emailRef.current.value || passwordRef.current.value == "") {
+    if (emailRef.current.value && passwordRef.current.value === "") {
       return setLoginError('Both email and password required')
     }
     try {
