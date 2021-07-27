@@ -9,7 +9,7 @@ import Dashboard from './Pages/Dashboard'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import NavBar from './Components/NavBar'
-import Footer from './Footer'
+
 
 import AddCompany from './Pages/Companies/AddCompany'
 
@@ -19,7 +19,7 @@ import RelatedDetailModule from './Pages/RelatedDetailModule'
 import NotFound from './Components/NotFound'
 import UserSettings from './Pages/Users/UserSettings'
 
-import "./style.css"
+
 
 export default function App() {
   
