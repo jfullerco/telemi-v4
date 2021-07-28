@@ -1,21 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Graph from 'react-graph-vis'
 
 
 
 const NetworkGraphComponent = ({data}) => {
-  
-  const locationNodes = !data ? "" : data.map((location, index) => ({id: location.id, label: location.Name, title: location.Name}))
-  const hubLocation = locationNodes != undefined ? locationNodes[24].id : ""
-  const locationEdges = locationNodes != undefined ?  locationNodes.map(edge => ({ from: hubLocation, to: edge.id})) : ""
 
-  console.log(locationNodes)
-  
-  const graph = {
-    nodes: locationNodes,
-    edges: locationEdges
+  const [ graph, setGraph ] = useState({
+    nodes: "",
+    edges: ""
+  })
+
+  const [ arr, setArr ] = useState([])
+
+  useEffect(() => {
+    data && data ? setArr(data) 
+    : []
+  },[])
+
+  useEffect(() => {
+    buildGraph()
+  },[arr])
+
+  const buildGraph = () => {
+    setGraph({
+      nodes: buildNodes,
+      edges: buildEdges
+    })
   }
+  
+  const buildNodes = arr? arr.map(node => ({
+    id: node.id, 
+    label: node.Name, 
+    title: node.Name
+  })) : null
 
+  const buildHub = buildNodes? buildNodes[24].id : null
+  
+  const buildEdges = buildNodes? buildNodes.map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
+
+  console.log(data)
+  
   const options = {
     layout: {
       hierarchical: true
