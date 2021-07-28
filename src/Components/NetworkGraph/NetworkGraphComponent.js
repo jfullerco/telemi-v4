@@ -3,44 +3,46 @@ import Graph from 'react-graph-vis'
 
 import {stateContext} from '../../Contexts/stateContext'
 
-const NetworkGraphComponent = () => {
+const NetworkGraphComponent = (props) => {
+  const {data} = props
+
   
-  const userContext = useContext(stateContext)
-  
-   
 
   const [ graph, setGraph ] = useState()
-  const [isDone, setIsDone] = useState(false)
+  const [ isDone, setIsDone ] = useState(false)
   const [ arr, setArr ] = useState()
-  const valuesLoaded = locations.userContext.userSession != "" ? true : false
+  const valuesLoaded = data != "" ? true : false
+  const valuesChanged = data != arr ? true : false
   
   useEffect(() => {
-    locations.userContext.userSession ? setArr(locations.userContext.userSession) 
+    data != undefined ? setArr(data) 
     : ""
   },[valuesLoaded])
 
   useEffect(() => {
-    buildGraph()
-  },[valuesLoaded])
+    buildGraph(data)
+  },[data])
 
-  const buildGraph = () => {
-    console.log(locations.userContext.userSession)
+console.log(graph)
+  const buildGraph = (data) => {
+    const buildNodes = data ? data.map(node => ({
+      id: node.id, 
+      label: node.Name, 
+      title: node.Name
+    })) : ""
+  
+    const buildHub = 'xfufkMEw417UyMgawRNU'
+    
+    const buildEdges = buildNodes != "" ? buildNodes.map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
+    
     setGraph({
       nodes: buildNodes,
       edges: buildEdges
     })
-    setIsDone(true)
+    console.log(graph)
+    graph != undefined ? setIsDone(true) : null
   }
   
-  const buildNodes = arr != undefined ? arr && arr.map(node => ({
-    id: node.id, 
-    label: node.Name, 
-    title: node.Name
-  })) : ""
-
-  const buildHub = 'xfufkMEw417UyMgawRNU'
-  
-  const buildEdges = buildNodes != "" ? buildNodes.map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
 
   
   

@@ -82,6 +82,7 @@ const DashboardGrids = ({visible}) => {
           currentGrid } = userContext.userSession
 
   const searchRef = useRef("")
+  console.log(locations)
 
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
   
@@ -97,7 +98,7 @@ const DashboardGrids = ({visible}) => {
     grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
     setGroupByOptions(serviceGroupByFields)
   },[grid])
-  console.log(locations)
+  
 /**Row Clicks */
   const handleServiceClick = (id) => {
                   
@@ -341,11 +342,11 @@ return (
 */}
     
     <p/>
-
+    {locations && locations != "" ?
     <NetworkGraphComponent 
-      
+      data={locations}
     />
-  
+  : ""}
   
   </>
   
