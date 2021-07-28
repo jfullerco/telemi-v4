@@ -343,7 +343,7 @@ return (
     <p/>
 
     <NetworkGraphComponent 
-      data={locations && locations}
+      
     />
   
   

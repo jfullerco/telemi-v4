@@ -1,44 +1,48 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Graph from 'react-graph-vis'
 
+import {stateContext} from '../../Contexts/stateContext'
 
+const NetworkGraphComponent = () => {
+  
+  const userContext = useContext(stateContext)
+  
+   
 
-const NetworkGraphComponent = ({data}) => {
-
-  const [ graph, setGraph ] = useState({
-    nodes: "",
-    edges: ""
-  })
-
-  const [ arr, setArr ] = useState([])
-
+  const [ graph, setGraph ] = useState()
+  const [isDone, setIsDone] = useState(false)
+  const [ arr, setArr ] = useState()
+  const valuesLoaded = locations.userContext.userSession != "" ? true : false
+  
   useEffect(() => {
-    data && data ? setArr(data) 
-    : []
-  },[])
+    locations.userContext.userSession ? setArr(locations.userContext.userSession) 
+    : ""
+  },[valuesLoaded])
 
   useEffect(() => {
     buildGraph()
-  },[arr])
+  },[valuesLoaded])
 
   const buildGraph = () => {
+    console.log(locations.userContext.userSession)
     setGraph({
       nodes: buildNodes,
       edges: buildEdges
     })
+    setIsDone(true)
   }
   
-  const buildNodes = arr? arr.map(node => ({
+  const buildNodes = arr != undefined ? arr && arr.map(node => ({
     id: node.id, 
     label: node.Name, 
     title: node.Name
-  })) : null
+  })) : ""
 
-  const buildHub = buildNodes? buildNodes[24].id : null
+  const buildHub = 'xfufkMEw417UyMgawRNU'
   
-  const buildEdges = buildNodes? buildNodes.map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
+  const buildEdges = buildNodes != "" ? buildNodes.map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
 
-  console.log(data)
+  
   
   const options = {
     layout: {
@@ -55,7 +59,7 @@ const NetworkGraphComponent = ({data}) => {
   }
 
   return(
-    <>{locationNodes != "" ? 
+    <>{isDone === true ? 
       <Graph
         graph={graph}
         options={options}
