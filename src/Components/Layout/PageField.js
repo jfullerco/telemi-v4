@@ -13,10 +13,10 @@ const PageField = ({
     isViewRelatedActive, 
     toggleFieldDropDown, 
     handleClick 
-  }) => {
+}) => {
   const history = useHistory()
   const params = useParams()
-  
+  console.log("field:",field, "fieldData:", fieldData) 
   return(
     <>
     {field && [field].map(item => {
@@ -25,7 +25,7 @@ const PageField = ({
           case "text":
             return (
               
-              <>  {[fieldData].map(data => data[item.dataField] != "" ? data[item.dataField] : "--"  )} </>
+              <>  {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )} </>
               
             )
           case "text-area":
@@ -35,7 +35,7 @@ const PageField = ({
           case "currency":
             return (
               <>
-                $ {[fieldData].map(data => data[item.dataField])}
+                $ {[fieldData].map(data => data[item.dataField] && data[item.dataField] != "" ? data[item.dataField] : "--"  )}
               </>
             )
           case "related-select":

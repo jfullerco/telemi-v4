@@ -42,8 +42,13 @@ body {
 }
 
 
-
-
+.network {
+  display:block;
+  width:500px;
+  height:500px;
+  border:solid;
+  background-color:white;
+}
  
 #wrapper {
           flex: 1;

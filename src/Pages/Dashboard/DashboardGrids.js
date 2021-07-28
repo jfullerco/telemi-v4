@@ -82,20 +82,22 @@ const DashboardGrids = ({visible}) => {
           currentGrid } = userContext.userSession
 
   const searchRef = useRef("")
-  console.log(locations)
 
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState(groupByOptions[0].Value)  
+  const [groupBy, setGroupBy] = useState("ALL")  
+
+  const [networkMap, setNetworkMap] = useState(false)
   
   useEffect(() => {
     grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
     grid === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
     grid === 'ORDERS' ? setGroupByOptions(orderGroupByFields) :
     grid === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
-    grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) : 
+    grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) :
+    grid === 'NETWORK' ? setNetworkMap(!networkMap) :
     setGroupByOptions(serviceGroupByFields)
   },[grid])
   
@@ -196,13 +198,15 @@ return (
         <option value="ACCOUNTS">Accounts</option>
         <option value="USERS">Users</option>
         <option value="CONTRACTS">Contracts</option>
+        <option value="NETWORK">Network Map</option>
         </SelectView>
       </Column>
       <Column size="is-narrow">
         <div className="select is-rounded is-small">
         <select onChange={(e) => setGroupBy(e.target.value)}>
+          <option value="ALL">Show All</option>
           {groupByOptions.map(groupOption => (
-            <option value={groupOption.Value} >Group by {groupOption.Label}</option>
+            <option value={groupOption.Value}>Group by {groupOption.Label}</option>
           ))}
         </select>
         </div>
@@ -226,42 +230,46 @@ return (
     />
     */}
     
-
-    <GridGroup
-      data={grid === "SERVICES" ? services : null}
-      isGrid='Services'
-      headerFields={serviceGridColumns}
-      mobileHeaderFields={serviceMobileGridColumns}
-      handleClick={(e) => handleServiceClick(e)}
-      groupBy={groupBy}
-    />
-
-    <GridGroup
-      data={grid === "TICKETS" ? tickets : null}
-      isGrid='Tickets'
-      headerFields={ticketGridColumns}
-      mobileHeaderFields={ticketMobileGridColumns}
-      handleClick={(e) => handleTicketClick(e)}
-      groupBy={groupBy}
-    />
-
-    <GridGroup
-      data={grid === "ORDERS" ? orders : null}
-      isGrid='Orders'
-      headerFields={orderGridColumns}
-      mobileHeaderFields={orderMobileGridColumns}
-      handleClick={(e) => handleOrderClick(e)}
-      groupBy={groupBy}
-    />
-
-    <GridGroup
-      data={grid === "ACCOUNTS" ? accounts : null}
-      isGrid='Accounts'
-      headerFields={accountGridColumns}
-      mobileHeaderFields={accountMobileGridColumns}
-      handleClick={(e) => handleAccountClick(e)}
-      groupBy={groupBy}
-    />
+    <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
+      <GridGroup
+        data={grid === "SERVICES" ? services : null}
+        isGrid='Services'
+        headerFields={serviceGridColumns}
+        mobileHeaderFields={serviceMobileGridColumns}
+        handleClick={(e) => handleServiceClick(e)}
+        groupBy={groupBy}
+      />
+    </div>
+    <div className={grid === 'TICKETS' ? "" : "is-hidden"}>
+      <GridGroup
+        data={grid === "TICKETS" ? tickets : null}
+        isGrid='Tickets'
+        headerFields={ticketGridColumns}
+        mobileHeaderFields={ticketMobileGridColumns}
+        handleClick={(e) => handleTicketClick(e)}
+        groupBy={groupBy}
+      />
+    </div>
+    <div className={grid === 'ORDERS' ? "" : "is-hidden"}>
+      <GridGroup
+        data={grid === "ORDERS" ? orders : null}
+        isGrid='Orders'
+        headerFields={orderGridColumns}
+        mobileHeaderFields={orderMobileGridColumns}
+        handleClick={(e) => handleOrderClick(e)}
+        groupBy={groupBy}
+      />
+    </div>
+    <div className={grid === 'ACCOUNTS' ? "" : "is-hidden"}>
+      <GridGroup
+        data={grid === "ACCOUNTS" ? accounts : null}
+        isGrid='Accounts'
+        headerFields={accountGridColumns}
+        mobileHeaderFields={accountMobileGridColumns}
+        handleClick={(e) => handleAccountClick(e)}
+        groupBy={groupBy}
+      />
+    </div>
 
 {/** 
  * <GridComponent 
@@ -342,11 +350,15 @@ return (
 */}
     
     <p/>
-    {locations && locations != "" ?
-    <NetworkGraphComponent 
-      data={locations}
-    />
-  : ""}
+    {
+      /** 
+       *  <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
+            <NetworkGraphComponent 
+              data={locations && locations}
+            />
+          </div>
+      */
+    }
   
   </>
   

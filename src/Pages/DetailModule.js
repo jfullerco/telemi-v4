@@ -232,6 +232,7 @@ const DetailModule = (state) => {
   }
 
   const handleSubmitUpdated = async(data) => { 
+    console.log(relatedInputData)
       try {
         await db.collection(isModule).doc(params.id).update(data)
         
@@ -245,7 +246,7 @@ const DetailModule = (state) => {
   }
 
   const handleRelatedSubmit = async() => {
-    console.log(relatedInputData)
+    
     try {
     await db.collection(relatedInputData.collection).doc().set(relatedInputData.data)
       setPageSuccess(`New ${relatedInputData.label} Saved`)
@@ -328,10 +329,10 @@ const handleRelatedDrawer = (field) => {
     pageFields: field.relatedInputFields, 
     label: field.label, 
     data: {
-      ['CompanyID']: currentCompanyID,
-      ['CompanyName']: currentCompany,
-      ['CreatedDate']: setCurrentDate(),
-      ['CreatedBy']: currentUser,
+      [ 'CompanyID' ]: currentCompanyID,
+      [ 'CompanyName' ]: currentCompany,
+      [ 'CreatedDate' ]: setCurrentDate(),
+      [ 'CreatedBy' ]: currentUser,
       [field.relatedDataField]: params.id
     }  
   })) : (
@@ -340,10 +341,10 @@ const handleRelatedDrawer = (field) => {
     pageFields: field.relatedInputFields, 
     label: field.label, 
     data: {
-      ['CompanyID']: currentCompanyID,
-      ['CompanyName']: currentCompany,
-      ['CreatedDate']: setCurrentDate(),
-      ['CreatedBy']: currentUser,
+      [ 'CompanyID' ]: currentCompanyID,
+      [ 'CompanyName' ]: currentCompany,
+      [ 'CreatedDate' ]: setCurrentDate(),
+      [ 'CreatedBy' ]: currentUser,
       [field.relatedDataField]: params.id
     }  
   }))
@@ -351,15 +352,15 @@ const handleRelatedDrawer = (field) => {
 }
 
 const handleRelatedInputChange = (e) => {
-  const {name, value} = e.target
+  const { name, value } = e.target
   setRelatedInputData({
     ...relatedInputData, 
-    data: {...relatedInputData.data,
+    data: { ...relatedInputData.data,
       [name]: value,
     }})
 }
 
-console.log(relatedInputData)
+
 
 return (
     <Loading active={loading}>

@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Graph from 'react-graph-vis'
 
-import {stateContext} from '../../Contexts/stateContext'
 
 const NetworkGraphComponent = (props) => {
   const {data} = props
-
-  
 
   const [ graph, setGraph ] = useState()
   const [ isDone, setIsDone ] = useState(false)
@@ -23,7 +20,7 @@ const NetworkGraphComponent = (props) => {
     buildGraph(data)
   },[data])
 
-console.log(graph)
+
   const buildGraph = (data) => {
     const buildNodes = data ? data.map(node => ({
       id: node.id, 
@@ -40,20 +37,27 @@ console.log(graph)
       edges: buildEdges
     })
     console.log(graph)
-    graph != undefined ? setIsDone(true) : null
+    setTimeout(() => {setIsDone(true)}, 1000)
   }
   
 
-  
+  console.log(isDone)
   
   const options = {
+    autoResize: true,
     layout: {
-      hierarchical: true
+      randomSeed: undefined,
+      hierarchical: false,
+      improvedLayout: false,
+      parentCentralization: true
     },
     edges: {
       color: "#000000"
     },
-    height: "500px"
+    height: '500px',
+    width: '500px'
+    
+    
   }
 
   const events = {
@@ -61,14 +65,17 @@ console.log(graph)
   }
 
   return(
-    <>{isDone === true ? 
+    <>
+    {isDone === false ? "" :
+    <div className="network">
       <Graph
         graph={graph}
         options={options}
         events={events}
 
       />
-      : "" }
+      </div>
+       }
     </>
   )
 }
