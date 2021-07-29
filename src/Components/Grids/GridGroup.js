@@ -96,7 +96,7 @@ const GridGroup = ({ data,
           </tbody>   
           <tbody className="is-size-7 is-hidden-tablet">
             
-              {data && data != undefined ? data.filter(f => !groupBy ? f[groupBy] === group : "").map(item => 
+              {data && data != undefined ? data.filter(f => f[groupBy] === group).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
                   {mobileHeaderFields && mobileHeaderFields.map(col => 
                     <td className={col.headerName === groupBy ? "is-hidden" : "py-3"} key={item[col.headerName]} >
