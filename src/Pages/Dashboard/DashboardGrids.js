@@ -196,6 +196,7 @@ return (
         <option value="TICKETS">Tickets</option>
         <option value="ORDERS">Orders</option>
         <option value="ACCOUNTS">Accounts</option>
+        <option value="LOCATIONS">Locations</option>
         <option value="USERS">Users</option>
         <option value="CONTRACTS">Contracts</option>
         <option value="NETWORK">Network Map</option>
@@ -271,7 +272,7 @@ return (
       />
     </div>
 
-{/** 
+{/** Replaced with Grid Component
  * <GridComponent 
       label="SERVICES"
       headerFields={serviceGridColumns}
@@ -350,15 +351,14 @@ return (
 */}
     
     <p/>
-    {
-      /** 
-       *  <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
+        {/** Network Graph */}
+          <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
             <NetworkGraphComponent 
               data={locations && locations}
             />
           </div>
-      */
-    }
+      
+    
   
   </>
   

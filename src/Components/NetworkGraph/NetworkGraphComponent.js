@@ -30,7 +30,7 @@ const NetworkGraphComponent = (props) => {
   
     const buildHub = 'xfufkMEw417UyMgawRNU'
     
-    const buildEdges = buildNodes != "" ? buildNodes.map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
+    const buildEdges = buildNodes != "" ? buildNodes.filter(f => f.id != buildHub).map(edge => ({ from: buildHub, to: edge.id && edge.id})) : ""
     
     setGraph({
       nodes: buildNodes,
@@ -45,17 +45,29 @@ const NetworkGraphComponent = (props) => {
   
   const options = {
     autoResize: true,
+    nodes: {
+      shape: 'dot'
+    },
     layout: {
-      randomSeed: undefined,
-      hierarchical: false,
+      
+      hierarchical: {
+        enabled: false,
+        parentCentralization: true,
+        direction: 'UD',
+        sortMethod: 'hubsize'
+      },
       improvedLayout: false,
-      parentCentralization: true
+      
     },
     edges: {
-      color: "#000000"
+      color: "#000000",
+      width: 0.15,
     },
-    height: '500px',
-    width: '500px'
+    physics: {
+      stabilization: false,
+      
+    },
+    
     
     
   }
@@ -67,14 +79,14 @@ const NetworkGraphComponent = (props) => {
   return(
     <>
     {isDone === false ? "" :
-    <div className="network">
+    <div className="network is-relative">
       <Graph
         graph={graph}
         options={options}
         events={events}
 
       />
-      </div>
+    </div>
        }
     </>
   )
