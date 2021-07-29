@@ -107,7 +107,7 @@ import React, { useContext } from 'react'
 
     const locationGridColumns = [
       {
-        docField: 'LocationName',
+        docField: 'Name',
         headerName: 'Location Name',
         key: "1",
         filterable: false
@@ -117,12 +117,6 @@ import React, { useContext } from 'react'
         headerName: 'Address 1',
         key: "2",
         filterable: false
-      },
-      { 
-        docField: 'Address2', 
-        headerName: 'Address 2', 
-        key: "3", 
-        filterable: false 
       },
       { 
         docField: 'City', 
@@ -140,6 +134,27 @@ import React, { useContext } from 'react'
         docField: 'Zip', 
         headerName: 'Zip', 
         key: "6", 
+        filterable: true 
+      }
+    ]
+
+    const locationMobileGridColumns = [
+      {
+        docField: 'Name',
+        headerName: 'Location Name',
+        key: "1",
+        filterable: false
+      },
+      { 
+        docField: 'City', 
+        headerName: 'City', 
+        key: "4", 
+        filterable: true 
+      },
+      { 
+        docField: 'State', 
+        headerName: 'State', 
+        key: "5", 
         filterable: true 
       }
     ]
@@ -1333,6 +1348,7 @@ export {
     serviceMobileGridColumns,
     serviceGroupByFields,
     locationGridColumns,
+    locationMobileGridColumns,
     locationGroupByFields,
     ticketGridColumns, 
     ticketGroupByFields,
