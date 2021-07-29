@@ -567,6 +567,14 @@ import React, { useContext } from 'react'
         tabLabel: "BASIC INFO" 
       },
       { 
+        label: "Service Start Date", 
+        dataField: "StartDate", 
+        visible: true, 
+        inputFieldType: "datepicker", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
+      { 
         label: "Related Orders", 
         dataField: "OrderNum", 
         inputFieldType: "map-list", 
@@ -594,7 +602,8 @@ import React, { useContext } from 'react'
                               }
         ], 
         tab: "DETAILS",
-        tabLabel: "DETAILS"  
+        tabLabel: "DETAILS",
+        hasBreakBefore: true  
       },
       { 
         label: "Related Order ID", 
@@ -606,15 +615,6 @@ import React, { useContext } from 'react'
         tab: "DETAILS",
         tabLabel: "DETAILS" 
       },
-      { 
-        label: "Service Start Date", 
-        dataField: "StartDate", 
-        visible: true, 
-        inputFieldType: "datepicker", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
-      },
-
       { 
         label: "Related Account", 
         dataField: "AccountNum",
