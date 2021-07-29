@@ -204,7 +204,7 @@ return (
   <>
     <div className="is-flex is-justify-content-flex-end">
     <Columns options="is-mobile pr-3 pb-3 is-gapless">
-      <Column size="is-narrow mr-2 mt-1">Current View</Column>
+      <Column size="is-narrow mr-2 mt-1">View</Column>
       <Column size="is-narrow mr-2">
         <SelectView onChange={(e)=>handleGridChange(e)} value={grid}>
         <option value="SERVICES">Services</option>

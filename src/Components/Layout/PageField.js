@@ -30,7 +30,7 @@ const PageField = ({
             )
           case "text-area":
             return (
-              <div className="textareafield">{[fieldData].map(data => data[item.dataField])}</div>
+              <div className="textareafield">{[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")}</div>
             )
           case "currency":
             return (
@@ -61,10 +61,10 @@ const PageField = ({
                 )
                 : null : 
                 fieldData && item.relatedDataType === "Account" ? <a onClick={
-                  (e)=> handleClick({colRef: "Accounts", id: fieldData[item.relatedDataField]})}> {[fieldData].map(data => data[item.dataField])} </a> 
+                  (e)=> handleClick({colRef: "Accounts", id: fieldData[item.relatedDataField]})}> {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} </a> 
                 : 
                 fieldData && item.relatedDataType === "Service" ? <a onClick={
-                  (e)=> handleClick({colRef: "Services", id: fieldData[item.relatedDataField]})}> {[fieldData].map(data => data[item.dataField])} </a> 
+                  (e)=> handleClick({colRef: "Services", id: fieldData[item.relatedDataField]})}> {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} </a> 
                 : null
                 }
                 
@@ -85,7 +85,7 @@ const PageField = ({
           default:
               return (
                 <>
-                  {[fieldData].map(data => data[item.dataField])}
+                  {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")}
                 </>
               )
           }
