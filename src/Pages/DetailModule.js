@@ -8,7 +8,9 @@ import {
   orderDetailFields,
   accountDetailFields,
   ticketDetailFields,
-  billsDetailFields } from '../Contexts/initialFields'
+  billsDetailFields,
+  locationDetailFields } from '../Contexts/initialFields'
+import {stateList} from '../Contexts/states.js'
 
 import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
@@ -116,6 +118,7 @@ const DetailModule = (state) => {
     handleInitialFieldMapping("AccountNum", accounts, pageFields)
     handleInitialFieldMapping("Bills", bills, pageFields)
     handleInitialFieldMapping("Notes", notes, pageFields)
+    handleInitialFieldMapping("State", stateList, pageFields)
     handleSetHeader()
     handleFinishedLoading()
   },[loading])
@@ -133,6 +136,7 @@ const DetailModule = (state) => {
     handleInitialFieldMapping("Services", services, pageFields)
     handleInitialFieldMapping("AccountNum", accounts, pageFields)
     handleInitialFieldMapping("Bills", bills, pageFields)
+    handleInitialFieldMapping("State", stateList, pageFields)
     
   },[updated])
 
@@ -153,6 +157,10 @@ const DetailModule = (state) => {
       case "Tickets":
         return (
           setPageFields(ticketDetailFields)
+        )
+      case "Locations":
+        return (
+          setPageFields(locationDetailFields)
         )
       case "Bills":
         return (

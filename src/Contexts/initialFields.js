@@ -1274,12 +1274,13 @@ import React, { useContext } from 'react'
   
     ]
 
-    const locationsDetailFields = [
+    const locationDetailFields = [
       {
         label: 'Location Name',
         dataField: 'Name',
         inputFieldType: 'text',
         tab: 'BASIC INFO',
+        isHeader: true
       },
       {
         label: 'Address 1',
@@ -1304,6 +1305,7 @@ import React, { useContext } from 'react'
         dataField: 'State',
         inputFieldType: 'select',
         inputSource: stateList,
+        inputValue: "code",
         tab: 'BASIC INFO'
       },
       {
@@ -1350,6 +1352,7 @@ export {
     locationGridColumns,
     locationMobileGridColumns,
     locationGroupByFields,
+    locationDetailFields,
     ticketGridColumns, 
     ticketGroupByFields,
     ticketMobileGridColumns,
