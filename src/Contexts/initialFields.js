@@ -9,7 +9,8 @@ import React, { useContext } from 'react'
   let services = []
   let notes = []
   let serviceStatusType = []
-  let vendorList
+  let vendorList = []
+  let stateList = []
   let serviceTypes = []
   let accessTypes = []
 
@@ -1257,6 +1258,54 @@ import React, { useContext } from 'react'
       },
   
     ]
+
+    const locationsDetailFields = [
+      {
+        label: 'Location Name',
+        dataField: 'Name',
+        inputFieldType: 'text',
+        tab: 'BASIC INFO',
+      },
+      {
+        label: 'Address 1',
+        dataField: 'Address1',
+        inputFieldType: 'text',
+        tab: 'BASIC INFO',
+      },
+      {
+        label: 'Address 2',
+        dataField: 'Address2',
+        inputFieldType: 'text',
+        tab: 'BASIC INFO'
+      },
+      {
+        label: 'City',
+        dataField: 'City',
+        inputFieldType: 'text',
+        tab: 'BASIC INFO'
+      },
+      {
+        label: 'State',
+        dataField: 'State',
+        inputFieldType: 'select',
+        inputSource: stateList,
+        tab: 'BASIC INFO'
+      },
+      {
+        label: 'Zip',
+        dataField: 'Zip',
+        inputFieldType: 'text',
+        tab: 'BASIC INFO'
+      },
+      {
+        label: 'Full Address',
+        dataField: 'FullAddress',
+        inputFieldType: 'concat',
+        visible: false,
+        tab: 'BASIC INFO'
+      },
+    ]
+
     const notesDetailFields = [
       {
         label: 'Note Date',
