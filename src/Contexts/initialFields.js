@@ -647,7 +647,7 @@ import React, { useContext } from 'react'
           {
             label: "Type",
             docField: "Type",
-            fieldType: "tex"
+            fieldType: "text"
           }
         ],
         tab: "SUPPORT"
