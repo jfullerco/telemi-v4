@@ -50,18 +50,10 @@ const RelatedPageInputFields = ({
                 type="date"
                 name={related.docField}
                 className="input is-rounded is-small"
-                value={related.docField}
+                value={related.docField && related.docField}
                 fieldChanged={(e)=>handleChange(e)}
               />
             )
-            
-            case "currency":
-              return (
-  
-                <TextBox title={related.label} addOn="currency" name={field.dataField} fieldChanged={handleChange} />
-  
-              )
-
         }
       }
       )}

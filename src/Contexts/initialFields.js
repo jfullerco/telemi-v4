@@ -492,7 +492,7 @@ import React, { useContext } from 'react'
             docField: "Zip",
             fieldType: "text"
           }
-          ],
+        ],
         relatedDataType: "Location",
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO"  
@@ -528,7 +528,13 @@ import React, { useContext } from 'react'
         label: "Access Type", 
         dataField: "AccessType", 
         inputFieldType: "select", 
-        inputSource: accessTypes, 
+        inputSource: [
+          { Name: 'T1', Value: 'T1' },
+          { Name: 'Ethernet', Value: 'Ethernet' },
+          { Name: 'Fiber', Value: 'Fiber' },
+          { Name: 'Cable/DSL', Value: 'CableDSL' }
+          
+        ], 
         inputID: "id", 
         inputValue: "Name", 
         tab: "BASIC INFO",
@@ -560,7 +566,12 @@ import React, { useContext } from 'react'
         label: "Status", 
         dataField: "Status", 
         inputFieldType: "select", 
-        inputSource: serviceStatusType, 
+        inputSource: [
+          { Name: 'Active', Value: 'Active' },
+          { Name: 'Disconnected', Value: 'Disconnected' },
+          { Name: 'Pending Activation', Value: 'Pending Activation' },
+          { Name: 'Pending Disconnect', Value: 'Pending Disconnect' }
+        ], 
         inputID: "id", 
         inputValue: "Name", 
         tab: "BASIC INFO",
@@ -599,7 +610,12 @@ import React, { useContext } from 'react'
                                 label: 'Status', 
                                 docField: 'Status', 
                                 fieldType: 'text'
-                              }
+                              },
+                              {
+                                label: 'CompanyName',
+                                docField: 'CompanyName',
+                                fieldType: 'inherit'
+                              },
         ], 
         tab: "DETAILS",
         tabLabel: "DETAILS",
@@ -614,6 +630,27 @@ import React, { useContext } from 'react'
         inputValue: "id", 
         tab: "DETAILS",
         tabLabel: "DETAILS" 
+      },
+      {
+        label: "Related Tickets",
+        dataField: "Tickets",
+        inputFieldType: "map-list",
+        relatedCollection: "Tickets",
+        relatedDataField: "ServiceID",
+        relatedInputLabel: "Ticket",
+        relatedInputFields: [
+          {
+            label: "Ticket Number",
+            docField: "TicketNumber",
+            fieldType: "text"
+          },
+          {
+            label: "Type",
+            docField: "Type",
+            fieldType: "tex"
+          }
+        ],
+        tab: "SUPPORT"
       },
       { 
         label: "Related Account", 

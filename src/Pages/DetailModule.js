@@ -331,6 +331,7 @@ const handleClick = (e) => {
 
 
 const handleRelatedDrawer = (field) => {
+  console.log(field)
   field.inputFieldType === "map-list" ? (
   setRelatedInputData({
     collection: field.relatedCollection, 
@@ -368,7 +369,7 @@ const handleRelatedInputChange = (e) => {
     }})
 }
 
-
+console.log(relatedInputData && relatedInputData)
 
 return (
     <Loading active={loading}>

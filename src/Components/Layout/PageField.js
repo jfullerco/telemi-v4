@@ -16,7 +16,7 @@ const PageField = ({
 }) => {
   const history = useHistory()
   const params = useParams()
-  console.log("field:",field, "fieldData:", fieldData) 
+  /**console.log("field:",field, "fieldData:", fieldData) */
   return(
     <>
     {field && [field].map(item => {
