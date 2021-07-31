@@ -1,13 +1,23 @@
 import React, {useState} from 'react'
+import { useSortHook } from '../../Hooks/useSortHook'
 
 const GridGroup = ({ data, 
                      isGrid, 
                      headerFields,
                      mobileHeaderFields,
-                     handleClick, 
-                     handleSort,
+                     handleClick,
                      groupBy
                      }) => {
+
+  const { sortedArr, setArr } = useSortHook() 
+
+  const [gridData, setGridData] = useState()
+
+  const handleSort = (sortBy, colRef) => {
+    setArr({sortBy: sortBy, data: colRef})
+    
+    console.log(sortedArr)
+  }
 
   const groupByOptions = [
     {

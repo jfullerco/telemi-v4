@@ -95,7 +95,7 @@ const DashboardGrids = ({visible}) => {
   const { sortedArr, sortArr } = useSortHook()
 
   
-  console.log("sorted:",sortedArr)
+  
   useEffect(() => {
     grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
     grid === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
@@ -106,11 +106,13 @@ const DashboardGrids = ({visible}) => {
     setGroupByOptions(serviceGroupByFields)
   },[grid])
 
-  const handleSorting = (colRef, sortBy) => {
-    
-     setLocations(sortArr(sortBy, colRef)) 
+  const handleSorting = (sortBy, colRef) => {
+   const sortedArray = sortArr(sortBy, colRef)
+   console.log("this:", sortedArray)
+
+     setLocations(sortedArr) 
       
-    }
+    
   }
   
 /**Row Clicks */
@@ -304,7 +306,7 @@ return (
         headerFields={locationGridColumns}
         mobileHeaderFields={locationMobileGridColumns}
         handleClick={(e) => handleLocationClick(e)}
-        handleSort={(colRef, sortBy)=>handleSorting(colRef, sortBy)}
+        handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}
       />
     </div>
