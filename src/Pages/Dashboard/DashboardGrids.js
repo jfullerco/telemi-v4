@@ -92,8 +92,10 @@ const DashboardGrids = ({visible}) => {
 
   const [networkMap, setNetworkMap] = useState(false)
 
-  const { sortedArr } = useSortHook()
-  console.log(sortedArr)
+  const { sortedArr, sortArr } = useSortHook()
+
+  
+  console.log("sorted:",sortedArr)
   useEffect(() => {
     grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
     grid === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
@@ -103,6 +105,13 @@ const DashboardGrids = ({visible}) => {
     grid === 'NETWORK' ? setNetworkMap(!networkMap) :
     setGroupByOptions(serviceGroupByFields)
   },[grid])
+
+  const handleSorting = (colRef, sortBy) => {
+    
+     setLocations(sortArr(sortBy, colRef)) 
+      
+    }
+  }
   
 /**Row Clicks */
   const handleServiceClick = (id) => {
@@ -246,7 +255,7 @@ return (
       handleClick={(e)=> handleServiceClick(e)}
     />
     */}
-    
+    <button onClick={() => sortArr('City', locations)}>Test</button>
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup
         data={grid === "SERVICES" ? services : null}
@@ -254,6 +263,7 @@ return (
         headerFields={serviceGridColumns}
         mobileHeaderFields={serviceMobileGridColumns}
         handleClick={(e) => handleServiceClick(e)}
+        handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
     </div>
@@ -294,6 +304,7 @@ return (
         headerFields={locationGridColumns}
         mobileHeaderFields={locationMobileGridColumns}
         handleClick={(e) => handleLocationClick(e)}
+        handleSort={(colRef, sortBy)=>handleSorting(colRef, sortBy)}
         groupBy={groupBy}
       />
     </div>

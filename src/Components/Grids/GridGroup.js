@@ -5,7 +5,7 @@ const GridGroup = ({ data,
                      headerFields,
                      mobileHeaderFields,
                      handleClick, 
-                     handleAddBtn,
+                     handleSort,
                      groupBy
                      }) => {
 
@@ -59,8 +59,8 @@ const GridGroup = ({ data,
 
                     {
                       col.mobile != true ? 
-                      <span > {col.headerName && col.headerName} </span> : 
-                      <>{col.headerName && col.headerName} </> 
+                      <span > <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a> </span> : 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName} </a> 
                     }
 
                   </th>
@@ -72,8 +72,8 @@ const GridGroup = ({ data,
 
                     {
                       col.mobile != true ? 
-                      <span > {col.headerName && col.headerName} </span> : 
-                      <>{col.headerName && col.headerName} </> 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a> : 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a>
                     }
 
                   </th>
@@ -134,8 +134,8 @@ const GridGroup = ({ data,
 
                     {
                       col.mobile != true ? 
-                      <span > {col.headerName && col.headerName} </span> : 
-                      <>{col.headerName && col.headerName} </> 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a> : 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a>
                     }
 
                   </th>
