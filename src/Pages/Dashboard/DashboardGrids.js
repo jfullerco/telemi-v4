@@ -247,16 +247,7 @@ return (
     </Columns>
     </div>
 
-    {/** 
-     * 
-     * 
-     * <GridGroup
-      data={services}
-      isGrid='Services'
-      headerFields={serviceGridColumns}
-      handleClick={(e)=> handleServiceClick(e)}
-    />
-    */}
+    
     
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup
