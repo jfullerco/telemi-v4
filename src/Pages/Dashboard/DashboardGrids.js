@@ -257,7 +257,7 @@ return (
       handleClick={(e)=> handleServiceClick(e)}
     />
     */}
-    <button onClick={() => sortArr('City', locations)}>Test</button>
+    
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup
         data={grid === "SERVICES" ? services : null}
