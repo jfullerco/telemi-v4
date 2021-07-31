@@ -41,7 +41,7 @@ import TabBar from '../../Components/Tabs/TabBar'
 import Columns from '../../Components/Layout/Columns'
 import Column from '../../Components/Layout/Column'
 
-
+import { useSortHook } from '../../Hooks/useSortHook'
 
 const DashboardGrids = ({visible}) => {
 
@@ -91,7 +91,9 @@ const DashboardGrids = ({visible}) => {
   const [groupBy, setGroupBy] = useState("ALL")  
 
   const [networkMap, setNetworkMap] = useState(false)
-  
+
+  const { sortedArr } = useSortHook()
+  console.log(sortedArr)
   useEffect(() => {
     grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
     grid === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
