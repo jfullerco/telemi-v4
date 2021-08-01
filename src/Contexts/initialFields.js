@@ -644,13 +644,27 @@ import React, { useContext } from 'react'
         relatedInputFields: [
           {
             label: "Ticket Number",
-            docField: "TicketNumber",
+            docField: "TicketNum",
             fieldType: "text"
           },
           {
             label: "Type",
             docField: "Type",
-            fieldType: "text"
+            fieldType: "select",
+            inputSource: [
+              {
+                id: "Service",
+                Name: "Service"
+              },
+              {
+                id: "Billing",
+                Name: "Billing"
+              },
+              {
+                id: "Disconnect",
+                Name: "Disconnect"
+              }
+            ],
           }
         ],
         tab: "SUPPORT"
