@@ -633,8 +633,11 @@ import React, { useContext } from 'react'
       },
       {
         label: "Related Tickets",
-        dataField: "Tickets",
+        dataField: "TicketNum",
         inputFieldType: "map-list",
+        inputSource: "",
+        inputID: "id",
+        inputValue: "TicketNum",
         relatedCollection: "Tickets",
         relatedDataField: "ServiceID",
         relatedInputLabel: "Ticket",

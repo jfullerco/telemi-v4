@@ -12,7 +12,7 @@ const CompanyDropDown = ({currentCompany, companies, isActive, handleClick, hand
      
       <div className={isActive === true ? `dropdown is-active` : `dropdown`}>
         <div className="dropdown-trigger" >
-          <div className="title" onClick={handleToggle}>
+          <div className="title donotwrap" onClick={handleToggle}>
             <span className="pr-1">
               <strong>{currentCompany}</strong>
             </span>

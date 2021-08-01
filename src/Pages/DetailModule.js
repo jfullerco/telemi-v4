@@ -230,9 +230,11 @@ const DetailModule = (state) => {
     try {
       await db.collection(isModule).doc().set(data) 
       
-      setPageSuccess("Saved")
+      setPageSuccess("Changes Saved!")
+      setTimeout(() => {setPageSuccess(false)}, 1000)
     } catch {
       setPageError("Error saving")
+      setTimeout(() => {setPageError(false)}, 1000)
     } 
     setDocIsNew(false) 
     setUpdated(true)
@@ -244,9 +246,10 @@ const DetailModule = (state) => {
       try {
         await db.collection(isModule).doc(params.id).update(data)
         
-        setPageSuccess("Saved")
+        setPageSuccess("CHANGES SAVED!")
+        setTimeout(() => {setPageSuccess(false)}, 1000)
       } catch {
-        setPageError("Error saving")
+        setPageError("ERROR SAVING CHANGES")
       } 
       setDocIsNew(false) 
       setUpdated(true)
@@ -395,7 +398,7 @@ return (
             title={isModule}
             handleEditDrawer={()=>handleToggle()}
           />
-          <div className="box is-rounded has-text-black" style={{minHeight: '50vh'}}>
+          <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
 
               {/** Refactor as ViewPageFields Component */}
               {active && pageFields.map(field => 
@@ -510,13 +513,19 @@ return (
               </DrawerComponent>
 
           </div>
-          <nav className="breadcrumb" aria-label="breadcrumbs">
+          <Columns>
               {/** Refactor this as LastUpdatedComponent Component with Hook */}
-              <ul>
-                <li className="is-size-7" style={{fontVariant: [ 'small-caps' ]}}>last updated: {active.LastUpdated && active.LastUpdated}</li>
-                <li className="is-size-7" style={{fontVariant: [ 'small-caps' ]}}>updated by: {active.LastUpdatedBy && active.LastUpdatedBy}</li>
-              </ul>
-            </nav>
+              <Column size="is-narrow">
+                <div className="is-size-7 ml-5" style={{fontVariant: [ 'small-caps' ]}}>
+                  last updated: {active.LastUpdated && active.LastUpdated}
+                </div>
+              </Column>
+              <Column size="is-narrow">
+                <div className="is-size-7 ml-5" style={{fontVariant: [ 'small-caps' ]}}>
+                  updated by: {active.LastUpdatedBy && active.LastUpdatedBy}</div>
+                </Column>
+             
+            </Columns>
         </> : 
           <div className="tile warning"> No record to display </div>
       }    

@@ -50,7 +50,7 @@ const GridGroup = ({ data,
       
     {groupBy != "ALL" ? groupedKeys.map((group) => 
                                            
-        <div className="box is-rounded">
+        <div className="box is-rounded mx-2">
           <div className="columns is-mobile">     {/**Header */}
             <div className="column is-narrow">
               <div className="is-size-6">{isGrid && isGrid}</div>
@@ -95,7 +95,7 @@ const GridGroup = ({ data,
               {data && data != undefined ? data.filter(f=> f[groupBy] === group).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
                   {headerFields && headerFields.map(col => 
-                    <td className={col.headerName === groupBy ? "is-hidden" : "py-4"} key={item[col.headerName]} >
+                    <td className={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-4"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 
@@ -109,7 +109,7 @@ const GridGroup = ({ data,
               {data && data != undefined ? data.filter(f => f[groupBy] === group).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
                   {mobileHeaderFields && mobileHeaderFields.map(col => 
-                    <td className={col.headerName === groupBy ? "is-hidden" : "py-3"} key={item[col.headerName]} >
+                    <td className={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-3"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 
@@ -126,7 +126,7 @@ const GridGroup = ({ data,
       
         ) : (
           
-          <div className="box is-rounded">
+          <div className="box is-rounded mx-2">
           <div className="columns is-mobile">     {/**Header */}
             <div className="column is-narrow">
               <div className="title">
@@ -157,8 +157,8 @@ const GridGroup = ({ data,
 
                     {
                       col.mobile != true ? 
-                      <span > {col.headerName && col.headerName} </span> : 
-                      <>{col.headerName && col.headerName} </> 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a> : 
+                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a>
                     }
 
                   </th>
@@ -170,7 +170,7 @@ const GridGroup = ({ data,
               {data && data != undefined ? data.map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
                   {headerFields && headerFields.map(col => 
-                    <td className={col.headerName === groupBy ? "is-hidden" : "py-4"} key={item[col.headerName]} >
+                    <td className={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-4"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 
@@ -184,7 +184,7 @@ const GridGroup = ({ data,
               {data && data != undefined ? data.map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
                   {mobileHeaderFields && mobileHeaderFields.map(col => 
-                    <td className={col.headerName === groupBy ? "is-hidden" : "py-3"} key={item[col.headerName]} >
+                    <td className={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-3"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 

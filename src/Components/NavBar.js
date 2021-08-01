@@ -27,11 +27,11 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="navbar is-black is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-black is-fixed-top pt-2 pb-2" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
 
       <div className="navbar-item">
-        <Link to="/dashboard" className="has-text-white is-size-5">
+        <Link to="/dashboard" className="has-text-white is-size-4">
           <strong>TELEMI</strong>
         </Link><span className="is-size-7 pl-1">beta</span>
       </div>
@@ -62,7 +62,7 @@ const NavBar = () => {
           <>
           
             
-            <a className="navbar-item" onClick={()=>history.push("/dashboard")}>{userFirstName}</a>
+            <a className="navbar-item" onClick={()=>history.push("/dashboard")}><span className="button is-link">{userFirstName}</span></a>
             
           <div className="navbar-item has-dropdown is-hoverable">
 
