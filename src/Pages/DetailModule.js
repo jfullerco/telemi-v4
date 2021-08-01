@@ -119,6 +119,7 @@ const DetailModule = (state) => {
     handleInitialFieldMapping("Bills", bills, pageFields)
     handleInitialFieldMapping("Notes", notes, pageFields)
     handleInitialFieldMapping("State", stateList, pageFields)
+    handleInitialFieldMapping("TicketNum", tickets, pageFields)
     handleSetHeader()
     handleFinishedLoading()
   },[loading])

@@ -640,7 +640,7 @@ import React, { useContext } from 'react'
         inputValue: "TicketNum",
         relatedCollection: "Tickets",
         relatedDataField: "ServiceID",
-        relatedInputLabel: "Ticket",
+        relatedInputLabel: "Ticket Number",
         relatedInputFields: [
           {
             label: "Ticket Number",
@@ -665,6 +665,11 @@ import React, { useContext } from 'react'
                 Name: "Disconnect"
               }
             ],
+          },
+          {
+            label: "Status",
+            docField: "Status",
+            fieldType: "tag-select"
           }
         ],
         tab: "SUPPORT"
