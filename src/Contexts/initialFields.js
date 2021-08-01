@@ -731,10 +731,15 @@ import React, { useContext } from 'react'
                                 fieldType: 'datepicker'
                               }, 
                               {
-                                label: 'Cost', 
+                                label: 'Base Cost', 
                                 docField: 'Cost', 
                                 fieldType: 'currency'
                               }, 
+                              {
+                                label: 'Total MRC',
+                                docField: 'TotalMRC',
+                                fieldType: 'currency'
+                              },
                               {
                                 label: 'Disputed', 
                                 docField: 'DisputedAmount', 
