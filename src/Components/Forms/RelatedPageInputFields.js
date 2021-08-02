@@ -11,7 +11,8 @@ import AddLocationModal from '../../Pages/Locations/AddLocationModal'
 const RelatedPageInputFields = ({ 
     relatedFields, 
     handleChange, 
-    handleUpdated,  
+    handleUpdated,
+    active  
   }) => {
       console.log(relatedFields)
 
@@ -50,7 +51,7 @@ const RelatedPageInputFields = ({
                 type="date"
                 name={related.docField}
                 className="input is-rounded is-small"
-                value={related.docField && related.docField}
+                value={related && active[related.docField]}
                 fieldChanged={(e)=>handleChange(e)}
               />
             )

@@ -332,7 +332,38 @@ const handleClick = (e) => {
   }) 
 }
 
+const handleRelDrawer = (field) => {
+  console.log(field)
+  const relData = field.relatedInputFields.map(doc => ({[doc.docField]: ""}))
 
+  field.inputFieldType === "map-list" ? (
+  setRelatedInputData({
+    collection: field.relatedCollection, 
+    pageFields: field.relatedInputFields, 
+    label: field.label, 
+    data: {
+      [ 'CompanyID' ]: currentCompanyID,
+      [ 'CompanyName' ]: currentCompany,
+      [ 'CreatedDate' ]: setCurrentDate(),
+      [ 'CreatedBy' ]: currentUser,
+      [field.relatedDataField]: params.id,
+      ...relData
+    }  
+  })) : (
+  setRelatedInputData({
+    collection: field.relatedCollection, 
+    pageFields: field.relatedInputFields, 
+    label: field.label, 
+    data: {
+      [ 'CompanyID' ]: currentCompanyID,
+      [ 'CompanyName' ]: currentCompany,
+      [ 'CreatedDate' ]: setCurrentDate(),
+      [ 'CreatedBy' ]: currentUser,
+      [field.relatedDataField]: params.id
+    }  
+  }))
+  setIsRelatedDrawerOpen(true)
+}
 
 const handleRelatedDrawer = (field) => {
   console.log(field)
@@ -432,7 +463,7 @@ return (
                             <>
                               <div key={field.label}>{field.label}
                                 <a className="link has-text-weight-normal is-size-7 pl-2" 
-                                  onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
+                                  onClick={() => handleRelDrawer(field)}>(add)</a> </div>
                             </> : null}
                           
                           <PageField 
@@ -508,6 +539,7 @@ return (
                   relatedFields={relatedInputData.pageFields}
                   handleChange={(e)=>handleRelatedInputChange(e)}
                   handleUpdated={()=>setUpdated(!updated)}
+                  active={relatedInputData}
                 />
 
                 

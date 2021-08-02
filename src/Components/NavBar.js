@@ -62,7 +62,7 @@ const NavBar = () => {
           <>
           
             
-            <a className="navbar-item" onClick={()=>history.push("/dashboard")}><span className="button is-link">{userFirstName}</span></a>
+            <a className={userFirstName && userFirstName ? "navbar-item" : "is-hidden"} onClick={()=>history.push("/dashboard")}><span className="button is-link">{userFirstName}</span></a>
             
           <div className="navbar-item has-dropdown is-hoverable">
 
