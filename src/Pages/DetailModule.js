@@ -332,70 +332,28 @@ const handleClick = (e) => {
   }) 
 }
 
-const handleRelDrawer = (field) => {
-  console.log(field)
-  const relData = field.relatedInputFields.map(doc => ({[doc.docField]: ""}))
-
-  field.inputFieldType === "map-list" ? (
-  setRelatedInputData({
-    collection: field.relatedCollection, 
-    pageFields: field.relatedInputFields, 
-    label: field.label, 
-    data: {
-      [ 'CompanyID' ]: currentCompanyID,
-      [ 'CompanyName' ]: currentCompany,
-      [ 'CreatedDate' ]: setCurrentDate(),
-      [ 'CreatedBy' ]: currentUser,
-      [field.relatedDataField]: params.id,
-      ...relData
-    }  
-  })) : (
-  setRelatedInputData({
-    collection: field.relatedCollection, 
-    pageFields: field.relatedInputFields, 
-    label: field.label, 
-    data: {
-      [ 'CompanyID' ]: currentCompanyID,
-      [ 'CompanyName' ]: currentCompany,
-      [ 'CreatedDate' ]: setCurrentDate(),
-      [ 'CreatedBy' ]: currentUser,
-      [field.relatedDataField]: params.id
-    }  
-  }))
-  setIsRelatedDrawerOpen(true)
-}
 
 const handleRelatedDrawer = (field) => {
-  console.log(field)
-  field.inputFieldType === "map-list" ? (
-  setRelatedInputData({
-    collection: field.relatedCollection, 
-    pageFields: field.relatedInputFields, 
-    label: field.label, 
-    data: {
-      [ 'CompanyID' ]: currentCompanyID,
-      [ 'CompanyName' ]: currentCompany,
-      [ 'CreatedDate' ]: setCurrentDate(),
-      [ 'CreatedBy' ]: currentUser,
-      [field.relatedDataField]: params.id
-    }  
-  })) : (
-  setRelatedInputData({
-    collection: field.relatedCollection, 
-    pageFields: field.relatedInputFields, 
-    label: field.label, 
-    data: {
-      [ 'CompanyID' ]: currentCompanyID,
-      [ 'CompanyName' ]: currentCompany,
-      [ 'CreatedDate' ]: setCurrentDate(),
-      [ 'CreatedBy' ]: currentUser,
-      [field.relatedDataField]: params.id
-    }  
-  }))
+
+setRelatedInputData({
+  collection: field.relatedCollection, 
+  pageFields: field.relatedInputFields, 
+  label: field.label, 
+  data: { 
+    [ 'CompanyID' ]: currentCompanyID,
+    [ 'CompanyName' ]: currentCompany,
+    [ 'CreatedDate' ]: setCurrentDate(),
+    [ 'CreatedBy' ]: currentUser,
+    [field.relatedDataField]: params.id,
+    
+  }  
+})
   setIsRelatedDrawerOpen(true)
+  
 }
 
 const handleRelatedInputChange = (e) => {
+  
   const { name, value } = e.target
   setRelatedInputData({
     ...relatedInputData, 
@@ -404,7 +362,17 @@ const handleRelatedInputChange = (e) => {
     }})
 }
 
-console.log(relatedInputData && relatedInputData)
+const handleRelatedField = (e) => {
+  const { name, value } = e
+  setRelatedInputData({
+    ...relatedInputData, 
+    data: { ...relatedInputData.data,
+      [name]: value,
+    }})
+}
+
+
+
 
 return (
     <Loading active={loading}>
@@ -463,7 +431,7 @@ return (
                             <>
                               <div key={field.label}>{field.label}
                                 <a className="link has-text-weight-normal is-size-7 pl-2" 
-                                  onClick={() => handleRelDrawer(field)}>(add)</a> </div>
+                                  onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
                             </> : null}
                           
                           <PageField 
@@ -538,8 +506,10 @@ return (
                 <RelatedPageInputFields 
                   relatedFields={relatedInputData.pageFields}
                   handleChange={(e)=>handleRelatedInputChange(e)}
+                  handleRelatedField={(e)=> handleRelatedField(e)}
                   handleUpdated={()=>setUpdated(!updated)}
-                  active={relatedInputData}
+                  activeData={active}
+                  relatedData={relatedInputData}
                 />
 
                 

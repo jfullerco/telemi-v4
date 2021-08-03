@@ -11,8 +11,10 @@ import AddLocationModal from '../../Pages/Locations/AddLocationModal'
 const RelatedPageInputFields = ({ 
     relatedFields, 
     handleChange, 
+    handleRelatedField,
     handleUpdated,
-    active  
+    activeData,
+    relatedData  
   }) => {
       console.log(relatedFields)
 
@@ -23,10 +25,17 @@ const RelatedPageInputFields = ({
         switch (related.fieldType) {
 
           case "text":
-            return (<>
+            return (
+              <>
+                <TextBox title={related.label} name={related.docField} fieldChanged={handleChange} />
+              </>
+            )
 
-              <TextBox title={related.label} name={related.docField} fieldChanged={handleChange} />
-</>
+          case "related-text":
+            return (
+              <>
+                <TextBox title={related.label} name={related.docField} fieldChanged={handleChange} />
+              </>
             )
 
           case "currency":
@@ -51,7 +60,7 @@ const RelatedPageInputFields = ({
                 type="date"
                 name={related.docField}
                 className="input is-rounded is-small"
-                value={related && active[related.docField]}
+                value={related && relatedData[related.docField]}
                 fieldChanged={(e)=>handleChange(e)}
               />
             )

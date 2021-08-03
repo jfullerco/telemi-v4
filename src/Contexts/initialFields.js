@@ -612,10 +612,12 @@ import React, { useContext } from 'react'
                                 fieldType: 'text'
                               },
                               {
-                                label: 'CompanyName',
-                                docField: 'CompanyName',
-                                fieldType: 'inherit'
-                              },
+                                label: 'Asset ID',
+                                docField: 'AssetID',
+                                fieldType: 'related-text',
+                                value: 'AssetID'
+                              }
+                              
         ], 
         tab: "DETAILS",
         tabLabel: "DETAILS",
