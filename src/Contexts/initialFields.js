@@ -616,6 +616,12 @@ import React, { useContext } from 'react'
                                 docField: 'AssetID',
                                 fieldType: 'related-text',
                                 value: 'AssetID'
+                              },
+                              {
+                                label: 'Vendor',
+                                docField: 'Vendor',
+                                fieldType: 'related-text',
+                                value: 'Vendor'
                               }
                               
         ], 

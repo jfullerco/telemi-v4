@@ -1,22 +1,18 @@
 import React from 'react'
-import Columns from '../../Components/Columns'
-import Column from '../../Components/Layout/Column'
 import SelectField from '../../Components/Forms/SelectField'
 import TextBox from '../../Components/Forms/TextBox'
 import TextArea from '../../Components/Forms/TextArea'
-import DeleteButton from '../Buttons/DeleteButton'
-import AddLocationModal from '../../Pages/Locations/AddLocationModal'
-
 
 const RelatedPageInputFields = ({ 
     relatedFields, 
     handleChange, 
-    handleRelatedField,
+    
     handleUpdated,
     activeData,
     relatedData  
   }) => {
       console.log(relatedFields)
+  
 
   return(
     <>
@@ -25,13 +21,6 @@ const RelatedPageInputFields = ({
         switch (related.fieldType) {
 
           case "text":
-            return (
-              <>
-                <TextBox title={related.label} name={related.docField} fieldChanged={handleChange} />
-              </>
-            )
-
-          case "related-text":
             return (
               <>
                 <TextBox title={related.label} name={related.docField} fieldChanged={handleChange} />

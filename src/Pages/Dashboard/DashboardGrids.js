@@ -108,11 +108,9 @@ const DashboardGrids = ({visible}) => {
 
   const handleSorting = (sortBy, colRef) => {
    const sortedArray = sortArr(sortBy, colRef)
-   console.log("this:", sortedArray)
 
      setLocations(sortedArr) 
-      
-    
+
   }
   
 /**Row Clicks */
@@ -301,84 +299,6 @@ return (
         groupBy={groupBy}
       />
     </div>
-
-{/** Replaced with Grid Component
- * <GridComponent 
-      label="SERVICES"
-      headerFields={serviceGridColumns}
-      data={services}
-      resetter={(e)=>setServices(e)}
-      handleFilter={(e)=>handleFilterServiceClick(e)}
-      handleSearch={(e)=>handleChangeSearchServices(e)}
-      handleClick={(e)=>handleServiceClick(e)}
-      handleAddBtn={() => handleAddServiceBtn()}
-      isVisible={grid}
-      isGrid="SERVICES"
-      toggleIsVisible={()=>{setServiceIsVisible(!serviceIsVisible)}}
-    />
-
-    <GridComponent 
-      label="TICKETS"
-      headerFields={ticketGridColumns}
-      data={tickets}
-      resetter={(e)=>setTickets(e)}
-      handleFilter={(e)=>handleFilterTicketClick(e)}
-      handleSearch={(e)=>handleChangeSearchTickets(e)}
-      handleClick={(e)=>handleTicketClick(e)}
-      handleAddBtn={() => handleAddTicketBtn()}
-      isVisible={grid}
-      isGrid="TICKETS"
-      toggleIsVisible={()=>{setTicketIsVisible(!ticketIsVisible)}}
-    /> 
-
-    <GridComponent 
-      label="ORDERS"
-      headerFields={orderGridColumns}
-      data={orders}
-      resetter={(e)=>setOrders(e)}
-      handleFilter={(e)=>handleFilterOrderClick(e)}
-      handleClick={(e)=>handleOrderClick(e)}
-      handleAddBtn={() => handleAddOrderBtn()}
-      isVisible={grid}
-      isGrid="ORDERS"
-      toggleIsVisible={()=>{setOrderIsVisible(!orderIsVisible)}}
-    /> 
-
-    <GridComponent 
-      label="ACCOUNTS"
-      headerFields={accountGridColumns}
-      data={accounts}
-      resetter={(e)=>setAccounts(e)}
-      handleFilter={(e)=>handleFilterAccountClick(e)}
-      handleClick={(e)=>handleAccountClick(e)}
-      handleAddBtn={() => handleAddAccountBtn()}
-      isVisible={grid}
-      isGrid="ACCOUNTS"
-      toggleIsVisible={()=>{setAccountIsVisible(!accountIsVisible)}}
-    /> 
-
-    <GridComponent 
-      label="USERS"
-      headerFields={userGridColumns}
-      data={users}
-      handleClick={(e)=>handleAccountClick(e)}
-      handleAddBtn={() => history.push("/adduser")}
-      isVisible={grid}
-      isGrid="USERS"
-      toggleIsVisible={()=>{setUserIsVisible(!userIsVisible)}}
-    /> 
-
-    <GridComponent 
-      label="CONTRACTS"
-      headerFields={contractGridColumns}
-      data={contracts}
-      handleClick={(e)=>handleAccountClick(e)}
-      handleAddBtn={() => history.push("/addcontract")}
-      isVisible={grid}
-      isGrid="CONTRACTS"
-      toggleIsVisible={()=>{setContractIsVisible(!contractIsVisible)}}
-    />
-*/}
     
     <p/>
         {/** Network Graph 

@@ -12,7 +12,6 @@ export const useSortHook = () => {
   },[arr])
 
   const sortArr = (sortBy, arr) => { 
-    console.log("start:", sortBy, arr)
     const sortRef = arr && arr.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : -1)
     
     setSortedArr(sortRef)

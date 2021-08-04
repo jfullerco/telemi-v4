@@ -16,9 +16,9 @@ import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
 import Page from '../Components/Page'
 import DrawerComponent from '../Components/Layout/DrawerComponent'
-import TabBar from '../Components/Tabs/TabBar'
+
 import Loading from '../Components/Loading'
-import CheckIfNeedsCache from '../Components/Conditions/CheckIfNeedsCache'
+
 import PageField from '../Components/Layout/PageField'
 import FieldLabel from '../Components/Layout/FieldLabel'
 import Field from '../Components/Layout/Field'
@@ -63,9 +63,6 @@ const DetailModule = (state) => {
   const { currentCompanyID } = params
   const {isNew}  = state.location.state || false 
   const {isDrawerActive} = state.location.state || false
-  const { cachedLocations } = state.location.state || []
-  const { cachedAccounts } = state.location.state || []
-  const { cachedServices } = state.location.state || []
   
   const [data, setData] = useState("")
   const [active, setActive] = useState("")
@@ -75,12 +72,12 @@ const DetailModule = (state) => {
   const [updated, setUpdated] = useState(false)
   const [pageFields, setPageFields] = useState([])
   const [viewDropDown, setViewDropDown] = useState(false)
-  const [isQuickAddDrawerOpen, setIsQuickAddDrawerOpen] = useState(false)
   
   const [pageSuccess, setPageSuccess] = useState(false)
   const [pageError, setPageError] = useState(false)
     
   const [relatedInputData, setRelatedInputData] = useState("")
+  const [relatedSubmitData, setRelatedSubmitData] = useState("")
   const [isRelatedDrawerOpen, setIsRelatedDrawerOpen] = useState(false)
   
   const [tab, setTab] = useState("BASIC INFO")
@@ -100,6 +97,17 @@ const DetailModule = (state) => {
     fetchNotes()
     
   }, [])
+
+  useEffect(() => {
+    checkForNew(isDrawerActive, isNew)
+    setLoading(true)
+    handlePageFields(isModule)
+    
+    fetchPage()
+    fetchBills()
+    fetchNotes()
+    
+  }, [isModule])
 
   useEffect(() => {
     
@@ -122,25 +130,16 @@ const DetailModule = (state) => {
     handleInitialFieldMapping("TicketNum", tickets, pageFields)
     handleSetHeader()
     handleFinishedLoading()
-  },[loading])
+  },[loading, updated])
+
+/** Map-List - Side Effect to inherit related data  */
 
   useEffect(() => {
+    relatedInputData.pageFields && relatedInputData.pageFields ? 
+    handleInheritedData(relatedInputData) : ""
+  },[relatedInputData])
 
-    handlePageFields()
-    handleSetLastUpdatedFields()
-    handleInitialFieldMapping("Vendor", vendorList, pageFields)
-    handleInitialFieldMapping("LocationName", locations, pageFields)
-    handleInitialFieldMapping("Type", serviceTypes, pageFields)
-    handleInitialFieldMapping("AccessType", accessTypes, pageFields)
-    handleInitialFieldMapping("Status", serviceStatusType, pageFields)
-    handleInitialFieldMapping("OrderNum", orders, pageFields)
-    handleInitialFieldMapping("Services", services, pageFields)
-    handleInitialFieldMapping("AccountNum", accounts, pageFields)
-    handleInitialFieldMapping("Bills", bills, pageFields)
-    handleInitialFieldMapping("State", stateList, pageFields)
-    
-  },[updated])
-
+/** Set Page Fields based on initialFields */
   const handlePageFields = (isModule) => {
     switch (isModule) {
       case "Services": 
@@ -183,13 +182,15 @@ const DetailModule = (state) => {
     const subtitle = pageFields.filter(f => f.isHeader === true).map(field => setActiveSubtitle(field.dataField))
   }
 
+/** Map inputSource arrays for initialFields */
   const handleInitialFieldMapping = (field, value, arr) => {
 
     const indexRef = arr.findIndex(i => i.dataField === field)
     arr[indexRef] = {...arr[indexRef], inputSource: value}
   
   }
-  
+
+/** Fetch Document from Firebase */  
   const fetchPage = async() => {
    
     const pageFieldsRef = await db.collection(isModule).doc(params.id).get() 
@@ -241,9 +242,9 @@ const DetailModule = (state) => {
     setUpdated(true)
     setIsDrawerOpen(!isDrawerOpen)
   }
-
+console.log("data", data, "active", active)
   const handleSubmitUpdated = async(data) => { 
-    console.log(relatedInputData)
+    
       try {
         await db.collection(isModule).doc(params.id).update(data)
         
@@ -260,12 +261,15 @@ const DetailModule = (state) => {
   const handleRelatedSubmit = async() => {
     
     try {
-    await db.collection(relatedInputData.collection).doc().set(relatedInputData.data)
+    await db.collection(relatedInputData.collection).doc().set(relatedSubmitData)
       setPageSuccess(`New ${relatedInputData.label} Saved`)
+      setTimeout(() => {setPageSuccess(false)}, 1000)
     } catch {
       setPageError(`Error Saving New ${relatedInputData.label}`)
+      setTimeout(() => {setPageError(false)}, 1000)
     }  
       setIsRelatedDrawerOpen(!isRelatedDrawerOpen)
+      setUpdated(!updated)
       setLoading(!loading)  
   }
 
@@ -295,7 +299,6 @@ const handleChange = (e) => {
   console.log(name, value)
   setActive({...active, [name]: value})
   setData({...data, [name]: value})
-  setUpdated(!updated)
 }
 
 const handleRelatedSelectChange = (e, relatedDataField) => {
@@ -311,13 +314,8 @@ const handleRelatedSelectChange = (e, relatedDataField) => {
   setUpdated(!updated)
 }
 
-const handleAddRelatedValue = (e) => {
-  console.log(e)
-  setAddRelatedValue(e)
-}
-
-const handleSetCache = (value, setValue) => {
-  setValue(value)
+const handleGoBack = () => {
+  history.goBack()
 }
 
 const handleClick = (e) => {
@@ -332,51 +330,53 @@ const handleClick = (e) => {
   }) 
 }
 
-
 const handleRelatedDrawer = (field) => {
 
-setRelatedInputData({
-  collection: field.relatedCollection, 
-  pageFields: field.relatedInputFields, 
-  label: field.label, 
-  data: { 
+  setRelatedInputData({ ...relatedInputData,
+    collection: field.relatedCollection, 
+    pageFields: field.relatedInputFields, 
+    label: field.label
+  })
+
+  setRelatedSubmitData({
     [ 'CompanyID' ]: currentCompanyID,
     [ 'CompanyName' ]: currentCompany,
     [ 'CreatedDate' ]: setCurrentDate(),
     [ 'CreatedBy' ]: currentUser,
     [field.relatedDataField]: params.id,
-    
-  }  
 })
-  setIsRelatedDrawerOpen(true)
+
+setIsRelatedDrawerOpen(true)
   
 }
 
 const handleRelatedInputChange = (e) => {
   
   const { name, value } = e.target
-  setRelatedInputData({
-    ...relatedInputData, 
-    data: { ...relatedInputData.data,
+  setRelatedSubmitData({
+    ...relatedSubmitData,
       [name]: value,
-    }})
+    })
 }
 
-const handleRelatedField = (e) => {
-  const { name, value } = e
-  setRelatedInputData({
-    ...relatedInputData, 
-    data: { ...relatedInputData.data,
-      [name]: value,
-    }})
+const handleInheritedData = (e) => {
+
+  const {pageFields} = e 
+  const relatedFields = pageFields.filter(f => 
+    f.value != undefined).map(rel => ({
+      [rel.docField]:
+      active[rel.value]
+    })
+  )
+  
+  const merged = Object.assign({}, ...relatedFields, relatedSubmitData)
+
+  setRelatedSubmitData({...relatedSubmitData, ...merged})
+
 }
-
-
-
-
 return (
     <Loading active={loading}>
-
+{loading != true ? 
     <Page 
       title={currentCompany}
       subtitle={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])} 
@@ -384,6 +384,7 @@ return (
       handleToggle={()=> handleToggle()} 
       pageSuccess={pageSuccess} 
       pageError={pageError}
+      handleGoBack={handleGoBack}
     >
       {userContext && userContext.userSession != undefined ? 
         <>
@@ -533,7 +534,7 @@ return (
           <div className="tile warning"> No record to display </div>
       }    
     </Page>
-
+: ""}
     </Loading>
     
   )

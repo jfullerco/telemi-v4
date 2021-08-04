@@ -10,7 +10,6 @@ import CompanyList from './Companies/CompanyList'
 import Loading from '../Components/Loading'
 
 import DashboardGrids from './Dashboard/DashboardGrids'
-import GridGroup from '../Components/Grids/GridGroup'
 
 import Login from './Login'
 
@@ -138,7 +137,7 @@ const Dashboard = () => {
     setCurrentCompany(companies[0].Name)
     setCompanies(companies)
     setDataLoading(false)
-    console.log("Is Admin")
+    
   }
   
   return (   

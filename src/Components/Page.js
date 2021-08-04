@@ -5,7 +5,7 @@ import Columns from './Layout/Columns'
 import Column from './Layout/Column'
 import { FaArrowLeft } from 'react-icons/fa'
 
-const Page = ({title, subtitle, pageError, pageSuccess, children}) => {
+const Page = ({title, subtitle, handleGoBack, pageError, pageSuccess, children}) => {
 
   const history = useHistory()
   
@@ -14,7 +14,7 @@ const Page = ({title, subtitle, pageError, pageSuccess, children}) => {
         <div className="is-block pt-5 pb-5" >
         <Columns options="is-mobile is-vcentered" >
           <Column size="is-narrow">
-            <FaArrowLeft className="icon pl-1 mx-2 my-2" onClick={()=>history.goBack()}/> 
+            <FaArrowLeft className="icon pl-1 mx-2 my-2" onClick={() => handleGoBack()}/> 
           </Column>
           <Column>
             <span className="title pl-2" >{title}</span>
@@ -74,10 +74,6 @@ const Page = ({title, subtitle, pageError, pageSuccess, children}) => {
       <div>
       <div className={pageSuccess && pageSuccess != false ? "notification is-success is-overlay is-align-content-center" : "is-hidden"}>{pageSuccess}</div>
         {children}
-      </div>
-      <div className="block">
-        <div className={pageSuccess && pageSuccess != false ? "notification is-success is-overlay" : "is-hidden"}>{pageSuccess}</div>
-        <div className={pageError && pageError != false ? "notification is-danger" : "is-hidden"}>{pageError}</div>
       </div>
     </div>
   )
