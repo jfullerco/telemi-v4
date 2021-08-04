@@ -242,7 +242,7 @@ const DetailModule = (state) => {
     setUpdated(true)
     setIsDrawerOpen(!isDrawerOpen)
   }
-console.log("data", data, "active", active)
+
   const handleSubmitUpdated = async(data) => { 
     
       try {
