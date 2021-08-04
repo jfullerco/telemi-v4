@@ -99,6 +99,7 @@ const DetailModule = (state) => {
   }, [])
 
   useEffect(() => {
+    handlePageFields([])
     checkForNew(isDrawerActive, isNew)
     setLoading(true)
     handlePageFields(isModule)

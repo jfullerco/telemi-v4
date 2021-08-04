@@ -1187,7 +1187,20 @@ import React, { useContext } from 'react'
         label: "Status", 
         dataField: "Status", 
         inputFieldType: "select", 
-        inputSource: "", 
+        inputSource: [
+          {
+            id: "Ordered",
+            name: "Ordered"
+          },
+          {
+            id: "Completed",
+            name: "Completed"
+          },
+          {
+            id: "Cancelled",
+            name: "Cancelled"
+          }
+        ], 
         inputID: "id", 
         inputValue: "Name", 
         tab: "BASIC INFO" 
