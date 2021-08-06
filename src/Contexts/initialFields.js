@@ -567,10 +567,22 @@ import React, { useContext } from 'react'
         dataField: "Status", 
         inputFieldType: "select", 
         inputSource: [
-          { Name: 'Active', Value: 'Active' },
-          { Name: 'Disconnected', Value: 'Disconnected' },
-          { Name: 'Pending Activation', Value: 'Pending Activation' },
-          { Name: 'Pending Disconnect', Value: 'Pending Disconnect' }
+          { 
+            Name: 'Active', 
+            Value: 'Active' 
+          },
+          { 
+            Name: 'Disconnected', 
+            Value: 'Disconnected' 
+          },
+          { 
+            Name: 'Pending Activation', 
+            Value: 'Pending Activation' 
+          },
+          { 
+            Name: 'Pending Disconnect', 
+            Value: 'Pending Disconnect' 
+          }
         ], 
         inputID: "id", 
         inputValue: "Name", 
@@ -677,7 +689,7 @@ import React, { useContext } from 'react'
           {
             label: "Status",
             docField: "Status",
-            fieldType: "tag-select"
+            fieldType: "select"
           }
         ],
         tab: "SUPPORT"
@@ -1189,16 +1201,16 @@ import React, { useContext } from 'react'
         inputFieldType: "select", 
         inputSource: [
           {
-            id: "Ordered",
-            name: "Ordered"
+            Name: "Ordered",
+            Value: "Ordered"
           },
           {
-            id: "Completed",
-            name: "Completed"
+            Name: "Completed",
+            Value: "Completed"
           },
           {
-            id: "Cancelled",
-            name: "Cancelled"
+            Name: "Cancelled",
+            Value: "Cancelled"
           }
         ], 
         inputID: "id", 
@@ -1358,7 +1370,6 @@ import React, { useContext } from 'react'
       },
   
     ]
-
     const locationDetailFields = [
       {
         label: 'Location Name',
@@ -1407,7 +1418,6 @@ import React, { useContext } from 'react'
         tab: 'BASIC INFO'
       },
     ]
-
     const notesDetailFields = [
       {
         label: 'Note Date',

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { db } from '../../Contexts/firebase'
 import ConfirmationModal from '../ConfirmationModal'
 
-const DeleteButton = ({ colRef, docRef }) => {
+const DeleteButton = ({ colRef, docRef, size }) => {
 
   const history = useHistory()
 
@@ -46,7 +46,7 @@ const DeleteButton = ({ colRef, docRef }) => {
 
   return(
     <>
-      <button className="button is-danger is-rounded mx-1" onClick={()=> {handleConfirmation()}}>
+      <button className={`button is-danger is-rounded mx-1 ${size}`} onClick={()=> {handleConfirmation()}}>
         Delete
       </button>
       
@@ -55,7 +55,7 @@ const DeleteButton = ({ colRef, docRef }) => {
       <ConfirmationModal header="Confirm Delete">
         {deleteSuccess && <div className="notification is-success">{deleteSuccess}</div>}
         {deleteError && <div className="notification is-danger">{deleteError}</div>}
-        <button className="button is-rounded is-danger" onClick={() => {handleClick()}}>
+        <button className="button is-rounded is-danger mr-3" onClick={() => {handleClick()}}>
           Delete
         </button> 
         <button className="button is-rounded" onClick={()=> {handleConfirmation()}}>

@@ -301,6 +301,7 @@ return (
     </div>
     
     <p/>
+    
         {/** Network Graph 
           <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
             <NetworkGraphComponent 

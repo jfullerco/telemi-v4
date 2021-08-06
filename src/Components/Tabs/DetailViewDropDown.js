@@ -1,11 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { FaChevronCircleDown } from "react-icons/fa"
 import { FaChevronCircleUp } from "react-icons/fa"
+import DeleteButton from '../Buttons/DeleteButton'
 
 
 const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handleView, value, title, handleEditDrawer}) => {
   const history = useHistory()
+  const {isModule, id} = useParams()
 
   return(
     <>
@@ -39,6 +41,14 @@ const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handle
               <a className="dropdown-item" onClick={() => handleView(view)}>{view}</a>
 
             )}
+            <hr className="dropdown-divider" />
+            <a className="dropdown-item">
+              <DeleteButton
+                colRef={isModule}
+                docRef={id}
+                size="is-small"
+              />
+            </a>
           </div>
         </div>
       </div>

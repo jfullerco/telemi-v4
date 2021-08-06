@@ -27,6 +27,7 @@ import DetailViewDropDown from '../Components/Tabs/DetailViewDropDown'
 
 import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
+import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
 
 
 const DetailModule = (state) => {
@@ -44,6 +45,7 @@ const DetailModule = (state) => {
           vendorList, 
           isStyle,
           setBills,
+          setOrders,
           setCurrentDate,
           setLocations,
           setAccounts,
@@ -88,9 +90,11 @@ const DetailModule = (state) => {
   
 
   useEffect(() => {
-    checkForNew(isDrawerActive, isNew)
+    
     setLoading(true)
     handlePageFields(isModule)
+    checkForNew(isDrawerActive, isNew)
+    
     
     fetchPage()
     fetchBills()
@@ -99,7 +103,7 @@ const DetailModule = (state) => {
   }, [])
 
   useEffect(() => {
-    handlePageFields([])
+    setPageFields()
     checkForNew(isDrawerActive, isNew)
     setLoading(true)
     handlePageFields(isModule)
@@ -113,7 +117,6 @@ const DetailModule = (state) => {
   useEffect(() => {
     
     handlePageFields(isModule)
-    fetchPage()
     fetchBills()
     fetchNotes()
     setTab("BASIC INFO")
@@ -121,7 +124,6 @@ const DetailModule = (state) => {
     handleInitialFieldMapping("LocationName", locations, pageFields)
     handleInitialFieldMapping("Type", serviceTypes, pageFields)
     handleInitialFieldMapping("AccessType", accessTypes, pageFields)
-    handleInitialFieldMapping("Status", serviceStatusType, pageFields)
     handleInitialFieldMapping("OrderNum", orders, pageFields)
     handleInitialFieldMapping("Services", services, pageFields)
     handleInitialFieldMapping("AccountNum", accounts, pageFields)
@@ -130,8 +132,11 @@ const DetailModule = (state) => {
     handleInitialFieldMapping("State", stateList, pageFields)
     handleInitialFieldMapping("TicketNum", tickets, pageFields)
     handleSetHeader()
+    setUpdated(false)
+    handleInitialFields()
     handleFinishedLoading()
-  },[loading, updated])
+    
+  },[loading])
 
 /** Map-List - Side Effect to inherit related data  */
 
@@ -142,6 +147,7 @@ const DetailModule = (state) => {
 
 /** Set Page Fields based on initialFields */
   const handlePageFields = (isModule) => {
+    
     switch (isModule) {
       case "Services": 
         return (
@@ -173,10 +179,23 @@ const DetailModule = (state) => {
         )
     }
   }
+console.log("data:", data, "active:", active)
 
   const checkForNew = (isDrawerActive, isNew) => {
     isDrawerActive === "true" ? setIsDrawerOpen(true) : ""
-    isNew === "true" ? setDocIsNew(true) : ""
+    isNew === "true" ? (
+      setDocIsNew(true) 
+      ) : ""
+  }
+
+  const handleInitialFields = () => {
+    setData({
+      ...data, 
+      ['CreatedDate']: setCurrentDate(),
+      ['CreatedBy']: currentUser,
+      ['CompanyID']: currentCompanyID, 
+      ['CompanyName']: currentCompany
+    })
   }
 
   const handleSetHeader = () => {
@@ -195,10 +214,10 @@ const DetailModule = (state) => {
   const fetchPage = async() => {
    
     const pageFieldsRef = await db.collection(isModule).doc(params.id).get() 
-    const data = await pageFieldsRef.data()
-    const id = await pageFieldsRef.id
-    await setActive({id: id, ...data})
-    await setData(data)
+    const data = pageFieldsRef.data()
+    const id = pageFieldsRef.id
+    setActive({id: id, ...data})
+    setData(data)
   
   }
 
@@ -208,6 +227,15 @@ const DetailModule = (state) => {
       id: doc.id,
       ...doc.data()}))
     await setBills(bills)
+
+  } 
+
+  const fetchOrders = async() => {
+    const ordersRef = await db.collection("Orders").where("ServiceID", "==", params.id).get()
+    const orders = await ordersRef.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()}))
+    await setOrders(orders)
 
   } 
   
@@ -225,11 +253,13 @@ const DetailModule = (state) => {
   }
 
   const handleSubmit = () => {
-      docIsNew === true ?   
-      handleSubmitNew(data) : handleSubmitUpdated(data)
+      docIsNew === true ? (
+        handleSubmitNew(data)
+      ) : handleSubmitUpdated(data)
   }
 
   const handleSubmitNew = async(data) => {
+    
     try {
       await db.collection(isModule).doc().set(data) 
       
@@ -270,26 +300,11 @@ const DetailModule = (state) => {
       setTimeout(() => {setPageError(false)}, 1000)
     }  
       setIsRelatedDrawerOpen(!isRelatedDrawerOpen)
-      setUpdated(!updated)
+      setUpdated(true)
       setLoading(!loading)  
   }
 
-const handleSetLastUpdatedFields = () => {
-  setActive({
-    ...active,  
-    ['LastUpdated']: setCurrentDate(),
-    ['LastUpdatedBy']: currentUser,
-    ['CompanyID']: currentCompanyID, 
-    ['CompanyName']: currentCompany
-  })
-  setData({
-    ...data, 
-    ['LastUpdated']: setCurrentDate(),
-    ['LastUpdatedBy']: currentUser,
-    ['CompanyID']: currentCompanyID, 
-    ['CompanyName']: currentCompany
-  })
-}
+
 
 const handleToggle = () => {
   setIsDrawerOpen(!isDrawerOpen)
@@ -374,10 +389,11 @@ const handleInheritedData = (e) => {
 
   setRelatedSubmitData({...relatedSubmitData, ...merged})
 
-}
+  }
+
 return (
     <Loading active={loading}>
-{loading != true ? 
+
     <Page 
       title={currentCompany}
       subtitle={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])} 
@@ -481,10 +497,7 @@ return (
                   currentCompanyID={currentCompanyID}
                 />
 
-                <DeleteButton 
-                  colRef={isModule}
-                  docRef={active.id}
-                />
+                
 
               </DrawerComponent>
 
@@ -534,8 +547,15 @@ return (
         </> : 
           <div className="tile warning"> No record to display </div>
       }    
+
+      {
+      /**<MonthlyCostGraph 
+        id={params.id}
+      />*/
+      }
+
     </Page>
-: ""}
+
     </Loading>
     
   )

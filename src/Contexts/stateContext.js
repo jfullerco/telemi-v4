@@ -160,8 +160,7 @@ export const StateProvider = (props) => {
 
     const fetchServices = async() => {
       const servicesRef = await db.collection("Services")
-        .where("CompanyID", "==", userSession.currentCompanyID)
-        .orderBy("LocationName").get()
+        .where("CompanyID", "==", userSession.currentCompanyID).get()
       const services = servicesRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
@@ -171,8 +170,7 @@ export const StateProvider = (props) => {
 
     const refreshServices = async() => {
       const servicesRef = await db.collection("Services")
-        .where("CompanyID", "==", userSession.currentCompanyID)
-        .orderBy("LocationName").get()
+        .where("CompanyID", "==", userSession.currentCompanyID).get()
       const services = servicesRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()

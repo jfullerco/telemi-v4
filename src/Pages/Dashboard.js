@@ -76,12 +76,14 @@ const Dashboard = () => {
   },[isUserAdmin])
 
   useEffect(() => {
-    
     fetchPageData()
   },[loading])
 
   useEffect(()=> {
     fetchPageData()
+    return function cleanup() {
+      
+    }
   },[currentCompany])
 
   const fetchUser = async(email) => {
