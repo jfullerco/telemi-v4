@@ -103,6 +103,7 @@ const DashboardGrids = ({visible}) => {
     grid === 'ORDERS' ? setGroupByOptions(orderGroupByFields) :
     grid === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
     grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) :
+    grid === 'CONTRACTS' ? setGroupByOptions(contractGroupByFields) :
     grid === 'NETWORK' ? setNetworkMap(!networkMap) :
     setGroupByOptions(serviceGroupByFields)
   },[grid])
@@ -177,6 +178,19 @@ const DashboardGrids = ({visible}) => {
       
       }
     })
+}
+
+const handleContractClick = (id) => {
+  history.push({
+    pathname: `/Contracts/${currentCompanyID}/${id}`,
+    state: {
+    id: id,
+    currentCompanyID: currentCompanyID,
+    cachedLocations: locations,
+    cachedAccounts: accounts
+    
+    }
+  })
 }
   
   /** Handle Change when choosing different Grid via Selector */
@@ -306,7 +320,7 @@ return (
         isGrid='Contracts'
         headerFields={contractGridColumns}
         mobileHeaderFields={contractMobileGridColumns}
-        handleClick={(e) => handleLocationClick(e)}
+        handleClick={(e) => handleContractClick(e)}
         handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}
       />

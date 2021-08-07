@@ -460,6 +460,17 @@ import React, { useContext } from 'react'
         key: "2"
       }
     ]
+
+    const contractGroupByFields = [
+      {
+        Label: 'Vendor',
+        Value: 'Vendor'
+      },
+      {
+        Label: 'All',
+        Value: ""
+      }
+    ]
     
 /** Page Fields */
     const serviceDetailFields = [
@@ -1477,7 +1488,7 @@ import React, { useContext } from 'react'
       },
       {
         label: 'File',
-        dataField: 'File',
+        dataField: 'FileURL',
         inputFieldType: 'file-field',
         tab: 'BASIC INFO',
         tabLabel: 'BASIC INFO'
@@ -1507,6 +1518,7 @@ export {
     contractGridColumns,
     contractMobileGridColumns,
     contractDetailFields,
+    contractGroupByFields,
     serviceDetailFields,
     ticketDetailFields,
     accountDetailFields,

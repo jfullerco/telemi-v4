@@ -82,11 +82,20 @@ const PageField = ({
               </>
             )
 
-          default:
+            case "file-field":
               return (
                 <>
-                  {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")}
+                {[fieldData].map(data =>  <>
+                  <embed src={data[item.dataField]}width="25vw" height="29vh"></embed>
+                  </>)}
+                
+                  
                 </>
+              )
+
+          default:
+              return (
+                <>  {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )} </>
               )
           }
         })

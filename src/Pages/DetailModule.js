@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
-import { db } from '../Contexts/firebase'
+import { db, store } from '../Contexts/firebase'
 import {
   serviceDetailFields,
   orderDetailFields,
@@ -58,6 +58,7 @@ const DetailModule = (state) => {
           orders, 
           accounts,
           tickets,
+          contracts,
           bills,
           notes,
           currentCompany,
@@ -255,7 +256,7 @@ console.log("data:", data, "active:", active)
 
   const handleFileChange = async(e) => {
     const file = e.target.files[0]
-    const imageRef = store.storage().ref(currentCompanyID).child(`${data.Name && data.Name}'-'${currentCompany}`)
+    const imageRef = store.ref(currentCompanyID).child(`${data.Name && data.Name}'-'${currentCompany}`)
     await imageRef.put(file)
     const fileURL = await imageRef.getDownloadURL() 
      setData({
