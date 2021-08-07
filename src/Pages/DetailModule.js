@@ -41,7 +41,6 @@ const DetailModule = (state) => {
 
   const { serviceTypes, 
           accessTypes, 
-          serviceStatusType,
           vendorList, 
           isStyle,
           setBills,
