@@ -1,4 +1,5 @@
 import React from 'react'
+import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import Columns from '../../Components/Columns'
 import Column from '../../Components/Layout/Column'
 import SelectField from '../../Components/Forms/SelectField'
@@ -15,6 +16,7 @@ const PageInputFields = ({
     handleChange, 
     handleRelatedSelectChange,
     handleAddRelatedValue,
+    handleFileChange,
     addRelatedValue,
     resetAddRelatedValue, 
     handleUpdated,
@@ -113,6 +115,21 @@ const PageInputFields = ({
                 value={active && active[field.dataField]}
                 fieldChanged={(e) => handleChange(e)}
               />
+            )
+
+          case "file-field":
+            return (
+              <div className="file is-boxed">
+                <label className="file-label">
+                  <input className="file-input" type="file" name="resume" onChange={(e) => handleFileChange(e)} />
+                  <span className="file-cta">
+                    <span className="file-icon">
+                      <i className="faUpload"></i>
+                    </span>
+                    <span className="file-label">Choose a file...</span>
+                  </span>
+                </label>
+              </div>
             )
 
         }

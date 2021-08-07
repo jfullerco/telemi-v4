@@ -32,6 +32,7 @@ import { serviceGridColumns,
          userGridColumns,
          userGroupByFields,
          contractGridColumns,
+         contractMobileGridColumns,
          contractGroupByFields } from '../../Contexts/initialFields'
 
 import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFields'
@@ -294,6 +295,17 @@ return (
         isGrid='Locations'
         headerFields={locationGridColumns}
         mobileHeaderFields={locationMobileGridColumns}
+        handleClick={(e) => handleLocationClick(e)}
+        handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
+        groupBy={groupBy}
+      />
+    </div>
+    <div className={grid === 'CONTRACTS' ? "" : "is-hidden"}>
+      <GridGroup
+        data={grid === "CONTRACTS" ? contracts : null}
+        isGrid='Contracts'
+        headerFields={contractGridColumns}
+        mobileHeaderFields={contractMobileGridColumns}
         handleClick={(e) => handleLocationClick(e)}
         handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}

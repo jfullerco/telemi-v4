@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { FaTrashAlt } from 'react-icons/fa'
 
 import { db } from '../../Contexts/firebase'
 import ConfirmationModal from '../ConfirmationModal'
 
-const DeleteButton = ({ colRef, docRef, size }) => {
+const DeleteButton = ({ colRef, docRef, size, isIcon }) => {
 
   const history = useHistory()
 
@@ -46,9 +47,19 @@ const DeleteButton = ({ colRef, docRef, size }) => {
 
   return(
     <>
-      <button className={`button is-danger is-rounded mx-1 ${size}`} onClick={()=> {handleConfirmation()}}>
-        Delete
-      </button>
+      {
+        isIcon && isIcon != true ?
+          <button 
+            className={`button is-danger is-rounded mx-1 ${size}`} 
+            onClick={() => { handleConfirmation()}}>
+            Delete
+          </button> 
+        :
+          <FaTrashAlt 
+            className="icon is-danger is-medium" 
+            onClick={() => { handleConfirmation()}}
+          />
+      }
       
       {toggleConfirmation != false ? 
       

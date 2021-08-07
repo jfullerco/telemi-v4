@@ -18,6 +18,7 @@ import RelatedDetailModule from './Pages/RelatedDetailModule'
 
 import NotFound from './Components/NotFound'
 import UserSettings from './Pages/Users/UserSettings'
+import Footer from './Footer'
 
 
 

@@ -447,6 +447,19 @@ import React, { useContext } from 'react'
         key: "4"
       }
     ]
+
+    const contractMobileGridColumns = [
+      {
+        docField: 'Vendor', 
+        headerName: 'Vendor', 
+        key: "1"
+      },
+      {
+        docField: 'Date', 
+        headerName: 'Date', 
+        key: "2"
+      }
+    ]
     
 /** Page Fields */
     const serviceDetailFields = [
@@ -1252,7 +1265,7 @@ import React, { useContext } from 'react'
       { 
         label: "Details", 
         dataField: "Details", 
-        inputFieldType: "text-area", 
+        inputFieldType: "array-list", 
         tab: "DETAILS" 
       },
       {
@@ -1440,6 +1453,33 @@ import React, { useContext } from 'react'
       }
     ]
 
+    const contractDetailFields = [
+      {
+        label: 'Date Signed',
+        dataField: 'Date',
+        inputFieldType: 'datepicker',
+        tab: 'BASIC INFO',
+        tabLabel: 'BASIC INFO'
+      },
+      {
+        label: 'Vendor',
+        dataField: 'Vendor',
+        inputFieldType: 'select',
+        inputSource: vendorList,
+        tab: 'BASIC INFO',
+        tablLabel: 'BASIC INFO'
+      },
+      {
+        label: 'File',
+        dataField: 'File',
+        inputFieldType: 'file-field',
+        tab: 'BASIC INFO',
+        tabLabel: 'BASIC INFO'
+      }
+    ]
+
+    
+
 export {
     serviceGridColumns, 
     serviceMobileGridColumns,
@@ -1459,6 +1499,8 @@ export {
     accountMobileGridColumns,
     userGridColumns, 
     contractGridColumns,
+    contractMobileGridColumns,
+    contractDetailFields,
     serviceDetailFields,
     ticketDetailFields,
     accountDetailFields,

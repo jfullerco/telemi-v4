@@ -9,7 +9,8 @@ import {
   accountDetailFields,
   ticketDetailFields,
   billsDetailFields,
-  locationDetailFields } from '../Contexts/initialFields'
+  locationDetailFields,
+  contractDetailFields } from '../Contexts/initialFields'
 import {stateList} from '../Contexts/states.js'
 
 import Columns from '../Components/Layout/Columns'
@@ -28,6 +29,7 @@ import DetailViewDropDown from '../Components/Tabs/DetailViewDropDown'
 import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
+
 
 
 const DetailModule = (state) => {
@@ -168,6 +170,10 @@ const DetailModule = (state) => {
         return (
           setPageFields(locationDetailFields)
         )
+      case "Contracts":
+        return (
+          setPageFields(contractDetailFields)
+        )
       case "Bills":
         return (
           setPageFields(billsDetailFields)
@@ -246,6 +252,17 @@ console.log("data:", data, "active:", active)
     await setNotes(notes)
 
   } 
+
+  const handleFileChange = async(e) => {
+    const file = e.target.files[0]
+    const imageRef = store.storage().ref(currentCompanyID).child(`${contractName.current.value}'-'${currentCompanyName}`)
+    await imageRef.put(file)
+    const fileURL = await imageRef.getDownloadURL() 
+     setData({
+       ...data,
+       ['FileURL']: fileURL
+      })
+  }
 
   const handleFinishedLoading = () => {
     setTimeout(() => {setLoading(false)}, 1000)
@@ -347,7 +364,8 @@ const handleClick = (e) => {
 
 const handleRelatedDrawer = (field) => {
 
-  setRelatedInputData({ ...relatedInputData,
+  setRelatedInputData({ 
+    ...relatedInputData,
     collection: field.relatedCollection, 
     pageFields: field.relatedInputFields, 
     label: field.label
@@ -416,7 +434,10 @@ return (
             handleEditDrawer={()=>handleToggle()}
           />
           <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
-
+            <article className="hero title is-small is-size-5"> 
+              {tab}
+            </article>
+            <div className="block">
               {/** Refactor as ViewPageFields Component */}
               {active && pageFields.map(field => 
                 <>
@@ -471,7 +492,7 @@ return (
                   )}
                 </>
               )}
-            
+            </div>
               <DrawerComponent 
                 title="Edit"
                 checked={isDrawerOpen}
@@ -485,6 +506,7 @@ return (
                   handleClose={()=>setIsDrawerOpen(!isDrawerOpen)}
                   handleChange={(e)=> handleChange(e)}
                   handleRelatedSelectChange={(e, related)=> handleRelatedSelectChange(e, related)}
+                  handleFileChange={(e)=> handleFileChange(e)}
                   pageFields={pageFields}
                   active={active}
                   tab={tab}
@@ -554,7 +576,7 @@ return (
       }
 
     </Page>
-
+    
     </Loading>
     
   )

@@ -2,7 +2,7 @@ import React from 'react'
 
 const ConfirmationModal = (props) => {
   return(
-    <div className="modal is-active">
+    <div className="modal is-active is-relative">
       <div className="modal-background"></div>
         <div className="modal-card">
           <div className="modal-card-head">
