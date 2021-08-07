@@ -255,7 +255,7 @@ console.log("data:", data, "active:", active)
 
   const handleFileChange = async(e) => {
     const file = e.target.files[0]
-    const imageRef = store.storage().ref(currentCompanyID).child(`${contractName.current.value}'-'${currentCompanyName}`)
+    const imageRef = store.storage().ref(currentCompanyID).child(`${data.Name && data.Name}'-'${currentCompany}`)
     await imageRef.put(file)
     const fileURL = await imageRef.getDownloadURL() 
      setData({

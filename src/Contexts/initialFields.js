@@ -1455,6 +1455,12 @@ import React, { useContext } from 'react'
 
     const contractDetailFields = [
       {
+        label: 'Contract Name',
+        dataField: 'Name',
+        tab: 'BASIC INFO',
+        tabLabel: 'BASIC INFO'
+      },
+      {
         label: 'Date Signed',
         dataField: 'Date',
         inputFieldType: 'datepicker',
