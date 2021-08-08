@@ -12,7 +12,7 @@ const Footer = ({handleClick}) => {
     <>
     <nav className="navbar footerblur is-fixed-bottom is-mobile">
       <div className="navbar-menu is-active">
-      <div className="navbar-end mr-5">
+      <div className="mr-5">
      
 
       <DeleteButtonFooter />

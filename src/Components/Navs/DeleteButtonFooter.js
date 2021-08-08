@@ -42,7 +42,7 @@ const DeleteButtonFooter = () => {
         onClick={()=>setToggle(!toggle)}
       >
 
-        <a className="navbar-link is-arrowless">
+        <a className="navbar-link navbar-dropdown is-arrowless">
           Delete
         </a>
 
