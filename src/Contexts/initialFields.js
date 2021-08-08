@@ -1472,6 +1472,16 @@ import React, { useContext } from 'react'
         tabLabel: 'BASIC INFO'
       },
       {
+        label: 'Vendor',
+        dataField: 'Vendor',
+        inputFieldType: 'select',
+        inputSource: vendorList,
+        inputID: "id", 
+        inputValue: "Name",
+        tab: 'BASIC INFO',
+        tablLabel: 'BASIC INFO'
+      },
+      {
         label: 'Date Signed',
         dataField: 'Date',
         inputFieldType: 'datepicker',
@@ -1479,12 +1489,39 @@ import React, { useContext } from 'react'
         tabLabel: 'BASIC INFO'
       },
       {
-        label: 'Vendor',
-        dataField: 'Vendor',
+        label: 'Term',
+        dataField: 'Term',
         inputFieldType: 'select',
-        inputSource: vendorList,
+        inputSource: [
+          {
+            id: 'Month to Month',
+            Name: 'Month to Month'
+          },
+          {
+            id: '12',
+            Name: '12'
+          },
+          {
+            id: '24',
+            Name: '24'
+          },
+          {
+            id: '36',
+            Name: '36'
+          },
+          {
+            id: '48',
+            Name: '48'
+          },
+          {
+            id: '60',
+            Name: '60'
+          }
+        ],
+        inputID: "id", 
+        inputValue: "Name",
         tab: 'BASIC INFO',
-        tablLabel: 'BASIC INFO'
+        tabLabel: 'BASIC INFO'
       },
       {
         label: 'File',

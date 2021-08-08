@@ -5,6 +5,8 @@ import MapListTable from '../Tables/MapListTable'
 
 import RelatedFieldDropDown from '../../Components/DropDowns/RelatedFieldDropDown'
 
+import { FaFileContract } from 'react-icons/fa'
+
 const PageField = ({
     field, 
     fieldData, 
@@ -85,9 +87,15 @@ const PageField = ({
             case "file-field":
               return (
                 <>
-                {[fieldData].map(data =>  <>
-                  <embed src={data[item.dataField]}width="25vw" height="29vh"></embed>
-                  </>)}
+                {
+                  [fieldData].map(data =>  
+                    <>
+                      <a href={data[item.dataField]} target="_blank">
+                        <FaFileContract className="icon is-medium" />
+                      </a>
+                    </>
+                  )
+                }
                 
                   
                 </>
@@ -95,9 +103,15 @@ const PageField = ({
 
           default:
               return (
-                <>  {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )} </>
+                <>
+                  {
+                    [fieldData].map(data => 
+                      data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  
+                    )
+                  } 
+                </>
               )
-          }
+            }
         })
       } 
     </>
