@@ -29,6 +29,7 @@ import DetailViewDropDown from '../Components/Tabs/DetailViewDropDown'
 import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
+import Footer from '../Footer'
 
 
 
@@ -577,7 +578,7 @@ return (
       }
 
     </Page>
-    
+    <Footer />
     </Loading>
     
   )
