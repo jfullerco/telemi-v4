@@ -1,0 +1,1 @@
+/**This should be the component that adds an alert that displays as a notification when opening document. Could also be used to send user a push notification */

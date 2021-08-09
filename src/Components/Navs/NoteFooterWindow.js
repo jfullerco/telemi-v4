@@ -1,0 +1,1 @@
+/** This will be the Footer Window that toggles on when Notes is clicked */
