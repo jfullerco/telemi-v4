@@ -1,3 +1,16 @@
+@media only screen and (max-width: 1024px) {
+  .navbar-item {
+    &.has-dropdown {
+      display: none;
+    }
+    &:hover {
+      .navbar-dropdown {
+        display: block !important;
+      }
+    }
+  }
+}
+
 :root {
   --speed: 500ms;
   
@@ -122,3 +135,5 @@ body {
   0% {max-height:0%;}
   100% {max-height:100%;}
 }
+
+

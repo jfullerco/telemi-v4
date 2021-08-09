@@ -35,20 +35,23 @@ const DeleteButtonFooter = () => {
 
   return(
     <>
+        
 
-      <div 
+     <div 
         className={toggle === true ? 
-          "navbar-item has-dropdown has-dropdown-up is-active" : "navbar-item has-dropdown has-dropdown-up"}
+          "dropdown is-up is-active " : "dropdown is-up"}
         onClick={()=>setToggle(!toggle)}
       >
-
-        <a className="navbar-link navbar-dropdown is-arrowless">
+        <div className="dropdown-trigger">
+        <a className="navbar-link is-arrowless">
           Delete
         </a>
+        </div>
 
-        <div className="navbar-dropdown is-rounded">
+        <div className={toggle === true ? "dropdown-menu" : "is-hidden"}>
+          <div className="dropdown-content">
 
-          <div className="navbar-item">
+          <div className="dropdown-item ">
 
             <title className="is-size-6">
               Confirm
@@ -63,10 +66,13 @@ const DeleteButtonFooter = () => {
             </a>
 
           </div>
-          
+          </div>
         </div>
 
      </div>
+
+    
+     
 
     </>
   )
