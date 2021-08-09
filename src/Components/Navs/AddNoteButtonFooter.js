@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { FaTrash } from 'react-icons/fa'
+import { FaRegStickyNote, FaStickyNote } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 
-const DeleteButtonFooter = () => {
+const AddNoteButtonFooter = () => {
 
   const {isModule, id} = useParams()
   const history = useHistory()
@@ -43,20 +43,21 @@ const DeleteButtonFooter = () => {
       >
         <div className="dropdown-trigger navbar-item" onClick={()=> {setToggle(!toggle)}}>
         
-        <FaTrash className={toggle === true ? "icon is-normal" : "icon is-normal is-link"} />
+          <FaStickyNote className={toggle === true ? "icon is-normal" : "is-hidden"}  />
+          <FaRegStickyNote className={toggle === false ? "icon is-normal" : "is-hidden"} />
         
         </div>
 
         <div className={toggle === true ? "dropdown-menu " : "is-hidden"}>
           <div className="dropdown-content">
 
-          <div className="dropdown-item">
+          <div className="dropdown-item ">
 
-            <a className="is-danger mr-2" onClick={()=>{handleClick()}}>
+            <a className="button is-small is-rounded is-danger mr-2" onClick={()=>{handleClick()}}>
               Yes Delete
             </a>
 
-            <a className="is-light" onClick={()=>{setToggle(false)}}>
+            <a className="button is-small is-rounded is-light" onClick={()=>{setToggle(false)}}>
               No Cancel
             </a>
 
@@ -69,4 +70,4 @@ const DeleteButtonFooter = () => {
     </>
   )
 }
-export default DeleteButtonFooter
+export default AddNoteButtonFooter
