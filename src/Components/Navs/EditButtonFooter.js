@@ -1,24 +1,19 @@
 import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { FaPencilAlt } from 'react-icons/fa'
-import useToggleEditDrawer from '../../Hooks/useToggleEditDrawer'
 
-const EditButtonFooter = () => {
+
+const EditButtonFooter = ({handleClick, isDrawerOpen}) => {
 
   const {isModule, id} = useParams()
   const history = useHistory()
-  const { isDrawerOpen, setToggleEditDrawer } = useToggleEditDrawer()
-console.log("button", isDrawerOpen)
-  const handleClick = async() => {
-    
-    console.log("nope")
-    
-  }
+  
+  
 
   return(
     <>
       
-       <div className="navbar-item" onClick={()=>{setToggleEditDrawer(!isDrawerOpen)}}>
+       <div className="navbar-item" onClick={()=>handleClick(!isDrawerOpen)}>
         
         <FaPencilAlt className={isDrawerOpen === true ? "icon is-normal" : "icon is-normal is-link"}  />
         

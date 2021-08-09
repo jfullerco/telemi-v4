@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 
-export default function useToggleEditDrawer() {
-  const [toggleEditDrawer, setToggleEditDrawer] = useState(false)
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+const useToggle = (initialValue) => {
+  const [toggleEditDrawer, setToggleEditDrawer] = useState(initialValue)
+  const [test, setTest] = useState(false)
 
-  useEffect(() => {
-    setIsDrawerOpen(!isDrawerOpen)
-  },[])
-  return {isDrawerOpen, setToggleEditDrawer}
+  
+  return {test, setTest, toggleEditDrawer, setToggleEditDrawer}
 }
+export default useToggleEditDrawer
+

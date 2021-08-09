@@ -7,7 +7,7 @@ import EditButtonFooter from './Components/Navs/EditButtonFooter'
 
 
 
-const Footer = ({handleClick}) => {
+const Footer = ({handleEditButton, isDrawerOpen, isBookmarked}) => {
 
   const { isModule, id } = useParams()
   
@@ -19,10 +19,15 @@ const Footer = ({handleClick}) => {
     
       <div className="navbar-menu is-justify-content-center is-relative">
       <div className="navbar-item is-inline-block-touch pl-5 pr-5">
-          <EditButtonFooter />
+          <EditButtonFooter 
+            handleClick={handleEditButton}
+            isDrawerOpen={isDrawerOpen}
+          />
         </div>
         <div className="navbar-item is-inline-block-touch pl-5 pr-5">
-          <AddBookmarkFooter />
+          <AddBookmarkFooter 
+            isBookmarked={isBookmarked}
+          />
         </div>
         <div className="navbar-item is-inline-block-touch pl-5 pr-5">
           <AddNoteButtonFooter />

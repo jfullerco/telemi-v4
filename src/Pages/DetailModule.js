@@ -31,8 +31,6 @@ import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
 import Footer from '../Footer'
 
-
-
 const DetailModule = (state) => {
 
   const params = useParams()
@@ -90,6 +88,8 @@ const DetailModule = (state) => {
   
   const [addRelatedValue, setAddRelatedValue] = useState()
   const [isRelatedActive, setIsRelatedActive] = useState(false)
+
+  
   
 
   useEffect(() => {
@@ -140,6 +140,7 @@ const DetailModule = (state) => {
     handleFinishedLoading()
     
   },[loading])
+  
 
 /** Map-List - Side Effect to inherit related data  */
 
@@ -186,7 +187,7 @@ const DetailModule = (state) => {
         )
     }
   }
-console.log("data:", data, "active:", active)
+
 
   const checkForNew = (isDrawerActive, isNew) => {
     isDrawerActive === "true" ? setIsDrawerOpen(true) : ""
@@ -578,7 +579,11 @@ return (
       }
 
     </Page>
-    <Footer />
+    <Footer 
+      handleEditButton={(e)=> setIsDrawerOpen(e)}
+      isDrawerOpen={isDrawerOpen}
+      isBookmarked={active.isBookmarked}
+    />
     </Loading>
     
   )
