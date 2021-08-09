@@ -30,7 +30,6 @@ import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
 import Footer from '../Footer'
-import useToggleEditDrawer from '../Hooks/useToggleEditDrawer'
 
 
 
@@ -87,13 +86,11 @@ const DetailModule = (state) => {
   const [isRelatedDrawerOpen, setIsRelatedDrawerOpen] = useState(false)
   
   const [tab, setTab] = useState("BASIC INFO")
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
   const [addRelatedValue, setAddRelatedValue] = useState()
   const [isRelatedActive, setIsRelatedActive] = useState(false)
-  const {isDrawerOpen, setToggleEditDrawer} = useToggleEditDrawer()
-
-  const [isDrawerOpens, setIsDrawerOpens] = useState()
-  console.log("page", isDrawerOpen)
+  
 
   useEffect(() => {
     
@@ -151,8 +148,6 @@ const DetailModule = (state) => {
     handleInheritedData(relatedInputData) : ""
   },[relatedInputData])
 
-  
-
 /** Set Page Fields based on initialFields */
   const handlePageFields = (isModule) => {
     
@@ -194,7 +189,7 @@ const DetailModule = (state) => {
 console.log("data:", data, "active:", active)
 
   const checkForNew = (isDrawerActive, isNew) => {
-    isDrawerActive === "true" ? setToggleEditDrawer(true) : ""
+    isDrawerActive === "true" ? setIsDrawerOpen(true) : ""
     isNew === "true" ? (
       setDocIsNew(true) 
       ) : ""
@@ -503,7 +498,7 @@ return (
               <DrawerComponent 
                 title="Edit"
                 checked={isDrawerOpen}
-                handleClose={()=>setToggleEditDrawer(!isDrawerOpen)} 
+                handleClose={()=>setIsDrawerOpen(!isDrawerOpen)} 
                 direction="right"
                 handleSubmit={()=> handleSubmit()}
               >
