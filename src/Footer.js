@@ -4,10 +4,11 @@ import DeleteButtonFooter from './Components/Navs/DeleteButtonFooter'
 import AddBookmarkFooter from './Components/Navs/AddBookmarkFooter'
 import AddNoteButtonFooter from './Components/Navs/AddNoteButtonFooter'
 import EditButtonFooter from './Components/Navs/EditButtonFooter'
+import AddTagButtonFooter from './Components/Navs/AddTagButtonFooter'
 
 
 
-const Footer = ({handleEditButton, isDrawerOpen, isBookmarked}) => {
+const Footer = ({handleEditButton, isDrawerOpen, isBookmarked, tags}) => {
 
   const { isModule, id } = useParams()
   
@@ -31,6 +32,11 @@ const Footer = ({handleEditButton, isDrawerOpen, isBookmarked}) => {
         </div>
         <div className="navbar-item is-inline-block-touch pl-5 pr-5">
           <AddNoteButtonFooter />
+        </div>
+        <div className="navbar-item is-inline-block-touch pl-5 pr-5">
+          <AddTagButtonFooter 
+            tags={tags}
+          />
         </div>
         <div className="navbar-item is-inline-block-touch pl-5 pr-5">
           <DeleteButtonFooter />

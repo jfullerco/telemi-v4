@@ -583,6 +583,7 @@ return (
       handleEditButton={(e)=> setIsDrawerOpen(e)}
       isDrawerOpen={isDrawerOpen}
       isBookmarked={active.isBookmarked}
+      tags={active.Tags}
     />
     </Loading>
     
