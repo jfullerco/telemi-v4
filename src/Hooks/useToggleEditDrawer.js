@@ -6,7 +6,6 @@ export default function useToggleEditDrawer() {
 
   useEffect(() => {
     setIsDrawerOpen(!isDrawerOpen)
-  },)
-
+  },[])
   return {isDrawerOpen, setToggleEditDrawer}
 }
