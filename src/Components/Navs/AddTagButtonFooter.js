@@ -44,11 +44,11 @@ const AddTagButtonFooter = (props) => {
   
   }
 
-  const handleDelete = (e) => {
-    const updateTags = tags && tags.slice(e)
+  const handleDelete = async(e) => {
+    const updateTags = tags.slice(e)
     try {
 
-      const res = await db.collection(isModule).doc(id).update({'Tags': [...updatedTags]})
+      const res = await db.collection(isModule).doc(id).update({'Tags': [...tags]})
       
       setToggle(false)
       props.handleUpdated()
@@ -61,7 +61,7 @@ const AddTagButtonFooter = (props) => {
     
     }
     
-  } 
+  
 
   const handleChange = (e) => {
     e.preventDefault()
