@@ -15,8 +15,8 @@ const Footer = (props) => {
 
   return(
     <>
-    <nav className="navbar footerblur is-fixed-bottom is-active">
-    <div className="navbar-menu is-active ">
+    <nav className="navbar footerblur is-fixed-bottom is-active ">
+    <div className="navbar-menu fis-active ">
     
       <div className="navbar-menu is-justify-content-center is-relative">
       <div className="navbar-item is-inline-block-touch pl-5 pr-5">
