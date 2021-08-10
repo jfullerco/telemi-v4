@@ -51,7 +51,7 @@ const NavBar = () => {
     </a>
       </div>
       <div 
-        className={`navbar-menu ${isActive ? 'is-active' : ''}`}
+        className={`navbar-menu ${isActive === true ? 'is-active' : ''}`}
         aria-label='menu' 
         id='tiemsNavbar'
       >
