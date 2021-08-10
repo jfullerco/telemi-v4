@@ -15,31 +15,31 @@ const Footer = (props) => {
 
   return(
     <>
-    <nav className="navbar footerblur is-fixed-bottom is-active ">
-    <div className="navbar-menu footer-menu is-active ">
+    <nav className="navbar footerblur is-fixed-bottom is-active">
+    <div className="navbar-menu footer-menu">
     
-      <div className="navbar-menu is-justify-content-center is-relative">
-      <div className="navbar-item is-inline-block-touch pl-5 pr-5">
+      <div className="navbar-menu is-justify-content-center is-relative footer-menu">
+      <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <EditButtonFooter 
             handleClick={handleEditButton}
             isDrawerOpen={isDrawerOpen}
           />
         </div>
-        <div className="navbar-item is-inline-block-touch pl-5 pr-5">
+        <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <AddBookmarkFooter 
             isBookmarked={isBookmarked}
           />
         </div>
-        <div className="navbar-item is-inline-block-touch pl-5 pr-5">
+        <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <AddNoteButtonFooter />
         </div>
-        <div className="navbar-item is-inline-block-touch pl-5 pr-5">
+        <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <AddTagButtonFooter 
             values={tags}
             handleUpdated={props.handleUpdated}
           />
         </div>
-        <div className="navbar-item is-inline-block-touch pl-5 pr-5">
+        <div className="navbar-item is-inline-block-touch pl-4 pr-">
           <DeleteButtonFooter />
         </div>
       </div>

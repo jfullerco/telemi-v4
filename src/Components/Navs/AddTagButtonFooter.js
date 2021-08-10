@@ -45,7 +45,7 @@ const AddTagButtonFooter = (props) => {
   }
 
   const handleDelete = async(e) => {
-    const updateTags = tags.slice(e)
+    const updateTags = tags.splice(e, 1)
     try {
 
       const res = await db.collection(isModule).doc(id).update({'Tags': [...tags]})
@@ -63,10 +63,10 @@ const AddTagButtonFooter = (props) => {
     
   
 
-  const handleChange = (e) => {
-    e.preventDefault()
-    const {name, value} = e.target 
-    setAddTag([...tags, value])
+  const handleChange = ({value}) => {
+    const newTag = value
+    
+    setAddTag([newTag, ...tags])
     setTagValue(value)
   } 
 
@@ -99,7 +99,7 @@ console.log(addTag)
 
             <TextBox 
               label="Tag:"
-              fieldChanged={(e)=>handleChange(e)}
+              fieldChanged={(e)=>handleChange(e.target)}
               value={tagValue}
             />
             <button type="submit" className="button is-rounded is-link" onClick={handleClick}>Add</button>
