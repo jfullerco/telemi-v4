@@ -88,7 +88,7 @@ const DetailModule = (state) => {
   
   const [addRelatedValue, setAddRelatedValue] = useState()
   const [isRelatedActive, setIsRelatedActive] = useState(false)
-  const updater = useCallback(() => setUpdated(true))
+  
   
   
 
@@ -584,7 +584,7 @@ return (
       isDrawerOpen={isDrawerOpen}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
-      handleUpdated={()=>setUpdated(!updated)}
+      handleUpdated={(updated)=>setUpdated(!updated)}
     />
     </Loading>
     
