@@ -34,21 +34,14 @@ const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handle
         </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
-            <a className="dropdown-item" onClick={()=>handleEditDrawer()}>EDIT</a>
-            <hr className="dropdown-divider" />
+            
             {views.map(view =>
 
               <a className="dropdown-item" onClick={() => handleView(view)}>{view}</a>
 
             )}
             <hr className="dropdown-divider" />
-            <a className="dropdown-item">
-              <DeleteButton
-                colRef={isModule}
-                docRef={id}
-                size="is-small"
-              />
-            </a>
+            
           </div>
         </div>
       </div>
