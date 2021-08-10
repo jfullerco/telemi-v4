@@ -58,7 +58,7 @@ body {
   
 }
 
-.navbar-menu {
+.footer-menu {
   display: flex !important;
   align-items: stretch !important;
   min-width: 100vw !important; 
