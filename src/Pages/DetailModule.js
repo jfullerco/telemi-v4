@@ -584,7 +584,7 @@ return (
       isDrawerOpen={isDrawerOpen}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
-      handleUpdated={(updated)=>setUpdated(!updated)}
+      handleUpdated={setUpdated}
     />
     </Loading>
     

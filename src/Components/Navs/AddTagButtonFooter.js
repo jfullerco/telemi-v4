@@ -24,7 +24,7 @@ const AddTagButtonFooter = (props) => {
     return () => {
       setAddTag("")
     }
-  },[handleUpdated])
+  },[props.handleUpdated])
 
   const handleClick = async() => {
     
@@ -33,7 +33,7 @@ const AddTagButtonFooter = (props) => {
     const res = await db.collection(isModule).doc(id).update({'Tags': [...addTag]})
     
     setToggle(false)
-    props.handleUpdated()
+    props.handleUpdated(t)
 
     } catch {
 
