@@ -4,7 +4,7 @@ import { FaTags } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 import TextBox from '../Forms/TextBox'
 
-const AddTagButtonFooter = (props, handleUpdated) => {
+const AddTagButtonFooter = (props) => {
   const values = props.values
   
   const {isModule, id} = useParams()
@@ -13,7 +13,7 @@ const AddTagButtonFooter = (props, handleUpdated) => {
   const [tags, setTags] = useState("")
   const [addTag, setAddTag] = useState("")
   
-  const [updated, setUpdated] = useState()
+  
 
   useEffect(() => {
     setAddTag(values)
@@ -33,7 +33,7 @@ const AddTagButtonFooter = (props, handleUpdated) => {
     const res = await db.collection(isModule).doc(id).update({'Tags': [...addTag]})
     
     setToggle(false)
-    handleUpdated()
+    props.handleUpdated()
 
     } catch {
 
