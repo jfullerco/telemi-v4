@@ -12,6 +12,7 @@ const AddTagButtonFooter = (props) => {
   const [ toggle, setToggle ] = useState(false)
   const [tags, setTags] = useState("")
   const [addTag, setAddTag] = useState("")
+  const [tagValue, setTagValue] = useState("")
   
   
 
@@ -33,8 +34,8 @@ const AddTagButtonFooter = (props) => {
     const res = await db.collection(isModule).doc(id).update({'Tags': [...addTag]})
     
     setToggle(false)
-    props.handleUpdated(t)
-
+    props.handleUpdated()
+    setTagValue("")
     } catch {
 
       console.log("Error Add Tag to Record")
@@ -43,10 +44,30 @@ const AddTagButtonFooter = (props) => {
   
   }
 
+  const handleDelete = (e) => {
+    const updateTags = tags && tags.slice(e)
+    try {
+
+      const res = await db.collection(isModule).doc(id).update({'Tags': [...updatedTags]})
+      
+      setToggle(false)
+      props.handleUpdated()
+      setTagValue("")
+      } catch {
+  
+        console.log("Error Add Tag to Record")
+  
+      }
+    
+    }
+    
+  } 
+
   const handleChange = (e) => {
     e.preventDefault()
     const {name, value} = e.target 
     setAddTag([...tags, value])
+    setTagValue(value)
   } 
 
   
@@ -71,7 +92,7 @@ console.log(addTag)
             <ul>
             {tags && tags != undefined ? tags.map((tag, index) => 
               
-              <li className="tag is-info is-light is-rounded mr-1" key={index}>{tag && tag} <button className="delete is-small">x</button></li>
+              <li className="tag is-info is-light is-rounded mr-1" key={index}>{tag && tag} <button className="delete is-small" onClick={()=>handleDelete({index})}>x</button></li>
             
           ) : ""}
             </ul>
@@ -79,7 +100,7 @@ console.log(addTag)
             <TextBox 
               label="Tag:"
               fieldChanged={(e)=>handleChange(e)}
-              
+              value={tagValue}
             />
             <button type="submit" className="button is-rounded is-link" onClick={handleClick}>Add</button>
 
