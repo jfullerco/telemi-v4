@@ -1,24 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { FaTags } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 import TextBox from '../Forms/TextBox'
 
-const AddTagButtonFooter = ({tags}) => {
-
+const AddTagButtonFooter = (props, handleUpdated) => {
+  const values = props.values
+  
   const {isModule, id} = useParams()
   const history = useHistory()
   const [ toggle, setToggle ] = useState(false)
-  const [addTag, setAddTag] = useState(tags)
+  const [tags, setTags] = useState("")
+  const [addTag, setAddTag] = useState("")
+  
+  const [updated, setUpdated] = useState()
+
+  useEffect(() => {
+    setAddTag(values)
+    setTags(values)
+  },[values])
+
+  useEffect(() => {
+    return () => {
+      setAddTag("")
+    }
+  },[handleUpdated])
 
   const handleClick = async() => {
     
     try {
 
-    const res = await db.collection(isModule).doc(id).update({['Tags']: addTag})
-    console.log(res)
+    const res = await db.collection(isModule).doc(id).update({'Tags': [...addTag]})
     
-    
+    setToggle(false)
+    handleUpdated()
 
     } catch {
 
@@ -30,17 +45,11 @@ const AddTagButtonFooter = ({tags}) => {
 
   const handleChange = (e) => {
     e.preventDefault()
-    const {name, value} = e.target
-    setAddTag({...tags, [name]: value})
+    const {name, value} = e.target 
+    setAddTag([...tags, value])
   } 
 
-  const autoClose = () => {
-
-    setTimeout(() => { 
-      history.push("/dashboard") 
-    }, 1500 )
-
-  }
+  
 console.log(addTag)
   return(
     <>
@@ -60,18 +69,19 @@ console.log(addTag)
 
           <div className="dropdown-item ">
             <ul>
-            {tags && tags != undefined ? [tags].map(tag => 
+            {tags && tags != undefined ? tags.map((tag, index) => 
               
-                <li>{tag && tag.value}</li>
-              
-            ) : ""}
+              <li className="tag is-info is-light is-rounded mr-" key={index}>{tag && tag} <button className="delete is-small">x</button></li>
+            
+          ) : ""}
             </ul>
 
             <TextBox 
               label="Tag:"
               fieldChanged={(e)=>handleChange(e)}
+              
             />
-            <button className="button is-rounded is-link" onClick={()=>handleClick()}>Add</button>
+            <button type="submit" className="button is-rounded is-link" onClick={handleClick}>Add</button>
 
 
           </div>

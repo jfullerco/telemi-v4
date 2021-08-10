@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
@@ -88,7 +88,7 @@ const DetailModule = (state) => {
   
   const [addRelatedValue, setAddRelatedValue] = useState()
   const [isRelatedActive, setIsRelatedActive] = useState(false)
-
+  const updater = useCallback(() => setUpdated(true))
   
   
 
@@ -584,6 +584,7 @@ return (
       isDrawerOpen={isDrawerOpen}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
+      handleUpdated={()=>setUpdated(!updated)}
     />
     </Loading>
     

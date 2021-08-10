@@ -8,7 +8,7 @@ import AddTagButtonFooter from './Components/Navs/AddTagButtonFooter'
 
 
 
-const Footer = ({handleEditButton, isDrawerOpen, isBookmarked, tags}) => {
+const Footer = ({handleEditButton, isDrawerOpen, isBookmarked, tags, handleUpdated}) => {
 
   const { isModule, id } = useParams()
   
@@ -35,7 +35,8 @@ const Footer = ({handleEditButton, isDrawerOpen, isBookmarked, tags}) => {
         </div>
         <div className="navbar-item is-inline-block-touch pl-5 pr-5">
           <AddTagButtonFooter 
-            tags={tags}
+            values={tags}
+            handleUpdated={handleUpdated}
           />
         </div>
         <div className="navbar-item is-inline-block-touch pl-5 pr-5">
