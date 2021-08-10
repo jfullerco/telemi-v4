@@ -40,7 +40,7 @@ const AddTagButtonFooter = (props, handleUpdated) => {
       console.log("Error Add Tag to Record")
 
     }
-    
+  
   }
 
   const handleChange = (e) => {
@@ -71,7 +71,7 @@ console.log(addTag)
             <ul>
             {tags && tags != undefined ? tags.map((tag, index) => 
               
-              <li className="tag is-info is-light is-rounded mr-" key={index}>{tag && tag} <button className="delete is-small">x</button></li>
+              <li className="tag is-info is-light is-rounded mr-1" key={index}>{tag && tag} <button className="delete is-small">x</button></li>
             
           ) : ""}
             </ul>
