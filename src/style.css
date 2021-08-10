@@ -58,12 +58,11 @@ body {
   
 }
 
-.footer-menu {
+.navbar-menu {
   display: flex !important;
   align-items: stretch !important;
   min-width: 100vw;
 }
-
 
 .network {
   display:block;
