@@ -39,7 +39,7 @@ const Footer = (props) => {
             handleUpdated={props.handleUpdated}
           />
         </div>
-        <div className="navbar-item is-inline-block-touch pl-4 pr-">
+        <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <DeleteButtonFooter />
         </div>
       </div>
