@@ -72,6 +72,10 @@ import React, { useContext } from 'react'
       {
         Label: 'Status',
         Value: 'Status'
+      },
+      {
+        Label: 'Tags',
+        Value: 'Tags'
       }
     ]
 

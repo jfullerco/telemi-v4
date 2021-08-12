@@ -65,13 +65,19 @@ const AddTagButtonFooter = (props) => {
 
   const handleChange = ({value}) => {
     const newTag = value
-    
-    setAddTag([newTag, ...tags])
-    setTagValue(value)
+    tags != undefined ?
+    (
+      setAddTag([newTag, ...tags]),
+      setTagValue(value)
+    )
+    : (
+      setAddTag([newTag]),
+      setTagValue(value)
+      )
   } 
 
   
-console.log(addTag)
+console.log(tags)
   return(
     <>
       <div 
