@@ -47,18 +47,18 @@ const DeleteButtonFooter = () => {
         
         </div>
 
-        <div className={toggle === true ? "dropdown-menu " : "is-hidden"}>
+        <div className={toggle === true ? "dropdown-menu" : "is-hidden"}>
           <div className="dropdown-content">
 
           <div className="dropdown-item">
 
-            <a className="is-danger mr-2" onClick={()=>{handleClick()}}>
+            <a className="button is-rounded is-danger mr-2" onClick={()=>{handleClick()}}>
               Yes Delete
             </a>
 
-            <a className="is-light" onClick={()=>{setToggle(false)}}>
-              No Cancel
-            </a>
+            <a className="delete is-small ml-" onClick={()=>{setToggle(false)}} />
+              
+            
 
           </div>
           </div>

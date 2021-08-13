@@ -642,7 +642,7 @@ import React, { useContext } from 'react'
                                 fieldType: 'datepicker'
                               }, 
                               {
-                                label: 'Order Number', 
+                                label: 'Order', 
                                 docField: 'OrderNum', 
                                 fieldType: 'text'
                               }, 
@@ -651,18 +651,6 @@ import React, { useContext } from 'react'
                                 docField: 'Status', 
                                 fieldType: 'text'
                               },
-                              {
-                                label: 'Asset ID',
-                                docField: 'AssetID',
-                                fieldType: 'related-text',
-                                value: 'AssetID'
-                              },
-                              {
-                                label: 'Vendor',
-                                docField: 'Vendor',
-                                fieldType: 'related-text',
-                                value: 'Vendor'
-                              }
                               
         ], 
         tab: "DETAILS",
@@ -691,7 +679,7 @@ import React, { useContext } from 'react'
         relatedInputLabel: "Ticket Number",
         relatedInputFields: [
           {
-            label: "Ticket Number",
+            label: "Ticket",
             docField: "TicketNum",
             fieldType: "text"
           },
