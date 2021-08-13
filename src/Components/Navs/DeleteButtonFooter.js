@@ -56,9 +56,7 @@ const DeleteButtonFooter = () => {
               Yes Delete
             </a>
 
-            <a className="delete is-small ml-" onClick={()=>{setToggle(false)}} />
-              
-            
+            <a className="delete is-small ml-3" onClick={()=>{setToggle(false)}} /> 
 
           </div>
           </div>
