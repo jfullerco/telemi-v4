@@ -20,9 +20,9 @@ export function useSearchHook() {
     ) : "";
 
     const serviceResults = searchValue && services && services != undefined ? services.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
-    
+
     setSearchResults(serviceResults)
-    console.log(searchResults)
+    console.log(searchResults) 
   },[searchValue])
 
   return [searchResults, setSearchValue]

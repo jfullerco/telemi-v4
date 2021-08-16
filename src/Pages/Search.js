@@ -19,7 +19,7 @@ const Search = () => {
 
       {searchResults && searchResults != undefined ? searchResults.map(result => 
         <div key={result.id}>
-          {.result}
+          {...result}
         </div>
       ) : ""}
     </div>
