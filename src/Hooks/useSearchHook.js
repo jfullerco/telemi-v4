@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {stateContext} from '../Contexts/stateContext'
 
-
 const useSearchHook = () => {
   const userContext = useContext(stateContext)
   const { 
@@ -23,4 +22,4 @@ const useSearchHook = () => {
 
   return {searchResults, setSearchValue}
 }
-export useSearchHook
+export default useSearchHook
