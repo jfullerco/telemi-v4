@@ -18,7 +18,7 @@ import RelatedDetailModule from './Pages/RelatedDetailModule'
 
 import NotFound from './Components/NotFound'
 import UserSettings from './Pages/Users/UserSettings'
-
+import Search from './Pages/Search'
 
 
 
@@ -49,6 +49,7 @@ export default function App() {
             
             <Route path="/addcompany" component={AddCompany} />
             <Route path="/settings" component={UserSettings} />
+            <Route path="/search" component={Search} />
             
             <Route component={NotFound} />
             </Switch>

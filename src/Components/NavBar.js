@@ -70,6 +70,7 @@ const NavBar = () => {
   
             <div className="navbar-dropdown">
               <a className="navbar-item" onClick={()=>history.push("/settings")}>SETTINGS</a>
+              <a className="navbar-item" onClick={()=>history.push("/search")}>SEARCH</a>
             </div>
             
           </div>

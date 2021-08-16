@@ -557,11 +557,22 @@ import React, { useContext } from 'react'
         dataField: "AccessType", 
         inputFieldType: "select", 
         inputSource: [
-          { Name: 'T1', Value: 'T1' },
-          { Name: 'Ethernet', Value: 'Ethernet' },
-          { Name: 'Fiber', Value: 'Fiber' },
-          { Name: 'Cable/DSL', Value: 'CableDSL' }
-          
+          { 
+            Name: 'T1', 
+            Value: 'T1' 
+          },
+          { 
+            Name: 'Ethernet', 
+            Value: 'Ethernet' 
+          },
+          { 
+            Name: 'Fiber', 
+            Value: 'Fiber' 
+          },
+          { 
+            Name: 'Cable/DSL', 
+            Value: 'CableDSL' 
+          } 
         ], 
         inputID: "id", 
         inputValue: "Name", 
@@ -636,23 +647,22 @@ import React, { useContext } from 'react'
         relatedDataField: "ServiceID", 
         relatedInputLabel: "Order Number",
         relatedInputFields: [
-                              {
-                                label: 'Date', 
-                                docField: 'OrderDate', 
-                                fieldType: 'datepicker'
-                              }, 
-                              {
-                                label: 'Order', 
-                                docField: 'OrderNum', 
-                                fieldType: 'text'
-                              }, 
-                              {
-                                label: 'Status', 
-                                docField: 'Status', 
-                                fieldType: 'text'
-                              },
-                              
-        ], 
+          {
+            label: 'Date',
+            docField: 'OrderDate',
+            fieldType: 'datepicker'
+          },
+          {
+            label: 'Order',
+            docField: 'OrderNum',
+            fieldType: 'text'
+          },
+          {
+            label: 'Status',
+            docField: 'Status',
+            fieldType: 'text'
+          },
+        ],
         tab: "DETAILS",
         tabLabel: "DETAILS",
         hasBreakBefore: true  
