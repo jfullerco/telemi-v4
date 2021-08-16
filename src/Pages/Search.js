@@ -3,7 +3,7 @@ import {searchResults, setSearchValue} from '../Hooks/useSearchHook'
 
 const Search = () => {
 
-  const [searchResults, setSearchValue] = useSearchHook()
+  const {searchResults, setSearchValue} = useSearchHook()
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value)

@@ -21,6 +21,6 @@ const useSearchHook = () => {
     setSearchResults(results)
   },[searchValue])
 
-  return {searchResults, setSearchValue}
+  return [searchResults, setSearchValue]
 }
 export default useSearchHook
