@@ -18,9 +18,9 @@ const Search = () => {
       <input type='text' onChange={(e) => handleSearch(e)} />
 
       {searchResults && searchResults != undefined ? searchResults.map(result => 
-        <div key={result.id}>
-          {...result}
-        </div>
+        <li key={result.id}>
+          {console.log(result)}
+        </li>
       ) : ""}
     </div>
 
