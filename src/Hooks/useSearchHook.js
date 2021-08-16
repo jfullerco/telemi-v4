@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {stateContext} from '../Contexts/stateContext'
 
-const useSearchHook = () => {
+export function useSearchHook() {
   const userContext = useContext(stateContext)
   const { 
     locations, 
@@ -10,16 +10,20 @@ const useSearchHook = () => {
     orders } = userContext.userSession
 
   const [searchValue, setSearchValue] = useState("")
-  const [data, setData] = useState(locations, services, tickets, orders)
+  const [data, setData] = useState([])
   const [searchResults, setSearchResults] = useState([])
 
   useEffect(() => {
-    const results = value && data && data.filter(el => 
-      el.toLowerCase().includes(searchValue)
-    );
-    setSearchResults(results)
+    
+    const locationResults = searchValue && locations && locations != undefined ? locations.filter(({Name, Address1, City, State, Zip}) => 
+      Name.toLowerCase().indexOf(searchValue) > -1 || Address1.toLowerCase().indexOf(searchValue) > -1 || City.toLowerCase().indexOf(searchValue) > -1 || State.toLowerCase().indexOf(searchValue) > -1 || Zip.toLowerCase().indexOf(searchValue) > -1
+    ) : "";
+
+    const serviceResults = searchValue && services && services != undefined ? services.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
+    
+    setSearchResults(serviceResults)
+    console.log(searchResults)
   },[searchValue])
 
-  return {searchResults, setSearchValue}
+  return [searchResults, setSearchValue]
 }
-export default useSearchHook

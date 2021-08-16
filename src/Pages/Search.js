@@ -1,9 +1,9 @@
 import React from 'react'
-import {searchResults, setSearchValue} from '../Hooks/useSearchHook'
+import { useSearchHook } from '../Hooks/useSearchHook'
 
 const Search = () => {
 
-  const {searchResults, setSearchValue} = useSearchHook()
+  const [searchResults, setSearchValue] = useSearchHook()
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value)
@@ -13,15 +13,16 @@ const Search = () => {
 
   return(
 
-    <>
+    <div className="hero is-large">
+      <p className="block"/>
       <input type='text' onChange={(e) => handleSearch(e)} />
 
-      {searchResults != undefined ? searchResults.map(result => 
-        <div>
-          {...result}
+      {searchResults && searchResults != undefined ? searchResults.map(result => 
+        <div key={result.id}>
+          {.result}
         </div>
       ) : ""}
-    </>
+    </div>
 
   )
 }
