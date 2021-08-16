@@ -13,24 +13,16 @@ export function useSearchHook() {
   const [data, setData] = useState([])
   const [searchResults, setSearchResults] = useState([])
 
+  const searchLocationRef = [...locations]
+  const searchServiceRef = [...services]
+
   useEffect(() => {
     
-    const locationResults = searchValue && locations && locations != undefined ? locations.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
+    const locationResults = searchValue && searchLocationRef && searchLocationRef != undefined ? searchLocationRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
 
-    const serviceResults = searchValue && services && services != undefined ? services.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
+    const serviceResults = searchValue && searchServiceRef && searchServiceRef != undefined ? searchServiceRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
 
-    setSearchResults([
-      {
-        locations: {
-          locationResults
-        }
-      },
-      {
-        services: {
-          serviceResults
-        }
-      }
-    ])
+    setSearchResults({...searchResults, ['locations']: locationResults, ['services']: serviceResults})
     console.log(searchResults) 
   },[searchValue])
 
