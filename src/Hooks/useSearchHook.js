@@ -23,4 +23,4 @@ const useSearchHook = () => {
 
   return {searchResults, setSearchValue}
 }
-export default useSearchHook
+export useSearchHook
