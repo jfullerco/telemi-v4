@@ -97,8 +97,6 @@ const DetailModule = (state) => {
     setLoading(true)
     handlePageFields(isModule)
     checkForNew(isDrawerActive, isNew)
-    
-    
     fetchPage()
     fetchBills()
     fetchNotes()
@@ -110,7 +108,6 @@ const DetailModule = (state) => {
     checkForNew(isDrawerActive, isNew)
     setLoading(true)
     handlePageFields(isModule)
-    
     fetchPage()
     fetchBills()
     fetchNotes()
@@ -191,19 +188,20 @@ const DetailModule = (state) => {
 
   const checkForNew = (isDrawerActive, isNew) => {
     isDrawerActive === "true" ? setIsDrawerOpen(true) : ""
-    isNew === "true" ? (
+    isNew === "true" ? 
       setDocIsNew(true) 
-      ) : ""
+      : ""
   }
 
   const handleInitialFields = () => {
+    
     setData({
       ...data, 
       ['CreatedDate']: setCurrentDate(),
       ['CreatedBy']: currentUser,
       ['CompanyID']: currentCompanyID, 
       ['CompanyName']: currentCompany
-    })
+    }) 
   }
 
   const handleSetHeader = () => {
@@ -272,14 +270,18 @@ const DetailModule = (state) => {
   }
 
   const handleSubmit = () => {
-      docIsNew === true ? (
-        handleSubmitNew(data)
-      ) : handleSubmitUpdated(data)
+      
+      docIsNew === true ? 
+      handleSubmitNew(data)
+      : 
+      handleSubmitUpdated(data)
+        
   }
-
+console.log(data)
   const handleSubmitNew = async(data) => {
     
     try {
+      
       await db.collection(isModule).doc().set(data) 
       
       setPageSuccess("Changes Saved!")
@@ -293,10 +295,15 @@ const DetailModule = (state) => {
     setIsDrawerOpen(!isDrawerOpen)
   }
 
-  const handleSubmitUpdated = async(data) => { 
+  const handleSubmitUpdated = async() => { 
     
       try {
-        await db.collection(isModule).doc(params.id).update(data)
+        
+        await db.collection(isModule).doc(params.id).update({
+          ...data, 
+          ['LastUpdated']: setCurrentDate(), 
+          ['LastUpdateBy']: currentUser
+        })
         
         setPageSuccess("CHANGES SAVED!")
         setTimeout(() => {setPageSuccess(false)}, 1000)
@@ -564,7 +571,7 @@ return (
               </Column>
               <Column size="is-narrow">
                 <div className="is-size-7 ml-5" style={{fontVariant: [ 'small-caps' ]}}>
-                  updated by: {active.LastUpdatedBy && active.LastUpdatedBy}</div>
+                  updated by: {active.LastUpdateBy && active.LastUpdateBy}</div>
                 </Column>
              
             </Columns>

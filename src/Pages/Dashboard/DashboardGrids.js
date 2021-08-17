@@ -8,6 +8,7 @@ import { db } from '../../Contexts/firebase'
 
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
+import CardGrid from '../../Components/Grids/CardGrid'
 
 import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
@@ -225,9 +226,11 @@ const handleContractClick = (id) => {
     })
   }
 
-  const recentUpdates = services != undefined services.map((el) => el.LastUpdated.sort()) : ""
+  const recentUpdates = services != "" ? services.map(({LastUpdated}) => {
+    return new Date(LastUpdated)
+  }) : ""
 
-  console.log(recentUpdates)
+  
 
 return (
   <>
@@ -265,7 +268,7 @@ return (
 
     <CardGrid title="Recent Updates">
       <>
-        
+        This
       </>
     </CardGrid>
     
