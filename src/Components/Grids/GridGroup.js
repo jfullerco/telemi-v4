@@ -65,7 +65,7 @@ const GridGroup = ({ data,
         <table className="table is-hoverable is-fullwidth is-centered">
             <thead className="is-size-6">
               <tr className="is-hidden-mobile ">
-                {headerFields && headerFields.map(col => 
+                {group != undefined ? headerFields && headerFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
 
                     {
@@ -75,10 +75,10 @@ const GridGroup = ({ data,
                     }
 
                   </th>
-                )}
+                ) : ""}
               </tr>
               <tr className="is-hidden-tablet">
-                {mobileHeaderFields && mobileHeaderFields.map(col => 
+                {group != undefined ? mobileHeaderFields && mobileHeaderFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{textAlign: "left"}} key={col.keyProp}>
 
                     {
@@ -88,34 +88,34 @@ const GridGroup = ({ data,
                     }
 
                   </th>
-                )}
+                ) : ""}
               </tr>
             </thead>
-            <tbody className="is-size-7 is-hidden-mobile">
+            <tbody className="is-size-7 is-hidden-touch">
             
               {data && data != undefined ? data.filter(f=> f[groupBy] === group).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
-                  {headerFields && headerFields.map(col => 
+                  {group != undefined ? headerFields && headerFields.map(col => 
                     <td className={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-4"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 
                     </td>
-                  )}
+                  ) : ""}
                 </tr>
               ) : "" }
           </tbody>   
-          <tbody className="is-size-7 is-hidden-tablet">
+          <tbody className="is-size-7 is-hidden-desktop">
             
               {data && data != undefined ? data.filter(f => f[groupBy] === group).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
-                  {mobileHeaderFields && mobileHeaderFields.map(col => 
+                  {group != undefined ? mobileHeaderFields && mobileHeaderFields.map(col => 
                     <td className={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-3"} key={item[col.headerName]} >
                       {item[col.docField] && col.type === "currency" ? "$" : null} 
                       
                       {item[col.docField]} 
                     </td>
-                  )}
+                  ) : ""}
                 </tr>
               ) : ""}
           </tbody>   
@@ -132,7 +132,7 @@ const GridGroup = ({ data,
             <div className="column is-narrow">
               <div className="is-size-6">{isGrid && isGrid}</div>
               <div className="title">
-                <strong>{group === undefined ? "Not Assigned" : group}</strong>
+                <strong>{group === "Tags" ? group : "No Tags Assigned"}</strong>
               </div>
               {console.log(group)}
             </div>
@@ -140,8 +140,8 @@ const GridGroup = ({ data,
         <div className="table-container ">
         <table className="table is-hoverable is-fullwidth is-centered">
             <thead className="is-size-6">
-              <tr className="is-hidden-mobile ">
-                {headerFields && headerFields.map(col => 
+              <tr className="is-hidden-mobile">
+                {headerFields && group === "Tags" ? headerFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
 
                     {
@@ -151,7 +151,7 @@ const GridGroup = ({ data,
                     }
 
                   </th>
-                )}
+                ) : ""}
               </tr>
               <tr className="is-hidden-tablet">
                 {mobileHeaderFields && mobileHeaderFields.map(col => 
@@ -167,7 +167,7 @@ const GridGroup = ({ data,
                 )}
               </tr>
             </thead>
-            <tbody className="is-size-7 is-hidden-mobile">
+            <tbody className="is-size-7 is-hidden-touch">
             
               {data && data != undefined ? data.filter(f => f.Tags && f.Tags.includes(group)).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
@@ -181,7 +181,7 @@ const GridGroup = ({ data,
                 </tr>
               ) : "" }
           </tbody>   
-          <tbody className="is-size-7 is-hidden-tablet">
+          <tbody className="is-size-7 is-hidden-desktop">
             
               {data && data != undefined ? data.filter(f => f.Tags && f.Tags.includes(group)).map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 

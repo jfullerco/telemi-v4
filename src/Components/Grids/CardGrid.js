@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 const CardGrid = ({title, children}) => {
   return(
     <>
-      <div className="card">
+      <div className="card is-rounded">
         <header className="card-header">
-          <p className="card-header-title">
+          <p className="title card-header-title">
             {title}
           </p>
         </header>

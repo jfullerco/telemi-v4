@@ -93,11 +93,15 @@ const DashboardGrids = ({visible}) => {
 
   const [groupBy, setGroupBy] = useState("ALL")  
 
+  const [recent, setRecent] = useState()
+
   const [networkMap, setNetworkMap] = useState(false)
 
   const { sortedArr, sortArr } = useSortHook()
 
-  
+  useEffect(() => {
+   recentUpdatesArr("SERVICES")
+  },[services])
   
   useEffect(() => {
     grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
@@ -108,6 +112,7 @@ const DashboardGrids = ({visible}) => {
     grid === 'CONTRACTS' ? setGroupByOptions(contractGroupByFields) :
     grid === 'NETWORK' ? setNetworkMap(!networkMap) :
     setGroupByOptions(serviceGroupByFields)
+    recentUpdatesArr("SERVICES")
   },[grid])
 
   const handleSorting = (sortBy, colRef) => {
@@ -225,11 +230,33 @@ const handleContractClick = (id) => {
       }
     })
   }
+  
+  const recentUpdatesArr = (arr) => {
+    switch (arr) {
+      case "SERVICES": 
+        return (
+          setRecent([...services])
+        )
+      case "TICKETS": 
+        return (
+          setRecent([...tickets])
+        )
+      case "ORDERS": 
+        return (
+          setRecent([...orders])
+        )
+    }
+  }
+  const sortByDate = (arr) => {
+    const sorter = (a, b) => {
+      return new Date(b.LastUpdated).getTime() - new Date(a.LastUpdated).getTime()
+    }
+    arr.sort(sorter)
+  }
 
-  const recentUpdates = services != "" ? services.map(({LastUpdated}) => {
-    return new Date(LastUpdated)
-  }) : ""
-
+  sortByDate(recent != undefined ? recent : [])
+  const recentUpdates = recent != undefined ? recent.slice(0, 10) : ""
+  console.log(recentUpdates)
   
 
 return (
@@ -249,15 +276,23 @@ return (
         <option value="NETWORK">Network Map</option>
         </SelectView>
       </Column>
+
       <Column size="is-narrow mr-2">
+
         <div className="select is-rounded is-small">
         <select onChange={(e) => setGroupBy(e.target.value)} value={groupBy}>
+
           <option value="ALL">Show All</option>
+
           {groupByOptions.map(groupOption => (
+
             <option value={groupOption.Value}>Group by {groupOption.Label}</option>
+
           ))}
+
         </select>
         </div>
+
       </Column>
       <Column size="is-1">
         <button className="button is-rounded is-link is-small" onClick={()=>handleAddClick()}>Add</button>
@@ -266,11 +301,6 @@ return (
     </Columns>
     </div>
 
-    <CardGrid title="Recent Updates">
-      <>
-        This
-      </>
-    </CardGrid>
     
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup
