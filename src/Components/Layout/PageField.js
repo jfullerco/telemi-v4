@@ -54,7 +54,7 @@ const PageField = ({
                       </th>
                     </thead>
                     <tbody>
-                      {location != undefined ? <div key={location.id}>{`${location.Address1} ${location.Address2} ${location.City}, ${location.State}`}</div> : "No Address Provided"}
+                      {location != undefined ? <div key={location.id}>{`${location.Address1 || ""} ${location.Address2 || ""} ${location.City || ""}, ${location.State || ""} ${location.Zip || ""}`}</div> : "Address has not been entered"}
                     </tbody>
                   </table>
                 </RelatedFieldDropDown>

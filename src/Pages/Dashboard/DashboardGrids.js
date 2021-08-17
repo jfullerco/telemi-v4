@@ -224,7 +224,9 @@ const handleContractClick = (id) => {
     })
   }
 
-  
+  const recentUpdates = services != undefined services.map((el) => el.LastUpdated.sort()) : ""
+
+  console.log(recentUpdates)
 
 return (
   <>
@@ -260,7 +262,11 @@ return (
     </Columns>
     </div>
 
-    
+    <CardGrid title="Recent Updates">
+      <>
+        
+      </>
+    </CardGrid>
     
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup

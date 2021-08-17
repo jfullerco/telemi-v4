@@ -33,13 +33,13 @@ const Search = () => {
       <input className="input is-rounded" type='text' onChange={(e) => handleSearch(e)} />
 
       {locationResults && locationResults != undefined ? locationResults.map(result => 
-        <div key={result.id}>
+        <div className="box" key={result.id}>
           <a onClick={() => handleClick(id)}>{result.Name}</a>
         </div>
       ) : ""}
 
       {serviceResults && serviceResults != undefined ? serviceResults.map(result =>   
-        <div key={result.id}>
+        <div className="box" key={result.id}>
           <a onClick={() => handleClick(id)}>{result.AssetID}</a>
         </div>
       ) : ""}
