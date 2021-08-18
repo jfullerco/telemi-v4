@@ -55,6 +55,10 @@ const AddDocButtonFooter = () => {
 
       console.log("Error Deleting Document")
 
+    } finally {
+
+      fetchDocs()
+
     }
     
   }
@@ -63,15 +67,30 @@ const AddDocButtonFooter = () => {
     const file = e.target.files[0]
     const imageRef = store.ref(currentCompanyID).child(`${isModule}'-'${id}'-'${currentCompany}`)
     await imageRef.put(file)
-    const fileURL = await imageRef.getDownloadURL() 
-     setNewDocData({
-       ['CompanyName']: currentCompany,
-       ['CompanyID']: currentCompanyID,
-       [`${isModule}ID`]: id,
-       ['AttachedDate']: setCurrentDate(),
-       ['AttachedBy']: currentUser,
-       ['FileURL']: fileURL
-      })
+    const fileURL = await imageRef.getDownloadURL()
+    try {
+
+      await db.collection("Attachments").doc().set({
+        ['CompanyName']: currentCompany,
+        ['CompanyID']: currentCompanyID,
+        [`${isModule}ID`]: id,
+        ['AttachedDate']: setCurrentDate(),
+        ['AttachedBy']: currentUser,
+        ['FileURL']: fileURL
+       })
+     
+     setToggle(false)
+ 
+     } catch {
+ 
+       console.log("Error Adding Document")
+ 
+     } finally {
+
+       fetchDocs()
+
+     }
+     
   }
   console.log(newDocData)
   return(
@@ -93,14 +112,14 @@ const AddDocButtonFooter = () => {
             <ul>
             {docs && docs != undefined ? docs.map((file, index) => 
               
-              <li className="tag is-info is-light is-rounded mr-1" key={index}><a target="_blank" href={file.FileURL}>{file.AttachedDate && file.AttachedDate}</a> <button className="delete is-small" onClick={()=>handleDelete(file.id)}>x</button></li>
+              <li className="tag is-info is-light is-rounded mr-1 mb-1" key={index}><a target="_blank" href={file.FileURL}>{file.AttachedDate && file.AttachedDate}</a> <button className="delete is-small" onClick={()=>handleDelete(file.id)}>x</button></li>
             
           ) : ""}
             </ul>
-
+<hr />
             <div className="field">
               <div className="control">
-              <div className="file is-boxed">
+              <div className="file is-small is-link">
                 <label className="file-label">
                   <input className="file-input" type="file" name="resume" onChange={(e) => handleFileChange(e)} />
                   <span className="file-cta">
@@ -113,7 +132,7 @@ const AddDocButtonFooter = () => {
               </div>
               </div>
           </div>
-            <button type="submit" className="button is-rounded is-link" onClick={handleClick}>Add</button>
+            
 
 
           </div>
