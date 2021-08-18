@@ -33,11 +33,12 @@ const AddCompany = ({open}) => {
 
     try {
       await db.collection("Companies").doc().set(data)
-      setPageSuccess("Company Added")
-      autoClose()
+      setPageSuccess("Company Added! Returning to Dashboard...")
+      
     } catch {
       setPageError("Error Adding Company")
     }
+    autoClose()
   }
 
   const autoClose = () => {
@@ -47,7 +48,7 @@ const AddCompany = ({open}) => {
 
   return (
     
-    <Page subtitle="Add Company" handleSubmit={handleSubmit} status="new" handleToggleReadOnly={() => setInputReadOnly(!inputReadOnly)} pageSuccess={pageSuccess} pageError={pageError} autoClose={autoClose}>
+    <Page subtitle="Add Company" handleSubmit={handleSubmit} status="new" handleToggleReadOnly={() => setInputReadOnly(!inputReadOnly)} pageSuccess={pageSuccess} pageError={pageError} handleGoBack={()=>history.goBack()}>
 
       <form>
         <TextInput

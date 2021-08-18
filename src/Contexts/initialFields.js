@@ -1470,8 +1470,10 @@ import React, { useContext } from 'react'
       {
         label: 'Contract Name',
         dataField: 'Name',
+        inputFieldType: 'text',
         tab: 'BASIC INFO',
-        tabLabel: 'BASIC INFO'
+        tabLabel: 'BASIC INFO',
+        isHeader: true
       },
       {
         label: 'Vendor',
