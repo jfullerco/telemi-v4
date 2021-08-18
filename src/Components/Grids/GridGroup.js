@@ -64,7 +64,7 @@ const GridGroup = ({ data,
         <div className="table-container ">
         <table className="table is-hoverable is-fullwidth is-centered">
             <thead className="is-size-6">
-              <tr className="is-hidden-mobile ">
+              <tr className="is-hidden-touch">
                 {group != undefined ? headerFields && headerFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
 
@@ -76,8 +76,8 @@ const GridGroup = ({ data,
 
                   </th>
                 ) : ""}
-              </tr>
-              <tr className="is-hidden-tablet">
+              </tr> 
+              <tr className="is-hidden-desktop">
                 {group != undefined ? mobileHeaderFields && mobileHeaderFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{textAlign: "left"}} key={col.keyProp}>
 
