@@ -82,7 +82,7 @@ console.log(tags)
     <>
       <div 
         className={toggle === true ? 
-          "dropdown is-up is-active is-mobile" : "dropdown is-up"}
+          "dropdown is-up is-right is-active is-mobile" : "dropdown is-up"}
         
       >
         <div className="dropdown-trigger navbar-item" onClick={()=> setToggle(!toggle)}>
