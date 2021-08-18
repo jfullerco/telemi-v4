@@ -5,6 +5,7 @@ import AddBookmarkFooter from './Components/Navs/AddBookmarkFooter'
 import AddNoteButtonFooter from './Components/Navs/AddNoteButtonFooter'
 import EditButtonFooter from './Components/Navs/EditButtonFooter'
 import AddTagButtonFooter from './Components/Navs/AddTagButtonFooter'
+import AddDocButtonFooter from './Components/Navs/AddDocButtonFooter'
 
 
 
@@ -32,6 +33,9 @@ const Footer = (props) => {
         </div>
         <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <AddNoteButtonFooter />
+        </div>
+        <div className="navbar-item is-inline-block-touch pl-4 pr-4">
+          <AddDocButtonFooter />
         </div>
         <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <AddTagButtonFooter 
