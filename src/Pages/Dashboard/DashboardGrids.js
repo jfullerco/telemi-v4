@@ -93,7 +93,7 @@ const DashboardGrids = ({visible}) => {
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState(userDefaults.groupBy && userDefaults.groupBy || "ALL")  
+  const [groupBy, setGroupBy] = useState(userDefaults?.groupBy || "ALL")  
 
   const [recent, setRecent] = useState()
 
