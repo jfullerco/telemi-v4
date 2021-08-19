@@ -93,13 +93,13 @@ const DashboardGrids = ({visible}) => {
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState(userDefaults?.groupBy || "ALL")  
+  const [groupBy, setGroupBy] = useState(userDefaults?.groupBy || "Vendor")  
 
   const [recent, setRecent] = useState()
 
   const [networkMap, setNetworkMap] = useState(false)
 
-  const { sortedArr, sortArr } = useSortHook()
+  const { sortedArr, sortArr } = useSortHook() 
 
   useEffect(() => {
    recentUpdatesArr("SERVICES") 
