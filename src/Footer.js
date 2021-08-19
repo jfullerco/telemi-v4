@@ -31,7 +31,7 @@ const Footer = (props) => {
             isBookmarked={isBookmarked}
           />
         </div>
-        <div className="navbar-item is-inline-block-touch pl-4 pr-4">
+        <div className="navbar-item is-inline-block-touch pl-4 pr-4 is-hidden">
           <AddNoteButtonFooter />
         </div>
         <div className="navbar-item is-inline-block-touch pl-4 pr-4">

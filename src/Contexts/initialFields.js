@@ -1604,6 +1604,49 @@ import {accessType} from './accessType'
         tabLabel: 'BASIC INFO'
       }
     ]
+  const userDetailFields = [
+    {
+      label: 'Email Address',
+      dataField: 'Email',
+      inputFieldType: 'text',
+      tab: "BASIC INFO",
+      tabLabel: "BASIC INFO"
+    },
+    {
+      label: 'First Name',
+      dataField: 'FirstName',
+      inputFieldType: 'text',
+      tab: "BASIC INFO",
+      tabLabel: "BASIC INFO"
+    },
+    {
+      label: 'Last Name',
+      dataField: 'LastName',
+      inputFieldType: 'text',
+      tab: "BASIC INFO",
+      tabLabel: "BASIC INFO"
+    },
+    {
+      label: 'Type',
+      dataField: "Type",
+      inputFieldType: 'select',
+      inputSource: [
+        {
+          Name: 'User',
+          Value: 'User'
+        },
+        {
+          Name: 'Agent',
+          Value: 'Agent'
+        }
+      ],
+      inputID: "Name",
+      inputValue: "Value",
+      tab: "BASIC INFO",
+      tabLabel: "BASIC INFO"
+    },
+    
+  ]
 
     
 
@@ -1624,7 +1667,8 @@ export {
     accountGridColumns, 
     accountGroupByFields,
     accountMobileGridColumns,
-    userGridColumns, 
+    userGridColumns,
+    userDetailFields, 
     contractGridColumns,
     contractMobileGridColumns,
     contractDetailFields,

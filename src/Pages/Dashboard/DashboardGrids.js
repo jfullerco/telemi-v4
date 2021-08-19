@@ -33,6 +33,7 @@ import { serviceGridColumns,
          accountMobileGridColumns,
          userGridColumns,
          userGroupByFields,
+         userDetailFields,
          contractGridColumns,
          contractMobileGridColumns,
          contractGroupByFields } from '../../Contexts/initialFields'
@@ -82,16 +83,17 @@ const DashboardGrids = ({visible}) => {
           accounts,
           bills,
           users,
+          userDefaults,
           contracts,
           currentGrid } = userContext.userSession
 
   const searchRef = useRef("")
-
-  const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : "SERVICES")
+console.log(userDefaults.Grid)
+  const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : userDefaults.Grid || "ORDERS" )
   
-  const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
+  const [groupByOptions, setGroupByOptions] = useState( serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState("ALL")  
+  const [groupBy, setGroupBy] = useState(userDefaults.groupBy || "ALL")  
 
   const [recent, setRecent] = useState()
 
@@ -174,6 +176,19 @@ const DashboardGrids = ({visible}) => {
                     })
   }
 
+  const handleUserClick = (id) => {
+                  
+    history.push({
+      pathname: `/Users/${currentCompanyID}/${id}`,
+      state: {
+        currentCompanyID: currentCompanyID,
+        cachedLocations: locations,
+        cachedAccounts: accounts,
+        cachedServices: services,
+      }
+    })
+  }
+
   const handleLocationClick = (id) => {
     history.push({
       pathname: `/Locations/${currentCompanyID}/${id}`,
@@ -247,6 +262,7 @@ const handleContractClick = (id) => {
         )
     }
   }
+
   const sortByDate = (arr) => {
     const sorter = (a, b) => {
       return new Date(b.LastUpdated).getTime() - new Date(a.LastUpdated).getTime()
@@ -256,7 +272,7 @@ const handleContractClick = (id) => {
 
   sortByDate(recent != undefined ? recent : [])
   const recentUpdates = recent != undefined ? recent.slice(0, 10) : ""
-  console.log(recentUpdates)
+  
   
 
 return (
@@ -361,6 +377,17 @@ return (
         headerFields={contractGridColumns}
         mobileHeaderFields={contractMobileGridColumns}
         handleClick={(e) => handleContractClick(e)}
+        handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
+        groupBy={groupBy}
+      />
+    </div>
+    <div className={grid === 'USERS' ? "" : "is-hidden"}>
+      <GridGroup
+        data={grid === "USERS" ? users : null}
+        isGrid='Users'
+        headerFields={userGridColumns}
+        mobileHeaderFields={userGridColumns}
+        handleClick={(e) => handleUserClick(e)}
         handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}
       />

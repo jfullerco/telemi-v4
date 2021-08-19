@@ -10,7 +10,8 @@ import {
   ticketDetailFields,
   billsDetailFields,
   locationDetailFields,
-  contractDetailFields } from '../Contexts/initialFields'
+  contractDetailFields,
+  userDetailFields } from '../Contexts/initialFields'
 import {stateList} from '../Contexts/states.js'
 
 import Columns from '../Components/Layout/Columns'
@@ -50,6 +51,7 @@ const DetailModule = (state) => {
           setLocations,
           setAccounts,
           setServices,
+          setUsers,
           setNotes } = userContext
 
   const { locations,
@@ -58,6 +60,7 @@ const DetailModule = (state) => {
           accounts,
           tickets,
           contracts,
+          users,
           bills,
           notes,
           currentCompany,
@@ -175,6 +178,10 @@ const DetailModule = (state) => {
       case "Notes": 
         return (
           setPageFields(notesDetailFields)
+        )
+      case "Users":
+        return (
+          setPageFields(userDetailFields)
         )
     }
   }

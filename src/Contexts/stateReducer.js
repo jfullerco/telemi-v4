@@ -130,6 +130,11 @@ export default (state, action) => {
         ...state,
         users: action.payload
       }; 
+    case "SET_USER_DEFAULTS":
+      return {
+        ...state,
+        userDefaults: action.payload
+      }; 
     case "SET_CONTRACTS":
       return {
         ...state,

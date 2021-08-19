@@ -37,6 +37,7 @@ const Dashboard = () => {
           setOrders,
           setAccounts,
           setUsers,
+          setUserDefaults,
           setBills,
           setContracts } = userContext
 
@@ -93,7 +94,8 @@ const Dashboard = () => {
     
     await setUserFirstName(user[0].FirstName)
     await setUserType(user[0].Type)
-    
+    await setUserDefaults(user[0].Defaults)
+    console.log(user[0].Defaults)
   }
 
   const isCurrentCompany = () => {

@@ -26,6 +26,7 @@ export const StateProvider = (props) => {
       contracts: "",
       notes: "",
       users: "",
+      userDefaults: "",
       currentCompanyID: "",
       currentCompany: "",
       currentLocationID: "",
@@ -525,6 +526,13 @@ export const StateProvider = (props) => {
         return currentDate.toISOString().substring(0, 10)
       }
 
+      const setUserDefaults = (userDefaults) => {
+        dispatch({
+          type: "SET_USER_DEFAULTS",
+          payload: userDefaults
+        })
+      }
+
     
     return (
       <Provider value={{ 
@@ -544,6 +552,7 @@ export const StateProvider = (props) => {
           setAccounts,
           setBills,
           setUsers,
+          setUserDefaults,
           setContracts,
           setNotes,
 
