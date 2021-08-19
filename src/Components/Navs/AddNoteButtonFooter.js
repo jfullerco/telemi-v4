@@ -38,7 +38,7 @@ const AddNoteButtonFooter = () => {
     <>
       <div 
         className={toggle === true ? 
-          "dropdown is-up is- is-active is-mobile" : "dropdown is-up"}
+          "dropdown is-up is-active is-mobile" : "dropdown is-up"}
         onClick={()=>setToggle(!toggle)}
       >
         <div className="dropdown-trigger navbar-item" onClick={()=> {setToggle(!toggle)}}>

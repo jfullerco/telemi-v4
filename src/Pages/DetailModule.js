@@ -89,9 +89,6 @@ const DetailModule = (state) => {
   const [addRelatedValue, setAddRelatedValue] = useState()
   const [isRelatedActive, setIsRelatedActive] = useState(false)
   
-  
-  
-
   useEffect(() => {
     
     setLoading(true)
@@ -120,10 +117,7 @@ const DetailModule = (state) => {
     fetchBills()
     fetchNotes()
     setTab("BASIC INFO")
-    handleInitialFieldMapping("Vendor", vendorList, pageFields)
     handleInitialFieldMapping("LocationName", locations, pageFields)
-    handleInitialFieldMapping("Type", serviceTypes, pageFields)
-    handleInitialFieldMapping("AccessType", accessTypes, pageFields)
     handleInitialFieldMapping("OrderNum", orders, pageFields)
     handleInitialFieldMapping("Services", services, pageFields)
     handleInitialFieldMapping("AccountNum", accounts, pageFields)

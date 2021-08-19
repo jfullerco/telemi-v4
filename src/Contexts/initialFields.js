@@ -1,4 +1,8 @@
 import React, { useContext } from 'react'
+import {vendorList} from './vendorList'
+import {stateList} from './states'
+import {serviceType} from './serviceType'
+import {accessType} from './accessType'
 
 
 /** Reference Object Dummy Assignments */
@@ -9,8 +13,8 @@ import React, { useContext } from 'react'
   let services = []
   let notes = []
   let serviceStatusType = []
-  let vendorList = []
-  let stateList = []
+  
+  
   let serviceTypes = []
   let accessTypes = []
 
@@ -478,7 +482,6 @@ import React, { useContext } from 'react'
     
 /** Page Fields */
     const serviceDetailFields = [
-   
       { 
         label: "Service Location", 
         dataField: "LocationName", 
@@ -516,10 +519,20 @@ import React, { useContext } from 'react'
             fieldType: "text"
           },
           {
+            label: "Province/Region",
+            docField: "Region",
+            fieldType: "text"
+          },
+          {
             label: "Zip",
             docField: "Zip",
             fieldType: "text"
-          }
+          },
+          {
+            label: "Country",
+            docField: "Country",
+            fieldType: "text"
+          },
         ],
         relatedDataType: "Location",
         tab: "BASIC INFO",
@@ -529,9 +542,9 @@ import React, { useContext } from 'react'
         label: "Vendor", 
         dataField: "Vendor", 
         inputFieldType: "select", 
-        inputSource: "", /** SET BY HANDLEINITIALFIELDMAPPING FN */
-        inputID: "id", 
-        inputValue: "Name", 
+        inputSource: vendorList, 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO" 
       },
@@ -539,9 +552,9 @@ import React, { useContext } from 'react'
         label: "Type", 
         dataField: "Type", 
         inputFieldType: "select", 
-        inputSource: serviceTypes, 
-        inputID: "id", 
-        inputValue: "Name", 
+        inputSource: serviceType, 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO"
       },
@@ -556,26 +569,9 @@ import React, { useContext } from 'react'
         label: "Access Type", 
         dataField: "AccessType", 
         inputFieldType: "select", 
-        inputSource: [
-          { 
-            Name: 'T1', 
-            Value: 'T1' 
-          },
-          { 
-            Name: 'Ethernet', 
-            Value: 'Ethernet' 
-          },
-          { 
-            Name: 'Fiber', 
-            Value: 'Fiber' 
-          },
-          { 
-            Name: 'Cable/DSL', 
-            Value: 'CableDSL' 
-          } 
-        ], 
-        inputID: "id", 
-        inputValue: "Name", 
+        inputSource: accessType, 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO" 
       },
@@ -633,6 +629,24 @@ import React, { useContext } from 'react'
         dataField: "StartDate", 
         visible: true, 
         inputFieldType: "datepicker", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
+      { 
+        label: 'Last Mile', 
+        dataField: 'LastMile', 
+        inputFieldType: "select", 
+        inputSource: vendorList, 
+        inputID: "Name", 
+        inputValue: "Value", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
+      { 
+        label: 'Demarc Information', 
+        dataField: 'DemarcInfo', 
+        visible: true, 
+        inputFieldType: "text-area", 
         tab: "DETAILS",
         tabLabel: "DETAILS" 
       },
@@ -828,7 +842,6 @@ import React, { useContext } from 'react'
         tab: "BASIC INFO",
         isHeader: true 
       },
-
       { 
         label: "Service Location", 
         dataField: "LocationName", 
@@ -866,11 +879,21 @@ import React, { useContext } from 'react'
             fieldType: "text"
           },
           {
+            label: "Province/Region",
+            docField: "Region",
+            fieldType: "text"
+          },
+          {
             label: "Zip",
             docField: "Zip",
             fieldType: "text"
-          }
-          ],
+          },
+          {
+            label: "Country",
+            docField: "Country",
+            fieldType: "text"
+          },
+        ],
         relatedDataType: "Location",
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO"  
@@ -942,8 +965,8 @@ import React, { useContext } from 'react'
         dataField: "Vendor", 
         inputFieldType: "select", 
         inputSource: vendorList, 
-        inputID: "id", 
-        inputValue: "Name", 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO"
       },
       { 
@@ -1047,9 +1070,10 @@ import React, { useContext } from 'react'
       { 
         label: "Vendor", 
         dataField: "Vendor", 
-        inputFieldType: "select",  
-        inputID: "id", 
-        inputValue: "Name", 
+        inputFieldType: "select",
+        inputSource: vendorList,  
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO"
       },
       { 
@@ -1168,11 +1192,21 @@ import React, { useContext } from 'react'
             fieldType: "text"
           },
           {
+            label: "Province/Region",
+            docField: "Region",
+            fieldType: "text"
+          },
+          {
             label: "Zip",
             docField: "Zip",
             fieldType: "text"
+          },
+          {
+            label: "Country",
+            docField: "Country",
+            fieldType: "text"
           }
-          ],
+        ],
         relatedDataType: "Location",
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO"  
@@ -1195,8 +1229,8 @@ import React, { useContext } from 'react'
         dataField: "Vendor", 
         inputFieldType: "select", 
         inputSource: vendorList, 
-        inputID: "id", 
-        inputValue: "Name", 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO" 
       },
       { 
@@ -1210,9 +1244,22 @@ import React, { useContext } from 'react'
         dataField: "Type",
         visible: false,
         inputField: "select",
-        inputSource: "",
-        inputID: "id",
-        inputValue: "Name",
+        inputSource: [
+          {
+            Name: 'New',
+            Value: 'New'
+          },
+          {
+            Name: 'Change',
+            Value: 'Change'
+          },
+          {
+            Name: 'Disconnect',
+            Value: 'Disconnect'
+          }
+        ],
+        inputID: "Name",
+        inputValue: "Value",
         tab: "BASIC INFO"
       },
       { 
@@ -1332,8 +1379,18 @@ import React, { useContext } from 'react'
             fieldType: "text"
           },
           {
+            label: "Province/Region",
+            docField: "Region",
+            fieldType: "text"
+          },
+          {
             label: "Zip",
             docField: "Zip",
+            fieldType: "text"
+          },
+          {
+            label: "Country",
+            docField: "Country",
             fieldType: "text"
           }
           ],
@@ -1358,8 +1415,8 @@ import React, { useContext } from 'react'
         dataField: "Vendor", 
         inputFieldType: "select", 
         inputSource: vendorList, 
-        inputID: "id", 
-        inputValue: "Name", 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO" 
       },
       { 
@@ -1431,10 +1488,22 @@ import React, { useContext } from 'react'
         tab: 'BASIC INFO'
       },
       {
-        label: 'Zip',
-        dataField: 'Zip',
-        inputFieldType: 'text',
+        label: "Province/Region",
+        dataField: "Region",
+        inputFieldType: "text",
         tab: 'BASIC INFO'
+      },
+      {
+        label: "Zip",
+        dataField: "Zip",
+        inputFieldType: "text",
+        tab: 'BASIC INFO'
+      },
+      {
+        label: "Country",
+        dataField: "Country",
+        inputFieldType: "text",
+        tab: "BASIC INFO"
       },
       {
         label: 'Full Address',
@@ -1480,8 +1549,8 @@ import React, { useContext } from 'react'
         dataField: 'Vendor',
         inputFieldType: 'select',
         inputSource: vendorList,
-        inputID: "id", 
-        inputValue: "Name",
+        inputID: "Name", 
+        inputValue: "Vendor",
         tab: 'BASIC INFO',
         tablLabel: 'BASIC INFO'
       },
