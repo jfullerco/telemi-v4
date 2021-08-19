@@ -88,7 +88,7 @@ const DashboardGrids = ({visible}) => {
           currentGrid } = userContext.userSession
 
   const searchRef = useRef("")
-
+ 
   const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : userDefaults.Grid && userDefaults.Grid || "SERVICES" )
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
