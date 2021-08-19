@@ -48,8 +48,12 @@ const vendorList = [
     Value: 'Segra'
   },
   {
+    Name: 'Level3',
+    Value: 'Level3'
+  },
+  {
     Name: 'TalkDesk',
-    Value: 'TalkDesk'
+    Value: 'TalkDesk' 
   },
   {
     Name: '8x8',
