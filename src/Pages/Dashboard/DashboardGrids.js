@@ -89,7 +89,7 @@ const DashboardGrids = ({visible}) => {
 
   const searchRef = useRef("")
  
-  const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : userDefaults?.Grid && userDefaults.Grid || "SERVICES" )
+  const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : userDefaults?.Grid || "SERVICES" )
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
 
@@ -102,7 +102,7 @@ const DashboardGrids = ({visible}) => {
   const { sortedArr, sortArr } = useSortHook()
 
   useEffect(() => {
-   recentUpdatesArr("SERVICES")
+   recentUpdatesArr("SERVICES") 
   },[services])
   
   useEffect(() => {
