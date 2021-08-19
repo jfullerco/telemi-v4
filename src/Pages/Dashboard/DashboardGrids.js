@@ -88,12 +88,12 @@ const DashboardGrids = ({visible}) => {
           currentGrid } = userContext.userSession
 
   const searchRef = useRef("")
-console.log(userDefaults.Grid)
-  const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : userDefaults.Grid || "ORDERS" )
-  
-  const [groupByOptions, setGroupByOptions] = useState( serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState(userDefaults.groupBy || "ALL")  
+  const [grid, setGrid] = useState(currentGrid != undefined ? currentGrid : userDefaults.Grid && userDefaults.Grid || "SERVICES" )
+  
+  const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
+
+  const [groupBy, setGroupBy] = useState(userDefaults.groupBy && userDefaults.groupBy || "ALL")  
 
   const [recent, setRecent] = useState()
 
