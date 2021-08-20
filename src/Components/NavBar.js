@@ -5,7 +5,7 @@ import {stateContext} from '../Contexts/stateContext'
 import {useAuth} from '../Contexts/AuthContext'
 import {auth} from '../Contexts/firebase'
 
-import {FaSearch} from '@react-icons/FaSearch'
+import {FaSearch} from 'react-icons/f'
 
 const NavBar = () => {
 
