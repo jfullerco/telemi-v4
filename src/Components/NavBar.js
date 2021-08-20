@@ -65,9 +65,9 @@ const NavBar = () => {
           
           
             
-            <a className="navbar-item" onClick={()=> history.push("/search")}><FaSearch className="icon fa-md" /></a>
+            <a className="navbar-item" onClick={()=> history.push("/search")}><span className="icon is-medium"><FaSearch /></span></a>
             <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link" onClick={()=>history.push("/dashboard")} ><FaUser className="icon fa-md" /></a>
+            <a className="navbar-link" onClick={()=>history.push("/dashboard")} ><span className="icon is-medium"><FaUser /></span></a>
           
           <div className="navbar-dropdown">
           <a onClick={()=>logOut()} className="navbar-item">

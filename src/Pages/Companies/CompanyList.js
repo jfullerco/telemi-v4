@@ -105,7 +105,7 @@ const CompanyList = () => {
     <>
       {
         userType === "Admin" ? 
-        <>
+        <div >
 
                   <CompanyDropDown 
                     isActive={active}
@@ -115,7 +115,7 @@ const CompanyList = () => {
                     currentCompany={currentCompany}
                   />
         
-        </>
+        </div>
         : <span className="title has-text-black">{currentCompany}</span>
       }
       {companies === null ? <button className="button is-rounded is-link" onClick={() => history.push("/addcompany")}>Add a Company Name</button> : null}

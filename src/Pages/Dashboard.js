@@ -152,15 +152,15 @@ const Dashboard = () => {
           <section className="hero is-small">
             <div className="hero-body">
 
-              <CompanyList />
+              <CompanyList /> 
 
             </div>
           </section>
 
           <div className={toggleCompanyList != false ? "block" : "is-hidden"} id="companyList">
-
+            
             <CompanyList />
-
+            
           </div>
 
           <div className="">

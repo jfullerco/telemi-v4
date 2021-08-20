@@ -25,6 +25,21 @@ body {
   
 }
 
+.companyList {
+  top: 51px;
+  background: rgba(240, 240, 240, 0.5);
+  
+  position: fixed;
+  overflow: hidden;
+  z-index: 3000;
+}
+
+.companyList-dropdown {
+  margin-top: 5px;
+  position: fixed;
+  z-index: 3000;
+}
+
 .donotwrap {
   max-width: 80vw;
   text-overflow: ellipsis;
