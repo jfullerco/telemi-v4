@@ -13,8 +13,6 @@ import {accessType} from './accessType'
   let services = []
   let notes = []
   let serviceStatusType = []
-  
-  
   let serviceTypes = []
   let accessTypes = []
 

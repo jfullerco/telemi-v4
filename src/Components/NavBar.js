@@ -5,6 +5,8 @@ import {stateContext} from '../Contexts/stateContext'
 import {useAuth} from '../Contexts/AuthContext'
 import {auth} from '../Contexts/firebase'
 
+import {FaSearch} from 'react-icons/fa'
+
 const NavBar = () => {
 
   const history = useHistory()
@@ -62,8 +64,13 @@ const NavBar = () => {
           <>
           
             
-            <a className={userFirstName && userFirstName ? "navbar-item" : "is-hidden"} onClick={()=>history.push("/dashboard")}><span className="button is-link">{userFirstName}</span></a>
-            
+            <a className={userFirstName && userFirstName ? "navbar-item" : "is-hidden"} 
+              onClick={()=>history.push("/dashboard")}>
+                <span className="button is-link">
+                  {userFirstName}
+                </span>
+            </a>
+            <a className="icon is-normal"><FaSearch /></a>
           <div className="navbar-item has-dropdown is-hoverable">
 
             <a className="navbar-link" onClick={()=>history.push("/dashboard")}>Dashboard</a>
