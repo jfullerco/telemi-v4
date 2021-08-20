@@ -5,7 +5,7 @@ import {stateContext} from '../Contexts/stateContext'
 import {useAuth} from '../Contexts/AuthContext'
 import {auth} from '../Contexts/firebase'
 
-import {FaSearch} from 'react-icons/f'
+import {FaSearch, FaUser} from 'react-icons/fa'
 
 const NavBar = () => {
 
@@ -29,7 +29,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="navbar is-black is-fixed-top pt-2 pb-2" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-black is-fixed-top " role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
 
       <div className="navbar-item">
@@ -63,29 +63,18 @@ const NavBar = () => {
         {currentUser != undefined ? ( 
           <>
           
-            
-            <a className={userFirstName && userFirstName ? "navbar-item" : "is-hidden"} 
-              onClick={()=>history.push("/dashboard")}>
-                <span className="button is-link">
-                  {userFirstName}
-                </span>
-            </a>
-            <a className="icon is-normal"><FaSearch /></a>
-          <div className="navbar-item has-dropdown is-hoverable">
-
-            <a className="navbar-link" onClick={()=>history.push("/dashboard")}>Dashboard</a>
-  
-            <div className="navbar-dropdown">
-              <a className="navbar-item" onClick={()=>history.push("/settings")}>SETTINGS</a>
-              <a className="navbar-item" onClick={()=>history.push("/search")}>SEARCH</a>
-            </div>
-            
-          </div>
-
-          <a onClick={()=>logOut()} className="navbar-item">
-            Logout
-          </a>
           
+            
+            <a className="navbar-item" onClick={()=> history.push("/search")}><FaSearch className="icon fa-md" /></a>
+            <div className="navbar-item has-dropdown is-hoverable">
+            <a className="navbar-link" onClick={()=>history.push("/dashboard")} ><FaUser className="icon fa-md" /></a>
+          
+          <div className="navbar-dropdown">
+          <a onClick={()=>logOut()} className="navbar-item">
+            Logout 
+          </a>
+          </div>
+          </div>
           </>
         ) : (
           <>
