@@ -5,7 +5,7 @@ import {stateContext} from '../Contexts/stateContext'
 import {useAuth} from '../Contexts/AuthContext'
 import {auth} from '../Contexts/firebase'
 
-import {FaSearch} from '@react-icons/fa'
+import {FaSearch} from '@react-icons/FaSearch'
 
 const NavBar = () => {
 
@@ -60,7 +60,7 @@ const NavBar = () => {
 
       <div className="navbar-end">
         
-        {currentUser != undefined ? (
+        {currentUser != undefined ? ( 
           <>
           
             
