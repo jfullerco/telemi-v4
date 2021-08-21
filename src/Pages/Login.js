@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
 
 import { useAuth } from '../Contexts/AuthContext'
+import {db} from '../Contexts/firebase'
 
 import { useHistory } from 'react-router-dom'
 import Columns from '../Components/Layout/Columns'
@@ -25,6 +26,10 @@ export default function Login() {
       setLoginError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
+      await db.collection('AccessLog').doc().set({
+        Email: emailRef.current.value,
+        Date: new Date()
+      })
       history.push("/dashboard")
     } catch {
       setLoginError('Email or Password is incorrect')

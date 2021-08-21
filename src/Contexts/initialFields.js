@@ -1548,7 +1548,7 @@ import {accessType} from './accessType'
         inputFieldType: 'select',
         inputSource: vendorList,
         inputID: "Name", 
-        inputValue: "Vendor",
+        inputValue: "Value",
         tab: 'BASIC INFO',
         tablLabel: 'BASIC INFO'
       },
@@ -1646,6 +1646,51 @@ import {accessType} from './accessType'
     
   ]
 
+  const contactDetailFields = [
+    {
+      label: 'First Name',
+      dataField: 'FirstName',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+    {
+      label: 'Last Name',
+      dataField: 'LastName',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+    {
+      label: 'Company Name',
+      dataField: 'CompanyName',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+    {
+      label: 'Title/Position',
+      dataField: 'Title',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+    {
+      label: 'Phone',
+      dataField: 'Phone',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+    {
+      label: 'Email',
+      dataField: 'Email',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+  ]
+
     
 
 export {
@@ -1675,5 +1720,6 @@ export {
     ticketDetailFields,
     accountDetailFields,
     orderDetailFields,
-    billsDetailFields
+    billsDetailFields,
+    contactDetailFields
 }

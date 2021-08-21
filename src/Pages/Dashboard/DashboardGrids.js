@@ -10,6 +10,8 @@ import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
 import CardGrid from '../../Components/Grids/CardGrid'
 
+import CostBySite from '../../Components/Graphs/CostBySite'
+
 import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 
@@ -402,7 +404,7 @@ return (
             />
           </div>
       */}
-    
+    <CostBySite />
   
   </>
   
