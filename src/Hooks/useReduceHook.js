@@ -21,7 +21,24 @@ export const useReduceHook = (props) => {
   },{})
   
   
+  const reducer = (map, val) => {
+    console.log("map", map, "val", val)
+    !map[val] ? map[val] = 1 :
+    ++map[val]
+    return map
+  }
+
   
+
+  
+
+  
+
+  
+const reduceArray = services != "" ? services.map(service => service.MRC).reduce(reducer, {}) : ""
+  
+  
+console.log("outPut", reduceArray)
   
 
   return { reducedArr, setReducerParams }

@@ -1,34 +1,39 @@
 import React, { useState, useEffect, useReducer, useContext } from 'react'
 import { stateContext } from '../../Contexts/stateContext'
 
-import { ResponsivePie } from '@nivo/bar'
+import { ResponsivePie } from '@nivo/pie'
 
 const CostBySite = () => {
   const userContext = useContext(stateContext)
   const {services} = userContext.userSession
-  const initState = services != "" ? services : []
-  const reducer = (state, action) => {
-    let key = state[action.payload]
-    !action[key] ? action[key] = [] :
-    action[key].push(state)
-    return action
-  }
-  const [state, dispatch] = useReducer(reducer, initState)
 
-  
+  const grouper = (arr) => arr != "" ? arr.reduce((LocationName, MRC) => {
+    LocationName[MRC.LocationName] = (parseInt(LocationName[MRC.LocationName]) || 0) + (parseInt(MRC.MRC) || 0);
+    return LocationName;
+  }, {}) : ""
 
-  useEffect(()=> {
-    dispatch({payload: 'MRC'})
-  },[se])
+  const groupLocations = grouper(services)
 
-  
 
-  
-  
-console.log(state)
-  
   return(
-    <>Check Console</>
+    <>
+    <ResponsivePie
+      data={groupLocations && groupLocations}
+      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      innerRadius={0.5}
+      padAngle={0.7}
+      cornerRadius={3}
+      activeOuterRadiusOffset={8}
+      borderWidth={1}
+      borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+      arcLinkLabelsSkipAngle={10}
+      arcLinkLabelsTextColor="#333333"
+      arcLinkLabelsThickness={2}
+      arcLinkLabelsColor={{ from: "color" }}
+      arcLabelsSkipAngle={10}
+      arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+    />
+    </>
   )
 }
 export default CostBySite
