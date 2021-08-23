@@ -7,18 +7,26 @@ const CostBySite = () => {
   const userContext = useContext(stateContext)
   const {services} = userContext.userSession
 
+  const [data, setData] = useState()
+
   const grouper = (arr) => arr != "" ? arr.reduce((LocationName, MRC) => {
     LocationName[MRC.LocationName] = (parseInt(LocationName[MRC.LocationName]) || 0) + (parseInt(MRC.MRC) || 0);
-    return LocationName;
-  }, {}) : ""
+    const arr = Object.assign({}, {
+      id: MRC.LocationName,
+      label: MRC.LocationName,
+      value: LocationName[MRC.LocationName]
+    }) 
+    
+    return arr
+  }, []) : ""
 
   const groupLocations = grouper(services)
- 
-
+  console.log(groupLocations)
+/**setData({...data, id: MRC.LocationName, label: MRC.LocationName, value: LocationName[MRC.LocationName]}) */
   return(
     <>
     <ResponsivePie
-      data={groupLocations}
+      data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.5}
       padAngle={0.7}

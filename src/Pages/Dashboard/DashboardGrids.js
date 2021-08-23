@@ -319,7 +319,7 @@ return (
     </Columns>
     </div>
 
-    <CostBySite />
+    <
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup
         data={grid === "SERVICES" ? services : null}
