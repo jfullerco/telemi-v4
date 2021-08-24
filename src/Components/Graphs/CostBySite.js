@@ -31,9 +31,12 @@ const CostBySite = () => {
     return sum += value
   }
 **/
-  
+  const sum = (acc, value) => {
+    return acc.cost += value.cost
+  }
+
   const initialData = services != "" ? services.map(service => ({name: service.LocationName, cost: parseInt(service.MRC) || 0})) : ""
-  
+  const totalMonthlyCost = initialData && initialData.reduce(sum, 0)
   const buildData = (arr) => {
     const hashMap = {}
 
@@ -70,6 +73,7 @@ const CostBySite = () => {
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
       arcLabel={function(e){return `$${e.value}`}}
     />
+    <title>{totalMontlyCost && totalMonthlyCost}</title> 
     </div>
   )
 }
