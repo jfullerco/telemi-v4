@@ -32,11 +32,11 @@ const CostBySite = () => {
   }
 **/
   const sum = (acc, value) => {
-    return acc.cost += value.cost
+    return acc += value
   }
 
   const initialData = services != "" ? services.map(service => ({name: service.LocationName, cost: parseInt(service.MRC) || 0})) : ""
-  const totalMonthlyCost = initialData && initialData.reduce(sum, 0)
+  const totalMonthlyCost = initialData && initialData.map(cost => cost.cost).reduce(sum, 0.00)
   const buildData = (arr) => {
     const hashMap = {}
 
@@ -50,12 +50,13 @@ const CostBySite = () => {
     
     return output 
   }
-  
+  console.log(totalMonthlyCost)
   const data = buildData(initialData)
   const pieData = data && data.map(el => ({id: el.id, label: el.label, value: el.value}))
   console.log(pieData)
   return(
     <div style={{height: 400}}>
+      {totalMonthlyCost != null ? <>Total Monthly Cost: ${totalMonthlyCost} </> : ""}
       <ResponsivePie
       data={pieData}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -73,7 +74,7 @@ const CostBySite = () => {
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
       arcLabel={function(e){return `$${e.value}`}}
     />
-    <title>{totalMontlyCost && totalMonthlyCost}</title> 
+    
     </div>
   )
 }
