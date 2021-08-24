@@ -32,14 +32,14 @@ const CostBySite = () => {
   }
 **/
   
-  const initialData = services != "" ? services.map(service => ({name: service.LocationName, value: parseInt(service.MRC) || 0})) : ""
+  const initialData = services != "" ? services.map(service => ({name: service.LocationName, cost: parseInt(service.MRC) || 0})) : ""
   
   const buildData = (arr) => {
     const hashMap = {}
 
-    for (const {name, value} of arr) {
-      hashMap[name] ? hashMap[name].total += value : 
-      hashMap[name] = { id: name, label: name, total: value, color: "hsl(104, 70%, 50%"
+    for (const {name, cost} of arr) {
+      hashMap[name] ? hashMap[name].value += cost : 
+      hashMap[name] = { id: name, label: name, value: cost
       }
     }
     
@@ -49,11 +49,12 @@ const CostBySite = () => {
   }
   
   const data = buildData(initialData)
-  console.log(data)
+  const pieData = data && data.map(el => ({id: el.id, label: el.label, value: el.value}))
+  console.log(pieData)
   return(
-    
+    <div style={{height: 400}}>
       <ResponsivePie
-      data={data}
+      data={pieData}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.5}
       padAngle={0.7}
@@ -67,8 +68,9 @@ const CostBySite = () => {
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+      arcLabel={function(e){return `$${e.value}`}}
     />
-    
+    </div>
   )
 }
 export default CostBySite
