@@ -794,13 +794,13 @@ import {accessType} from './accessType'
                                 fieldType: 'currency'
                               }, 
                               {
-                                label: 'Total MRC',
-                                docField: 'TotalMRC',
+                                label: 'Total Cost',
+                                docField: 'TotalCost',
                                 fieldType: 'currency'
                               },
                               {
                                 label: 'Disputed', 
-                                docField: 'DisputedAmount', 
+                                docField: 'DisputedCost', 
                                 fieldType: 'currency'
                               }
                             ], 
@@ -1335,12 +1335,6 @@ import {accessType} from './accessType'
     ]
     const billsDetailFields = [
       { 
-        label: "NOTICE: Thanks for your patience as we add more features!", 
-        dataField: "", 
-        inputFieldType: "text", 
-        tab: "BASIC INFO" 
-      },
-      { 
         label: "Location", 
         dataField: "LocationName", 
         inputFieldType: "related-select", 
@@ -1417,12 +1411,6 @@ import {accessType} from './accessType'
         inputValue: "Value", 
         tab: "BASIC INFO" 
       },
-      { 
-        label: "Amount Billed", 
-        dataField: "Cost", 
-        inputFieldType: "text", 
-        tab: "BASIC INFO" 
-      },
       {
         label: "Asset ID",
         dataField: "AssetID",
@@ -1430,9 +1418,21 @@ import {accessType} from './accessType'
         tab: "BASIC INFO"
       },
       { 
+        label: "Amount Billed", 
+        dataField: "Cost", 
+        inputFieldType: "currency", 
+        tab: "BASIC INFO" 
+      },
+      { 
+        label: "Total Billed", 
+        dataField: "TotalCost", 
+        inputFieldType: "currency", 
+        tab: "BASIC INFO" 
+      },
+      { 
         label: "Disputed Amount", 
-        dataField: "DisputedAmount", 
-        inputFieldType: "text", 
+        dataField: "DisputedCost", 
+        inputFieldType: "currency", 
         tab: "BASIC INFO" 
       },
       { 

@@ -28,6 +28,10 @@ const serviceType = [
     Value: 'MPLS with Voice'
   },
   {
+    Name: 'Voice',
+    Value: 'Voice'
+  },
+  {
     Name: 'Legacy Voice',
     Value: 'Legacy Voice'
   },
