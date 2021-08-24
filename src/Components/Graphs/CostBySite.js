@@ -4,28 +4,55 @@ import { stateContext } from '../../Contexts/stateContext'
 import { ResponsivePie } from '@nivo/pie'
 
 const CostBySite = () => {
+
   const userContext = useContext(stateContext)
   const {services} = userContext.userSession
 
-  const [data, setData] = useState()
+  
 
-  const grouper = (arr) => arr != "" ? arr.reduce((LocationName, MRC) => {
-    LocationName[MRC.LocationName] = (parseInt(LocationName[MRC.LocationName]) || 0) + (parseInt(MRC.MRC) || 0);
-    const arr = Object.assign({}, {
+  /**
+   * const grouper = (arr) => arr != "" ? arr.reduce((LocationName, MRC) => {
+    
+    let total = (parseInt(LocationName[MRC.LocationName]) || 0) + (parseInt(MRC.MRC) || 0)
+    !LocationName[MRC.LocationName] ? LocationName[MRC.LocationName] = [] : LocationName
+    LocationName[MRC.LocationName].push({
       id: MRC.LocationName,
       label: MRC.LocationName,
-      value: LocationName[MRC.LocationName]
+      value: MRC.MRC || 0
     }) 
     
-    return arr
-  }, []) : ""
-
+    return LocationName
+  },[]) : ""
+  
+  
   const groupLocations = grouper(services)
-  console.log(groupLocations)
-/**setData({...data, id: MRC.LocationName, label: MRC.LocationName, value: LocationName[MRC.LocationName]}) */
+  
+  const total = (sum, value) => {
+    return sum += value
+  }
+**/
+  
+  const initialData = services != "" ? services.map(service => ({name: service.LocationName, value: parseInt(service.MRC) || 0})) : ""
+  
+  const buildData = (arr) => {
+    const hashMap = {}
+
+    for (const {name, value} of arr) {
+      hashMap[name] ? hashMap[name].total += value : 
+      hashMap[name] = { id: name, label: name, total: value, color: "hsl(104, 70%, 50%"
+      }
+    }
+    
+    const output = Object.values(hashMap)
+    
+    return output 
+  }
+  
+  const data = buildData(initialData)
+  console.log(data)
   return(
-    <>
-    <ResponsivePie
+    
+      <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.5}
@@ -41,7 +68,7 @@ const CostBySite = () => {
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
     />
-    </>
+    
   )
 }
 export default CostBySite
