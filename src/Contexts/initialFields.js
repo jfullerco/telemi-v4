@@ -78,7 +78,7 @@ import {accessType} from './accessType'
       {
         Label: 'Account Number',
         Value: 'AccountNum'
-      }
+      },
       {
         Label: 'Tags',
         Value: 'Tags'
