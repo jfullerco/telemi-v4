@@ -319,7 +319,7 @@ return (
     </Columns>
     </div>
 
-   <><CostBySite /></>
+   
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup
         data={grid === "SERVICES" ? services : null}
@@ -396,6 +396,8 @@ return (
     </div>
     
     <p/>
+
+    <CostBySite />
     
         {/** Network Graph 
           <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
