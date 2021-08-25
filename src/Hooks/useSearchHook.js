@@ -18,7 +18,7 @@ export function useSearchHook() {
 
   useEffect(() => {
     
-    const locationResults = searchValue && searchLocationRef && searchLocationRef != undefined ? searchLocationRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().indexOf(searchValue) > -1)) : ""
+    const locationResults = searchValue && searchLocationRef && searchLocationRef != undefined ? searchLocationRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
 
     const serviceResults = searchValue && searchServiceRef && searchServiceRef != undefined ? searchServiceRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
 
