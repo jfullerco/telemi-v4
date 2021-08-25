@@ -30,8 +30,6 @@ const GridGroup = ({ data,
      } 
   ]
 
-  
-
   const arrGroup = (arr, el) => arr && arr.reduce((acc, item) => {
     let key = item[el]
     !acc[key] ? acc[key] = [] :
@@ -42,15 +40,14 @@ const GridGroup = ({ data,
   const groupedArr = data != undefined ? arrGroup(data, groupBy) : ""
   const groupedKeys = Object.keys(groupedArr)
   
-  
-  
 
   return(
   
   <>
       
     {groupBy != "ALL" & groupBy != "Tags" ? groupedKeys.map((group) => 
-                                           
+
+                                    
         <div className="box is-rounded mx-2">
           <div className="columns is-mobile">     {/**Header */}
             <div className="column is-narrow">
@@ -61,9 +58,13 @@ const GridGroup = ({ data,
               
             </div>
         </div>
+
+
+              
         <div className="table-container ">
         <table className="table is-hoverable is-fullwidth is-centered">
             <thead className="is-size-6">
+              {/**Full Window Header - Not Tags - Not ALL */} 
               <tr className="is-hidden-touch">
                 {group != undefined ? headerFields && headerFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
@@ -77,6 +78,7 @@ const GridGroup = ({ data,
                   </th>
                 ) : ""}
               </tr> 
+              {/**Mobile Window Header - Not Tags - Not ALL */} 
               <tr className="is-hidden-desktop">
                 {group != undefined ? mobileHeaderFields && mobileHeaderFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{textAlign: "left"}} key={col.keyProp}>
@@ -91,6 +93,7 @@ const GridGroup = ({ data,
                 ) : ""}
               </tr>
             </thead>
+            {/**Full Window List - Not Tags - Not ALL */} 
             <tbody className="is-size-7 is-hidden-touch">
             
               {data && data != undefined ? data.filter(f=> f[groupBy] === group).map(item => 
@@ -104,7 +107,8 @@ const GridGroup = ({ data,
                   ) : ""}
                 </tr>
               ) : "" }
-          </tbody>   
+          </tbody> 
+          {/**Mobile Window List - Not Tags - Not ALL */}   
           <tbody className="is-size-7 is-hidden-desktop">
             
               {data && data != undefined ? data.filter(f => f[groupBy] === group).map(item => 
@@ -140,7 +144,8 @@ const GridGroup = ({ data,
         <div className="table-container ">
         <table className="table is-hoverable is-fullwidth is-centered">
             <thead className="is-size-6">
-              <tr className="is-hidden-mobile">
+              {/**Full Window Header - TAGS - Not ALL */} 
+              <tr className="is-hidden-touch">
                 {headerFields && group === "Tags" ? headerFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
 
@@ -153,7 +158,8 @@ const GridGroup = ({ data,
                   </th>
                 ) : ""}
               </tr>
-              <tr className="is-hidden-tablet">
+              {/**Mobile Window Header - TAGS - Not ALL */} 
+              <tr className="is-hidden-desktop">
                 {mobileHeaderFields && mobileHeaderFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{textAlign: "left"}} key={col.keyProp}>
 
@@ -167,6 +173,7 @@ const GridGroup = ({ data,
                 )}
               </tr>
             </thead>
+            {/**Full Window List - TAGS - Not ALL */} 
             <tbody className="is-size-7 is-hidden-touch">
             
               {data && data != undefined ? data.filter(f => f.Tags && f.Tags.includes(group)).map(item => 
@@ -180,7 +187,8 @@ const GridGroup = ({ data,
                   )}
                 </tr>
               ) : "" }
-          </tbody>   
+          </tbody>
+          {/**Mobile Window List - TAGS - Not ALL */}    
           <tbody className="is-size-7 is-hidden-desktop">
             
               {data && data != undefined ? data.filter(f => f.Tags && f.Tags.includes(group)).map(item => 
@@ -213,7 +221,8 @@ const GridGroup = ({ data,
         <div className="table-container ">
         <table className="table is-hoverable is-fullwidth is-centered">
             <thead className="is-size-6">
-              <tr className="is-hidden-mobile ">
+              {/**Full Window Header - ALL */} 
+              <tr className="is-hidden-touch">
                 {headerFields && headerFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{width: '15%', textAlign: "left"}} key={col.keyProp}>
 
@@ -226,7 +235,8 @@ const GridGroup = ({ data,
                   </th>
                 )}
               </tr>
-              <tr className="is-hidden-tablet">
+              {/**Mobile Window Header - ALL */} 
+              <tr className="is-hidden-desktop">
                 {mobileHeaderFields && mobileHeaderFields.map(col => 
                   <th className={col.headerName === groupBy ? "is-hidden": ""} style={{textAlign: "left"}} key={col.keyProp}>
 
@@ -240,7 +250,8 @@ const GridGroup = ({ data,
                 )}
               </tr>
             </thead>
-            <tbody className="is-size-7 is-hidden-mobile">
+            {/**Full Window List - ALL */} 
+            <tbody className="is-size-7 is-hidden-touch">
             
               {data && data != undefined ? data.map(item => 
                 <tr onClick={()=>handleClick(item.id)} key={item.id}> 
@@ -254,6 +265,7 @@ const GridGroup = ({ data,
                 </tr>
               ) : "" }
           </tbody>   
+          {/**Mobile Window List - ALL */} 
           <tbody className="is-size-7 is-hidden-tablet">
             
               {data && data != undefined ? data.map(item => 

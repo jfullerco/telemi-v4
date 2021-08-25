@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSearchHook } from '../Hooks/useSearchHook'
 import { stateContext } from '../Contexts/stateContext'
+import Page from '../Components/Page'
 
 const Search = () => {
   const userContext = useContext(stateContext)
@@ -14,11 +15,15 @@ const Search = () => {
   const history = useHistory()
 
   const handleSearch = (e) => {
-    setSearchValue(e.target.value)
+    setSearchValue(e.target.value.toLowerCase())
   }
 
   const handleClick = (view, id) => {
     history.push(`/${view}/${currentCompanyID}/${id}`)
+  }
+  
+  const handleGoBack = () => {
+    history.goBack()
   }
 
   useEffect(() => {
@@ -30,28 +35,34 @@ const Search = () => {
   },[searchResults])
 
   return(
-
-    <div className="hero is-large">
-      <p className="block"/>
-      <label>Search</label>
-      <input className="input is-rounded" type='text' onChange={(e) => handleSearch(e)} />
-      <div className="mt-5">
-      {locationResults && locationResults != undefined ? locationResults.map(result => 
-        <div className="box" key={result.id}>
-          <div className="title is-size-7">Location</div>
-          <a onClick={() => handleClick('Locations', result.id)}><span className="title is-size-5">{result.Name}</span> - {result?.Address1} {result?.Address2} {result?.City} {result?.State} {result.Zip}</a>
-        </div>
-      ) : ""}
-
-      {serviceResults && serviceResults != undefined ? serviceResults.map(result =>   
-        <div className="box" key={result.id}>
-          <p className="title is-size-7">Service</p>
-          <a onClick={() => handleClick('Services', result.id)}><span className="title is-size-5">{result.AssetID}</span> - {result.LocationName}</a>
-        </div>
-      ) : ""}
+    <Page title="Search" handleGoBack={handleGoBack}>
+      <div className="hero is-large">
+        <p className="block"/>
+          <input className="input is-rounded" type='text' onChange={(e) => handleSearch(e)} />
+          <div className="mt-5">
+            {locationResults && locationResults != undefined ? locationResults.map(result => 
+              <div className="box" key={result.id}>
+                <div className="title is-size-7">Location</div>
+                <a onClick={() => handleClick('Locations', result.id)}>
+                  <span className="title is-size-5">
+                    {result.Name}
+                  </span> - {result?.Address1} {result?.Address2} {result?.City} {result?.State} {result.Zip}</a>
+                </div>
+            ) : ""}
+          </div>
+          <div>
+            {serviceResults && serviceResults != undefined ? serviceResults.map(result =>   
+              <div className="box" key={result.id}>
+                <div className="title is-size-7">Service</div>
+                <a onClick={() => handleClick('Services', result.id)}>
+                  <span className="title is-size-5">
+                    {result.AssetID}
+                  </span> - {result.LocationName}</a>
+                </div>
+            ) : ""}
+          </div>
       </div>
-    </div>
-
+    </Page>
   )
 }
 export default Search
