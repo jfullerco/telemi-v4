@@ -12,7 +12,7 @@ const Page = ({title, subtitle, handleGoBack, pageError, pageSuccess, children})
 
   
   return(
-    <div className="">
+    <div> 
       <div className="content pt-5 pb-5" >
         <Columns options="is-mobile is-vcentered">
           <Column size="is-narrow">
