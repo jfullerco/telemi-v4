@@ -12,8 +12,8 @@ const Page = ({title, subtitle, handleGoBack, pageError, pageSuccess, children})
 
   
   return(
-    <div className="wrapper">
-      <div className="is-block pt-5 pb-5" >
+    <div className="">
+      <div className="content pt-5 pb-5" >
         <Columns options="is-mobile is-vcentered">
           <Column size="is-narrow">
             <FaArrowLeft className="icon pl-1 mx-2 my-2" onClick={() => handleGoBack()}/> 

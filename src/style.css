@@ -87,7 +87,7 @@ body {
   background-color:white;
 }
  
-#wrapper {
+.wrapper {
           display: flex;
           min-width: 50vw;
       }

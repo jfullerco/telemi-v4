@@ -645,6 +645,27 @@ import {accessType} from './accessType'
         tabLabel: "DETAILS" 
       },
       { 
+        label: "LEC Circuit ID", 
+        dataField: "LECCircuitID", 
+        inputFieldType: "text", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
+      { 
+        label: "IPV4 Info", 
+        dataField: "IPV4", 
+        inputFieldType: "text-area", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
+      { 
+        label: "IPV6 Info", 
+        dataField: "IPV6", 
+        inputFieldType: "text-area", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
+      { 
         label: 'Demarc Information', 
         dataField: 'DemarcInfo', 
         visible: true, 

@@ -55,27 +55,38 @@ const CostBySite = () => {
   const pieData = data && data.map(el => ({id: el.id, label: el.label, value: el.value}))
   console.log(pieData)
   return(
-    <div style={{height: 400}}>
-      {totalMonthlyCost != null ? <>Total Monthly Cost: ${totalMonthlyCost} </> : ""}
-      <ResponsivePie
-      data={pieData}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-      innerRadius={0.5}
-      padAngle={0.7}
-      cornerRadius={3}
-      activeOuterRadiusOffset={8}
-      borderWidth={1}
-      borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-      arcLinkLabelsSkipAngle={10}
-      arcLinkLabelsTextColor="#333333"
-      arcLinkLabelsThickness={2}
-      arcLinkLabelsColor={{ from: "color" }}
-      arcLabelsSkipAngle={10}
-      arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
-      arcLabel={function(e){return `$${e.value}`}}
-    />
+    <>
+    {totalMonthlyCost > 1 ? 
+      (
+        <>
+        <div style={{height: 400}}>
+      
+          <ResponsivePie
+          data={pieData}
+          margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+          innerRadius={0.5}
+          padAngle={0.7}
+          cornerRadius={3}
+          activeOuterRadiusOffset={8}
+          borderWidth={1}
+          borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+          arcLinkLabelsSkipAngle={10}
+          arcLinkLabelsTextColor="#333333"
+          arcLinkLabelsThickness={2}
+          arcLinkLabelsColor={{ from: "color" }}
+          arcLabelsSkipAngle={10}
+          arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+          arcLabel={function(e){return `$${e.value}`}}
+        />
     
-    </div>
+        </div>
+    
+        <div className="ml-4 is-size-7">Total Monthly Cost: ${totalMonthlyCost}.00 </div> 
+      </>
+      )
+      
+    : ""}
+    </>
   )
 }
 export default CostBySite

@@ -72,6 +72,7 @@ const PageField = ({
                 
               </>
             )
+            
           case "map-list":
             return (
               <>
@@ -87,17 +88,15 @@ const PageField = ({
             case "file-field":
               return (
                 <>
-                {
-                  [fieldData].map(data =>  
-                    <>
-                      <a href={data[item.dataField]} target="_blank">
-                        <FaFileContract className="icon is-medium" />
-                      </a>
-                    </>
-                  )
-                }
-                
-                  
+                  {
+                    [fieldData].map(data =>  
+                      <>
+                        <a href={data[item.dataField]} target="_blank">
+                          <FaFileContract className="icon is-medium" />
+                        </a>
+                      </>
+                    )
+                  }
                 </>
               )
 
