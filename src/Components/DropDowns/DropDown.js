@@ -21,7 +21,7 @@ const CompanyDropDown = ({currentOption, options, isActive, handleClick, handleT
             {options && options.map(option => 
               <a 
                 className={currentOption === option.Name ? "dropdown-item is-active": "dropdown-item"} 
-                style={{textTransform: "uppercase"}}
+                
                 onClick={()=>handleClick({id: option.id, name: option.Name})}
               >
                 {option.Name}

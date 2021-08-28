@@ -36,6 +36,7 @@ const AddTagButtonFooter = (props) => {
     setToggle(false)
     props.handleUpdated()
     setTagValue("")
+    
     } catch {
 
       console.log("Error Add Tag to Record")
