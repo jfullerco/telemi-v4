@@ -8,6 +8,7 @@ import { db } from '../../Contexts/firebase'
 
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
+import GridGroup2 from '../../Components/Grids/GridGroup2'
 import CardGrid from '../../Components/Grids/CardGrid'
 
 import CostBySite from '../../Components/Graphs/CostBySite'
@@ -48,6 +49,8 @@ import Columns from '../../Components/Layout/Columns'
 import Column from '../../Components/Layout/Column'
 
 import { useSortHook } from '../../Hooks/useSortHook'
+import SideDrawer from '../../Components/Drawers/SideDrawer'
+import DetailDrawer from '../DetailDrawer'
 
 const DashboardGrids = ({visible}) => {
 
@@ -99,7 +102,9 @@ const DashboardGrids = ({visible}) => {
 
   const [recent, setRecent] = useState()
 
-  const [networkMap, setNetworkMap] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isCurrentDocID, setIsCurrentDocID] = useState()
+  const [isModule, setIsModule] = useState()
 
   const { sortedArr, sortArr } = useSortHook() 
 
@@ -124,6 +129,12 @@ const DashboardGrids = ({visible}) => {
 
      setLocations(sortedArr) 
 
+  }
+
+  const handleTestClick = (id) => {
+    setIsModule("Services")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
   }
   
 /**Row Clicks */
@@ -321,12 +332,12 @@ return (
 
     <CostBySite />
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "SERVICES" ? services : null}
         isGrid='Services'
         headerFields={serviceGridColumns}
         mobileHeaderFields={serviceMobileGridColumns}
-        handleClick={(e) => handleServiceClick(e)}
+        handleClick={(e) => handleTestClick(e)}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
@@ -397,7 +408,13 @@ return (
     
     <p/>
 
-    
+    <SideDrawer direction="right" checked={isDrawerOpen} handleClose={() => setIsDrawerOpen(!isDrawerOpen)}>
+      <DetailDrawer
+        currentCompanyID={currentCompanyID}
+        id={isCurrentDocID}
+        isModule={isModule}
+      />
+    </SideDrawer>
     
         {/** Network Graph 
           <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>

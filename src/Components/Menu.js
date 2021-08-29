@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
-const Menu = () => {
+const Menu = ({title}) => {
   const history = useHistory()
   return(
     <>
       <aside className="menu">
         <p className="menu-label">
-          Dashboard
+          {title}
         </p>
         <ul className="menu-list">
           <li><a onClick={history.push('/dashboard')}>Dashboard</a></li>

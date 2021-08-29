@@ -60,6 +60,11 @@ body {
   padding: 1rem;
 }
 
+.drawer-paper-full {
+  width: 100vw;
+  padding: 1rem;
+}
+
 .notification {
   background-color: rgba(230, 230, 230, 0.3);
   background-blend-mode: screen;
@@ -94,11 +99,11 @@ body {
 
 .dropdown {
           display: flex;
-         
+
       }
 .dropdown-menu {
           position: absolute;
-         
+          
       }
 
 .container {
@@ -130,6 +135,7 @@ body {
   
 }
 
+
 @-webkit-keyframes rotate {
   /* 100% keyframe for  clockwise. 
      use 0% instead for anticlockwise */
@@ -148,26 +154,8 @@ body {
   100% {max-height:100%;}
 }
 
-@include until($desktop) {
-  .dropdown-menu {
-    display: block;
-    opacity: 0;
 
-    position: absolute;   /* or float: left; width: 100%;*/
-    left: 0;
-    right: 0;
-
-    transform: translateY(-50%);
-    transition: all 1s ease-in-out;
-    pointer-events: none;
-  }
-
-  .dropdown-menu.is-active {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-  }
-}
+  
 
 
 
