@@ -44,71 +44,69 @@ const GridGroup = ({ data,
 
   return(
   
-  <>
-      
-    {groupBy != "ALL" & groupBy != "Tags" ? groupedKeys.map((group) => 
-
-                                    
+    <> 
+      {groupBy != "ALL" & groupBy != "Tags" ? groupedKeys.map((group) => 
         <div className="box is-rounded mx-2">
-          <div className="columns is-mobile">     {/**Header */}
-            <div className="column is-narrow">
-              <div className="is-size-6">{isGrid && isGrid}</div>
-              <div className="title">
-                <strong>{group === undefined ? "Not Assigned" : group}</strong>
+            <div className="columns is-mobile">     {/**Header */}
+              <div className="column is-narrow">
+                <div className="is-size-6">{isGrid && isGrid}</div>
+                <div className="title">
+                  <strong>{group || "Not Assigned"}</strong>
+                </div>
+                
               </div>
-              
-            </div>
-        </div>
+          </div>
+          
+          <div className="table-container ">
+            <Table params="table is-hoverable is-fullwidth is-centered">
+              <TableHead params="is-size-6">
 
-
-              
-        <div className="table-container ">
-        <Table params="table is-hoverable is-fullwidth is-centered">
-            <TableHead params="is-size-6">
               {/**Full Window Header - Not Tags - Not ALL */} 
-              <TableRow params="is-hidden-touch">
-                {group != undefined ? headerFields && headerFields.map(col => 
-                  <TableHeadItem 
-                    params={col.headerName === groupBy ? "is-hidden": ""} 
-                    style={{width: '15%', textAlign: "left"}} 
-                    key={col.keyProp}
-                  >
-                    {
-                      col.mobile != true ? 
-                      <span> 
+
+                <TableRow params="is-hidden-touch">
+                  {group != undefined ? headerFields && headerFields.map(col => 
+                    <TableHeadItem 
+                      params={col.headerName === groupBy ? "is-hidden": ""} 
+                      style={{width: '15%', textAlign: "left"}} 
+                      key={col.keyProp}
+                    >
+                      {
+                        col.mobile != true ? 
+                        <span> 
+                          <a onClick={()=> handleSort(col.docField, data)}>
+                            {col.headerName && col.headerName}
+                          </a> 
+                        </span> : 
+                        <a onClick={()=> handleSort(col.docField, data)}>
+                          {col.headerName && col.headerName} 
+                        </a> 
+                      }
+                    </TableHeadItem>
+                  ) : "Not Assigned"}
+                </TableRow> 
+
+              {/**Mobile Window Header - Not Tags - Not ALL */} 
+
+                <TableRow params="is-hidden-desktop">
+                  {group != undefined ? mobileHeaderFields && mobileHeaderFields.map(col => 
+                    <TableHeadItem 
+                      params={col.headerName === groupBy ? "is-hidden": ""} 
+                      style={{textAlign: "left"}} 
+                      key={col.keyProp}
+                    >
+                      {
+                        col.mobile != true ? 
                         <a onClick={()=> handleSort(col.docField, data)}>
                           {col.headerName && col.headerName}
-                        </a> 
-                      </span> : 
-                      <a onClick={()=> handleSort(col.docField, data)}>
-                        {col.headerName && col.headerName} 
-                      </a> 
-                    }
-
-                  </TableHeadItem>
-                ) : ""}
-              </TableRow> 
-              {/**Mobile Window Header - Not Tags - Not ALL */} 
-              <TableRow params="is-hidden-desktop">
-                {group != undefined ? mobileHeaderFields && mobileHeaderFields.map(col => 
-                  <TableHeadItem 
-                    params={col.headerName === groupBy ? "is-hidden": ""} 
-                    style={{textAlign: "left"}} 
-                    key={col.keyProp}
-                  >
-                    {
-                      col.mobile != true ? 
-                      <a onClick={()=> handleSort(col.docField, data)}>
-                        {col.headerName && col.headerName}
-                      </a> : 
-                      <a onClick={()=> handleSort(col.docField, data)}>
-                        {col.headerName && col.headerName}
-                      </a>
-                    }
-                  </TableHeadItem>
-                ) : ""}
-              </TableRow>
-            </TableHead>
+                        </a> : 
+                        <a onClick={()=> handleSort(col.docField, data)}>
+                          {col.headerName && col.headerName}
+                        </a>
+                      }
+                    </TableHeadItem>
+                  ) : ""}
+                </TableRow>
+              </TableHead>
 
             {/**Full Window List - Not Tags - Not ALL */} 
 
@@ -162,7 +160,7 @@ const GridGroup = ({ data,
               <div className="column is-narrow">
                 <div className="is-size-6">{isGrid && isGrid}</div>
                   <div className="title">
-                    <strong>{group === "Tags" ? group : "No Tags Assigned"}</strong>
+                    <strong>{group || "No Tags Assigned"}</strong>
                   </div>
               </div>
             </div>
@@ -181,14 +179,21 @@ const GridGroup = ({ data,
                   >
                     {
                       col.mobile != true ? 
-                      <span > <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName}</a> </span> : 
-                      <a onClick={()=> handleSort(col.docField, data)}>{col.headerName && col.headerName} </a> 
+                      <span> 
+                        <a onClick={()=> handleSort(col.docField, data)}>
+                          {col.headerName && col.headerName}
+                        </a> 
+                      </span> : 
+                        <a onClick={()=> handleSort(col.docField, data)}>
+                          {col.headerName && col.headerName} 
+                        </a> 
                     }
-
                   </TableHead>
                 ) : ""}
               </TableRow>
+
               {/**Mobile Window Header - TAGS - Not ALL */} 
+              
               <TableRow params="is-hidden-desktop">
                 {mobileHeaderFields && mobileHeaderFields.map(col => 
                   <TableHead 
