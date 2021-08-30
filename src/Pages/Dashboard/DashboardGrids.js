@@ -131,14 +131,38 @@ const DashboardGrids = ({visible}) => {
 
   }
 
-  const handleTestClick = (id) => {
+  const handleServiceClick = (id) => {
     setIsModule("Services")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
+  }
+
+  const handleTicketClick = (id) => {
+    setIsModule("Tickets")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
+  }
+
+  const handleOrderClick = (id) => {
+    setIsModule("Orders")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
+  }
+
+  const handleAccountClick = (id) => {
+    setIsModule("Accounts")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
+  }
+
+  const handleUserClick = (id) => {
+    setIsModule("Users")
     setIsCurrentDocID(id)
     setIsDrawerOpen(true)
   }
   
 /**Row Clicks */
-  const handleServiceClick = (id) => {
+  const handleServiceClickOld = (id) => {
                   
                     history.push({
                       pathname: `/Services/${currentCompanyID}/${id}`,
@@ -151,7 +175,7 @@ const DashboardGrids = ({visible}) => {
                     })
   }
 
-  const handleTicketClick = (id) => {
+  const handleTicketClickOld = (id) => {
                     history.push({
                       pathname: `/Tickets/${currentCompanyID}/${id}`,
                       state: {
@@ -164,7 +188,7 @@ const DashboardGrids = ({visible}) => {
                     })
   }
 
-  const handleAccountClick = (id) => {
+  const handleAccountClickOld = (id) => {
                     history.push({
                       pathname: `/Accounts/${currentCompanyID}/${id}`,
                       state: {
@@ -176,7 +200,7 @@ const DashboardGrids = ({visible}) => {
                     })
   }
 
-  const handleOrderClick = (id) => {
+  const handleOrderClickOld = (id) => {
                     history.push({
                       pathname: `/Orders/${currentCompanyID}/${id}`,
                       state: {
@@ -189,7 +213,7 @@ const DashboardGrids = ({visible}) => {
                     })
   }
 
-  const handleUserClick = (id) => {
+  const handleUserClickOld = (id) => {
                   
     history.push({
       pathname: `/Users/${currentCompanyID}/${id}`,
@@ -337,13 +361,13 @@ return (
         isGrid='Services'
         headerFields={serviceGridColumns}
         mobileHeaderFields={serviceMobileGridColumns}
-        handleClick={(e) => handleTestClick(e)}
+        handleClick={(e) => handleServiceClick(e)}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
     </div>
     <div className={grid === 'TICKETS' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "TICKETS" ? tickets : null}
         isGrid='Tickets'
         headerFields={ticketGridColumns}
@@ -353,7 +377,7 @@ return (
       />
     </div>
     <div className={grid === 'ORDERS' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "ORDERS" ? orders : null}
         isGrid='Orders'
         headerFields={orderGridColumns}
