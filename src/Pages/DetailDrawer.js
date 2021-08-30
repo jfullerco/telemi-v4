@@ -395,7 +395,7 @@ const handleRelatedDrawer = (field) => {
     [ 'CompanyName' ]: currentCompany,
     [ 'CreatedDate' ]: setCurrentDate(),
     [ 'CreatedBy' ]: currentUser,
-    [field.relatedDataField]: params.id,
+    [field.relatedDataField]: props.id,
 })
 
 setIsRelatedDrawerOpen(true)
@@ -430,7 +430,7 @@ const handleInheritedData = (e) => {
 return (
     <Loading active={loading}>
 
-    <DrawerPage 
+    <DrawerPage
       title={currentCompany}
     >
       {userContext && userContext.userSession != undefined ? 
