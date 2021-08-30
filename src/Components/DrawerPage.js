@@ -14,7 +14,7 @@ const DrawerPage = ({title, subtitle, children}) => {
             <span className="title"><div className="donotwrap">{title}</div></span>
           </Column>
         </Columns>
-      </div>
+      
           
       <div>
         {children} 

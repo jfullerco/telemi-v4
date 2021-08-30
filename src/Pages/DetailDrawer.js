@@ -444,7 +444,7 @@ return (
             handleView={(e)=>setTab(e)}
             value={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])}
             title={isModule}
-            handleEditDrawer={()=>handleToggle()}
+            handleEditDrawer={()=>handleToggle()} 
           />
           <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
             <article className="hero title is-small is-size-5"> 
