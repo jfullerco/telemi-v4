@@ -16,7 +16,7 @@ import {stateList} from '../Contexts/states.js'
 
 import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
-import Page from '../Components/Page'
+import DrawerPage from '../Components/DrawerPage'
 import DrawerComponent from '../Components/Layout/DrawerComponent'
 
 import Loading from '../Components/Loading'
@@ -31,6 +31,7 @@ import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
 import Footer from '../Footer'
+import {useRefreshDataHook} from '../Hooks/useRefreshDataHook'
 
 const DetailDrawer = (props) => {
 
@@ -51,7 +52,8 @@ const DetailDrawer = (props) => {
           setAccounts,
           setServices,
           setUsers,
-          setNotes } = userContext
+          setNotes,
+          refreshServices } = userContext
 
   const { locations,
           services, 
@@ -90,6 +92,8 @@ const DetailDrawer = (props) => {
   
   const [addRelatedValue, setAddRelatedValue] = useState()
   const [isRelatedActive, setIsRelatedActive] = useState(false)
+  const {refreshModule} = useRefreshDataHook(isModule)
+  
   
   useEffect(() => {
     
@@ -133,6 +137,11 @@ const DetailDrawer = (props) => {
     handleFinishedLoading()
     
   },[loading])
+
+  useEffect(() => {
+    refreshModule(isModule)
+    setUpdated(false)
+  },[updated])
   
 
 /** Map-List - Side Effect to inherit related data  */
@@ -421,14 +430,8 @@ const handleInheritedData = (e) => {
 return (
     <Loading active={loading}>
 
-    <Page 
+    <DrawerPage 
       title={currentCompany}
-      subtitle={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])} 
-      status="view" 
-      handleToggle={()=> handleToggle()} 
-      pageSuccess={pageSuccess} 
-      pageError={pageError}
-      handleGoBack={handleGoBack}
     >
       {userContext && userContext.userSession != undefined ? 
         <>
@@ -585,7 +588,7 @@ return (
       />*/
       }
 
-    </Page>
+    </DrawerPage>
     <Footer 
       handleEditButton={(e)=> setIsDrawerOpen(e)}
       isDrawerOpen={isDrawerOpen}

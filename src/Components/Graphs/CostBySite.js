@@ -50,10 +50,10 @@ const CostBySite = () => {
     
     return output 
   }
-  console.log(totalMonthlyCost)
+  
   const data = buildData(initialData)
   const pieData = data && data.map(el => ({id: el.id, label: el.label, value: el.value}))
-  console.log(pieData)
+  
   return(
     <>
     {totalMonthlyCost > 1 ? 

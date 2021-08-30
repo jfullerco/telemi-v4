@@ -1,28 +1,25 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useMemo } from 'react'
+import Columns from './Layout/Columns'
+import Column from './Layout/Column'
 
 
-const DrawerPage = ({title, handleSubmit, handleClose, children}) => {
+const DrawerPage = ({title, subtitle, children}) => {
 
-  const history = useHistory()
-  
   return(
-     <div className="drawerPaper">
-        
-        <div className="mb-2">
-
-          <div className="title">{title && title}</div>
-
-        </div>
-        
-        <div className="mb-2">
-        
-          <button className="button is-rounded is-link" type="submit" onClick={handleSubmit}>Save</button>
-          <button className="button is-rounded ml-2" onClick={handleClose}>Close</button>
-        
-        </div>
-        {children}
+    <> 
+        <Columns options="is-mobile is-vcentered">
+          <Column size="is-narrow">
+          </Column>
+          <Column>
+            <span className="title"><div className="donotwrap">{title}</div></span>
+          </Column>
+        </Columns>
       </div>
+          
+      <div>
+        {children} 
+      </div>
+    </>
   )
 }
 export default DrawerPage

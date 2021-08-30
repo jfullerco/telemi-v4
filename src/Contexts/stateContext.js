@@ -167,6 +167,7 @@ export const StateProvider = (props) => {
         ...doc.data()
       }))
       setServices(services)
+      console.log("Fetched Services")
     }
 
     const refreshServices = async() => {
@@ -177,6 +178,7 @@ export const StateProvider = (props) => {
         ...doc.data()
       }))
       setServices(services)
+      console.log("Refreshed Services")
     }
 
     const fetchTickets = async() => {
@@ -186,6 +188,7 @@ export const StateProvider = (props) => {
         id: doc.id,
         ...doc.data()}))
       setTickets(tickets)
+      console.log("Fetched Tickets")
     }
 
     const refreshTickets = async() => {
@@ -195,6 +198,7 @@ export const StateProvider = (props) => {
         id: doc.id,
         ...doc.data()}))
       setTickets(tickets)
+      console.log("Refreshed Tickets")
     }
 
     const fetchOrders = async() => {
@@ -204,6 +208,7 @@ export const StateProvider = (props) => {
         id: doc.id,
         ...doc.data()}))
       setOrders(orders)
+      console.log("Fetched Orders")
     }
 
     const refreshOrders = async() => {
@@ -213,6 +218,7 @@ export const StateProvider = (props) => {
         id: doc.id,
         ...doc.data()}))
       setOrders(orders)
+      console.log("Refreshed Orders")
     }
 
     const fetchAccounts = async() => {

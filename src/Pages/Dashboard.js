@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
@@ -61,10 +61,13 @@ const Dashboard = () => {
   const isUserLoggedIn = currentUser != undefined ? currentUser : ""
   const isUserAdmin = userType != undefined ? userType : ""
   const isReadyForPageBuild = userType != undefined ? userType : ""
+  
 
   const [ toggleCompanyList, setToggleCompanyList ] = useState(false)
   const [ toggleDashboard, setToggleDashboard ] = useState(false)
   const [ loading, setLoading ] = useState(false)
+  
+  
 
   useEffect(() => {
     fetchUser(currentUser)
@@ -77,14 +80,16 @@ const Dashboard = () => {
   },[isUserAdmin])
 
   useEffect(() => {
-    fetchPageData()
+    loading != false ? fetchPageData() : ""
+    
+
   },[loading])
 
   useEffect(()=> {
-    fetchPageData()
-    return function cleanup() {
-      
-    }
+    loading != false ? fetchPageData() : ""
+    
+    
+    
   },[currentCompany])
 
   const fetchUser = async(email) => {
@@ -102,6 +107,7 @@ const Dashboard = () => {
     userType != "" & userType === "Admin" ?
     currentCompany == "" ? fetchCompaniesAdmin() : "" : 
     currentCompany == "" ? fetchCompanies() : ""
+    
   }
 
   const fetchPageData = async() => {
@@ -118,6 +124,7 @@ const Dashboard = () => {
       }, 1500)
       
       return () => clearTimeout(timer)
+      
   }
 
   const fetchCompanies = async() => {
@@ -128,7 +135,7 @@ const Dashboard = () => {
     setCurrentCompanyID(companies[0].id)
     setCurrentCompany(companies[0].Name)
     setCompanies(companies)
-    setDataLoading(false)
+    
     
   }
 
@@ -140,7 +147,7 @@ const Dashboard = () => {
     setCurrentCompanyID(companies[0].id)
     setCurrentCompany(companies[0].Name)
     setCompanies(companies)
-    setDataLoading(false)
+    
     
   }
   
@@ -157,11 +164,7 @@ const Dashboard = () => {
             </div>
           </section>
 
-          <div className={toggleCompanyList != false ? "block" : "is-hidden"} id="companyList">
-            
-            <CompanyList />
-            
-          </div>
+          
 
           <div className="">
 
