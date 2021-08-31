@@ -1,9 +1,7 @@
 import React from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import MapListTable from '../Tables/MapListTable'
-
-import RelatedFieldDropDown from '../../Components/DropDowns/RelatedFieldDropDown'
 
 import { FaFileContract } from 'react-icons/fa'
 
@@ -11,13 +9,9 @@ const PageField = ({
     field, 
     fieldData, 
     relatedDataMap, 
-    toggleViewDrawer, 
-    isViewRelatedActive, 
-    toggleFieldDropDown, 
     handleClick 
 }) => {
   const history = useHistory()
-  const params = useParams()
   /**console.log("field:",field, "fieldData:", fieldData) */
   return(
     <>
@@ -46,18 +40,20 @@ const PageField = ({
                 {fieldData && item.relatedDataType === "Location" ?
                 item.inputSource != "" ? item.inputSource.filter(f => f.id === fieldData[item.relatedDataField]).map(location =>  
                   
-                  <RelatedFieldDropDown label={location.Name} isActive={isViewRelatedActive} handleToggle={()=>toggleFieldDropDown()}>
+                
+
+                
                   <table>
                     <thead>
                       <th>
-                        Address
+                      {location.Name}
                       </th>
                     </thead>
                     <tbody>
-                      {location != undefined ? <div key={location.id}>{`${location.Address1 || ""} ${location.Address2 || ""} ${location.City || ""}, ${location.State || ""} ${location.Zip || ""}`}</div> : "Address has not been entered"}
+                      {location != undefined ? <div className="is-size-7" key={location.id}>{`${location.Address1 || ""} ${location.Address2 || ""} ${location.City || ""}, ${location.State || ""} ${location.Zip || ""}`}</div> : "Full Address not entered"}
                     </tbody>
                   </table>
-                </RelatedFieldDropDown>
+                
                   
                  
                 )
@@ -82,6 +78,18 @@ const PageField = ({
                   colRef={item.relatedCollection}
                   handleClick={(e)=>handleClick(e)}
                 /> 
+              </>
+            )
+          
+          case "status":
+            return (
+              <>
+                {[fieldData].map(data => data[item.dataField] != "" || undefined ? (
+                  <div className={
+                    data[item.dataField] === 'Active' ? "tag is-success" :
+                    data[item.dataField] === 'Disconnected' ? "tag is-danger" : 
+                    data[item.dataField] === 'Pending Activation' || 'Pending Disconnect' ? "tag is-warning" : ""}>{data[item.dataField]}</div>
+                ) : "--"  )}
               </>
             )
 

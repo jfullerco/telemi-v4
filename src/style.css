@@ -82,6 +82,7 @@ body {
   display: flex !important;
   align-items: stretch !important;
   min-width: 100vw !important; 
+  padding: 0px !important;
 }
 
 .network {

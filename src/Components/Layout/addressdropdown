@@ -1,0 +1,12 @@
+  <RelatedFieldDropDown label={location.Name} isActive={isViewRelatedActive} handleToggle={()=>toggleFieldDropDown()}>
+                  <table>
+                    <thead>
+                      <th>
+                        Address
+                      </th>
+                    </thead>
+                    <tbody>
+                      {location != undefined ? <div key={location.id}>{`${location.Address1 || ""} ${location.Address2 || ""} ${location.City || ""}, ${location.State || ""} ${location.Zip || ""}`}</div> : "Address has not been entered"}
+                    </tbody>
+                  </table>
+                </RelatedFieldDropDown>

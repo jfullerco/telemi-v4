@@ -35,7 +35,7 @@ const CostBySite = () => {
     return acc += value
   }
 
-  const initialData = services != "" ? services.map(service => ({name: service.LocationName, cost: parseInt(service.MRC) || 0})) : ""
+  const initialData = services != "" ? services.filter(f => f.Status != 'Disconnected').map(service => ({name: service.LocationName, cost: parseInt(service.MRC) || 0})) : ""
   const totalMonthlyCost = initialData && initialData.map(cost => cost.cost).reduce(sum, 0.00)
   const buildData = (arr) => {
     const hashMap = {}

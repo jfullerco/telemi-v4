@@ -484,6 +484,10 @@ import {accessType} from './accessType'
     
 /** Page Fields */
     const serviceDetailFields = [
+      {
+        label: "Basic Info",
+        inputFieldType: "tabTitle"
+      },
       { 
         label: "Service Location", 
         dataField: "LocationName", 
@@ -602,7 +606,7 @@ import {accessType} from './accessType'
       { 
         label: "Status", 
         dataField: "Status", 
-        inputFieldType: "select", 
+        inputFieldType: "status", 
         inputSource: [
           { 
             Name: 'Active', 
@@ -625,6 +629,10 @@ import {accessType} from './accessType'
         inputValue: "Name", 
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO" 
+      },
+      {
+        label: 'Details',
+        inputFieldType: 'tabTitle'
       },
       { 
         label: "Service Start Date", 
@@ -715,6 +723,10 @@ import {accessType} from './accessType'
         tabLabel: "DETAILS" 
       },
       {
+        label: 'Support',
+        inputFieldType: 'tabTitle'
+      },
+      {
         label: "Related Tickets",
         dataField: "TicketNum",
         inputFieldType: "map-list",
@@ -756,6 +768,10 @@ import {accessType} from './accessType'
           }
         ],
         tab: "SUPPORT"
+      },
+      {
+        label: 'Billing',
+        inputFieldType: 'tabTitle'
       },
       { 
         label: "Related Account", 

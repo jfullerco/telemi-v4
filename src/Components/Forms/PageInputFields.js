@@ -1,13 +1,9 @@
 import React from 'react'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import Columns from '../../Components/Columns'
-import Column from '../../Components/Layout/Column'
-import SelectField from '../../Components/Forms/SelectField'
-import TextBox from '../../Components/Forms/TextBox'
-import TextArea from '../../Components/Forms/TextArea'
-import DeleteButton from '../Buttons/DeleteButton'
+import SelectField from './SelectField'
+import TextBox from './TextBox'
+import TextArea from './TextArea'
 import AddLocationModal from '../../Pages/Locations/AddLocationModal'
-
+import FileUploadField from './FileUploadField'
 
 const PageInputFields = ({ 
     pageFields, 
@@ -25,12 +21,13 @@ const PageInputFields = ({
     
   }) => {
       
-
   return(
     <>
     
-      {pageFields && pageFields.filter(t => t.tab === tab).map(field => {
+      {pageFields && pageFields.map(field => {
+
         switch (field.inputFieldType) {
+
           case "related-select":
             return (
               <>
@@ -49,13 +46,16 @@ const PageInputFields = ({
                   <option></option>
 
                   {field.inputSource && field.inputSource.map(i =>
+
                     <option id={i[field.inputID]} name={i[field.dataField]} key={i[field.inputID]}>
                       {i[field.inputValue]}
                     </option>
+
                   )}
                 </SelectField>
 
                 {addRelatedValue === "Locations" ?
+
                   <AddLocationModal
                     handleUpdated={handleUpdated}
                     resetAddRelatedValue={() => resetAddRelatedValue()}
@@ -63,22 +63,33 @@ const PageInputFields = ({
                     currentCompanyID={currentCompanyID}
                     nameRef={field.inputValue}
                   /> 
+
                 : ""}
 
               </>
-
             )
 
           case "select":
             return (
 
-              <SelectField type="select" title={field.label} name={field.dataField} value={active && active[field.dataField]} handleChange={(e) => handleChange(e)} >
+              <SelectField 
+                type="select" 
+                title={field.label} 
+                name={field.dataField} 
+                value={active && active[field.dataField]} 
+                handleChange={(e) => handleChange(e)} 
+              >
+
                 <option></option>
+
                 {field.inputSource && field.inputSource.map(i =>
+
                   <option name={i[field.dataField]} key={i[field.inputID]}>
                     {i[field.inputValue]}
                   </option>
+
                 )}
+
               </SelectField>
 
             )
@@ -86,21 +97,37 @@ const PageInputFields = ({
           case "text":
             return (
 
-              <TextBox title={field.label} name={field.dataField} value={active && active[field.dataField]} fieldChanged={handleChange} />
+              <TextBox 
+                title={field.label} 
+                name={field.dataField} 
+                value={active && active[field.dataField]} 
+                fieldChanged={handleChange} 
+              />
 
             )
 
           case "currency":
             return (
 
-              <TextBox title={field.label} addOn="currency" name={field.dataField} value={active && active[field.dataField]} fieldChanged={handleChange} />
+              <TextBox 
+                title={field.label} 
+                addOn="currency" 
+                name={field.dataField} 
+                value={active && active[field.dataField]} 
+                fieldChanged={handleChange} 
+              />
 
             )
 
           case "text-area":
             return (
 
-              <TextArea title={field.label} name={field.dataField} value={active && active[field.dataField]} fieldChanged={handleChange} />
+              <TextArea 
+                title={field.label} 
+                name={field.dataField} 
+                value={active && active[field.dataField]} 
+                fieldChanged={handleChange} 
+              />
 
             )
 
@@ -117,19 +144,38 @@ const PageInputFields = ({
               />
             )
 
+            case "status":
+            return (
+
+              <SelectField 
+                type="select" 
+                title={field.label} 
+                name={field.dataField} 
+                value={active && active[field.dataField]} 
+                handleChange={(e) => handleChange(e)} 
+              >
+
+                <option></option>
+
+                {field.inputSource && field.inputSource.map(i =>
+
+                  <option name={i[field.dataField]} key={i[field.inputID]}>
+                    {i[field.inputValue]}
+                  </option>
+
+                )}
+
+              </SelectField>
+
+            )
+
           case "file-field":
             return (
-              <div className="file is-boxed">
-                <label className="file-label">
-                  <input className="file-input" type="file" name="resume" onChange={(e) => handleFileChange(e)} />
-                  <span className="file-cta">
-                    <span className="file-icon">
-                      <i className="faUpload"></i>
-                    </span>
-                    <span className="file-label">Choose a file...</span>
-                  </span>
-                </label>
-              </div>
+              <>
+
+                <FileUploadField handleFileChange={handleFileChange} />
+
+              </>
             )
 
         }

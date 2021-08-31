@@ -87,7 +87,7 @@ const DetailDrawer = (props) => {
   const [relatedSubmitData, setRelatedSubmitData] = useState("")
   const [isRelatedDrawerOpen, setIsRelatedDrawerOpen] = useState(false)
   
-  const [tab, setTab] = useState(props.tab || "BASIC INFO")
+  
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
   const [addRelatedValue, setAddRelatedValue] = useState()
@@ -122,7 +122,6 @@ const DetailDrawer = (props) => {
     handlePageFields(isModule)
     fetchBills()
     fetchNotes()
-    setTab("BASIC INFO")
     handleInitialFieldMapping("LocationName", locations, pageFields)
     handleInitialFieldMapping("OrderNum", orders, pageFields)
     handleInitialFieldMapping("Services", services, pageFields)
@@ -435,55 +434,78 @@ return (
     >
       {userContext && userContext.userSession != undefined ? 
         <>
-          
-          <DetailViewDropDown 
-            views={['BASIC INFO', 'DETAILS', 'SUPPORT', 'BILLING', 'NOTES']}
-            activeView='BASIC INFO'
-            handleToggle={()=>setViewDropDown(!viewDropDown)}
-            isActive={viewDropDown}
-            handleView={(e)=>setTab(e)}
-            value={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])}
-            title={isModule}
-            handleEditDrawer={()=>handleToggle()} 
-          />
+          {/** 
+           *<DetailViewDropDown 
+              views={['BASIC INFO', 'DETAILS', 'SUPPORT', 'BILLING', 'NOTES']}
+              activeView='BASIC INFO'
+              handleToggle={()=>setViewDropDown(!viewDropDown)}
+              isActive={viewDropDown}
+              handleView={(e)=>setTab(e)}
+              value={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])}
+              title={isModule}
+              handleEditDrawer={()=>handleToggle()} 
+            />
+            */}
           <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
-            <article className="hero title is-small is-size-5"> 
-              {tab}
+
+            <article className="hero title is-small"> 
+              <span className="is-size-7">{isModule}</span>
+              {active === "" ? 
+              <input className="input is-rounded is-disabled is-loading" /> : 
+                <span className="is-size-4">
+                  {[active].map(item => item[activeSubtitle] && item[activeSubtitle])}
+                </span>
+              }
+              
             </article>
+
             <div className="block">
               {/** Refactor as ViewPageFields Component */}
               {active && pageFields.map(field => 
                 <>
                   {[active].map(docItem => 
-                    <div className={field.visible != false & field.tab === tab ? "" : "is-hidden" }> 
-                    <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
+                    <div className={field.visible != false ? "" : "is-hidden" }> 
+                    
                     
                     <Columns options="is-mobile">
-                    {field.inputFieldType === "map-list" ? 
+                      
+                      {field.inputFieldType === "map-list" ? 
+                            "" : field.inputFieldType === "tabTitle" ? 
                             "" :
-                      <Column size="is-two-fifths pl-5">
+                        <Column size="is-two-fifths pl-5">
 
-                        <FieldLabel>
-                          
-                              <Columns options="is-mobile">
-                                <Column size="is-11">
-                                  <div key={field.label}>{field.label}</div>
-                                </Column>
-                                <Column>:</Column>
-                              </Columns>
-                          
-                        </FieldLabel>
+                          <FieldLabel>
+                            
+                                <Columns options="is-mobile">
+                                  <Column size="is-11">
+                                    <div key={field.label}>{field.label}</div>
+                                  </Column>
+                                  <Column>:</Column>
+                                </Columns>
+                            
+                          </FieldLabel>
 
                       </Column>
                     }
                       <Column size="pl-5">
                         
-                          {field.inputFieldType === "map-list" ? 
-                            <>
-                              <div key={field.label}>{field.label}
-                                <a className="link has-text-weight-normal is-size-7 pl-2" 
-                                  onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
-                            </> : null}
+                          {
+                            field.inputFieldType === 'tabTitle' ? (
+                              <div key={field.label} className="title is-size-5">
+                                <hr />
+                                {field.label}
+                              </div> 
+                            ) : 
+                            field.inputFieldType === "map-list" ? 
+                              <>
+                                <div key={field.label}>{field.label}
+                                  <a className="link has-text-weight-normal is-size-7 pl-2" 
+                                    onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
+                              </> 
+                            : null
+                          }
+
+                          
                           
                           <PageField 
                             field={field}
@@ -522,7 +544,6 @@ return (
                   handleFileChange={(e)=> handleFileChange(e)}
                   pageFields={pageFields}
                   active={active}
-                  tab={tab}
                   addRelatedValue={addRelatedValue}
                   handleAddRelatedValue={(e)=>handleRelatedDrawer(e)}
                   resetAddRelatedValue={()=>setAddRelatedValue("")}

@@ -3,7 +3,7 @@ import Columns from './Layout/Columns'
 import Column from './Layout/Column'
 
 
-const DrawerPage = ({title, subtitle, children}) => {
+const DrawerPage = ({title, children}) => {
 
   return(
     <> 
@@ -14,7 +14,7 @@ const DrawerPage = ({title, subtitle, children}) => {
             <span className="title"><div className="donotwrap">{title}</div></span>
           </Column>
         </Columns>
-      
+        
           
       <div>
         {children} 
