@@ -449,10 +449,10 @@ return (
           <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
 
             <article className="hero title is-small"> 
-              <span className="is-size-7">{isModule}</span>
+              <span className="subtitle is-5">{isModule}</span>
               {active === "" ? 
               <input className="input is-rounded is-disabled is-loading" /> : 
-                <span className="is-size-4">
+                <span className="title is-3">
                   {[active].map(item => item[activeSubtitle] && item[activeSubtitle])}
                 </span>
               }
@@ -491,7 +491,7 @@ return (
                         
                           {
                             field.inputFieldType === 'tabTitle' ? (
-                              <div key={field.label} className="title is-size-5">
+                              <div key={field.label} className="title is-5">
                                 <hr />
                                 {field.label}
                               </div> 
