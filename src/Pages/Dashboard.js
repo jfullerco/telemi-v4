@@ -86,10 +86,7 @@ const Dashboard = () => {
   },[loading])
 
   useEffect(()=> {
-    loading != false ? fetchPageData() : ""
-    
-    
-    
+    fetchPageData()
   },[currentCompany])
 
   const fetchUser = async(email) => {
