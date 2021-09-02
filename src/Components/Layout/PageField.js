@@ -9,7 +9,8 @@ const PageField = ({
     field, 
     fieldData, 
     relatedDataMap, 
-    handleClick 
+    handleClick,
+    handleArrayMapClick 
 }) => {
   const history = useHistory()
   /**console.log("field:",field, "fieldData:", fieldData) */
@@ -40,21 +41,16 @@ const PageField = ({
                 {fieldData && item.relatedDataType === "Location" ?
                 item.inputSource != "" ? item.inputSource.filter(f => f.id === fieldData[item.relatedDataField]).map(location =>  
                   
-                
-
-                
                   <table>
                     <thead>
-                      <th>
-                      {location.Name}
-                      </th>
+                      <tr>
+                      <th>{location.Name}</th>
+                      </tr>
                     </thead>
                     <tbody>
                       {location != undefined ? <div className="is-size-7" key={location.id}>{`${location.Address1 || ""} ${location.Address2 || ""} ${location.City || ""}, ${location.State || ""} ${location.Zip || ""}`}</div> : "Full Address not entered"}
                     </tbody>
                   </table>
-                
-                  
                  
                 )
                 : null : 
@@ -80,12 +76,24 @@ const PageField = ({
                 /> 
               </>
             )
+
+            case "array-map-list":
+            return (
+              <>
+                <MapListTable 
+                  headerFields={item.relatedInputFields}
+                  data={fieldData[item.dataField]}
+                  colRef={item.relatedCollection}
+                  handleClick={(e)=>handleArrayMapClick(e)}
+                /> 
+              </>
+            )
           
           case "status":
             return (
               <>
                 {[fieldData].map(data => data[item.dataField] != "" || undefined ? (
-                  <div className={
+                  <div key={data[item.label]} className={
                     data[item.dataField] === 'Active' ? "tag is-success" :
                     data[item.dataField] === 'Disconnected' ? "tag is-danger" : 
                     data[item.dataField] === 'Pending Activation' || 'Pending Disconnect' ? "tag is-warning" : ""}>{data[item.dataField]}</div>
@@ -107,6 +115,8 @@ const PageField = ({
                   }
                 </>
               )
+
+              
 
           default:
               return (

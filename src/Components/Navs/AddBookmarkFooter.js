@@ -36,7 +36,7 @@ const AddBookmarkFooter = ({isBookmarked}) => {
     }, 1500 )
 
   }
-  console.log(isBookmarked)
+  
 
   return(
     <>

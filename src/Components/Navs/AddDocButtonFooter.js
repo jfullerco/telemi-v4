@@ -19,7 +19,7 @@ const AddDocButtonFooter = () => {
   useEffect(() => {
     fetchDocs()
   },[])
-  console.log("docs", docs)
+  
   const fetchDocs = async() => {
     const docRef = await db.collection("Attachments").where(`${isModule}ID`, "==", `${id}`).get()
     const docs = docRef.docs.map(doc => ({id: doc.id, ...doc.data()}))

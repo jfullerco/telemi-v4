@@ -78,7 +78,7 @@ const AddTagButtonFooter = (props) => {
   } 
 
   
-console.log(tags)
+
   return(
     <>
       <div 

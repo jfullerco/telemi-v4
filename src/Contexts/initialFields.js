@@ -501,43 +501,43 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Location Name',
-            docField: 'Name',
-            fieldType: 'text'
+            dataField: 'Name',
+            inputFieldType: 'text'
           },
           {
             label: "Address 1",
-            docField: "Address1",
-            fieldType: "text"
+            dataField: "Address1",
+            inputFieldType: "text"
           },
           {
             label: "Address 2",
-            docField: "Address2",
-            fieldType: "text"
+            dataField: "Address2",
+            inputFieldType: "text"
           },
           {
             label: "City",
-            docField: "City",
-            fieldType: "text"
+            dataField: "City",
+            inputFieldType: "text"
           },
           {
             label: "State",
-            docField: "State",
-            fieldType: "text"
+            dataField: "State",
+            inputFieldType: "text"
           },
           {
             label: "Province/Region",
-            docField: "Region",
-            fieldType: "text"
+            dataField: "Region",
+            inputFieldType: "text"
           },
           {
             label: "Zip",
-            docField: "Zip",
-            fieldType: "text"
+            dataField: "Zip",
+            inputFieldType: "text"
           },
           {
             label: "Country",
-            docField: "Country",
-            fieldType: "text"
+            dataField: "Country",
+            inputFieldType: "text"
           },
         ],
         relatedDataType: "Location",
@@ -625,8 +625,8 @@ import {accessType} from './accessType'
             Value: 'Pending Disconnect' 
           }
         ], 
-        inputID: "id", 
-        inputValue: "Name", 
+        inputID: "Name", 
+        inputValue: "Value", 
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO" 
       },
@@ -674,6 +674,108 @@ import {accessType} from './accessType'
         tabLabel: "DETAILS" 
       },
       { 
+        label: "IP Assignments", 
+        dataField: "IPAssignments", 
+        inputFieldType: "array-map-list",  
+        relatedInputFields: [
+          {
+            label: 'Version',
+            dataField: 'Version',
+            inputFieldType: 'select',
+            inputID: "Name", 
+            inputValue: "Value", 
+            inputSource: [
+              {
+                Name: 'v4',
+                Value: 'v4'
+              },
+              {
+                Name: 'v6',
+                Value: 'v6'
+              }
+            ]
+          },
+          {
+            label: 'IP Address',
+            dataField: 'IPAddress',
+            inputFieldType: 'text',
+          },
+          {
+            label: 'Range',
+            dataField: 'Range',
+            inputFieldType: 'select',
+            inputID: "Name", 
+            inputValue: "Value", 
+            inputSource: [
+              {
+                Name: '/30',
+                Value: '/30'
+              },
+              {
+                Name: '/29',
+                Value: '/29'
+              },
+              {
+                Name: '/28',
+                Value: '/28'
+              },
+              {
+                Name: '/27',
+                Value: '/27'
+              },
+              {
+                Name: '/26',
+                Value: '/26'
+              },
+              {
+                Name: '/25',
+                Value: '/25'
+              },
+              {
+                Name: '/24',
+                Value: '/24'
+              },
+              {
+                Name: '/23',
+                Value: '/23'
+              },
+              {
+                Name: '/22',
+                Value: '/22'
+              },
+              {
+                Name: '/21',
+                Value: '/21'
+              },
+              {
+                Name: '/20',
+                Value: '/20'
+              },
+              {
+                Name: '/19',
+                Value: '/19'
+              },
+              {
+                Name: '/18',
+                Value: '/18'
+              },
+              {
+                Name: '/17',
+                Value: '/17'
+              },
+              {
+                Name: '/16',
+                Value: '/16'
+              }
+            ]
+          },
+          
+        ],
+        tab: "DETAILS",
+        tabLabel: "DETAILS",
+        hasBreakBefore: true  
+      },
+      { 
         label: 'Demarc Information', 
         dataField: 'DemarcInfo', 
         visible: true, 
@@ -694,18 +796,36 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Date',
-            docField: 'OrderDate',
-            fieldType: 'datepicker'
+            dataField: 'OrderDate',
+            inputFieldType: 'datepicker'
+          },
+          {
+            label: 'Existing',
+            dataField: 'OrderNum',
+            inputFieldType: 'related-select',
+            inputSource: orders,
+            inputID: "id",
+            relatedCollection: "Orders", 
+            relatedDataField: "OrderID",
+            relatedInputLabel: "Order",
+            relatedInputFields: [
+              {
+                label: 'Order',
+                dataField: 'OrderNum',
+                inputFieldType: 'text'
+              }
+            ], 
+            relatedDataType: 'Order',
           },
           {
             label: 'Order',
-            docField: 'OrderNum',
-            fieldType: 'text'
+            dataField: 'OrderNum',
+            inputFieldType: 'text'
           },
           {
             label: 'Status',
-            docField: 'Status',
-            fieldType: 'text'
+            dataField: 'Status',
+            inputFieldType: 'text'
           },
         ],
         tab: "DETAILS",
@@ -739,32 +859,54 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: "Ticket",
-            docField: "TicketNum",
-            fieldType: "text"
+            dataField: "TicketNum",
+            inputFieldType: "text"
           },
           {
             label: "Type",
-            docField: "Type",
-            fieldType: "select",
+            dataField: "Type",
+            inputFieldType: "select",
+            inputID: 'Name',
+            inputValue: 'Value',
             inputSource: [
               {
-                id: "Service",
-                Name: "Service"
+                Name: "Service",
+                Value: "Service"
               },
               {
-                id: "Billing",
-                Name: "Billing"
+                Name: "Billing",
+                Value: "Billing"
               },
               {
-                id: "Disconnect",
-                Name: "Disconnect"
+                Name: "Disconnect",
+                Value: "Disconnect"
               }
             ],
           },
           {
             label: "Status",
-            docField: "Status",
-            fieldType: "select"
+            dataField: "Status",
+            inputFieldType: "select",
+            inputID: 'Name',
+            inputValue: 'Value',
+            inputSource: [
+              {
+                Name: 'Submitted',
+                Value: 'Submitted'
+              },
+              {
+                Name: 'In Process',
+                Value: 'In Process'
+              },
+              {
+                Name: 'Completed',
+                Value: 'Completed'
+              },
+              {
+                Name: 'Closed',
+                Value: 'Closed'
+              }
+            ]
           }
         ],
         tab: "SUPPORT"
@@ -787,8 +929,8 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Account Number',
-            docField: 'AccountNum',
-            fieldType: 'text'
+            dataField: 'AccountNum',
+            inputFieldType: 'text'
           }
         ], 
         relatedDataType: 'Account',
@@ -824,49 +966,53 @@ import {accessType} from './accessType'
         relatedDataField: "ServiceID",
         relatedInputLabel: "Bill",
         relatedInputFields: [
-                              {
-                                label: 'Date', 
-                                docField: 'Date', 
-                                fieldType: 'datepicker'
-                              }, 
-                              {
-                                label: 'Base Cost', 
-                                docField: 'Cost', 
-                                fieldType: 'currency'
-                              }, 
-                              {
-                                label: 'Total Cost',
-                                docField: 'TotalCost',
-                                fieldType: 'currency'
-                              },
-                              {
-                                label: 'Disputed', 
-                                docField: 'DisputedCost', 
-                                fieldType: 'currency'
-                              }
-                            ], 
+          {
+            label: 'Date', 
+            dataField: 'Date', 
+            inputFieldType: 'datepicker'
+          }, 
+          {
+            label: 'Base Cost', 
+            dataField: 'Cost', 
+            inputFieldType: 'currency'
+          }, 
+          {
+            label: 'Total Cost',
+            dataField: 'TotalCost',
+            inputFieldType: 'currency'
+          },
+          {
+            label: 'Disputed', 
+            dataField: 'DisputedCost', 
+            inputFieldType: 'currency'
+          }
+        ], 
         tab: "BILLING",
         tabLabel: "BILLING", 
       },
+      {
+        label: 'Notes',
+        inputFieldType: 'tabTitle'
+      },
       { 
-        label: "Notes", 
+        label: "", 
         dataField: "Notes", 
         inputFieldType: "map-list", 
         relatedCollection: "Notes", 
         relatedDataField: "ServiceID",
         relatedInputLabel: "Note",
         relatedInputFields: [
-                              {
-                                label: 'Note Date', 
-                                docField: 'Date', 
-                                fieldType: 'datepicker'
-                              }, 
-                              {
-                                label: 'Note', 
-                                docField: 'NoteBody', 
-                                fieldType: 'text-area'
-                              }, 
-                            ], 
+          {
+            label: 'Date', 
+            dataField: 'Date', 
+            inputFieldType: 'datepicker'
+          }, 
+          {
+            label: 'Note', 
+            dataField: 'NoteBody', 
+            inputFieldType: 'text-area'
+          }, 
+        ], 
         tab: "NOTES",
         tabLabel: "NOTES", 
       },
@@ -894,43 +1040,43 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Location Name',
-            docField: 'Name',
-            fieldType: 'text'
+            dataField: 'Name',
+            inputFieldType: 'text'
           },
           {
             label: "Address 1",
-            docField: "Address1",
-            fieldType: "text"
+            dataField: "Address1",
+            inputFieldType: "text"
           },
           {
             label: "Address 2",
-            docField: "Address2",
-            fieldType: "text"
+            dataField: "Address2",
+            inputFieldType: "text"
           },
           {
             label: "City",
-            docField: "City",
-            fieldType: "text"
+            dataField: "City",
+            inputFieldType: "text"
           },
           {
             label: "State",
-            docField: "State",
-            fieldType: "text"
+            dataField: "State",
+            inputFieldType: "text"
           },
           {
             label: "Province/Region",
-            docField: "Region",
-            fieldType: "text"
+            dataField: "Region",
+            inputFieldType: "text"
           },
           {
             label: "Zip",
-            docField: "Zip",
-            fieldType: "text"
+            dataField: "Zip",
+            inputFieldType: "text"
           },
           {
             label: "Country",
-            docField: "Country",
-            fieldType: "text"
+            dataField: "Country",
+            inputFieldType: "text"
           },
         ],
         relatedDataType: "Location",
@@ -960,8 +1106,8 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Account Number',
-            docField: 'AccountNum',
-            fieldType: 'text'
+            dataField: 'AccountNum',
+            inputFieldType: 'text'
           }
         ], 
         relatedDataType: 'Account',
@@ -991,8 +1137,8 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Asset ID',
-            docField: 'AssetID',
-            fieldType: 'text'
+            dataField: 'AssetID',
+            inputFieldType: 'text'
           }
         ], 
         relatedDataType: 'Service',
@@ -1017,50 +1163,52 @@ import {accessType} from './accessType'
       { 
         label: "Type", 
         dataField: "Type", 
-        inputFieldType: "select", 
+        inputFieldType: "select",
+        inputID: 'Name',
+        inputValue: 'Value', 
         inputSource: [
-                        { 
-                          id: "Service",
-                          Name: "Service" 
-                        },
-                        { 
-                          id: "Billing",
-                          Name: "Billing" 
-                        },
-                        { 
-                          id: "Disconnect",
-                          Name: "Disconnect" 
-                        }
-          ], 
-        inputID: "id", 
-        inputValue: "Name", 
-        tab: "BASIC INFO" 
+          { 
+            Name: "Service",
+            Value: "Service" 
+          },
+          { 
+            Name: "Billing",
+            Value: "Billing" 
+          },
+          { 
+            Name: "Disconnect",
+            Value: "Disconnect" 
+          }
+        ], 
+        tab: "BASIC INFO",
+        tabLabel: "BASIC INFO" 
       },
       { 
         label: "Status", 
         dataField: "Status", 
-        inputFieldType: "select", 
+        inputFieldType: "select",
+        inputID: 'Name', 
+        inputValue: 'Value', 
         inputSource: [
-                        { 
-                          id: "Active",
-                          Name: "Active" 
-                        },
-                        { 
-                          id: "Closed",
-                          Name: "Completed" 
-                        },
-                        { 
-                          id: "ClosedResolved",
-                          Name: "Closed - Resolved" 
-                        },
-                        { 
-                          id: "ClosedNotResolved",
-                          Name: "Closed - Not Resolved" 
-                        }
-          ], 
-        inputID: "id", 
-        inputValue: "Name", 
-        tab: "BASIC INFO"  
+          { 
+            Name: "Submitted",
+            Value: "Submitted" 
+          },
+          { 
+            Name: "In Process",
+            Value: "In Process" 
+          },
+          { 
+            Name: "Completed",
+            Value: "Completed" 
+          },
+          { 
+            Name: "Closed",
+            Value: "Closed" 
+          }
+        ],  
+        tab: "BASIC INFO",
+
       },
       { 
         label: "Details", 
@@ -1068,7 +1216,6 @@ import {accessType} from './accessType'
         inputFieldType: "text-area", 
         tab: "BASIC INFO" 
       },
-
       { 
         label: "Notes", 
         dataField: "NoteID", 
@@ -1082,13 +1229,13 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Date',
-            docField: 'Date',
-            fieldType: 'datepicker'
+            dataField: 'Date',
+            inputFieldType: 'datepicker'
           },
           {
             label: 'Note',
-            docField: 'Note',
-            fieldType: 'textarea'
+            dataField: 'Note',
+            inputFieldType: 'textarea'
           }
         ], 
         relatedDataType: 'Note',
@@ -1140,18 +1287,18 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Asset ID',
-            docField: 'AssetID',
-            fieldType: 'text'
+            dataField: 'AssetID',
+            inputFieldType: 'text'
           },
           {
             label: 'Service Location',
-            docField: 'LocationName',
-            fieldType: 'text'
+            dataField: 'LocationName',
+            inputFieldType: 'text'
           },
           {
             label: 'Group',
-            docField: 'GroupNum',
-            fieldType: 'text'
+            dataField: 'GroupNum',
+            inputFieldType: 'text'
           }
         ], 
         relatedDataType: 'Service',
@@ -1166,28 +1313,27 @@ import {accessType} from './accessType'
         relatedCollection: "Bills", 
         relatedDataField: "AccountID",
         relatedInputFields: [
-                              {
-                                label: 'Date', 
-                                docField: 'Date', 
-                                fieldType: 'datepicker'
-                              }, 
-                              {
-                                label: 'Sub Account', 
-                                docField: 'SubAccountNum', 
-                                fieldType: 'text'
-                              },
-                              {
-                                label: 'Asset ID', 
-                                docField: 'AssetID', 
-                                fieldType: 'text'
-                              },
-                              {
-                                label: 'Cost', 
-                                docField: 'Cost', 
-                                fieldType: 'currency'
-                              }, 
-                              
-                            ], 
+          {
+            label: 'Date', 
+            dataField: 'Date', 
+            inputFieldType: 'datepicker'
+          }, 
+          {
+            label: 'Sub Account', 
+            dataField: 'SubAccountNum', 
+            inputFieldType: 'text'
+          },
+          {
+            label: 'Asset ID', 
+            dataField: 'AssetID', 
+            inputFieldType: 'text'
+          },
+          {
+            label: 'Cost', 
+            dataField: 'Cost', 
+            inputFieldType: 'currency'
+          },                     
+        ], 
         tab: "BILLING",
         tabLabel: "BILLING",
       },
@@ -1207,43 +1353,43 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Location Name',
-            docField: 'Name',
-            fieldType: 'text'
+            dataField: 'Name',
+            inputFieldType: 'text'
           },
           {
             label: "Address 1",
-            docField: "Address1",
-            fieldType: "text"
+            dataField: "Address1",
+            inputFieldType: "text"
           },
           {
             label: "Address 2",
-            docField: "Address2",
-            fieldType: "text"
+            dataField: "Address2",
+            inputFieldType: "text"
           },
           {
             label: "City",
-            docField: "City",
-            fieldType: "text"
+            dataField: "City",
+            inputFieldType: "text"
           },
           {
             label: "State",
-            docField: "State",
-            fieldType: "text"
+            dataField: "State",
+            inputFieldType: "text"
           },
           {
             label: "Province/Region",
-            docField: "Region",
-            fieldType: "text"
+            dataField: "Region",
+            inputFieldType: "text"
           },
           {
             label: "Zip",
-            docField: "Zip",
-            fieldType: "text"
+            dataField: "Zip",
+            inputFieldType: "text"
           },
           {
             label: "Country",
-            docField: "Country",
-            fieldType: "text"
+            dataField: "Country",
+            inputFieldType: "text"
           }
         ],
         relatedDataType: "Location",
@@ -1283,6 +1429,8 @@ import {accessType} from './accessType'
         dataField: "Type",
         visible: false,
         inputField: "select",
+        inputID: "Name",
+        inputValue: "Value",
         inputSource: [
           {
             Name: 'New',
@@ -1297,8 +1445,6 @@ import {accessType} from './accessType'
             Value: 'Disconnect'
           }
         ],
-        inputID: "Name",
-        inputValue: "Value",
         tab: "BASIC INFO"
       },
       { 
@@ -1311,6 +1457,8 @@ import {accessType} from './accessType'
         label: "Status", 
         dataField: "Status", 
         inputFieldType: "select", 
+        inputID: "id", 
+        inputValue: "Name", 
         inputSource: [
           {
             Name: "Ordered",
@@ -1325,8 +1473,6 @@ import {accessType} from './accessType'
             Value: "Cancelled"
           }
         ], 
-        inputID: "id", 
-        inputValue: "Name", 
         tab: "BASIC INFO" 
       },
       { 
@@ -1348,13 +1494,13 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Asset ID',
-            docField: 'AssetID',
-            fieldType: 'text'
+            dataField: 'AssetID',
+            inputFieldType: 'text'
           }, 
           {
             label: 'Location',
-            docField: 'LocationName',
-            fieldType: 'text'
+            dataField: 'LocationName',
+            inputFieldType: 'text'
           }
         ], 
         relatedDataType: 'Service',
@@ -1388,45 +1534,45 @@ import {accessType} from './accessType'
         relatedInputFields: [
           {
             label: 'Location Name',
-            docField: 'Name',
-            fieldType: 'text'
+            dataField: 'Name',
+            inputFieldType: 'text'
           },
           {
             label: "Address 1",
-            docField: "Address1",
-            fieldType: "text"
+            dataField: "Address1",
+            inputFieldType: "text"
           },
           {
             label: "Address 2",
-            docField: "Address2",
-            fieldType: "text"
+            dataField: "Address2",
+            inputFieldType: "text"
           },
           {
             label: "City",
-            docField: "City",
-            fieldType: "text"
+            dataField: "City",
+            inputFieldType: "text"
           },
           {
             label: "State",
-            docField: "State",
-            fieldType: "text"
+            dataField: "State",
+            inputFieldType: "text"
           },
           {
             label: "Province/Region",
-            docField: "Region",
-            fieldType: "text"
+            dataField: "Region",
+            inputFieldType: "text"
           },
           {
             label: "Zip",
-            docField: "Zip",
-            fieldType: "text"
+            dataField: "Zip",
+            inputFieldType: "text"
           },
           {
             label: "Country",
-            docField: "Country",
-            fieldType: "text"
+            dataField: "Country",
+            inputFieldType: "text"
           }
-          ],
+        ],
         relatedDataType: "Location",
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO"  
@@ -1606,32 +1752,32 @@ import {accessType} from './accessType'
         inputFieldType: 'select',
         inputSource: [
           {
-            id: 'Month to Month',
-            Name: 'Month to Month'
+            Name: 'Month to Month',
+            Value: 'Month to Month'
           },
           {
-            id: '12',
-            Name: '12'
+            Name: '12',
+            Value: '12'
           },
           {
-            id: '24',
-            Name: '24'
+            Name: '24',
+            Value: '24'
           },
           {
-            id: '36',
-            Name: '36'
+            Name: '36',
+            Value: '36'
           },
           {
-            id: '48',
-            Name: '48'
+            Name: '48',
+            Value: '48'
           },
           {
-            id: '60',
-            Name: '60'
+            Name: '60',
+            Value: '60'
           }
         ],
-        inputID: "id", 
-        inputValue: "Name",
+        inputID: "Name", 
+        inputValue: "Value",
         tab: 'BASIC INFO',
         tabLabel: 'BASIC INFO'
       },

@@ -26,7 +26,7 @@ const PageInputFields = ({
     
       {pageFields && pageFields.map(field => {
 
-        switch (field.inputFieldType) {
+        switch (field.inputFieldType || field.fieldType) {
 
           case "related-select":
             return (

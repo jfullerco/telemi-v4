@@ -18,8 +18,6 @@ const GridComponent = ({
   toggleIsVisible,
   styleOptions}) => {
 
-  
-
   const headerStyle = {
         borderBottomStyle: "solid",
         bottomBorderColor: "black"

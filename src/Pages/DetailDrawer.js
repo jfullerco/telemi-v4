@@ -73,25 +73,31 @@ const DetailDrawer = (props) => {
   
   const [data, setData] = useState("")
   const [active, setActive] = useState("")
+  
+
   const [activeSubtitle, setActiveSubtitle] = useState("")
   const [docIsNew, setDocIsNew] = useState()
   const [loading, setLoading] = useState(true)
   const [updated, setUpdated] = useState(false)
+
   const [pageFields, setPageFields] = useState([])
-  const [viewDropDown, setViewDropDown] = useState(false)
   
   const [pageSuccess, setPageSuccess] = useState(false)
   const [pageError, setPageError] = useState(false)
-    
+  
+  const [isRelatedActive, setIsRelatedActive] = useState(false)
+  const [addRelatedValue, setAddRelatedValue] = useState()
   const [relatedInputData, setRelatedInputData] = useState("")
   const [relatedSubmitData, setRelatedSubmitData] = useState("")
+
   const [isRelatedDrawerOpen, setIsRelatedDrawerOpen] = useState(false)
-  
-  
+  const [isArrayMapDrawerOpen, setIsArrayMapDrawerOpen] = useState(false)
+  const [isArrayMapInputData, setIsArrayMapInputData] = useState("")
+  const [isArrayMapData, setIsArrayMapData] = useState("")
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
-  const [addRelatedValue, setAddRelatedValue] = useState()
-  const [isRelatedActive, setIsRelatedActive] = useState(false)
+  
+  
   const {refreshModule} = useRefreshDataHook(isModule)
   
   
@@ -138,8 +144,10 @@ const DetailDrawer = (props) => {
   },[loading])
 
   useEffect(() => {
+    setLoading(!loading)
     refreshModule(isModule)
     setUpdated(false)
+    handleFinishedLoading()
   },[updated])
   
 
@@ -320,7 +328,8 @@ console.log(data)
       } 
       setDocIsNew(false) 
       setUpdated(true)
-      setIsDrawerOpen(!isDrawerOpen)
+      setIsDrawerOpen(false)
+      setIsArrayMapDrawerOpen(false)
   }
 
   const handleRelatedSubmit = async() => {
@@ -379,6 +388,57 @@ const handleClick = (e) => {
     }
   }) 
 }
+const handleArrayMapDrawer = (field) => {
+  
+  setIsArrayMapInputData({  
+    pageFields: field.relatedInputFields, 
+    dataField: field.dataField,
+    label: field.label
+  })
+
+setIsArrayMapDrawerOpen(true)
+  
+}
+
+const handleArrayMapChange = (e) => {
+  e.preventDefault()
+  const {name, value} = e.target
+  const mapFieldName = isArrayMapInputData.dataField
+  setIsArrayMapData({...isArrayMapData, [name]: value})
+}
+
+const handleArrayMapSubmit = async() => {
+  try {
+        
+    await db.collection(isModule).doc(props.id).update({
+      ...data, [isArrayMapInputData.dataField]: [
+        ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
+      ['LastUpdated']: setCurrentDate(), 
+      ['LastUpdateBy']: currentUser
+    })
+    setActive({
+      ...data, [isArrayMapInputData.dataField]: [
+        ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
+      ['LastUpdated']: setCurrentDate(), 
+      ['LastUpdateBy']: currentUser
+    })
+    setData({
+      ...data, [isArrayMapInputData.dataField]: [
+        ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
+      ['LastUpdated']: setCurrentDate(), 
+      ['LastUpdateBy']: currentUser
+    })
+    setPageSuccess("CHANGES SAVED!")
+    setTimeout(() => {setPageSuccess(false)}, 1000)
+  } catch {
+    console.log("ERROR SAVING CHANGES")
+  } 
+  
+  
+  setIsArrayMapData()
+  setIsArrayMapDrawerOpen(false)
+
+}
 
 const handleRelatedDrawer = (field) => {
 
@@ -415,7 +475,7 @@ const handleInheritedData = (e) => {
   const {pageFields} = e 
   const relatedFields = pageFields.filter(f => 
     f.value != undefined).map(rel => ({
-      [rel.docField]:
+      [rel.dataField]:
       active[rel.value]
     })
   )
@@ -470,7 +530,8 @@ return (
                     <Columns options="is-mobile">
                       
                       {field.inputFieldType === "map-list" ? 
-                            "" : field.inputFieldType === "tabTitle" ? 
+                            "" : field.inputFieldType === "tabTitle" ?
+                            "" : field.inputFieldType === "array-map-list" ? 
                             "" :
                         <Column size="is-two-fifths pl-5">
 
@@ -502,7 +563,13 @@ return (
                                   <a className="link has-text-weight-normal is-size-7 pl-2" 
                                     onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
                               </> 
-                            : null
+                            : field.inputFieldType === "array-map-list" ? 
+                            <>
+                              <div key={field.label}>{field.label}
+                                <a className="link has-text-weight-normal is-size-7 pl-2" 
+                                  onClick={() => handleArrayMapDrawer(field)}>(add)</a> </div>
+                            </> 
+                          : null
                           }
 
                           
@@ -528,6 +595,7 @@ return (
                 </>
               )}
             </div>
+
               <DrawerComponent 
                 title="Edit"
                 checked={isDrawerOpen}
@@ -556,6 +624,33 @@ return (
 
               </DrawerComponent>
 
+              <DrawerComponent 
+                title="Add New"
+                checked={isArrayMapDrawerOpen}
+                handleClose={()=>setIsArrayMapDrawerOpen(!isArrayMapDrawerOpen)} 
+                direction="right"
+                handleSubmit={()=> handleArrayMapSubmit()}
+              >
+
+                <PageInputFields 
+                  
+                  handleClose={()=>setIsArrayMapDrawerOpen(!isArrayMapDrawerOpen)}
+                  handleChange={(e)=> handleArrayMapChange(e)}
+                  handleRelatedSelectChange={(e, related)=> handleRelatedSelectChange(e, related)}
+                  handleFileChange={(e)=> handleFileChange(e)}
+                  pageFields={isArrayMapInputData.pageFields}
+                  active={active}
+                  addRelatedValue={addRelatedValue}
+                  handleAddRelatedValue={(e)=>handleRelatedDrawer(e)}
+                  resetAddRelatedValue={()=>setAddRelatedValue("")}
+                  handleUpdated={()=>setUpdated(!updated)}
+                  currentCompany={currentCompany}
+                  currentCompanyID={currentCompanyID}
+                />
+
+                
+
+              </DrawerComponent>
               
 
               <DrawerComponent

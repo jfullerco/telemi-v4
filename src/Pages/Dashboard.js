@@ -97,7 +97,7 @@ const Dashboard = () => {
     await setUserFirstName(user[0].FirstName)
     await setUserType(user[0].Type)
     await setUserDefaults(user[0].Defaults && user[0].Defaults)
-    console.log(user[0].Defaults)
+    console.log([user][0][FirstName])
   }
 
   const isCurrentCompany = () => {
