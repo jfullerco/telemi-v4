@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { stateContext } from './stateContext'
 import {vendorList} from './vendorList'
 import {stateList} from './states'
 import {serviceType} from './serviceType'
@@ -6,7 +7,7 @@ import {accessType} from './accessType'
 
 
 /** Reference Object Dummy Assignments */
-
+  
   let locations = []
   let orders = []
   let accounts = []
@@ -803,7 +804,7 @@ import {accessType} from './accessType'
             label: 'Existing',
             dataField: 'OrderNum',
             inputFieldType: 'related-select',
-            inputSource: orders,
+            inputSource: "",
             inputID: "id",
             relatedCollection: "Orders", 
             relatedDataField: "OrderID",
@@ -1878,7 +1879,6 @@ import {accessType} from './accessType'
     },
   ]
 
-    
 
 export {
     serviceGridColumns, 

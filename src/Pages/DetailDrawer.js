@@ -200,7 +200,7 @@ const DetailDrawer = (props) => {
         )
     }
   }
-
+console.log("orders:",orders)
 
   const checkForNew = (isDrawerActive, isNew) => {
     isDrawerActive === "true" ? setIsDrawerOpen(true) : ""

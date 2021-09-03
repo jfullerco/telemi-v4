@@ -31,7 +31,7 @@ const PageInputFields = ({
           case "related-select":
             return (
               <>
-  
+                {console.log('pageInput array:',[field.inputSource])}
                 <SelectField
                   type="select"
                   title={field.label}
@@ -44,7 +44,7 @@ const PageInputFields = ({
                 >
                   
                   <option></option>
-
+                  
                   {field.inputSource && field.inputSource.map(i =>
 
                     <option id={i[field.inputID]} name={i[field.dataField]} key={i[field.inputID]}>

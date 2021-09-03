@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { stateContext } from '../../Contexts/stateContext'
 import SelectField from '../../Components/Forms/SelectField'
 import TextBox from '../../Components/Forms/TextBox'
 import TextArea from '../../Components/Forms/TextArea'
 
 const RelatedPageInputFields = ({ 
-    relatedFields, 
+    pageFields,
+    relatedFields,
     handleChange, 
     
     handleUpdated,
     activeData,
     relatedData  
   }) => {
+
+    const userContext = useContext(stateContext)
+    const {locations, orders, users, notes, tickets, services} = userContext.userSession
       console.log(relatedFields)
   
 
@@ -23,7 +28,7 @@ const RelatedPageInputFields = ({
           case "related-select":
             return (
               <>
-  
+                {console.log(pageFields[related.inputSource])}
                 <SelectField
                   type="select"
                   title={related.label}
