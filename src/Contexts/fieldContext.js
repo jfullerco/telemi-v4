@@ -1,23 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useState, createContext, useContext } from 'react'
 import { stateContext } from './stateContext'
 import {vendorList} from './vendorList'
 import {stateList} from './states'
 import {serviceType} from './serviceType'
 import {accessType} from './accessType'
 
+export const fieldContext = createContext({})
 
-/** Reference Object Dummy Assignments */
-  
-  let locations = []
-  let orders = []
-  let accounts = []
-  let services = []
-  let notes = []
-  let serviceStatusType = []
-  let serviceTypes = []
-  let accessTypes = []
+export const FieldProvider = (props) => {
+    
+    const {Provider} = fieldContext
+    const userContext = useContext(stateContext)
+    const {
+      locations,
+      orders,
+      accounts,
+      services,
+      notes,
+      tickets
+    } = userContext.userSession
 
-/** Grid Fields */
+  /** Grid Fields */
     const serviceGridColumns = [
       {
         docField: 'Vendor', 
@@ -493,7 +496,7 @@ import {accessType} from './accessType'
         label: "Service Location", 
         dataField: "LocationName", 
         inputFieldType: "related-select", 
-        inputSource: "", /** SET BY HANDLEINITIALFIELDMAPPING FN */
+        inputSource: locations, /** SET BY HANDLEINITIALFIELDMAPPING FN */
         inputID: "id", 
         inputValue: "Name",
         relatedCollection: "Locations", 
@@ -788,7 +791,7 @@ import {accessType} from './accessType'
         label: "Related Orders", 
         dataField: "OrderNum", 
         inputFieldType: "map-list", 
-        inputSource: "", 
+        inputSource: orders, 
         inputID: "id", 
         inputValue: "OrderNum",
         relatedCollection: "Orders", 
@@ -796,16 +799,12 @@ import {accessType} from './accessType'
         relatedInputLabel: "Order Number",
         relatedInputFields: [
           {
-            label: 'Date',
-            dataField: 'OrderDate',
-            inputFieldType: 'datepicker'
-          },
-          {
-            label: 'Existing',
+            label: 'Existing Order',
             dataField: 'OrderNum',
             inputFieldType: 'related-select',
-            inputSource: "",
+            inputSource: orders,
             inputID: "id",
+            inputValue: "OrderNum",
             relatedCollection: "Orders", 
             relatedDataField: "OrderID",
             relatedInputLabel: "Order",
@@ -817,6 +816,11 @@ import {accessType} from './accessType'
               }
             ], 
             relatedDataType: 'Order',
+          },
+          {
+            label: 'Date',
+            dataField: 'OrderDate',
+            inputFieldType: 'datepicker'
           },
           {
             label: 'Order',
@@ -851,7 +855,7 @@ import {accessType} from './accessType'
         label: "Related Tickets",
         dataField: "TicketNum",
         inputFieldType: "map-list",
-        inputSource: "",
+        inputSource: tickets,
         inputID: "id",
         inputValue: "TicketNum",
         relatedCollection: "Tickets",
@@ -921,7 +925,7 @@ import {accessType} from './accessType'
         dataField: "AccountNum",
         visible: true, 
         inputFieldType: "related-select", 
-        inputSource: "", 
+        inputSource: accounts, 
         inputID: "id", 
         inputValue: "AccountNum",
         relatedCollection: "Accounts", 
@@ -1880,32 +1884,39 @@ import {accessType} from './accessType'
   ]
 
 
-export {
-    serviceGridColumns, 
-    serviceMobileGridColumns,
-    serviceGroupByFields,
-    locationGridColumns,
-    locationMobileGridColumns,
-    locationGroupByFields,
-    locationDetailFields,
-    ticketGridColumns, 
-    ticketGroupByFields,
-    ticketMobileGridColumns,
-    orderGridColumns, 
-    orderMobileGridColumns,
-    accountGridColumns, 
-    accountGroupByFields,
-    accountMobileGridColumns,
-    userGridColumns,
-    userDetailFields, 
-    contractGridColumns,
-    contractMobileGridColumns,
-    contractDetailFields,
-    contractGroupByFields,
-    serviceDetailFields,
-    ticketDetailFields,
-    accountDetailFields,
-    orderDetailFields,
-    billsDetailFields,
-    contactDetailFields
+
+
+
+return (
+    <Provider value={{ 
+      serviceGridColumns, 
+      serviceMobileGridColumns,
+      serviceGroupByFields,
+      locationGridColumns,
+      locationMobileGridColumns,
+      locationGroupByFields,
+      locationDetailFields,
+      ticketGridColumns, 
+      ticketGroupByFields,
+      ticketMobileGridColumns,
+      orderGridColumns, 
+      orderMobileGridColumns,
+      accountGridColumns, 
+      accountGroupByFields,
+      accountMobileGridColumns,
+      userGridColumns,
+      userDetailFields, 
+      contractGridColumns,
+      contractMobileGridColumns,
+      contractDetailFields,
+      contractGroupByFields,
+      serviceDetailFields,
+      ticketDetailFields,
+      accountDetailFields,
+      orderDetailFields,
+      billsDetailFields,
+      contactDetailFields}}>
+      {props.children}
+    </Provider>
+  )
 }

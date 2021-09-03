@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import { StateProvider, stateContext } from './Contexts/stateContext'
+import { FieldProvider } from './Contexts/fieldContext'
 import { AuthProvider } from './Contexts/AuthContext'
 
 import Hello from './Pages/Hello'
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <StateProvider>
     <AuthProvider>
+      <FieldProvider>
       <Router>
       <NavBar />
        
@@ -62,6 +64,7 @@ export default function App() {
       
      
     </Router>
+    </FieldProvider>
     </AuthProvider>
     </StateProvider>
   );

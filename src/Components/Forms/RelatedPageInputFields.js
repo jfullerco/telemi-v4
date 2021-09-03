@@ -5,10 +5,10 @@ import TextBox from '../../Components/Forms/TextBox'
 import TextArea from '../../Components/Forms/TextArea'
 
 const RelatedPageInputFields = ({ 
-    pageFields,
+    
     relatedFields,
     handleChange, 
-    
+    handleRelatedSelectChange,
     handleUpdated,
     activeData,
     relatedData  
@@ -28,7 +28,7 @@ const RelatedPageInputFields = ({
           case "related-select":
             return (
               <>
-                {console.log(pageFields[related.inputSource])}
+                {console.log()}
                 <SelectField
                   type="select"
                   title={related.label}

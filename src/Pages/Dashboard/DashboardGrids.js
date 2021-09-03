@@ -4,6 +4,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Paper from '@material-ui/core/Paper';
 
 import { stateContext } from '../../Contexts/stateContext'
+import { fieldContext } from '../../Contexts/fieldContext'
 import { db } from '../../Contexts/firebase'
 
 import GridComponent from './Components/GridComponent'
@@ -18,27 +19,7 @@ import {useFilterArray} from '../../Components/Tables/useFilterArray'
 
 import NetworkGraphComponent from '../../Components/NetworkGraph/NetworkGraphComponent'
 
-import { serviceGridColumns,
-  serviceGroupByFields,
-  serviceMobileGridColumns,
-  locationGridColumns,
-  locationGroupByFields,
-  locationMobileGridColumns,
-  ticketGridColumns,
-  ticketGroupByFields,
-  ticketMobileGridColumns,
-  orderGridColumns,
-  orderGroupByFields,
-  orderMobileGridColumns,
-  accountGridColumns,
-  accountGroupByFields,
-  accountMobileGridColumns,
-  userGridColumns,
-  userGroupByFields,
-  userDetailFields,
-  contractGridColumns,
-  contractMobileGridColumns,
-  contractGroupByFields } from '../../Contexts/initialFields'
+
 
 import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFields'
 
@@ -90,6 +71,29 @@ const DashboardGrids = ({visible}) => {
           userDefaults,
           contracts,
           currentGrid } = userContext.userSession
+  const {
+    serviceGridColumns,
+    serviceGroupByFields,
+    serviceMobileGridColumns,
+    locationGridColumns,
+    locationGroupByFields,
+    locationMobileGridColumns,
+    ticketGridColumns,
+    ticketGroupByFields,
+    ticketMobileGridColumns,
+    orderGridColumns,
+    orderGroupByFields,
+    orderMobileGridColumns,
+    accountGridColumns,
+    accountGroupByFields,
+    accountMobileGridColumns,
+    userGridColumns,
+    userGroupByFields,
+    userDetailFields,
+    contractGridColumns,
+    contractMobileGridColumns,
+    contractGroupByFields
+  } = useContext(fieldContext)
 
   const searchRef = useRef("")
  

@@ -4,14 +4,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { stateContext } from '../Contexts/stateContext'
 import { db, store } from '../Contexts/firebase'
 import {
-  serviceDetailFields,
-  orderDetailFields,
-  accountDetailFields,
-  ticketDetailFields,
-  billsDetailFields,
-  locationDetailFields,
-  contractDetailFields,
-  userDetailFields } from '../Contexts/initialFields'
+  fieldContext } from '../Contexts/fieldContext'
 import {stateList} from '../Contexts/states.js'
 
 import Columns from '../Components/Layout/Columns'
@@ -66,6 +59,17 @@ const DetailDrawer = (props) => {
           notes,
           currentCompany,
           currentUser } = userContext.userSession
+
+    const {
+      serviceDetailFields,
+      orderDetailFields,
+      accountDetailFields,
+      ticketDetailFields,
+      billsDetailFields,
+      locationDetailFields,
+      contractDetailFields,
+      userDetailFields
+    } = useContext(fieldContext)
   
   
   const {isNew}  = props || false 
@@ -128,14 +132,7 @@ const DetailDrawer = (props) => {
     handlePageFields(isModule)
     fetchBills()
     fetchNotes()
-    handleInitialFieldMapping("LocationName", locations, pageFields)
-    handleInitialFieldMapping("OrderNum", orders, pageFields)
-    handleInitialFieldMapping("Services", services, pageFields)
-    handleInitialFieldMapping("AccountNum", accounts, pageFields)
-    handleInitialFieldMapping("Bills", bills, pageFields)
-    handleInitialFieldMapping("Notes", notes, pageFields)
-    handleInitialFieldMapping("State", stateList, pageFields)
-    handleInitialFieldMapping("TicketNum", tickets, pageFields)
+    
     handleSetHeader()
     setUpdated(false)
     handleInitialFields()
