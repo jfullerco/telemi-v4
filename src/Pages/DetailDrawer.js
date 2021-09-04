@@ -18,7 +18,8 @@ import PageField from '../Components/Layout/PageField'
 import FieldLabel from '../Components/Layout/FieldLabel'
 import Field from '../Components/Layout/Field'
 import DeleteButton from '../Components/Buttons/DeleteButton'
-import DetailViewDropDown from '../Components/Tabs/DetailViewDropDown'
+import TabBar from '../Components/Tabs/TabBar'
+import Tab from '../Components/Tabs/Tab'
 
 import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
@@ -77,7 +78,7 @@ const DetailDrawer = (props) => {
   
   const [data, setData] = useState("")
   const [active, setActive] = useState("")
-  
+  const [tab, setTab] = useState("BASIC INFO")
 
   const [activeSubtitle, setActiveSubtitle] = useState("")
   const [docIsNew, setDocIsNew] = useState()
@@ -220,6 +221,8 @@ console.log("orders:",orders)
   const handleSetHeader = () => {
     const subtitle = pageFields.filter(f => f.isHeader === true).map(field => setActiveSubtitle(field.dataField))
   }
+
+  
 
 /** Map inputSource arrays for initialFields */
   const handleInitialFieldMapping = (field, value, arr) => {
@@ -503,6 +506,14 @@ return (
               handleEditDrawer={()=>handleToggle()} 
             />
             */}
+
+            <TabBar>
+              <Tab 
+                data={pageFields}
+                active={tab}
+                handleClick={(e)=>setTab(e)}
+              />
+            </TabBar>
           <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
 
             <article className="hero title is-small"> 
@@ -521,8 +532,9 @@ return (
               {active && pageFields.map(field => 
                 <>
                   {[active].map(docItem => 
-                    <div className={field.visible != false ? "" : "is-hidden" }> 
-                    
+                     
+                    <div className={field.visible != false & field.tab === tab ? "" : "is-hidden" }> 
+                    <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
                     
                     <Columns options="is-mobile">
                       
@@ -669,6 +681,7 @@ return (
                   relatedFields={relatedInputData.pageFields}
                   handleChange={(e)=>handleRelatedInputChange(e)}
                   handleRelatedField={(e)=> handleRelatedField(e)}
+                  handleRelatedSelectChange={(e, related)=> handleRelatedSelectChange(e, related)}
                   handleUpdated={()=>setUpdated(!updated)}
                   activeData={active}
                   relatedData={relatedInputData}

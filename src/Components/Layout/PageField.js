@@ -59,6 +59,9 @@ const PageField = ({
                 : 
                 fieldData && item.relatedDataType === "Service" ? <a onClick={
                   (e)=> handleClick({colRef: "Services", id: fieldData[item.relatedDataField]})}> {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} </a> 
+                : 
+                fieldData && item.relatedDataType === "Order" ? <a onClick={
+                  (e)=> handleClick({colRef: "Orders", id: fieldData[item.relatedDataField]})}> {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} </a> 
                 : null
                 }
                 

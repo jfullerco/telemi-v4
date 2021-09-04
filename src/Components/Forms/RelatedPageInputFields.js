@@ -28,7 +28,7 @@ const RelatedPageInputFields = ({
           case "related-select":
             return (
               <>
-                {console.log()}
+                
                 <SelectField
                   type="select"
                   title={related.label}

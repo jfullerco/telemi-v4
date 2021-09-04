@@ -2,8 +2,10 @@ import React from 'react'
 
 const TabBar = ({children}) => {
   return(
-    <div className="tabs is-right">
-      {children}
+    <div className="tabs is-fullwidth is-toggle is-toggle-rounded">
+      <ul>
+        {children}
+      </ul>
     </div>
   )
 }

@@ -787,55 +787,27 @@ export const FieldProvider = (props) => {
         tab: "DETAILS",
         tabLabel: "DETAILS" 
       },
-      { 
-        label: "Related Orders", 
-        dataField: "OrderNum", 
-        inputFieldType: "map-list", 
-        inputSource: orders, 
-        inputID: "id", 
+      {
+        label: 'Order Number',
+        dataField: 'OrderNum',
+        visible: true,
+        inputFieldType: 'related-select',
+        inputSource: orders,
+        inputID: "id",
         inputValue: "OrderNum",
         relatedCollection: "Orders", 
-        relatedDataField: "ServiceID", 
+        relatedDataField: "OrderID",
         relatedInputLabel: "Order Number",
         relatedInputFields: [
-          {
-            label: 'Existing Order',
-            dataField: 'OrderNum',
-            inputFieldType: 'related-select',
-            inputSource: orders,
-            inputID: "id",
-            inputValue: "OrderNum",
-            relatedCollection: "Orders", 
-            relatedDataField: "OrderID",
-            relatedInputLabel: "Order",
-            relatedInputFields: [
-              {
-                label: 'Order',
-                dataField: 'OrderNum',
-                inputFieldType: 'text'
-              }
-            ], 
-            relatedDataType: 'Order',
-          },
-          {
-            label: 'Date',
-            dataField: 'OrderDate',
-            inputFieldType: 'datepicker'
-          },
           {
             label: 'Order',
             dataField: 'OrderNum',
             inputFieldType: 'text'
-          },
-          {
-            label: 'Status',
-            dataField: 'Status',
-            inputFieldType: 'text'
-          },
-        ],
-        tab: "DETAILS",
-        tabLabel: "DETAILS",
-        hasBreakBefore: true  
+          }
+        ], 
+        relatedDataType: 'Order',
+        tab: 'DETAILS',
+        tabLabel: 'DETAILS'
       },
       { 
         label: "Related Order ID", 
@@ -853,7 +825,7 @@ export const FieldProvider = (props) => {
       },
       {
         label: "Related Tickets",
-        dataField: "TicketNum",
+        dataField: "Tickets",
         inputFieldType: "map-list",
         inputSource: tickets,
         inputID: "id",
@@ -1000,7 +972,7 @@ export const FieldProvider = (props) => {
         inputFieldType: 'tabTitle'
       },
       { 
-        label: "", 
+        label: "N", 
         dataField: "Notes", 
         inputFieldType: "map-list", 
         relatedCollection: "Notes", 
