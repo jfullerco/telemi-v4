@@ -638,6 +638,38 @@ export const FieldProvider = (props) => {
         label: 'Details',
         inputFieldType: 'tabTitle'
       },
+      {
+        label: 'Order Number',
+        dataField: 'OrderNum',
+        visible: true,
+        inputFieldType: 'related-select',
+        inputSource: orders,
+        inputID: "id",
+        inputValue: "OrderNum", 
+        relatedCollection: "Orders", 
+        relatedDataField: "OrderID",
+        relatedInputLabel: "Order Number",
+        relatedInputFields: [
+          {
+            label: 'Order',
+            dataField: 'OrderNum',
+            inputFieldType: 'text'
+          }
+        ], 
+        relatedDataType: 'Order',
+        tab: 'DETAILS',
+        tabLabel: 'DETAILS'
+      },
+      { 
+        label: "Related Order ID", 
+        dataField: "OrderID", 
+        visible: false, 
+        inputSource: orders, 
+        inputID: "ID", 
+        inputValue: "id", 
+        tab: "DETAILS",
+        tabLabel: "DETAILS" 
+      },
       { 
         label: "Service Start Date", 
         dataField: "StartDate", 
@@ -664,15 +696,9 @@ export const FieldProvider = (props) => {
         tabLabel: "DETAILS" 
       },
       { 
-        label: "IPV4 Info", 
-        dataField: "IPV4", 
-        inputFieldType: "text-area", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
-      },
-      { 
-        label: "IPV6 Info", 
-        dataField: "IPV6", 
+        label: 'Demarc Information', 
+        dataField: 'DemarcInfo', 
+        visible: true, 
         inputFieldType: "text-area", 
         tab: "DETAILS",
         tabLabel: "DETAILS" 
@@ -823,46 +849,6 @@ export const FieldProvider = (props) => {
         tab: "DETAILS",
         tabLabel: "DETAILS",
         hasBreakBefore: true  
-      },
-      { 
-        label: 'Demarc Information', 
-        dataField: 'DemarcInfo', 
-        visible: true, 
-        inputFieldType: "text-area", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
-      },
-      {
-        label: 'Order Number',
-        dataField: 'OrderNum',
-        visible: true,
-        inputFieldType: 'related-select',
-        inputSource: orders,
-        inputID: "id",
-        inputValue: "OrderNum",
-        relatedCollection: "Orders", 
-        relatedDataField: "OrderID",
-        relatedInputLabel: "Order Number",
-        relatedInputFields: [
-          {
-            label: 'Order',
-            dataField: 'OrderNum',
-            inputFieldType: 'text'
-          }
-        ], 
-        relatedDataType: 'Order',
-        tab: 'DETAILS',
-        tabLabel: 'DETAILS'
-      },
-      { 
-        label: "Related Order ID", 
-        dataField: "OrderID", 
-        visible: false, 
-        inputSource: orders, 
-        inputID: "ID", 
-        inputValue: "id", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
       },
       {
         label: 'Support',
