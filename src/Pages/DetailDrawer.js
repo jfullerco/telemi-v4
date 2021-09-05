@@ -407,6 +407,32 @@ const handleArrayMapChange = (e) => {
   setIsArrayMapData({...isArrayMapData, [name]: value})
 }
 
+const handleArrayMapDelete = (e, arr, field) => {
+
+  
+  
+  setIsArrayMapInputData({  
+    pageFields: field.relatedInputFields, 
+    dataField: field.dataField,
+    label: field.label
+  })
+  
+  console.log('arr',data[field.dataField])
+
+  const deleteRef = data[field.dataField].splice(e, 1)
+  
+  
+    try {
+
+      handleSubmitUpdated()
+
+      } catch {
+  
+        console.log("Error Deleting Item")
+  
+      }
+}
+
 const handleArrayMapSubmit = async() => {
   try {
         
@@ -594,6 +620,7 @@ return (
                             toggleFieldDropDown={()=>setIsRelatedActive(!isRelatedActive)}
                             isViewRelatedActive={isRelatedActive}
                             handleClick={(e)=>handleClick(e)}
+                            handleArrayMapDelete={(e, arr)=>handleArrayMapDelete(e, arr, field)}
                           />
                        
                       </Column>

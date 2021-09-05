@@ -4,7 +4,8 @@ const MapListTable = ({
   data,
   colRef,
   headerFields,
-  handleClick
+  handleClick,
+  handleDelete
 }) => {
   return(
     <>
@@ -25,7 +26,7 @@ const MapListTable = ({
         </thead>
         <tbody className="is-size-7">
 
-          {data && data != undefined ? data.map(item =>
+          {data && data != undefined ? data.map((item, index) =>
           
             <tr key={item.id}>
               
@@ -39,15 +40,17 @@ const MapListTable = ({
                     name={col.relatedCollection}
                     value={item[col.dataField]}
                   >
-
+                    {item[col.dataField] === undefined ? "--" :
                     <a onClick={(e) => handleClick({ colRef: colRef, id: item.id })}>
                       {col.inputFieldType === 'currency' ? "$" : ""} {item[col.dataField]}
                     </a>
-
+                    }
                   </td>
 
                 </>
               )}
+              {handleDelete != undefined ? <td><button className="delete is-small" onClick={()=>handleDelete(index, data, headerFields)}>x</button></td> :
+              ""}
             </tr>
           ) : ""}
 

@@ -56,7 +56,7 @@ export default function App() {
         </div>
         
       </div>
-      <div className="column is-12-mobile is-four-fif-tablet is-10-desktop is-10-widescreen is-10-fullhd">
+      <div className="column is-12-mobile is-four-fifths-tablet is-10-desktop is-10-widescreen is-10-fullhd">
       <div className="container"> 
           <Switch>
             

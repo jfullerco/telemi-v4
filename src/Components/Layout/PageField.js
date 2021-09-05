@@ -10,7 +10,8 @@ const PageField = ({
     fieldData, 
     relatedDataMap, 
     handleClick,
-    handleArrayMapClick 
+    handleArrayMapClick,
+    handleArrayMapDelete 
 }) => {
   const history = useHistory()
   /**console.log("field:",field, "fieldData:", fieldData) */
@@ -88,6 +89,7 @@ const PageField = ({
                   data={fieldData[item.dataField]}
                   colRef={item.relatedCollection}
                   handleClick={(e)=>handleArrayMapClick(e)}
+                  handleDelete={(e, arr)=>handleArrayMapDelete(e, arr)}
                 /> 
               </>
             )

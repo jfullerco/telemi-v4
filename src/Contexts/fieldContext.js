@@ -683,6 +683,51 @@ export const FieldProvider = (props) => {
         inputFieldType: "array-map-list",  
         relatedInputFields: [
           {
+            label: 'Type',
+            dataField: 'Type',
+            inputFieldType: 'select',
+            inputID: "Name", 
+            inputValue: "Value", 
+            inputSource: [
+              {
+                Name: 'Public IP',
+                Value: 'Public IP'
+              },
+              {
+                Name: 'WAN',
+                Value: 'WAN'
+              },
+              {
+                Name: 'LAN',
+                Value: 'LAN'
+              },
+              {
+                Name: 'CER',
+                Value: 'CER'
+              },
+              {
+                Name: 'PER',
+                Value: 'PER'
+              },
+              {
+                Name: 'Border Element',
+                Value: 'Border Element'
+              },
+              {
+                Name: 'Virtual',
+                Value: 'Virtual'
+              },
+              {
+                Name: 'Route',
+                Value: 'Route'
+              },
+              {
+                Name: 'Device',
+                Value: 'Device'
+              },
+            ]
+          },
+          {
             label: 'Version',
             dataField: 'Version',
             inputFieldType: 'select',
