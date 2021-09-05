@@ -4,10 +4,11 @@ const MenuList = (props) => {
   
   return(
     <>
+      
         <ul className="menu-list">
           {props.children}
         </ul>
-      </aside>
+      
     </>
   )
 }

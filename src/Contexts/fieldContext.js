@@ -972,7 +972,7 @@ export const FieldProvider = (props) => {
         inputFieldType: 'tabTitle'
       },
       { 
-        label: "N", 
+        label: "Notes", 
         dataField: "Notes", 
         inputFieldType: "map-list", 
         relatedCollection: "Notes", 
@@ -981,7 +981,7 @@ export const FieldProvider = (props) => {
         relatedInputFields: [
           {
             label: 'Date', 
-            dataField: 'Date', 
+            dataField: 'Date',  
             inputFieldType: 'datepicker'
           }, 
           {
@@ -1677,7 +1677,7 @@ export const FieldProvider = (props) => {
     ]
     const notesDetailFields = [
       {
-        label: 'Note Date',
+        label: 'Date',
         dataField: 'Date',
         inputFieldType: 'datepicker',
         tab: 'NOTES',
@@ -1691,9 +1691,40 @@ export const FieldProvider = (props) => {
         tablLabel: 'NOTES'
       },
       {
-        label: 'Attached to',
-        dataField: 'AttachedTo',
+        label: 'Related',
+        dataField: 'Related',
         inputFieldType: 'text'
+      }
+    ]
+
+    const eventsDetailFields = [
+      {
+        label: 'Date',
+        dataField: 'Date',
+        inputFieldType: 'datepicker',
+        tab: 'EVENTS',
+        tabLabel: 'EVENTS'
+      },
+      {
+        label: 'Title',
+        dataField: 'Title',
+        inputFieldType: 'text',
+        tab: 'EVENTS',
+        tablLabel: 'EVENTS'
+      },
+      {
+        label: 'Details',
+        dataField: 'Details',
+        inputFieldType: 'text-area',
+        tab: 'EVENTS',
+        tabLabel: 'EVENTS'
+      },
+      {
+        label: 'Related',
+        dataField: 'Related',
+        inputFieldType: 'text',
+        tab: 'EVENTS',
+        tabLabel: 'EVENTS'
       }
     ]
 

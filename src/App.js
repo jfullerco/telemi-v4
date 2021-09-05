@@ -20,6 +20,8 @@ import RelatedDetailModule from './Pages/RelatedDetailModule'
 import NotFound from './Components/NotFound'
 import UserSettings from './Pages/Users/UserSettings'
 import Search from './Pages/Search'
+import Menu from './Components/Menu/Menu'
+import MenuList from './Components/Menu/MenuList'
 
 
 
@@ -35,8 +37,26 @@ export default function App() {
       <NavBar />
        
       <div className="columns is-variable is-mobile">
-      <div className="column is-1 is-hidden-mobile"></div>
-      <div className="column is-12-mobile">
+      <div className="column is-1 is-hidden-mobile">
+        <div className="is-hidden">
+          <Menu>
+          <div className="buttons is-right">
+            <button className="delete"></button>
+          </div>
+            <MenuList>
+              <li><a>Home</a></li>
+              <li><a className="is-active">Companies</a>
+              <ul>
+                <li><a>Add a company</a></li>  
+                <li><a>Manage your companies</a></li>
+              </ul></li>
+
+            </MenuList>
+          </Menu>
+        </div>
+        
+      </div>
+      <div className="column is-12-mobile is-four-fif-tablet is-10-desktop is-10-widescreen is-10-fullhd">
       <div className="container"> 
           <Switch>
             

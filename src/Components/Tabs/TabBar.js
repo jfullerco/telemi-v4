@@ -2,7 +2,7 @@ import React from 'react'
 
 const TabBar = ({children}) => {
   return(
-    <div className="tabs is-fullwidth is-toggle is-toggle-rounded">
+    <div className="tabs is-fullwidth ">
       <ul>
         {children}
       </ul>
