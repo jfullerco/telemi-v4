@@ -6,29 +6,21 @@ import Paper from '@material-ui/core/Paper';
 import { stateContext } from '../../Contexts/stateContext'
 import { fieldContext } from '../../Contexts/fieldContext'
 import { db } from '../../Contexts/firebase'
+import { useSortHook } from '../../Hooks/useSortHook'
+import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
+import {useFilterArray} from '../../Components/Tables/useFilterArray'
+import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFields'
 
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
 import GridGroup2 from '../../Components/Grids/GridGroup2'
+import Grid from '../../Components/Grids/Grid'
 import CardGrid from '../../Components/Grids/CardGrid'
-
 import CostBySite from '../../Components/Graphs/CostBySite'
-
-import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
-import {useFilterArray} from '../../Components/Tables/useFilterArray'
-
 import NetworkGraphComponent from '../../Components/NetworkGraph/NetworkGraphComponent'
-
-
-
-import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFields'
-
 import SelectView from '../../Components/Grids/SelectView'
-import TabBar from '../../Components/Tabs/TabBar'
 import Columns from '../../Components/Layout/Columns'
 import Column from '../../Components/Layout/Column'
-
-import { useSortHook } from '../../Hooks/useSortHook'
 import SideDrawer from '../../Components/Drawers/SideDrawer'
 import DetailDrawer from '../DetailDrawer'
 
@@ -106,6 +98,7 @@ const DashboardGrids = ({visible}) => {
   const [recent, setRecent] = useState()
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isNewDoc, setIsNewDoc] = useState(false)
   const [isCurrentDocID, setIsCurrentDocID] = useState()
   const [isModule, setIsModule] = useState()
 
@@ -197,14 +190,9 @@ const DashboardGrids = ({visible}) => {
 
   const handleAddClick = (id) => {
     const isModule = modGridStr(grid)
-    history.push({
-      pathname: `/${isModule}/${currentCompanyID}/${id}`,
-      state: {
-      currentCompanyID: currentCompanyID,
-      isNew: "true",
-      isDrawerActive: "true",
-      }
-    })
+    setIsModule(isModule)
+    setIsNewDoc(true)
+    setIsDrawerOpen(true)
   }
   
   const recentUpdatesArr = (arr) => {
@@ -250,7 +238,7 @@ return (
         <option value="LOCATIONS">Locations</option>
         <option value="USERS">Users</option>
         <option value="CONTRACTS">Contracts</option>
-        <option value="NETWORK">Network Map</option>
+        
         </SelectView>
       </Column>
 
@@ -278,7 +266,10 @@ return (
     </Columns>
     </div>
 
-    <CostBySite />
+    <Grid title="Monthly Cost">
+      <CostBySite />
+    </Grid>
+    
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup2
         data={grid === "SERVICES" ? services : null}
@@ -295,7 +286,7 @@ return (
         data={grid === "TICKETS" ? tickets : null}
         isGrid='Tickets'
         headerFields={ticketGridColumns}
-        mobileHeaderFields={ticketMobileGridColumns}
+        mobileHeaderFields={ticketMobileGridColumns} 
         handleClick={(e) => handleTicketClick(e)}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
@@ -309,7 +300,7 @@ return (
         mobileHeaderFields={orderMobileGridColumns}
         handleClick={(e) => handleOrderClick(e)}
         handleSort={(e)=>handleSorting(e)}
-        groupBy={groupBy}
+        groupBy={groupBy || "ALL"}
       />
     </div>
     <div className={grid === 'ACCOUNTS' ? "" : "is-hidden"}>
@@ -364,6 +355,10 @@ return (
         currentCompanyID={currentCompanyID}
         id={isCurrentDocID}
         isModule={isModule}
+        isNew={isNewDoc}
+        isDrawerActive={isNewDoc}
+        isDetailDrawerOpen={(e)=>setIsDrawerOpen(false)}
+        resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>
     

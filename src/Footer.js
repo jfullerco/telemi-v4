@@ -11,7 +11,7 @@ import AddDocButtonFooter from './Components/Navs/AddDocButtonFooter'
 
 const Footer = (props) => {
 
-  const {handleEditButton, isDrawerOpen, isBookmarked, tags, isModule, id} = props
+  const {handleEditButton, isDrawerOpen, isBookmarked, tags, isModule, id, isDetailDrawerOpen} = props
   
   return(
     <>
@@ -45,7 +45,11 @@ const Footer = (props) => {
           />
         </div>
         <div className="navbar-item is-inline-block-touch pl-4 pr-4">
-          <DeleteButtonFooter />
+          <DeleteButtonFooter 
+            isModule={isModule}
+            id={id}
+            isDetailDrawerOpen={(e)=>props.isDetailDrawerOpen(e)}
+          />
         </div>
       </div>
       </div>

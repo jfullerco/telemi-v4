@@ -3,17 +3,17 @@ import { useParams, useHistory } from 'react-router-dom'
 import { FaTrash } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 
-const DeleteButtonFooter = () => {
+const DeleteButtonFooter = (props) => {
 
-  const {isModule, id} = useParams()
+  
   const history = useHistory()
   const [ toggle, setToggle ] = useState(false)
 
-  const handleClick = async() => {
+  const handleClick = async(props) => {
     
     try {
 
-    const res = await db.collection(isModule).doc(id).delete()
+    const res = await db.collection(props.isModule).doc(props.id).delete()
     console.log(res)
     
     autoClose()
@@ -26,10 +26,10 @@ const DeleteButtonFooter = () => {
     
   }
 
-  const autoClose = () => {
+  const autoClose = (props) => {
 
     setTimeout(() => { 
-      history.push("/dashboard") 
+      props.isDetailDrawerOpen(false)
     }, 1500 )
 
   }

@@ -3,21 +3,15 @@ import { useParams, useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
 import { db, store } from '../Contexts/firebase'
-import {
-  fieldContext } from '../Contexts/fieldContext'
-import {stateList} from '../Contexts/states.js'
+import { fieldContext } from '../Contexts/fieldContext'
+import {useRefreshDataHook} from '../Hooks/useRefreshDataHook'
 
 import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
 import DrawerPage from '../Components/DrawerPage'
 import DrawerComponent from '../Components/Layout/DrawerComponent'
-
 import Loading from '../Components/Loading'
-
 import PageField from '../Components/Layout/PageField'
-import FieldLabel from '../Components/Layout/FieldLabel'
-import Field from '../Components/Layout/Field'
-import DeleteButton from '../Components/Buttons/DeleteButton'
 import TabBar from '../Components/Tabs/TabBar'
 import Tab from '../Components/Tabs/Tab'
 
@@ -25,7 +19,7 @@ import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
 import Footer from '../Footer'
-import {useRefreshDataHook} from '../Hooks/useRefreshDataHook'
+
 
 const DetailDrawer = (props) => {
 
@@ -72,10 +66,6 @@ const DetailDrawer = (props) => {
       userDetailFields
     } = useContext(fieldContext)
   
-  
-  const {isNew}  = props || false 
-  const {isDrawerActive} = props || false
-  
   const [data, setData] = useState("")
   const [active, setActive] = useState("")
   const [tab, setTab] = useState("BASIC INFO")
@@ -101,8 +91,6 @@ const DetailDrawer = (props) => {
   const [isArrayMapData, setIsArrayMapData] = useState("")
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
-  
-  
   const {refreshModule} = useRefreshDataHook(isModule)
   
   
@@ -110,30 +98,29 @@ const DetailDrawer = (props) => {
     
     setLoading(true)
     handlePageFields(isModule)
-    checkForNew(isDrawerActive, isNew)
-    fetchPage()
-    fetchBills()
-    fetchNotes()
-    
+    checkForNew(props.isDrawerActive, props.isNew)
+    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchBills() : ""
+    props.isNew === false ? fetchNotes() : ""
+     
   }, [])
 
   useEffect(() => {
     setPageFields()
-    checkForNew(isDrawerActive, isNew)
+    checkForNew(props.isDrawerActive, props.isNew)
     setLoading(true)
     handlePageFields(isModule)
-    fetchPage()
-    fetchBills()
-    fetchNotes()
+    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchBills() : ""
+    props.isNew === false ? fetchNotes() : ""
     
   }, [isModule])
 
   useEffect(() => {
     
     handlePageFields(isModule)
-    fetchBills()
-    fetchNotes()
-    
+    props.isNew === false ? fetchBills() : ""
+    props.isNew === false ? fetchNotes() : ""
     handleSetHeader()
     setUpdated(false)
     handleInitialFields()
@@ -198,13 +185,11 @@ const DetailDrawer = (props) => {
         )
     }
   }
-console.log("orders:",orders)
 
   const checkForNew = (isDrawerActive, isNew) => {
-    isDrawerActive === "true" ? setIsDrawerOpen(true) : ""
-    isNew === "true" ? 
-      setDocIsNew(true) 
-      : ""
+    isDrawerActive === true ? setIsDrawerOpen(true) : ""
+    isNew === true ? setDocIsNew(true) : ""
+
   }
 
   const handleInitialFields = () => {
@@ -216,21 +201,28 @@ console.log("orders:",orders)
       ['CompanyID']: currentCompanyID, 
       ['CompanyName']: currentCompany
     }) 
+
+  }
+
+  const handleFinishedLoading = () => {
+    setTimeout(() => {setLoading(false)}, 1000)
   }
 
   const handleSetHeader = () => {
+
     const subtitle = pageFields.filter(f => f.isHeader === true).map(field => setActiveSubtitle(field.dataField))
+
   }
 
-  
-
-/** Map inputSource arrays for initialFields */
+/** Map inputSource arrays for initialFields 
   const handleInitialFieldMapping = (field, value, arr) => {
 
     const indexRef = arr.findIndex(i => i.dataField === field)
     arr[indexRef] = {...arr[indexRef], inputSource: value}
   
   }
+
+  */
 
 /** Fetch Document from Firebase */  
   const fetchPage = async() => {
@@ -279,11 +271,7 @@ console.log("orders:",orders)
        ...data,
        ['FileURL']: fileURL
       })
-  }
-
-  const handleFinishedLoading = () => {
-    setTimeout(() => {setLoading(false)}, 1000)
-  }
+  }  
 
   const handleSubmit = () => {
       
@@ -293,7 +281,7 @@ console.log("orders:",orders)
       handleSubmitUpdated(data)
         
   }
-console.log(data)
+
   const handleSubmitNew = async(data) => {
     
     try {
@@ -346,8 +334,6 @@ console.log(data)
       setUpdated(true)
       setLoading(!loading)  
   }
-
-
 
 const handleToggle = () => {
   setIsDrawerOpen(!isDrawerOpen)
@@ -408,34 +394,26 @@ const handleArrayMapChange = (e) => {
 }
 
 const handleArrayMapDelete = (e, arr, field) => {
-
-  
   
   setIsArrayMapInputData({  
     pageFields: field.relatedInputFields, 
     dataField: field.dataField,
     label: field.label
   })
-  
-  console.log('arr',data[field.dataField])
 
   const deleteRef = data[field.dataField].splice(e, 1)
-  
-  
+
     try {
-
-      handleSubmitUpdated()
-
+        handleSubmitUpdated()
       } catch {
-  
         console.log("Error Deleting Item")
-  
       }
+
 }
 
 const handleArrayMapSubmit = async() => {
-  try {
-        
+
+  try {     
     await db.collection(isModule).doc(props.id).update({
       ...data, [isArrayMapInputData.dataField]: [
         ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
@@ -459,7 +437,6 @@ const handleArrayMapSubmit = async() => {
   } catch {
     console.log("ERROR SAVING CHANGES")
   } 
-  
   
   setIsArrayMapData()
   setIsArrayMapDrawerOpen(false)
@@ -513,6 +490,7 @@ const handleInheritedData = (e) => {
   }
 
 return (
+
     <Loading active={loading}>
 
     <DrawerPage title={currentCompany}>
@@ -651,12 +629,13 @@ return (
              
             </Columns>
         </> : 
-          <div className="tile warning"> No record to display </div>
+          <div className="notification warning"> No record to display </div>
       }    
     </DrawerPage>
     <Footer 
       handleEditButton={(e)=> setIsDrawerOpen(e)}
       isDrawerOpen={isDrawerOpen}
+      isDetailDrawerOpen={(e)=>props.isDetailDrawerOpen(e)}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
       handleUpdated={fetchPage}

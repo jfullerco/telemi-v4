@@ -1941,6 +1941,7 @@ return (
       ticketGroupByFields,
       ticketMobileGridColumns,
       orderGridColumns, 
+      orderGroupByFields,
       orderMobileGridColumns,
       accountGridColumns, 
       accountGroupByFields,
