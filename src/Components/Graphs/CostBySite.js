@@ -59,7 +59,7 @@ const CostBySite = () => {
     {totalMonthlyCost > 1 ? 
       (
         <>
-        <div style={{height: 400}}>
+        <div className="is-hidden-mobile" style={{height: 400}}>
       
           <ResponsivePie
           data={pieData}

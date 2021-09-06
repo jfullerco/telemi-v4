@@ -7,7 +7,7 @@ import TextBox from '../Forms/TextBox'
 const AddTagButtonFooter = (props) => {
   const values = props.values
   
-  const {isModule, id} = useParams()
+  
   const history = useHistory()
   const [ toggle, setToggle ] = useState(false)
   const [tags, setTags] = useState("")
@@ -27,11 +27,11 @@ const AddTagButtonFooter = (props) => {
     }
   },[props.handleUpdated])
 
-  const handleClick = async() => {
+  const handleClick = async(props) => {
     
     try {
 
-    const res = await db.collection(isModule).doc(id).update({'Tags': [...addTag]})
+    const res = await db.collection(props.isModule).doc(props.id).update({'Tags': [...addTag]})
     
     setToggle(false)
     props.handleUpdated()
@@ -39,7 +39,7 @@ const AddTagButtonFooter = (props) => {
     
     } catch {
 
-      console.log("Error Add Tag to Record")
+      console.log("Error Adding Tag to Record")
 
     }
   
@@ -49,14 +49,14 @@ const AddTagButtonFooter = (props) => {
     const updateTags = tags.splice(e, 1)
     try {
 
-      const res = await db.collection(isModule).doc(id).update({'Tags': [...tags]})
+      const res = await db.collection(props.isModule).doc(props.id).update({'Tags': [...tags]})
       
       setToggle(false)
       props.handleUpdated()
       setTagValue("")
       } catch {
   
-        console.log("Error Add Tag to Record")
+        console.log("Error Deleting Tag to Record")
   
       }
     
@@ -109,7 +109,7 @@ const AddTagButtonFooter = (props) => {
               fieldChanged={(e)=>handleChange(e.target)}
               value={tagValue}
             />
-            <button type="submit" className="button is-rounded is-link" onClick={handleClick}>Add</button>
+            <button type="submit" className="button is-rounded is-link" onClick={()=>handleClick(props)}>Add</button>
 
 
           </div>

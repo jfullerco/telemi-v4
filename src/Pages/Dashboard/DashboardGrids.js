@@ -319,7 +319,7 @@ return (
   <>
     <div className="is-flex is-justify-content-flex-end">
     <Columns options="is-mobile pr-3 pb-3 is-gapless">
-      <Column size="is-narrow mr-2 mt-1">View</Column>
+      <Column size="is-narrow mr-2 mt-1 is-hidden-mobile">View</Column>
       <Column size="is-narrow mr-2">
         <SelectView onChange={(e)=>handleGridChange(e)} value={grid}>
         <option value="SERVICES">Services</option>
@@ -351,7 +351,7 @@ return (
 
       </Column>
       <Column size="is-1">
-        <button className="button is-rounded is-link is-small" onClick={()=>handleAddClick()}>Add</button>
+        <button className="button is-rounded is-link is-small has-text-weight-bold" onClick={()=>handleAddClick()}>Add</button>
       </Column>
       
     </Columns>

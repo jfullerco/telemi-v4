@@ -515,122 +515,60 @@ const handleInheritedData = (e) => {
 return (
     <Loading active={loading}>
 
-    <DrawerPage
-      title={currentCompany}
-    >
+    <DrawerPage title={currentCompany}>
       {userContext && userContext.userSession != undefined ? 
-        <>
-          {/** 
-           *<DetailViewDropDown 
-              views={['BASIC INFO', 'DETAILS', 'SUPPORT', 'BILLING', 'NOTES']}
-              activeView='BASIC INFO'
-              handleToggle={()=>setViewDropDown(!viewDropDown)}
-              isActive={viewDropDown}
-              handleView={(e)=>setTab(e)}
-              value={active && [active].map(item => item[activeSubtitle] && item[activeSubtitle])}
-              title={isModule}
-              handleEditDrawer={()=>handleToggle()} 
+        <> 
+          <TabBar>
+            <Tab 
+              data={pageFields}
+              active={tab}
+              handleClick={(e)=>setTab(e)}
             />
-            */}
+          </TabBar>
 
-            <TabBar>
-              <Tab 
-                data={pageFields}
-                active={tab}
-                handleClick={(e)=>setTab(e)}
-              />
-            </TabBar>
           <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
 
             <article className="hero title is-small"> 
               <span className="subtitle is-5">{isModule}</span>
-              {active === "" ? 
-              <input className="input is-rounded is-disabled is-loading" /> : 
-                <span className="title is-3">
-                  {[active].map(item => item[activeSubtitle] && item[activeSubtitle])}
-                </span>
-              }
-              
+              <span className="title is-3">
+                {[active].map(item => item[activeSubtitle] && item[activeSubtitle])}
+              </span>
             </article>
 
-            <div className="block">
-              {/** Refactor as ViewPageFields Component */}
-              {active && pageFields.map(field => 
-                <>
-                  {[active].map(docItem => 
-                     
-                    <div className={field.visible != false & field.tab === tab ? "" : "is-hidden" }> 
-                    <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
-                    
-                    <Columns options="is-mobile">
+              <div className="block">
+                {/** Refactor as ViewPageFields Component */}
+                {active && pageFields.map(field => 
+                  <>
+                    {[active].map(docItem => 
                       
-                      {field.inputFieldType === "map-list" ? 
-                            "" : field.inputFieldType === "tabTitle" ?
-                            "" : field.inputFieldType === "array-map-list" ? 
-                            "" :
-                        <Column size="is-two-fifths pl-5">
-
-                          <FieldLabel>
-                            
-                                <Columns options="is-mobile">
-                                  <Column size="is-11">
-                                    <div key={field.label}>{field.label}</div>
-                                  </Column>
-                                  <Column>:</Column>
-                                </Columns>
-                            
-                          </FieldLabel>
-
-                      </Column>
-                    }
-                      <Column size="pl-5">
-                        
-                          {
-                            field.inputFieldType === 'tabTitle' ? (
-                              <div key={field.label} className="title is-5">
-                                <hr />
-                                {field.label}
-                              </div> 
-                            ) : 
-                            field.inputFieldType === "map-list" ? 
-                              <>
-                                <div key={field.label}>{field.label}
-                                  <a className="link has-text-weight-normal is-size-7 pl-2" 
-                                    onClick={() => handleRelatedDrawer(field)}>(add)</a> </div>
-                              </> 
-                            : field.inputFieldType === "array-map-list" ? 
-                            <>
-                              <div key={field.label}>{field.label}
-                                <a className="link has-text-weight-normal is-size-7 pl-2" 
-                                  onClick={() => handleArrayMapDrawer(field)}>(add)</a> </div>
-                            </> 
-                          : null
-                          }
-
-                          
-                          
-                          <PageField 
-                            field={field}
-                            fieldData={docItem}
-                            relatedDataMap={
+                      <div className={field.visible != false & field.tab === tab ? "" : "is-hidden" }> 
+                      <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
+                      
+                        <Columns options="is-mobile">
+                          <Column size="pl-5">
+                            <PageField 
+                              field={field}
+                              fieldData={docItem}
+                              relatedDataMap={
                                 field.inputSource && field.inputSource.filter(item => 
-                                  item[field.relatedDataField] === docItem.id).map(i => ({...i}))
+                                item[field.relatedDataField] === docItem.id).map(i => ({...i}))
                               }
-                            toggleViewDrawer={()=>handleToggle()}
-                            toggleFieldDropDown={()=>setIsRelatedActive(!isRelatedActive)}
-                            isViewRelatedActive={isRelatedActive}
-                            handleClick={(e)=>handleClick(e)}
-                            handleArrayMapDelete={(e, arr)=>handleArrayMapDelete(e, arr, field)}
-                          />
-                       
-                      </Column>
-                    </Columns>
-                      
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
+                              toggleViewDrawer={()=>handleToggle()}
+                              toggleFieldDropDown={()=>setIsRelatedActive(!isRelatedActive)}
+                              isViewRelatedActive={isRelatedActive}
+                              handleClick={(e)=>handleClick(e)}
+                              handleArrayMapDelete={(e, arr)=>handleArrayMapDelete(e, arr, field)}
+                              handleArrayMapDrawer={(field) => handleArrayMapDrawer(field)}
+                              handleRelatedDrawer={(field) => handleRelatedDrawer(field)}
+                            />
+                          </Column>
+                        </Columns>
+                        
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
 
               <DrawerComponent 
                 title="Edit"
@@ -655,9 +593,6 @@ return (
                   currentCompany={currentCompany}
                   currentCompanyID={currentCompanyID}
                 />
-
-                
-
               </DrawerComponent>
 
               <DrawerComponent 
@@ -667,7 +602,6 @@ return (
                 direction="right"
                 handleSubmit={()=> handleArrayMapSubmit()}
               >
-
                 <PageInputFields 
                   
                   handleClose={()=>setIsArrayMapDrawerOpen(!isArrayMapDrawerOpen)}
@@ -683,12 +617,7 @@ return (
                   currentCompany={currentCompany}
                   currentCompanyID={currentCompanyID}
                 />
-
-                
-
               </DrawerComponent>
-              
-
               <DrawerComponent
                 title="Add New"
                 checked={isRelatedDrawerOpen}
@@ -696,14 +625,6 @@ return (
                 handleClose={()=>setIsRelatedDrawerOpen(!isRelatedDrawerOpen)}
                 handleSubmit={()=>handleRelatedSubmit()}
               >
-{/** 
-                <QuickAdd 
-                  colRef={relatedInputData.collection}
-                  dataField={relatedInputData.field}
-                  label={relatedInputData.label}
-                  handleRelatedInputChange={(e)=>handleRelatedInputChange(e)}
-                />
-*/}
                 <RelatedPageInputFields 
                   relatedFields={relatedInputData.pageFields}
                   handleChange={(e)=>handleRelatedInputChange(e)}
@@ -712,9 +633,7 @@ return (
                   handleUpdated={()=>setUpdated(!updated)}
                   activeData={active}
                   relatedData={relatedInputData}
-                />
-
-                
+                /> 
               </DrawerComponent>
 
           </div>
@@ -734,13 +653,6 @@ return (
         </> : 
           <div className="tile warning"> No record to display </div>
       }    
-
-      {
-      /**<MonthlyCostGraph 
-        id={params.id}
-      />*/
-      }
-
     </DrawerPage>
     <Footer 
       handleEditButton={(e)=> setIsDrawerOpen(e)}
@@ -748,6 +660,8 @@ return (
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
       handleUpdated={fetchPage}
+      isModule={isModule}
+      id={data.id}
     />
     </Loading>
     

@@ -80,7 +80,7 @@ export const FieldProvider = (props) => {
         Value: 'Status'
       },
       {
-        Label: 'Account Number',
+        Label: 'Account',
         Value: 'AccountNum'
       },
       {
@@ -633,6 +633,13 @@ export const FieldProvider = (props) => {
         inputValue: "Value", 
         tab: "BASIC INFO",
         tabLabel: "BASIC INFO" 
+      },
+      {
+        label: 'Tags',
+        dataField: 'Tags',
+        inputFieldType: 'tags',
+        tab: 'BASIC INFO',
+        tabLabel: 'BASIC INFO'
       },
       {
         label: 'Details',

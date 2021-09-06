@@ -11,7 +11,7 @@ const Tab = ({data, handleClick, active, children}) => {
   const dataArr = data != undefined ? data.filter(f => f.tab != undefined) : ""
   const groupedArr = data != undefined ? arrGroup(dataArr, 'tab') : ""
   const tabs = Object.keys(groupedArr)
-  console.log(active)
+  
   return(
     <>
       {
@@ -22,7 +22,7 @@ const Tab = ({data, handleClick, active, children}) => {
             </a>
           </li>
         )
-        }          
+      }          
     </>
   )
 }

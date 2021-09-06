@@ -10,10 +10,9 @@ import AddDocButtonFooter from './Components/Navs/AddDocButtonFooter'
 
 
 const Footer = (props) => {
-  const {handleEditButton, isDrawerOpen, isBookmarked, tags} = props
-  const { isModule, id } = useParams()
-  
 
+  const {handleEditButton, isDrawerOpen, isBookmarked, tags, isModule, id} = props
+  
   return(
     <>
     <nav className="navbar footerblur is-fixed-bottom is-active">
@@ -41,6 +40,8 @@ const Footer = (props) => {
           <AddTagButtonFooter 
             values={tags}
             handleUpdated={props.handleUpdated}
+            isModule={isModule}
+            id={id}
           />
         </div>
         <div className="navbar-item is-inline-block-touch pl-4 pr-4">

@@ -1,13 +1,19 @@
 import React from 'react'
 
-const TagCloud = ({data, label, handleClick}) => {
+const TagCloud = ({data, handleTagDelete}) => {
 
   return(
     <div className="field is-grouped is-grouped-multiline">
-      <div className="title">{label}</div>
         <div className="control">
           <div className="tags">
-            {!data ? null : data.map(tag => <div className="tag" onClick={()=>handleClick(tag.id)}>{tag.label}</div>)}
+            {!data ? null : data.map(tag => 
+              
+                <span className="tag is-rounded">
+                  {tag}
+                  <button className="delete is-small is-hidden" onClick={()=>handleTagDelete()}></button>
+                </span>
+              
+            )}
           </div>
         </div>
     </div>
