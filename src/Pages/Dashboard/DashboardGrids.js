@@ -101,7 +101,7 @@ const DashboardGrids = ({visible}) => {
   
   const [groupByOptions, setGroupByOptions] = useState(serviceGroupByFields)
 
-  const [groupBy, setGroupBy] = useState(userDefaults?.groupBy || "Vendor")  
+  const [groupBy, setGroupBy] = useState(userDefaults?.groupBy || "ALL")  
 
   const [recent, setRecent] = useState()
 
@@ -163,97 +163,18 @@ const DashboardGrids = ({visible}) => {
     setIsCurrentDocID(id)
     setIsDrawerOpen(true)
   }
-  
-/**Row Clicks */
-  const handleServiceClickOld = (id) => {
-                  
-                    history.push({
-                      pathname: `/Services/${currentCompanyID}/${id}`,
-                      state: {
-                        currentCompanyID: currentCompanyID,
-                        cachedLocations: locations,
-                        cachedAccounts: accounts,
-                        cachedServices: services,
-                      }
-                    })
-  }
 
-  const handleTicketClickOld = (id) => {
-                    history.push({
-                      pathname: `/Tickets/${currentCompanyID}/${id}`,
-                      state: {
-                      id: id,
-                      services: services,
-                      locations: locations,
-                      accounts: accounts,
-                      tickets: tickets
-                      }
-                    })
-  }
-
-  const handleAccountClickOld = (id) => {
-                    history.push({
-                      pathname: `/Accounts/${currentCompanyID}/${id}`,
-                      state: {
-                      id: id,
-                      services: services,
-                      locations: locations,
-                      accounts: accounts
-                      }
-                    })
-  }
-
-  const handleOrderClickOld = (id) => {
-                    history.push({
-                      pathname: `/Orders/${currentCompanyID}/${id}`,
-                      state: {
-                      id: id,
-                      currentCompanyID: currentCompanyID,
-                      cachedLocations: locations,
-                      cachedAccounts: accounts
-                      
-                      }
-                    })
-  }
-
-  const handleUserClickOld = (id) => {
-                  
-    history.push({
-      pathname: `/Users/${currentCompanyID}/${id}`,
-      state: {
-        currentCompanyID: currentCompanyID,
-        cachedLocations: locations,
-        cachedAccounts: accounts,
-        cachedServices: services,
-      }
-    })
+  const handleContractClick = (id) => {
+    setIsModule("Contracts")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
   }
 
   const handleLocationClick = (id) => {
-    history.push({
-      pathname: `/Locations/${currentCompanyID}/${id}`,
-      state: {
-      id: id,
-      currentCompanyID: currentCompanyID,
-      cachedLocations: locations,
-      cachedAccounts: accounts
-      
-      }
-    })
-}
-
-const handleContractClick = (id) => {
-  history.push({
-    pathname: `/Contracts/${currentCompanyID}/${id}`,
-    state: {
-    id: id,
-    currentCompanyID: currentCompanyID,
-    cachedLocations: locations,
-    cachedAccounts: accounts
-    
-    }
-  })
-}
+    setIsModule("Locations")
+    setIsCurrentDocID(id)
+    setIsDrawerOpen(true)
+  }
   
   /** Handle Change when choosing different Grid via Selector */
 
@@ -376,6 +297,7 @@ return (
         headerFields={ticketGridColumns}
         mobileHeaderFields={ticketMobileGridColumns}
         handleClick={(e) => handleTicketClick(e)}
+        handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
     </div>
@@ -386,21 +308,23 @@ return (
         headerFields={orderGridColumns}
         mobileHeaderFields={orderMobileGridColumns}
         handleClick={(e) => handleOrderClick(e)}
+        handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
     </div>
     <div className={grid === 'ACCOUNTS' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "ACCOUNTS" ? accounts : null}
         isGrid='Accounts'
         headerFields={accountGridColumns}
         mobileHeaderFields={accountMobileGridColumns}
         handleClick={(e) => handleAccountClick(e)}
+        handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
     </div>
     <div className={grid === 'LOCATIONS' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "LOCATIONS" ? locations : null}
         isGrid='Locations'
         headerFields={locationGridColumns}
@@ -411,7 +335,7 @@ return (
       />
     </div>
     <div className={grid === 'CONTRACTS' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "CONTRACTS" ? contracts : null}
         isGrid='Contracts'
         headerFields={contractGridColumns}
@@ -422,7 +346,7 @@ return (
       />
     </div>
     <div className={grid === 'USERS' ? "" : "is-hidden"}>
-      <GridGroup
+      <GridGroup2
         data={grid === "USERS" ? users : null}
         isGrid='Users'
         headerFields={userGridColumns}
