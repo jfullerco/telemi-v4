@@ -5,6 +5,7 @@ import MapListTable from '../Tables/MapListTable'
 import TagCloud from '../Tags/TagCloud'
 import Columns from './Columns'
 import Column from './Column'
+import LabeledTextField from '../Fields/LabeledTextField'
 
 const PageField = ({
     field, 
@@ -25,7 +26,8 @@ const PageField = ({
 
           case "text":
             return (
-              <> 
+              <>
+              <div className="is-hidden-mobile"> 
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -35,11 +37,17 @@ const PageField = ({
                     {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )} 
                   </Column>
                 </Columns>
+              </div>
+              <LabeledTextField 
+                label={field.label}
+                value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
+              />
               </>
             )
           case "text-area":
             return (
               <>
+              <div className="is-hidden-mobile">
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -51,11 +59,17 @@ const PageField = ({
                     </div>
                   </Column>
                 </Columns>
+              </div>
+              <LabeledTextField 
+                label={field.label}
+                value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
+              />
               </>
             )
           case "currency":
             return (
               <>
+              <div className="is-hidden-mobile">
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -65,6 +79,11 @@ const PageField = ({
                     $ {[fieldData].map(data => data[item.dataField] && data[item.dataField] != "" ? data[item.dataField] : "--"  )}
                   </Column>
                 </Columns>
+              </div>
+              <LabeledTextField 
+                label={field.label}
+                value={`$ ${[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}`}
+              />
               </>
             )
           case "related-select":
@@ -121,6 +140,10 @@ const PageField = ({
                     }
                   </Column>
                 </Columns>
+                <LabeledTextField 
+                  label={field.label}
+                  value={`${[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}`}
+                />
               </>
             )
             

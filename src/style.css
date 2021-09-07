@@ -75,7 +75,6 @@ body {
   background-color: rgba(240, 240, 240, 0.7);
   
   backdrop-filter: blur(10px);
-  
 }
 
 .footer-menu {
@@ -91,6 +90,30 @@ body {
   height:700px;
   
   background-color:white;
+}
+
+.text-field {
+  position: relative;
+  padding-top: 1rem;
+  height: 55px;
+  
+}
+
+.text-field-label {
+  position: absolute;
+  
+  font-size: .70rem;
+  padding-left: .85rem;
+  
+  transform: translate(0, -16px) scale(1);
+}
+
+.text-field-input {
+  
+  position: absolute;
+  width: 100%;
+  padding-left: .2rem;
+  padding-top: 5px;
 }
  
 .wrapper {

@@ -23,6 +23,7 @@ import Columns from '../../Components/Layout/Columns'
 import Column from '../../Components/Layout/Column'
 import SideDrawer from '../../Components/Drawers/SideDrawer'
 import DetailDrawer from '../DetailDrawer'
+import LabeledTextField from '../../Components/Fields/LabeledTextField'
 
 const DashboardGrids = ({visible}) => {
 
@@ -265,7 +266,7 @@ return (
       
     </Columns>
     </div>
-
+    <LabeledTextField />
     <Grid title="Monthly Cost">
       <CostBySite />
     </Grid>

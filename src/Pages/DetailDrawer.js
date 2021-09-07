@@ -523,7 +523,7 @@ return (
                       <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
                       
                         <Columns options="is-mobile">
-                          <Column size="pl-5">
+                          <Column size="pl-3 pr-3">
                             <PageField 
                               field={field}
                               fieldData={docItem}
