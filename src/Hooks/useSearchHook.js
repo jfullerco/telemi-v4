@@ -7,7 +7,8 @@ export function useSearchHook() {
     locations, 
     services, 
     tickets, 
-    orders } = userContext.userSession
+    orders,
+    accounts } = userContext.userSession
 
   const [searchValue, setSearchValue] = useState("")
   const [data, setData] = useState([])
@@ -15,6 +16,9 @@ export function useSearchHook() {
 
   const searchLocationRef = [...locations]
   const searchServiceRef = [...services]
+  const searchTicketRef = [...tickets]
+  const searchOrderRef = [...orders]
+  const searchAccountRef = [...accounts]
 
   useEffect(() => {
     
@@ -22,7 +26,13 @@ export function useSearchHook() {
 
     const serviceResults = searchValue && searchServiceRef && searchServiceRef != undefined ? searchServiceRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
 
-    setSearchResults({...searchResults, ['locations']: locationResults, ['services']: serviceResults})
+    const ticketResults = searchValue && searchTicketRef && searchTicketRef != undefined ? searchTicketRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
+
+    const orderResults = searchValue && searchOrderRef && searchOrderRef != undefined ? searchOrderRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
+
+    const accountResults = searchValue && searchAccountRef && searchAccountRef != undefined ? searchAccountRef.filter((obj) => Object.keys(obj).some((el) => obj[el].toString().toLowerCase().indexOf(searchValue) > -1)) : ""
+
+    setSearchResults({...searchResults, ['locations']: locationResults, ['services']: serviceResults, ['tickets']: ticketResults, ['orders']: orderResults, ['accounts']: accountResults})
     console.log(searchResults) 
   },[searchValue])
 
