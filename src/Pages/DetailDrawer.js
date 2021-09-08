@@ -636,7 +636,7 @@ return (
     <Footer 
       handleEditButton={(e)=> setIsDrawerOpen(e)}
       isDrawerOpen={isDrawerOpen}
-      isDetailDrawerOpen={props.isDetailDrawerOpen}
+      handleClose={()=>props.isDetailDrawerOpen()}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
       handleUpdated={fetchPage}

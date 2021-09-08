@@ -11,7 +11,7 @@ import AddDocButtonFooter from './Components/Navs/AddDocButtonFooter'
 
 const Footer = (props) => {
 
-  const {handleEditButton, isDrawerOpen, isBookmarked, tags, isModule, id, isDetailDrawerOpen} = props
+  const {handleEditButton, isDrawerOpen, isBookmarked, tags, isModule, id, handleClose} = props
   
   return(
     <>
@@ -48,7 +48,7 @@ const Footer = (props) => {
           <DeleteButtonFooter 
             isModule={isModule}
             id={id}
-            isDetailDrawerOpen={(e)=>props.isDetailDrawerOpen(e)}
+            handleClose={()=>handleClose()}
           />
         </div>
       </div>

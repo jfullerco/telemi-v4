@@ -4,12 +4,6 @@
   
 }
 
-* {
-  overscroll-behavior: none;
-  
-  /**border: 1px solid red;*/
-}
-
 body {
   
   display: flex;

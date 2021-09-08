@@ -8,12 +8,13 @@ const DeleteButtonFooter = (props) => {
   
   const history = useHistory()
   const [ toggle, setToggle ] = useState(false)
+  const {isModule, id, handleClose} = props
 
-  const handleClick = async(props) => {
+  const handleClick = async() => {
     
     try {
 
-    const res = await db.collection(props.isModule).doc(props.id).delete()
+    const res = await db.collection(isModule).doc(id).delete()
     console.log(res)
     
     autoClose()
@@ -26,11 +27,11 @@ const DeleteButtonFooter = (props) => {
     
   }
 
-  const autoClose = (props) => {
+  const autoClose = () => {
 
-    setTimeout(() => { 
-      props.isDetailDrawerOpen(false)
-    }, 1500 )
+    setTimeout(() =>  
+      handleClose()
+    , 1500 )
 
   }
 

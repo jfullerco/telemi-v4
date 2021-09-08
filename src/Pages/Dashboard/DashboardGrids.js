@@ -363,7 +363,7 @@ return (
         isModule={isModule}
         isNew={isNewDoc}
         isDrawerActive={isNewDoc}
-        isDetailDrawerOpen={setIsDrawerOpen}
+        isDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
         resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>

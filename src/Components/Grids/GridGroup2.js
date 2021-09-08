@@ -265,7 +265,7 @@ const GridGroup = ({ data,
         <Table params="table is-hoverable is-fullwidth is-centered">
             <TableHead params="is-size-6">
               {/**Full Window Header - ALL */} 
-              <TableRow params="is-hidden-touch">
+              <TableRow params="is-hidden-mobile">
                 {headerFields && headerFields.map(col => 
                   <TableHeadItem 
                     params={col.headerName === groupBy ? "is-hidden": ""} 
@@ -283,7 +283,7 @@ const GridGroup = ({ data,
 
               {/**Mobile Window Header - ALL */} 
 
-              <TableRow params="is-hidden-desktop">
+              <TableRow params="is-hidden-tablet">
                 {mobileHeaderFields && mobileHeaderFields.map(col => 
                   <TableHeadItem 
                     params={col.headerName === groupBy ? "is-hidden": ""} 
@@ -303,7 +303,7 @@ const GridGroup = ({ data,
 
             {/**Full Window List - ALL */} 
 
-            <TableBody params="is-size-7 is-hidden-touch">
+            <TableBody params="is-size-7 is-hidden-mobile">
               {data && data != undefined ? data.map(item => 
                 <TableRow handleRowClick={()=>handleClick(item.id)} key={item.id}> 
                   {headerFields && headerFields.map(col => 
