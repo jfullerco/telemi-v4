@@ -9,7 +9,7 @@ import { db } from '../../Contexts/firebase'
 import { useSortHook } from '../../Hooks/useSortHook'
 import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
-import {serviceGroupByFields as groupByOptions} from '../../Contexts/initialFields'
+
 
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
