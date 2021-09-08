@@ -6,6 +6,7 @@ import TagCloud from '../Tags/TagCloud'
 import Columns from './Columns'
 import Column from './Column'
 import LabeledTextField from '../Fields/LabeledTextField'
+import LabeledTextRelatedField from '../Fields/LabeledTextRelatedField'
 
 const PageField = ({
     field, 
@@ -90,6 +91,7 @@ const PageField = ({
             return (
 
               <>
+              <div className="is-hidden-mobile">
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -140,9 +142,41 @@ const PageField = ({
                     }
                   </Column>
                 </Columns>
-                <LabeledTextField 
+                </div>
+                <LabeledTextRelatedField 
                   label={field.label}
-                  value={`${[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}`}
+                  value={
+                    fieldData && item.relatedDataType === "Location" ?
+                      item.inputSource != "" ? 
+                        item.inputSource.filter(f => f.id === fieldData[item.relatedDataField]).map(location =>  
+                          location != undefined ? 
+                            <p className="donotwrapfield is-hidden-tablet" key={location.id}>
+                              {location.Name} -
+                                {`
+                                  ${location.Address1 || ""} 
+                                  ${location.Address2 || ""} 
+                                  ${location.City || ""}, 
+                                  ${location.State || ""} 
+                                  ${location.Zip || ""}
+                                `}
+                            </p> : "Full Address not entered"
+                          ) : null : 
+                      fieldData && item.relatedDataType === "Account" ? 
+                        <a onClick={(e)=> handleClick({colRef: "Accounts", id: fieldData[item.relatedDataField]})}> 
+                          {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
+                        </a> 
+                    : 
+                      fieldData && item.relatedDataType === "Service" ? 
+                        <a onClick={(e)=> handleClick({colRef: "Services", id: fieldData[item.relatedDataField]})}> 
+                          {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
+                        </a> 
+                    : 
+                      fieldData && item.relatedDataType === "Order" ? 
+                      <a onClick={(e)=> handleClick({colRef: "Orders", id: fieldData[item.relatedDataField]})}> 
+                        {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
+                      </a> 
+                    : null
+                  }
                 />
               </>
             )
@@ -205,6 +239,7 @@ const PageField = ({
           case "status":
             return (
               <>
+              <div className='is-hidden-mobile'>
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -222,13 +257,18 @@ const PageField = ({
                   
                   </Column>
                 </Columns>
-                
+                </div>
+                <LabeledTextField 
+                  label={field.label}
+                  value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
+                />
               </>
             )
           
           case "tags":
             return (
               <> 
+              <div className='is-hidden-mobile'>
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -244,7 +284,11 @@ const PageField = ({
                   
                   </Column>
                 </Columns> 
-                
+                </div>
+                <LabeledTextField 
+                  label={field.label}
+                  value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
+                />
               </>
             )
 
@@ -276,6 +320,7 @@ const PageField = ({
           default:
               return (
                 <>
+                <div className='is-hidden-mobile'>
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
                     <div key={field.label}>{field.label}</div>
@@ -289,6 +334,11 @@ const PageField = ({
                   } 
                   </Column>
                 </Columns>
+                </div>
+                <LabeledTextField 
+                  label={field.label}
+                  value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
+                />
                 </>
               )
             }

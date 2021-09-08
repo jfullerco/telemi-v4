@@ -25,7 +25,7 @@ const DetailDrawer = (props) => {
 
   const history = useHistory()
   
-  const { isModule, currentCompanyID } = props && props || null
+  const { isModule } = props && props || null
 
   const userContext = useContext(stateContext)
 
@@ -53,6 +53,7 @@ const DetailDrawer = (props) => {
           bills,
           notes,
           currentCompany,
+          currentCompanyID,
           currentUser } = userContext.userSession
 
     const {
@@ -99,7 +100,7 @@ const DetailDrawer = (props) => {
     setLoading(true)
     handlePageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
-    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchPage(props) : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
      
@@ -110,7 +111,7 @@ const DetailDrawer = (props) => {
     checkForNew(props.isDrawerActive, props.isNew)
     setLoading(true)
     handlePageFields(isModule)
-    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchPage(props) : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     
@@ -225,9 +226,9 @@ const DetailDrawer = (props) => {
   */
 
 /** Fetch Document from Firebase */  
-  const fetchPage = async() => {
+  const fetchPage = async(props) => {
    
-    const pageFieldsRef = await db.collection(isModule).doc(props.id).get() 
+    const pageFieldsRef = await db.collection(props.isModule).doc(props.id).get() 
     const data = pageFieldsRef.data()
     const id = pageFieldsRef.id
     setActive({id: id, ...data})
@@ -493,7 +494,7 @@ return (
 
     <Loading active={loading}>
 
-    <DrawerPage title={currentCompany}>
+    <DrawerPage>
       {userContext && userContext.userSession != undefined ? 
         <> 
           <TabBar>
@@ -635,12 +636,12 @@ return (
     <Footer 
       handleEditButton={(e)=> setIsDrawerOpen(e)}
       isDrawerOpen={isDrawerOpen}
-      isDetailDrawerOpen={(e)=>props.isDetailDrawerOpen(e)}
+      isDetailDrawerOpen={props.isDetailDrawerOpen}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
       handleUpdated={fetchPage}
-      isModule={isModule}
-      id={data.id}
+      isModule={props.isModule}
+      id={props.id}
     />
     </Loading>
     

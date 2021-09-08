@@ -9,7 +9,7 @@ const TabBar = ({children}) => {
       </ul>
     </div>
     
-    <div className="tabs is-fullwidth is-hidden-mobile">
+    <div className="tabs is-hidden-mobile">
     <ul>
       {children}
     </ul>

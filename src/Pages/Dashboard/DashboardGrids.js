@@ -266,7 +266,7 @@ return (
       
     </Columns>
     </div>
-    <LabeledTextField />
+    
     <Grid title="Monthly Cost">
       <CostBySite />
     </Grid>
@@ -351,14 +351,19 @@ return (
     
     <p/>
 
-    <SideDrawer direction="right" checked={isDrawerOpen} handleClose={() => setIsDrawerOpen(!isDrawerOpen)}>
+    <SideDrawer 
+      direction="right" 
+      checked={isDrawerOpen} 
+      handleClose={() => setIsDrawerOpen(!isDrawerOpen)}
+      title={currentCompany}
+    >
       <DetailDrawer
         currentCompanyID={currentCompanyID}
         id={isCurrentDocID}
         isModule={isModule}
         isNew={isNewDoc}
         isDrawerActive={isNewDoc}
-        isDetailDrawerOpen={(e)=>setIsDrawerOpen(false)}
+        isDetailDrawerOpen={setIsDrawerOpen}
         resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>

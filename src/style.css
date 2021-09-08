@@ -54,6 +54,13 @@ body {
   overflow: hidden;
 }
 
+.donotwrapfield {
+  max-width: 75vw;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 
 .drawerPaper {
   width: 85vw;
@@ -63,6 +70,7 @@ body {
 .drawer-paper-full {
   width: 100vw;
   padding: 1rem;
+  background: rgba(240, 240, 240, 0.5);
 }
 
 .notification {
@@ -96,7 +104,6 @@ body {
   position: relative;
   padding-top: 1rem;
   height: 55px;
-  
 }
 
 .text-field-label {
