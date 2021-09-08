@@ -308,7 +308,7 @@ const GridGroup = ({ data,
                 <TableRow handleRowClick={()=>handleClick(item.id)} key={item.id}> 
                   {headerFields && headerFields.map(col => 
                     <TableData 
-                      params={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-4"} 
+                      params="donotwrapcell py-4"
                       key={item[col.headerName]} 
                     >
                       {item[col.docField] && col.type === "currency" ? `$ ${item[col.docField]}` : item[col.docField]} 
@@ -325,7 +325,7 @@ const GridGroup = ({ data,
                 <TableRow handleRowClick={()=>handleClick(item.id)} key={item.id}> 
                   {mobileHeaderFields && mobileHeaderFields.map(col => 
                     <TableData 
-                      params={col.headerName === groupBy ? "is-hidden" : "donotwrapcell py-3"} 
+                      params="donotwrapcell py-3" 
                       key={item[col.headerName]} 
                     >
                       {item[col.docField] && col.type === "currency" ? `$ ${item[col.docField]}` : item[col.docField]} 
