@@ -25,7 +25,7 @@ const DetailDrawer = (props) => {
 
   const history = useHistory()
   
-  const { isModule } = props && props || null
+  const { isModule, isDetailDrawerOpen } = props && props || null
 
   const userContext = useContext(stateContext)
 
@@ -94,32 +94,34 @@ const DetailDrawer = (props) => {
   
   const {refreshModule} = useRefreshDataHook(isModule)
   
-  
+  console.log('active', active, 'data', data)
   useEffect(() => {
     
     setLoading(true)
     handlePageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
-    props.isNew === false ? fetchPage(props) : ""
+    props.isNew === false ? fetchPage() : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
      
   }, [])
 
   useEffect(() => {
-    setPageFields()
-    checkForNew(props.isDrawerActive, props.isNew)
     setLoading(true)
+    setPageFields(isModule)
+    checkForNew(props.isDrawerActive, props.isNew)
+    
     handlePageFields(isModule)
-    props.isNew === false ? fetchPage(props) : ""
+    props.isNew === false ? fetchPage() : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     
-  }, [isModule])
+  }, [isModule, isDetailDrawerOpen])
 
   useEffect(() => {
     
     handlePageFields(isModule)
+    props.isNew === false ? fetchPage() : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     handleSetHeader()
@@ -206,7 +208,7 @@ const DetailDrawer = (props) => {
   }
 
   const handleFinishedLoading = () => {
-    setTimeout(() => {setLoading(false)}, 1000)
+    setTimeout(() => {setLoading(false)}, 1500)
   }
 
   const handleSetHeader = () => {
@@ -226,8 +228,8 @@ const DetailDrawer = (props) => {
   */
 
 /** Fetch Document from Firebase */  
-  const fetchPage = async(props) => {
-   
+  const fetchPage = async() => {
+   console.log('props:', props)
     const pageFieldsRef = await db.collection(props.isModule).doc(props.id).get() 
     const data = pageFieldsRef.data()
     const id = pageFieldsRef.id
@@ -295,7 +297,7 @@ const DetailDrawer = (props) => {
       setPageError("Error saving")
       setTimeout(() => {setPageError(false)}, 1000)
     } 
-    setDocIsNew(false) 
+    
     setUpdated(true)
     setIsDrawerOpen(!isDrawerOpen)
   }
@@ -636,7 +638,7 @@ return (
     <Footer 
       handleEditButton={(e)=> setIsDrawerOpen(e)}
       isDrawerOpen={isDrawerOpen}
-      handleClose={()=>props.isDetailDrawerOpen()}
+      handleClose={()=>props.setIsDetailDrawerOpen()}
       isBookmarked={active.isBookmarked}
       tags={active.Tags}
       handleUpdated={fetchPage}

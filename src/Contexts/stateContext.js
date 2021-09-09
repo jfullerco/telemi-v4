@@ -42,100 +42,7 @@ export const StateProvider = (props) => {
       dataLoading: false,
 
     }
-
-    const serviceTypes = [
-    { id: "Internet",
-      Name: "Internet" },
-    { id: "Internet with Voice",
-      Name: "Internet with Voice" },
-    { id: "Ethernet",
-      Name: "Ethernet" },
-    { id: "MPLS",
-      Name: "MPLS" },
-    { id: "MPLS with Voice",
-      Name: "MPLS with Voice" },
-    { id: "SIP Voice",
-      Name: "SIP Voice" },
-    { id: "Legacy Voice",
-      Name: "Legacy Voice" },
-    { id: "UCaaS",
-      Name: "UCaaS" },
-    { id: "Managed Security",
-      Name: "Managed Security" },
-    { id: "Hosting",
-      Name: "Hosting" },
-    { id: "Mobility",
-      Name: "Mobility" }
-    ]
-
-    const accessTypes = [
-      { id: "T1",
-      Name: "T1" },
-      { id: "Ethernet",
-      Name: "Ethernet" },
-      { id: "Fiber",
-      Name: "Fiber" },
-      { id: "Cable/DSL",
-      Name: "Cable/DSL" },
-    ]
-
-    const serviceStatusType = [
-      { id: "Active",
-      Name: "Active" },
-      { id: "Disconnected",
-      Name: "Disconnected" },
-      { id: "Pending Activation",
-      Name: "Pending Activation" },
-      { id: "Pending Disconnect",
-      Name: "Pending Disconnect" },
-    ]
-
-    const orderStatusType = [
-      { id: "Ordered",
-      Name: "Ordered" },
-      { id: "Completed",
-      Name: "Completed" },
-      { id: "Cancelled",
-      Name: "Cancelled" },
-    ]
-
-    const orderType = [
-      {
-        id: "New",
-      Name: "New"
-      },
-      {
-        id: "Change",
-        Name: "Change"
-      },
-      {
-        id: "Disconnect",
-        Name: "Disconnect"
-      },
-    ]
-
-    const vendorList = [
-      {id: "AT&T",
-      Name: "AT&T"},
-      {id: "Verizon",
-      Name: "Verizon"},
-      {id: "Lumen",
-      Name: "Lumen"},
-      {id: "Lumos",
-      Name: "Lumos"},
-      {id: "Windstream",
-      Name: "Windstream"},
-      {id: "Lingo",
-      Name: "Lingo"},
-      {id: "Comcast",
-      Name: "Comcast"},
-      {id: "Masergy",
-      Name: "Masergy"},
-      {id: "Spectrum",
-      Name: "Spectrum"},
-      {id: "Microsoft",
-      Name: "Microsoft"}
-    ]
+    
 
     //** Global Service Calls */
 
@@ -311,6 +218,16 @@ export const StateProvider = (props) => {
         id: doc.id,
         ...doc.data()}))
       setContracts(contracts)
+    }
+
+    const handleSubmitNew = async(isModule, data) => {
+    
+      try {
+        await db.collection(isModule).doc().set(data) 
+      } catch {
+        console.log("Error submitting new document")
+      } 
+
     }
     
     /** Global Style Variables */
@@ -594,13 +511,9 @@ export const StateProvider = (props) => {
           refreshContracts,
           fetchNotes,
           refreshNotes,
+          handleSubmitNew,
 
-          vendorList,
-          serviceTypes,
-          accessTypes,
-          serviceStatusType,
-          orderStatusType,
-          orderType,
+          
 
           setDataLoading,
           setCurrentGrid,

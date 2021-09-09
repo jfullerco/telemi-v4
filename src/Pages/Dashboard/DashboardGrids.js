@@ -23,7 +23,7 @@ import Columns from '../../Components/Layout/Columns'
 import Column from '../../Components/Layout/Column'
 import SideDrawer from '../../Components/Drawers/SideDrawer'
 import DetailDrawer from '../DetailDrawer'
-import LabeledTextField from '../../Components/Fields/LabeledTextField'
+import SquareSelectField from '../../Components/Forms/SquareSelectField'
 
 const DashboardGrids = ({visible}) => {
 
@@ -99,16 +99,24 @@ const DashboardGrids = ({visible}) => {
   const [recent, setRecent] = useState()
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isNewDocDrawerOpen, setIsNewDocDrawerOpen] = useState(false)
   const [isNewDoc, setIsNewDoc] = useState(false)
   const [isCurrentDocID, setIsCurrentDocID] = useState()
   const [isModule, setIsModule] = useState()
+  
 
   const { sortedArr, sortArr } = useSortHook() 
+
+  console.log('isNew:', 'grid:', grid, 'isNewDoc:', isNewDoc, 'isModule:', isModule, 'isCurrentDocID:', isCurrentDocID)
 
   useEffect(() => {
    recentUpdatesArr("SERVICES") 
   },[services])
-  
+
+  useEffect(() => {
+    
+  },[isDrawerOpen])
+
   useEffect(() => {
     grid === 'SERVICES' ? setGroupByOptions(serviceGroupByFields) : 
     grid === 'TICKETS' ? setGroupByOptions(ticketGroupByFields) :
@@ -192,9 +200,11 @@ const DashboardGrids = ({visible}) => {
   const handleAddClick = (id) => {
     const isModule = modGridStr(grid)
     setIsModule(isModule)
-    setIsNewDoc(true)
-    setIsDrawerOpen(true)
+    
+    setIsNewDocDrawerOpen(true)
+    
   }
+
   
   const recentUpdatesArr = (arr) => {
     switch (arr) {
@@ -266,7 +276,10 @@ return (
       
     </Columns>
     </div>
-    
+    <SquareSelectField 
+      label="Test Label"
+      placeholder="Test Placeholder"
+    />
     <Grid title="Monthly Cost">
       <CostBySite />
     </Grid>
@@ -361,9 +374,27 @@ return (
         currentCompanyID={currentCompanyID}
         id={isCurrentDocID}
         isModule={isModule}
-        isNew={isNewDoc}
-        isDrawerActive={isNewDoc}
-        isDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
+        isNew={isNewDoc || false}
+        isDrawerActive={isNewDoc || false}
+        setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
+        isDetailDrawerOpen={isDrawerOpen}
+        resetIsNew={()=>setIsNewDoc()}
+      />
+    </SideDrawer>
+    <SideDrawer 
+      direction="right" 
+      checked={isNewDocDrawerOpen} 
+      handleClose={() => setIsNewDocDrawerOpen(!isNewDocDrawerOpen)}
+      title={currentCompany}
+    >
+      <DetailDrawer
+        currentCompanyID={currentCompanyID}
+        id={isCurrentDocID}
+        isModule={isModule}
+        isNew={true}
+        isDrawerActive={true}
+        setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
+        isDetailDrawerOpen={isDrawerOpen}
         resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>

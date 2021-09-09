@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { FaTrash } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
+import {useRefreshDataHook} from '../../Hooks/useRefreshDataHook'
 
 const DeleteButtonFooter = (props) => {
 
@@ -9,6 +10,7 @@ const DeleteButtonFooter = (props) => {
   const history = useHistory()
   const [ toggle, setToggle ] = useState(false)
   const {isModule, id, handleClose} = props
+  const {refreshModule} = useRefreshDataHook(isModule)
 
   const handleClick = async() => {
     
@@ -16,7 +18,7 @@ const DeleteButtonFooter = (props) => {
 
     const res = await db.collection(isModule).doc(id).delete()
     console.log(res)
-    
+    refreshModule(isModule)
     autoClose()
 
     } catch {

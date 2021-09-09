@@ -4,16 +4,12 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import { StateProvider, stateContext } from './Contexts/stateContext'
 import { FieldProvider } from './Contexts/fieldContext'
 import { AuthProvider } from './Contexts/AuthContext'
-
 import Hello from './Pages/Hello'
 import Dashboard from './Pages/Dashboard'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import NavBar from './Components/NavBar'
-
-
 import AddCompany from './Pages/Companies/AddCompany'
-
 import DetailModule from './Pages/DetailModule'
 import RelatedDetailModule from './Pages/RelatedDetailModule'
 
@@ -22,8 +18,6 @@ import UserSettings from './Pages/Users/UserSettings'
 import Search from './Pages/Search'
 import Menu from './Components/Menu/Menu'
 import MenuList from './Components/Menu/MenuList'
-
-
 
 export default function App() {
   
@@ -38,26 +32,10 @@ export default function App() {
        
       <div className="columns is-variable is-mobile">
       <div className="column is-1 is-hidden-mobile">
-        <div className="is-hidden">
-          <Menu>
-          <div className="buttons is-right">
-            <button className="delete"></button>
-          </div>
-            <MenuList>
-              <li><a>Home</a></li>
-              <li><a className="is-active">Companies</a>
-              <ul>
-                <li><a>Add a company</a></li>  
-                <li><a>Manage your companies</a></li>
-              </ul></li>
-
-            </MenuList>
-          </Menu>
-        </div>
-        
       </div>
-      <div className="column is-12-mobile is-four-fifths-tablet is-10-desktop is-10-widescreen is-10-fullhd">
-      <div className="container"> 
+        <div className="column is-12-mobile is-four-fifths-tablet is-10-desktop is-10-widescreen is-10-fullhd">
+        <div className="container"> 
+
           <Switch>
             
             <Route exact path="/"  component={Hello} />
@@ -78,11 +56,9 @@ export default function App() {
             
         </div>
         </div>
-        <div className="column is-1 is-hidden-mobile"></div>
-        </div>  
-        
-      
-     
+      <div className="column is-1 is-hidden-mobile"></div>
+      </div>  
+         
     </Router>
     </FieldProvider>
     </AuthProvider>

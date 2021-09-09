@@ -28,6 +28,9 @@ const Footer = (props) => {
         <div className="navbar-item is-inline-block-touch pl-4 pr-4">
           <AddBookmarkFooter 
             isBookmarked={isBookmarked}
+            id={id}
+            isModule={isModule}
+            handleClose={()=>handleClose()}
           />
         </div>
         <div className="navbar-item is-inline-block-touch pl-4 pr-4 is-hidden">
