@@ -2,13 +2,14 @@ import * as firebase from 'firebase/app'
 
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyBi2EZr6TAuP_M0GDf2t6kYjVSBr-EEHgI",
-  authDomain: "telemi-develop.firebaseapp.com",
-  projectId: "telemi-develop",
-  storageBucket: "telemi-develop.appspot.com",
-  messagingSenderId: "208473651772",
-  appId: "1:208473651772:web:b7d880afd16985ad626139",
-  measurementId: "G-K3F50P2C8N"
+  apiKey: "AIzaSyCLcH3HfDZU-0Qa8k90hHYhQZZRyOAy8j4",
+  authDomain: "tiems-24d17.firebaseapp.com",
+  databaseURL: "https://tiems-24d17-default-rtdb.firebaseio.com",
+  projectId: "tiems-24d17",
+  storageBucket: "tiems-24d17.appspot.com",
+  messagingSenderId: "371736927443",
+  appId: "1:371736927443:web:9d80c3abc38e399db3c826",
+  measurementId: "G-1R2QK5MPPK"
 })
 
 export const auth = app.auth() 
