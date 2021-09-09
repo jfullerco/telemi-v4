@@ -3,8 +3,6 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 
-
-
 const app = firebase.initializeApp({
   apiKey: "AIzaSyCLcH3HfDZU-0Qa8k90hHYhQZZRyOAy8j4",
   authDomain: "tiems-24d17.firebaseapp.com",
@@ -15,8 +13,6 @@ const app = firebase.initializeApp({
   appId: "1:371736927443:web:9d80c3abc38e399db3c826",
   measurementId: "G-1R2QK5MPPK"
 })
-
-
 
 export const auth = app.auth()
 export const db = app.firestore()
