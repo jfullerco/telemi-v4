@@ -1,5 +1,5 @@
-import firebase from "firebase/app"
-import 'firebase/auth'
+import * as firebase from "firebase/app"
+
 import 'firebase/firestore'
 import 'firebase/storage'
 
@@ -14,7 +14,7 @@ const appInit = firebase.initializeApp({
   measurementId: "G-1R2QK5MPPK"
 })
 
-export const auth = appInit.auth()
+export const auth = appInit.getAuth()
 export const db = appInit.firestore()
 export const store = appInit.storage()
 
