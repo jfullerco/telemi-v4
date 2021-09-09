@@ -1,7 +1,9 @@
-import * as firebase from 'firebase/app'
+import firebase from "firebase/app"
 import 'firebase/auth'
+import 'firebase/firestore'
+import 'firebase/storage'
 
-const app = firebase.initializeApp({
+const appInit = firebase.initializeApp({
   apiKey: "AIzaSyCLcH3HfDZU-0Qa8k90hHYhQZZRyOAy8j4",
   authDomain: "tiems-24d17.firebaseapp.com",
   databaseURL: "https://tiems-24d17-default-rtdb.firebaseio.com",
@@ -12,9 +14,9 @@ const app = firebase.initializeApp({
   measurementId: "G-1R2QK5MPPK"
 })
 
-export const auth = app.auth()
-export const db = app.firestore()
-export const store = app.storage()
+export const auth = appInit.auth()
+export const db = appInit.firestore()
+export const store = appInit.storage()
 
 
-export default app
+export default appInit
