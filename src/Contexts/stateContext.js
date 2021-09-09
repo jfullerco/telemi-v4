@@ -1,6 +1,7 @@
 import React, {useState, createContext, useReducer} from 'react'
 import stateReducer from './stateReducer'
 import {db} from './firebase'
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
 
 
 
@@ -47,22 +48,24 @@ export const StateProvider = (props) => {
     //** Global Service Calls */
 
     const fetchLocations = async() => {
-      const locationsRef = await db.collection("Locations")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const locationsRef = await query(getDocs(collection(db, "Locations"),
+        where("CompanyID", "==", userSession.currentCompanyID)))
       const locations = locationsRef.docs.map(doc => ({
         id: doc.id, 
         ...doc.data()
       }))
+      console.log(locations)
       setLocations(locations)
     }
 
     const refreshLocations = async(id) => {
-      const locationsRef = await db.collection("Locations")
-        .where("CompanyID", "==", id).get()
+      const locationsRef = await getDocs(collection(db, "Locations"), 
+      where("CompanyID", "==", id))
       const locations = locationsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }))
+      console.log(locations)
       setLocations(locations)
     }
 

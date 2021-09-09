@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
-
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
 import { db } from '../Contexts/firebase'
 
 import CompanyList from './Companies/CompanyList'
@@ -91,7 +91,7 @@ const Dashboard = () => {
 
   const fetchUser = async(email) => {
     
-    const userRef = await db.collection("Users").where("Email", "==", email).get()
+    const userRef = await getDocs(collection(db, "Users").where("Email", "==", email))
     const user = await userRef.docs.map(doc => ({id: doc.id, FirstName: doc.FirstName, Type: doc.Type, ...doc.data()}))
     
     await setUserFirstName(user[0].FirstName)
@@ -125,7 +125,7 @@ const Dashboard = () => {
   }
 
   const fetchCompanies = async() => {
-    const companiesRef = await db.collection("Companies").where("Users", "array-contains", currentUser).get() 
+    const companiesRef = await getDocs(collection(db, "Companies").where("Users", "array-contains", currentUser))
      
     const companies = await companiesRef.docs.map(doc => ({id: doc.id, ...doc.data()}))
     
@@ -137,7 +137,7 @@ const Dashboard = () => {
   }
 
   const fetchCompaniesAdmin = async() => {
-    const companiesRef = await db.collection("Companies").get() 
+    const companiesRef = await getDocs(collection(db, "Companies"))
     
     const companies = await companiesRef.docs.map(doc => ({id: doc.id, ...doc.data()}))
     
