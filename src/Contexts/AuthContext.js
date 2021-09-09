@@ -20,7 +20,7 @@ export function AuthProvider({children}) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
+    return auth.signInWithEmailAndPassword(auth, email, password)
   }
 
   useEffect(() => {

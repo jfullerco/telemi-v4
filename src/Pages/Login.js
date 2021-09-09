@@ -16,9 +16,10 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [modalState, setModalState] = useState(true)
   const [loginError, setLoginError] = useState('')
-
+console.log(login)
   async function handleSubmit(e) {
     e.preventDefault()
+    console.log(emailRef.current.value, passwordRef.current.value)
     if (emailRef.current.value && passwordRef.current.value === "") {
       return setLoginError('Both email and password required')
     }
@@ -33,7 +34,7 @@ export default function Login() {
       history.push("/dashboard")
     } catch {
       setLoginError('Email or Password is incorrect')
-      console.log(loginError)
+      console.log('Email or Password is incorrect')
     }
     setLoading(false)
    
