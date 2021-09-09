@@ -1,22 +1,31 @@
-import {firebase} from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/storage'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-const app = firebase.initializeApp({
-  apiKey: "AIzaSyCLcH3HfDZU-0Qa8k90hHYhQZZRyOAy8j4",
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyD2bcK_vkMuuLB2SmD0dHZdDqj3YLuod5Y",
   authDomain: "tiems-24d17.firebaseapp.com",
   databaseURL: "https://tiems-24d17-default-rtdb.firebaseio.com",
   projectId: "tiems-24d17",
   storageBucket: "tiems-24d17.appspot.com",
   messagingSenderId: "371736927443",
-  appId: "1:371736927443:web:9d80c3abc38e399db3c826",
-  measurementId: "G-1R2QK5MPPK"
-})
+  appId: "1:371736927443:web:654f431bd4833cf9b3c826",
+  measurementId: "G-4YK9LJLX6X"
+};
 
-export const auth = app.auth() 
-export const db = app.firestore()
-export const store = app.storage()
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+export const auth = getAuth(app) 
+export const db = getFirestore(app)
+export const store = getStorage(app) 
 
 
 export default app
