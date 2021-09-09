@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-
+import { getFirestore, collection, query, where, getDocs, } from 'firebase/firestore'
 import { useAuth } from '../Contexts/AuthContext'
 import {db} from '../Contexts/firebase'
 
@@ -27,7 +27,8 @@ console.log(login)
       setLoginError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      await db.collection('AccessLog').doc().set({
+      console.log('signed in')
+      const docRef = await addDoc(collection(db, 'AccessLog'), {
         Email: emailRef.current.value,
         Date: new Date()
       })
