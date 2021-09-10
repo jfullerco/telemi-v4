@@ -276,10 +276,7 @@ return (
       
     </Columns>
     </div>
-    <SquareSelectField 
-      label="Test Label"
-      placeholder="Test Placeholder"
-    />
+    
     <Grid title="Monthly Cost">
       <CostBySite />
     </Grid>
