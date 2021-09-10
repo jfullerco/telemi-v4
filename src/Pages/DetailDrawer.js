@@ -294,12 +294,12 @@ const DetailDrawer = (props) => {
     
     try {
       
-      await db.collection(isModule).doc().set(data) 
+      await addDoc(collection(db, isModule), data) 
       
-      setPageSuccess("Changes Saved!")
+      console.log("Changes Saved!")
       setTimeout(() => {setPageSuccess(false)}, 1000)
     } catch {
-      setPageError("Error saving")
+      console.log("Error saving")
       setTimeout(() => {setPageError(false)}, 1000)
     } 
     
@@ -308,7 +308,7 @@ const DetailDrawer = (props) => {
   }
 
   const handleSubmitUpdated = async() => { 
-    
+     
       try {
         
         await db.collection(isModule).doc(props.id).update({
