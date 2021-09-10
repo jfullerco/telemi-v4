@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { collection, query, where, getDocs, getDoc, addDoc, doc } from 'firebase/firestore'
+import { collection, query, where, getDocs, getDoc, addDoc, updateDoc, doc } from 'firebase/firestore'
 import { useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
@@ -25,7 +25,7 @@ const DetailDrawer = (props) => {
 
   const history = useHistory()
   
-  const { isModule, isDetailDrawerOpen } = props && props || null
+  const { isModule, isDetailDrawerOpen, id } = props && props || null
 
   const userContext = useContext(stateContext)
 
@@ -307,20 +307,21 @@ const DetailDrawer = (props) => {
     setIsDrawerOpen(!isDrawerOpen)
   }
 
-  const handleSubmitUpdated = async() => { 
-     
+  const handleSubmitUpdated = async(data) => { 
+    const docData = {
+      ...data, 
+      ['LastUpdated']: setCurrentDate(), 
+      ['LastUpdateBy']: currentUser
+    }
+    const docRef = doc(db, isModule, id)
       try {
         
-        await db.collection(isModule).doc(props.id).update({
-          ...data, 
-          ['LastUpdated']: setCurrentDate(), 
-          ['LastUpdateBy']: currentUser
-        })
+        await updateDoc(docRef, docData)
         
-        setPageSuccess("CHANGES SAVED!")
+        console.log("Document updated!")
         setTimeout(() => {setPageSuccess(false)}, 1000)
       } catch {
-        setPageError("ERROR SAVING CHANGES")
+        console.log("Error updating document")
       } 
       setDocIsNew(false) 
       setUpdated(true)
