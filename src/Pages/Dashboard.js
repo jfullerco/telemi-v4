@@ -91,13 +91,14 @@ const Dashboard = () => {
 
   const fetchUser = async(email) => {
     
-    const userRef = await getDocs(collection(db, "Users").where("Email", "==", email))
+    const q = query(collection(db, "Users"), where("Email", "==", email))
+    const userRef = await getDocs(q)
     const user = await userRef.docs.map(doc => ({id: doc.id, FirstName: doc.FirstName, Type: doc.Type, ...doc.data()}))
-    
+    console.log(user)
     await setUserFirstName(user[0].FirstName)
     await setUserType(user[0].Type)
     await setUserDefaults(user[0].Defaults && user[0].Defaults)
-    console.log([user][0][FirstName])
+    
   }
 
   const isCurrentCompany = () => {
@@ -125,7 +126,8 @@ const Dashboard = () => {
   }
 
   const fetchCompanies = async() => {
-    const companiesRef = await getDocs(collection(db, "Companies").where("Users", "array-contains", currentUser))
+    const q = query(collection(db, "Companies"), where("Users", "array-contains", currentUser))
+    const companiesRef = await getDocs(q)
      
     const companies = await companiesRef.docs.map(doc => ({id: doc.id, ...doc.data()}))
     
@@ -137,6 +139,7 @@ const Dashboard = () => {
   }
 
   const fetchCompaniesAdmin = async() => {
+    
     const companiesRef = await getDocs(collection(db, "Companies"))
     
     const companies = await companiesRef.docs.map(doc => ({id: doc.id, ...doc.data()}))

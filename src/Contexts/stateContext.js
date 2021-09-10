@@ -1,7 +1,7 @@
 import React, {useState, createContext, useReducer} from 'react'
 import stateReducer from './stateReducer'
 import {db} from './firebase'
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, query, where, getDocs } from 'firebase/firestore'
 
 
 
@@ -48,30 +48,33 @@ export const StateProvider = (props) => {
     //** Global Service Calls */
 
     const fetchLocations = async() => {
-      const locationsRef = await query(getDocs(collection(db, "Locations"),
-        where("CompanyID", "==", userSession.currentCompanyID)))
+      const q = query(collection(db, "Locations"),
+      where("CompanyID", "==", userSession.currentCompanyID))
+      const locationsRef = await getDocs(q)
       const locations = locationsRef.docs.map(doc => ({
         id: doc.id, 
         ...doc.data()
       }))
-      console.log(locations)
+      console.log('Fetched Locations')
       setLocations(locations)
     }
 
     const refreshLocations = async(id) => {
-      const locationsRef = await getDocs(collection(db, "Locations"), 
+      const q = query(collection(db, "Locations"), 
       where("CompanyID", "==", id))
+      const locationsRef = await getDocs(q)
       const locations = locationsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }))
-      console.log(locations)
+      console.log('Refreshed Locations')
       setLocations(locations)
     }
 
     const fetchServices = async() => {
-      const servicesRef = await db.collection("Services")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Services"),
+      where("CompanyID", "==", userSession.currentCompanyID))
+      const servicesRef = await getDocs(q)
       const services = servicesRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
@@ -81,8 +84,9 @@ export const StateProvider = (props) => {
     }
 
     const refreshServices = async() => {
-      const servicesRef = await db.collection("Services")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Services"), 
+      where("CompanyID", "==", userSession.currentCompanyID))
+      const servicesRef = await getDocs(q)
       const services = servicesRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
@@ -92,8 +96,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchTickets = async() => {
-      const ticketsRef = await db.collection("Tickets")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Tickets"), where("CompanyID", "==", userSession.currentCompanyID))
+      const ticketsRef = await getDocs(q)
       const tickets = ticketsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -102,8 +106,8 @@ export const StateProvider = (props) => {
     }
 
     const refreshTickets = async() => {
-      const ticketsRef = await db.collection("Tickets")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Tickets"), where("CompanyID", "==", userSession.currentCompanyID))
+      const ticketsRef = await getDocs(q)
       const tickets = ticketsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -112,8 +116,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchOrders = async() => {
-      const ordersRef = await db.collection("Orders")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Orders"), where("CompanyID", "==", userSession.currentCompanyID))
+      const ordersRef = await getDocs(q)
       const orders = ordersRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -122,8 +126,8 @@ export const StateProvider = (props) => {
     }
 
     const refreshOrders = async() => {
-      const ordersRef = await db.collection("Orders")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Orders"), where("CompanyID", "==", userSession.currentCompanyID))
+      const ordersRef = await getDocs(q)
       const orders = ordersRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -132,8 +136,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchAccounts = async() => {
-      const accountsRef = await db.collection("Accounts")
-        .where("CompanyID", "==", userSession.currentCompanyID).orderBy("AccountNum").get()
+      const q = query(collection(db, "Accounts"), where("CompanyID", "==", userSession.currentCompanyID))
+      const accountsRef = await getDocs(q)
       const accounts = accountsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -141,8 +145,8 @@ export const StateProvider = (props) => {
     }
 
     const refreshAccounts = async() => {
-      const accountsRef = await db.collection("Accounts")
-        .where("CompanyID", "==", userSession.currentCompanyID).orderBy("AccountNum").get()
+      const q = query(collection(db, "Accounts"), where("CompanyID", "==", userSession.currentCompanyID))
+      const accountsRef = await getDocs(q)
       const accounts = accountsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -150,8 +154,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchBills = async() => {
-      const billsRef = await db.collection("Bills")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Bills"), where("CompanyID", "==", userSession.currentCompanyID))
+      const billsRef = await getDocs(q)
       const bills = billsRef.docs.map(doc => ({
         id: doc.id, 
         ...doc.data()
@@ -160,8 +164,8 @@ export const StateProvider = (props) => {
     }
     
     const refreshBills = async() => {
-      const billsRef = await db.collection("Bills")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Bills"), where("CompanyID", "==", userSession.currentCompanyID))
+      const billsRef = await getDocs(q)
       const bills = billsRef.docs.map(doc => ({
         id: doc.id, 
         ...doc.data()
@@ -170,8 +174,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchUsers = async() => {
-      const usersRef = await db.collection("Users")
-        .where("Companies", "array-contains", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Users"), where("Companies", "array-contains", userSession.currentCompanyID))
+      const usersRef = await getDocs(q)
       const users = usersRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -179,8 +183,8 @@ export const StateProvider = (props) => {
     }
 
     const refreshUsers = async() => {
-      const usersRef = await db.collection("Users")
-        .where("Companies", "array-contains", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Users"), where("Companies", "array-contains", userSession.currentCompanyID))
+      const usersRef = await getDocs(q)
       const users = usersRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -188,8 +192,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchNotes = async() => {
-      const notesRef = await db.collection("Notes")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Notes"), where("CompanyID", "==", userSession.currentCompanyID))
+      const notesRef = await getDocs(q)
       const notes = notesRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -197,7 +201,8 @@ export const StateProvider = (props) => {
     }
 
     const refreshNotes = async() => {
-      const notesRef = await db.collection("Notes")
+      const q = query(collection(db, "Notes"), where("CompanyID", "==", userSession.currentCompanyID))
+      const notesRef = await getDocs(q)
         .where("CompanyID", "==", userSession.currentCompanyID).get()
       const notes = notesRef.docs.map(doc => ({
         id: doc.id,
@@ -206,8 +211,8 @@ export const StateProvider = (props) => {
     }
 
     const fetchContracts = async() => {
-      const contractsRef = await db.collection("Contracts")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Contracts"), where("CompanyID", "==", userSession.currentCompanyID))
+      const contractsRef = await getDocs(q)
       const contracts = contractsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -215,8 +220,8 @@ export const StateProvider = (props) => {
     }
 
     const refreshContracts = async() => {
-      const contractsRef = await db.collection("Contracts")
-        .where("CompanyID", "==", userSession.currentCompanyID).get()
+      const q = query(collection(db, "Contracts"), where("CompanyID", "==", userSession.currentCompanyID))
+      const contractsRef = await getDocs(q)
       const contracts = contractsRef.docs.map(doc => ({
         id: doc.id,
         ...doc.data()}))
@@ -245,7 +250,8 @@ export const StateProvider = (props) => {
     const [toggleDevTools, setToggleDevTools] = useState(false)
 
     const fetchCompanies = async(currentUser) => {
-      return await db.collection("Companies").where("Users", "array-contains", currentUser).get()
+      const q = query(collection(db, "Companies"), where("Users", "array-contains", currentUser))
+      return await getDocs(q)
     }
     
     const [userSession, dispatch] = useReducer(stateReducer, initialState)

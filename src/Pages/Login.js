@@ -16,7 +16,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [modalState, setModalState] = useState(true)
   const [loginError, setLoginError] = useState('')
-console.log(login)
+
   async function handleSubmit(e) {
     e.preventDefault()
     console.log(emailRef.current.value, passwordRef.current.value)

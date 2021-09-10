@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
 import { db, store } from '../Contexts/firebase'
+import { collection, query, where, getDocs, getDoc, addDoc, doc } from 'firebase/firestore'
 import { fieldContext } from '../Contexts/fieldContext'
 import {useRefreshDataHook} from '../Hooks/useRefreshDataHook'
 
@@ -229,17 +230,20 @@ const DetailDrawer = (props) => {
 
 /** Fetch Document from Firebase */  
   const fetchPage = async() => {
-   console.log('props:', props)
-    const pageFieldsRef = await db.collection(props.isModule).doc(props.id).get() 
-    const data = pageFieldsRef.data()
-    const id = pageFieldsRef.id
+    
+    const docRef = doc(db, props.isModule, props.id)
+    const docSnap = await getDoc(docRef) 
+    console.log(docSnap)
+    const data = docSnap.data()
+    const id = docSnap.id
     setActive({id: id, ...data})
     setData(data)
   
   }
 
   const fetchBills = async() => {
-    const billsRef = await db.collection("Bills").where("ServiceID", "==", props.id).get()
+    const q = query(collection(db, "Bills"), where("ServiceID", "==", props.id))
+    const billsRef = await getDocs(q)
     const bills = await billsRef.docs.map(doc => ({
       id: doc.id,
       ...doc.data()}))
