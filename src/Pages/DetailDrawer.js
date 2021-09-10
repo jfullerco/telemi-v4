@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { collection, query, where, getDocs, getDoc, addDoc, doc } from 'firebase/firestore'
+import { useHistory } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
 import { db, store } from '../Contexts/firebase'
-import { collection, query, where, getDocs, getDoc, addDoc, doc } from 'firebase/firestore'
 import { fieldContext } from '../Contexts/fieldContext'
-import {useRefreshDataHook} from '../Hooks/useRefreshDataHook'
+import { useRefreshDataHook } from '../Hooks/useRefreshDataHook'
 
 import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
@@ -18,7 +18,6 @@ import Tab from '../Components/Tabs/Tab'
 
 import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
-import MonthlyCostGraph from '../Components/Graphs/MonthlyCostGraph'
 import Footer from '../Footer'
 
 
@@ -252,7 +251,8 @@ const DetailDrawer = (props) => {
   } 
 
   const fetchOrders = async() => {
-    const ordersRef = await db.collection("Orders").where("ServiceID", "==", props.id).get()
+    const q = query(collection(db, "Orders"), where("ServiceID", "==", props.id))
+    const ordersRef = await getDocs(q)
     const orders = await ordersRef.docs.map(doc => ({
       id: doc.id,
       ...doc.data()}))
@@ -261,7 +261,8 @@ const DetailDrawer = (props) => {
   } 
   
   const fetchNotes = async() => {
-    const notesRef = await db.collection("Notes").where("ServiceID", "==", props.id).get()
+    const q = query(collection(db, "Notes"), where("ServiceID", "==", props.id))
+    const notesRef = await getDocs(q)
     const notes = await notesRef.docs.map(doc => ({
       id: doc.id,
       ...doc.data()}))
