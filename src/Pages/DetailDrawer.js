@@ -330,13 +330,14 @@ const DetailDrawer = (props) => {
   }
 
   const handleRelatedSubmit = async() => {
-    
+    const docData = relatedSubmitData
+    const docRef = doc(db, relatedInputData.collection)
     try {
-    await db.collection(relatedInputData.collection).doc().set(relatedSubmitData)
-      setPageSuccess(`New ${relatedInputData.label} Saved`)
+    await addDoc(docRef, docData)
+      console.log(`Successfully saved new ${relatedInputData.label}`)
       setTimeout(() => {setPageSuccess(false)}, 1000)
     } catch {
-      setPageError(`Error Saving New ${relatedInputData.label}`)
+      setPageError(`Error saving new ${relatedInputData.label}`)
       setTimeout(() => {setPageError(false)}, 1000)
     }  
       setIsRelatedDrawerOpen(!isRelatedDrawerOpen)

@@ -1,32 +1,24 @@
 import React, { useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { doc, deleteDoc } from 'firebase/firestore'
 import { FaTrash } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 import {useRefreshDataHook} from '../../Hooks/useRefreshDataHook'
 
 const DeleteButtonFooter = (props) => {
 
-  
-  const history = useHistory()
   const [ toggle, setToggle ] = useState(false)
   const {isModule, id, handleClose} = props
   const {refreshModule} = useRefreshDataHook(isModule)
 
   const handleClick = async() => {
-    
     try {
-
-    const res = await db.collection(isModule).doc(id).delete()
-    console.log(res)
+    await deleteDoc(doc(db, isModule, id))
+    console.log("Successfully deleted document")
     refreshModule(isModule)
     autoClose()
-
     } catch {
-
-      console.log("Error Deleting Record")
-
-    }
-    
+      console.log("Error deleting document")
+    } 
   }
 
   const autoClose = () => {
