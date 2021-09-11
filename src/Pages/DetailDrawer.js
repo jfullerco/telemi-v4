@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { collection, query, where, getDocs, getDoc, addDoc, updateDoc, doc } from 'firebase/firestore'
 import { useHistory } from 'react-router-dom'
-
 import { stateContext } from '../Contexts/stateContext'
-import { db, store } from '../Contexts/firebase'
+import { db, fire, store } from '../Contexts/firebase'
 import { fieldContext } from '../Contexts/fieldContext'
 import { useRefreshDataHook } from '../Hooks/useRefreshDataHook'
-
+import { useLoading } from '../Hooks/useLoading'
 import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
 import DrawerPage from '../Components/DrawerPage'
@@ -28,44 +26,58 @@ const DetailDrawer = (props) => {
   const { isModule, isDetailDrawerOpen, id } = props && props || null
 
   const userContext = useContext(stateContext)
+  const {
+    collection, 
+    query, 
+    where, 
+    getDocs, 
+    getDoc, 
+    addDoc, 
+    updateDoc, 
+    doc
+  } = fire
 
-  const { serviceTypes, 
-          accessTypes, 
-          vendorList, 
-          isStyle,
-          setBills,
-          setOrders,
-          setCurrentDate,
-          setLocations,
-          setAccounts,
-          setServices,
-          setUsers,
-          setNotes,
-          refreshServices } = userContext
+  const { 
+    serviceTypes, 
+    accessTypes, 
+    vendorList, 
+    isStyle,
+    setBills,
+    setOrders,
+    setCurrentDate,
+    setLocations,
+    setAccounts,
+    setServices,
+    setUsers,
+    setNotes,
+    refreshServices 
+  } = userContext
 
-  const { locations,
-          services, 
-          orders, 
-          accounts,
-          tickets,
-          contracts,
-          users,
-          bills,
-          notes,
-          currentCompany,
-          currentCompanyID,
-          currentUser } = userContext.userSession
+  const { 
+    locations,
+    services, 
+    orders, 
+    accounts,
+    tickets,
+    contracts,
+    users,
+    bills,
+    notes,
+    currentCompany,
+    currentCompanyID,
+    currentUser 
+  } = userContext.userSession
 
-    const {
-      serviceDetailFields,
-      orderDetailFields,
-      accountDetailFields,
-      ticketDetailFields,
-      billsDetailFields,
-      locationDetailFields,
-      contractDetailFields,
-      userDetailFields
-    } = useContext(fieldContext)
+  const {
+    serviceDetailFields,
+    orderDetailFields,
+    accountDetailFields,
+    ticketDetailFields,
+    billsDetailFields,
+    locationDetailFields,
+    contractDetailFields,
+    userDetailFields
+  } = useContext(fieldContext)
   
   const [data, setData] = useState("")
   const [active, setActive] = useState("")
@@ -73,7 +85,7 @@ const DetailDrawer = (props) => {
 
   const [activeSubtitle, setActiveSubtitle] = useState("")
   const [docIsNew, setDocIsNew] = useState()
-  const [loading, setLoading] = useState(true)
+  
   const [updated, setUpdated] = useState(false)
 
   const [pageFields, setPageFields] = useState([])
@@ -93,11 +105,11 @@ const DetailDrawer = (props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
   const {refreshModule} = useRefreshDataHook(isModule)
+  const [loading, toggleLoading] = useLoading(true)
   
-  console.log('active', active, 'data', data)
   useEffect(() => {
     
-    setLoading(true)
+    toggleLoading(true)
     handlePageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
     props.isNew === false ? fetchPage() : ""
@@ -107,10 +119,10 @@ const DetailDrawer = (props) => {
   }, [])
 
   useEffect(() => {
-    setLoading(true)
+
+    toggleLoading(true)
     setPageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
-    
     handlePageFields(isModule)
     props.isNew === false ? fetchPage() : ""
     props.isNew === false ? fetchBills() : ""
@@ -132,18 +144,22 @@ const DetailDrawer = (props) => {
   },[loading])
 
   useEffect(() => {
-    setLoading(!loading)
+
+    toggleLoading(true)
     refreshModule(isModule)
     setUpdated(false)
     handleFinishedLoading()
+
   },[updated])
   
 
 /** Map-List - Side Effect to inherit related data  */
 
   useEffect(() => {
+
     relatedInputData.pageFields && relatedInputData.pageFields ? 
     handleInheritedData(relatedInputData) : ""
+
   },[relatedInputData])
 
 /** Set Page Fields based on initialFields */
@@ -208,7 +224,11 @@ const DetailDrawer = (props) => {
   }
 
   const handleFinishedLoading = () => {
-    setTimeout(() => {setLoading(false)}, 1500)
+
+    setTimeout(() => {
+      toggleLoading(false)
+    }, 1500)
+
   }
 
   const handleSetHeader = () => {
@@ -241,6 +261,7 @@ const DetailDrawer = (props) => {
   }
 
   const fetchBills = async() => {
+
     const q = query(collection(db, "Bills"), where("ServiceID", "==", props.id))
     const billsRef = await getDocs(q)
     const bills = await billsRef.docs.map(doc => ({
@@ -251,6 +272,7 @@ const DetailDrawer = (props) => {
   } 
 
   const fetchOrders = async() => {
+
     const q = query(collection(db, "Orders"), where("ServiceID", "==", props.id))
     const ordersRef = await getDocs(q)
     const orders = await ordersRef.docs.map(doc => ({
@@ -261,6 +283,7 @@ const DetailDrawer = (props) => {
   } 
   
   const fetchNotes = async() => {
+
     const q = query(collection(db, "Notes"), where("ServiceID", "==", props.id))
     const notesRef = await getDocs(q)
     const notes = await notesRef.docs.map(doc => ({
@@ -271,6 +294,7 @@ const DetailDrawer = (props) => {
   } 
 
   const handleFileChange = async(e) => {
+
     const file = e.target.files[0]
     const imageRef = store.ref(currentCompanyID).child(`${data.Name && data.Name}'-'${currentCompany}`)
     await imageRef.put(file)
@@ -279,13 +303,13 @@ const DetailDrawer = (props) => {
        ...data,
        ['FileURL']: fileURL
       })
+
   }  
 
   const handleSubmit = () => {
       
       docIsNew === true ? 
-      handleSubmitNew(data)
-      : 
+      handleSubmitNew(data) : 
       handleSubmitUpdated(data)
         
   }
@@ -293,70 +317,91 @@ const DetailDrawer = (props) => {
   const handleSubmitNew = async(data) => {
     
     try {
-      
+
       await addDoc(collection(db, isModule), data) 
-      
       console.log("Changes Saved!")
       setTimeout(() => {setPageSuccess(false)}, 1000)
+
     } catch {
+
       console.log("Error saving")
       setTimeout(() => {setPageError(false)}, 1000)
+
     } 
     
     setUpdated(true)
     setIsDrawerOpen(!isDrawerOpen)
+
   }
 
   const handleSubmitUpdated = async(data) => { 
+
     const docData = {
       ...data, 
       ['LastUpdated']: setCurrentDate(), 
       ['LastUpdateBy']: currentUser
     }
+
     const docRef = doc(db, isModule, id)
+
       try {
         
         await updateDoc(docRef, docData)
         
         console.log("Document updated!")
-        setTimeout(() => {setPageSuccess(false)}, 1000)
+        
       } catch {
+
         console.log("Error updating document")
+
       } 
+
       setDocIsNew(false) 
       setUpdated(true)
       setIsDrawerOpen(false)
       setIsArrayMapDrawerOpen(false)
+
   }
 
   const handleRelatedSubmit = async() => {
+
     const docData = relatedSubmitData
     const docRef = doc(db, relatedInputData.collection)
+
     try {
+
     await addDoc(docRef, docData)
       console.log(`Successfully saved new ${relatedInputData.label}`)
-      setTimeout(() => {setPageSuccess(false)}, 1000)
+
     } catch {
-      setPageError(`Error saving new ${relatedInputData.label}`)
-      setTimeout(() => {setPageError(false)}, 1000)
+
+      console.log(`Error saving new ${relatedInputData.label}`)
+      
     }  
+
       setIsRelatedDrawerOpen(!isRelatedDrawerOpen)
       setUpdated(true)
-      setLoading(!loading)  
+      setLoading(!loading) 
+
   }
 
 const handleToggle = () => {
+
   setIsDrawerOpen(!isDrawerOpen)
+
 }
 
 const handleChange = (e) => {
+
   const {name, value} = e.target
   console.log(name, value)
   setActive({...active, [name]: value})
   setData({...data, [name]: value})
+
 }
 
 const handleRelatedSelectChange = (e, relatedDataField) => {
+
   e.preventDefault()
   const selectedValue = e.target.options[e.target.selectedIndex].text
   const id = e.target.options[e.target.selectedIndex].id
@@ -367,6 +412,7 @@ const handleRelatedSelectChange = (e, relatedDataField) => {
   setActive({...active, [relatedName]: id, [name]: value})
   setData({...data, [relatedName]: id, [name]: value})
   setUpdated(!updated)
+
 }
 
 const handleGoBack = () => {
@@ -535,6 +581,7 @@ return (
                         <Columns options="is-mobile">
                           <Column size="pl-3 pr-3">
                             <PageField 
+                              loading={loading}
                               field={field}
                               fieldData={docItem}
                               relatedDataMap={

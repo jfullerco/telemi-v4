@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
-import { db } from '../../Contexts/firebase'
+import { db, fire } from '../../Contexts/firebase'
 
 const AddBookmarkFooter = (props) => {
 
   const {isModule, id, isBookmarked} = props
-  const history = useHistory()
+
+  const {doc, updateDoc} = fire
+
   const [ toggle, setToggle ] = useState()
   
   useEffect(() => {
@@ -14,12 +15,16 @@ const AddBookmarkFooter = (props) => {
   },[isBookmarked])
 
   const handleClick = async() => {
+    const docData = {
+      ['isBookmarked']: !isBookmarked
+    }
+    const docRef = doc(db, isModule, id)
     try {
-      const res = await db.collection(isModule).doc(id).update({['isBookmarked']: !isBookmarked})
-      console.log(res)
+      await updateDoc(docRef, docData)
+      console.log("Successfully bookmarked document")
       setToggle(!toggle)
     } catch {
-      console.log("Error Bookmarking Record")
+      console.log("Error bookmarking document")
     } 
   }
 

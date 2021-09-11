@@ -9,6 +9,7 @@ import LabeledTextField from '../Fields/LabeledTextField'
 import LabeledTextRelatedField from '../Fields/LabeledTextRelatedField'
 
 const PageField = ({
+    loading,
     field, 
     fieldData,  
     relatedDataMap, 
@@ -28,6 +29,8 @@ const PageField = ({
           case "text":
             return (
               <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> : 
+              <>
               <div className="is-hidden-mobile"> 
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
@@ -43,7 +46,9 @@ const PageField = ({
                 label={field.label}
                 value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
               />
-              </>
+            </>
+            }
+            </>  
             )
           case "text-area":
             return (
