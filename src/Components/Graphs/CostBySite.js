@@ -8,11 +8,8 @@ const CostBySite = () => {
   const userContext = useContext(stateContext)
   const {services} = userContext.userSession
 
-  
-
-  /**
-   * const grouper = (arr) => arr != "" ? arr.reduce((LocationName, MRC) => {
-    
+/**
+  * const grouper = (arr) => arr != "" ? arr.reduce((LocationName, MRC) => {
     let total = (parseInt(LocationName[MRC.LocationName]) || 0) + (parseInt(MRC.MRC) || 0)
     !LocationName[MRC.LocationName] ? LocationName[MRC.LocationName] = [] : LocationName
     LocationName[MRC.LocationName].push({
@@ -20,7 +17,6 @@ const CostBySite = () => {
       label: MRC.LocationName,
       value: MRC.MRC || 0
     }) 
-    
     return LocationName
   },[]) : ""
   
@@ -31,6 +27,7 @@ const CostBySite = () => {
     return sum += value
   }
 **/
+
   const sum = (acc, value) => {
     return acc += value
   }
@@ -59,7 +56,7 @@ const CostBySite = () => {
     {totalMonthlyCost > 1 ? 
       (
         <>
-        <div className="is-hidden-mobile" style={{height: 400}}>
+        <div className="is-hidden-mobile is-hidden-tablet is-hidden-desktop" style={{height: '20vh'}}>
       
           <ResponsivePie
           data={pieData}
