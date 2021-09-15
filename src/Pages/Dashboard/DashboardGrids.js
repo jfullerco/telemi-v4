@@ -107,7 +107,9 @@ const DashboardGrids = ({visible}) => {
 
   const { sortedArr, sortArr } = useSortHook() 
 
-  console.log('isNew:', 'grid:', grid, 'isNewDoc:', isNewDoc, 'isModule:', isModule, 'isCurrentDocID:', isCurrentDocID)
+  /**
+   * console.log('isNew:', 'grid:', grid, 'isNewDoc:', isNewDoc, 'isModule:', isModule, 'isCurrentDocID:', isCurrentDocID)
+   * */
 
   useEffect(() => {
    recentUpdatesArr("SERVICES") 

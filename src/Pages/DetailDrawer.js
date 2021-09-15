@@ -34,7 +34,9 @@ const DetailDrawer = (props) => {
     getDoc, 
     addDoc, 
     updateDoc, 
-    doc
+    doc,
+    arrayUnion,
+    arrayRemove
   } = fire
 
   const { 
@@ -466,16 +468,10 @@ const handleArrayMapDelete = (e, arr, field) => {
       }
 
 }
+console.log('data:', data, 'active:', active)
+const handleArrayMapSubmit = async(data) => {
 
-const handleArrayMapSubmit = async() => {
-
-  try {     
-    await db.collection(isModule).doc(props.id).update({
-      ...data, [isArrayMapInputData.dataField]: [
-        ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
-      ['LastUpdated']: setCurrentDate(), 
-      ['LastUpdateBy']: currentUser
-    })
+  try{
     setActive({
       ...data, [isArrayMapInputData.dataField]: [
         ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
@@ -488,8 +484,8 @@ const handleArrayMapSubmit = async() => {
       ['LastUpdated']: setCurrentDate(), 
       ['LastUpdateBy']: currentUser
     })
-    setPageSuccess("CHANGES SAVED!")
-    setTimeout(() => {setPageSuccess(false)}, 1000)
+    console.log("Successfully updated record")
+    
   } catch {
     console.log("ERROR SAVING CHANGES")
   } 

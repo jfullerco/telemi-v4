@@ -13,7 +13,9 @@ import {
   updateDoc, 
   setDoc, 
   addDoc, 
-  deleteDoc 
+  deleteDoc,
+  arrayUnion, 
+  arrayRemove 
 } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes } from 'firebase/storage'
 // TODO: Add SDKs for Firebase products that you want to use
