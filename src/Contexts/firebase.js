@@ -47,7 +47,9 @@ export const fire = {
   deleteDoc,
   getStorage,
   ref,
-  uploadBytes
+  uploadBytes,
+  arrayUnion,
+  arrayRemove
 } 
 
 // Initialize Firebase

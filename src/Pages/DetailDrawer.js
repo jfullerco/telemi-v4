@@ -468,24 +468,38 @@ const handleArrayMapDelete = (e, arr, field) => {
       }
 
 }
-console.log('data:', data, 'active:', active)
+console.log('data:', data, 'active:', active, 'isArrayMapData:', isArrayMapData)
 const handleArrayMapSubmit = async(data) => {
 
-  try{
-    setActive({
-      ...data, [isArrayMapInputData.dataField]: [
-        ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
-      ['LastUpdated']: setCurrentDate(), 
-      ['LastUpdateBy']: currentUser
-    })
-    setData({
-      ...data, [isArrayMapInputData.dataField]: [
-        ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
-      ['LastUpdated']: setCurrentDate(), 
-      ['LastUpdateBy']: currentUser
-    })
-    console.log("Successfully updated record")
-    
+  /**const docD = {
+    [isArrayMapInputData.dataField]: [isArrayMapData]
+  }*/
+
+  setActive({
+    ...data, [isArrayMapInputData.dataField]: [
+      ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
+    ['LastUpdated']: setCurrentDate(), 
+    ['LastUpdateBy']: currentUser
+  })
+  setData({
+    ...data, [isArrayMapInputData.dataField]: [
+      ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
+    ['LastUpdated']: setCurrentDate(), 
+    ['LastUpdateBy']: currentUser
+  })
+
+  const docData = {
+    ...data, 
+    ['LastUpdated']: setCurrentDate(), 
+    ['LastUpdateBy']: currentUser
+  }
+  
+  
+  
+
+  try {     
+    await updateDoc(doc(db, isModule, id), docData)
+    console.log("Successfully saved array value")
   } catch {
     console.log("ERROR SAVING CHANGES")
   } 
