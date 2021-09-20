@@ -53,6 +53,8 @@ const PageField = ({
           case "text-area":
             return (
               <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
+              <>
               <div className="is-hidden-mobile">
                 <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
@@ -71,9 +73,13 @@ const PageField = ({
                 value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
               />
               </>
+              }
+              </> 
             )
           case "currency":
             return (
+              <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
               <>
               <div className="is-hidden-mobile">
                 <Columns options="is-mobile">
@@ -91,10 +97,13 @@ const PageField = ({
                 value={`$ ${[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}`}
               />
               </>
+              }
+              </>
             )
           case "related-select":
             return (
-
+              <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
               <>
               <div className="is-hidden-mobile">
                 <Columns options="is-mobile">
@@ -184,10 +193,14 @@ const PageField = ({
                   }
                 />
               </>
+              }
+              </>
             )
             
           case "map-list":
             return (
+              <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
               <>
                 <Columns options="is-mobile is-centered is-multiline">
                   <Column size="is-12">
@@ -211,10 +224,14 @@ const PageField = ({
                   </Column>
                 </Columns>
               </>
+              }
+              </>
             )
 
             case "array-map-list":
             return (
+              <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
               <>
                 <Columns options="is-mobile is-multiline">
                   <Column size="is-12">
@@ -239,10 +256,14 @@ const PageField = ({
                   </Column>
                 </Columns>
               </>
+              }
+              </>
             )
           
           case "status":
             return (
+              <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
               <>
               <div className='is-hidden-mobile'>
                 <Columns options="is-mobile">
@@ -268,10 +289,14 @@ const PageField = ({
                   value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
                 />
               </>
+              }
+              </>
             )
           
           case "tags":
             return (
+              <>
+              {loading === true ? <input className="input is-rounded is-small" disabled /> :
               <> 
               <div className='is-hidden-mobile'>
                 <Columns options="is-mobile">
@@ -295,10 +320,14 @@ const PageField = ({
                   value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
                 />
               </>
+              }
+              </>
             )
 
             case "file-field":
               return (
+                <>
+                {loading === true ? <input className="input is-rounded is-small" disabled /> :
                 <>
                   <Columns options="is-mobile">
                   <Column size="is-4-mobile is-3-tablet is-3-desktop is-2-fullhd">
@@ -318,12 +347,16 @@ const PageField = ({
                   </Column>
                 </Columns> 
                 </>
+                }
+                </>
               )
 
               
 
           default:
               return (
+                <>
+                {loading === true ? <input className="input is-rounded is-small" disabled /> :
                 <>
                 <div className='is-hidden-mobile'>
                 <Columns options="is-mobile">
@@ -344,6 +377,8 @@ const PageField = ({
                   label={field.label}
                   value={[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )}
                 />
+                </>
+                }
                 </>
               )
             }

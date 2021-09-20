@@ -23,7 +23,7 @@ const DetailDrawer = (props) => {
 
   const history = useHistory()
   
-  const { isModule, isDetailDrawerOpen, id } = props && props || null
+  const { isModule, setIsModule, setIsCurrentID, isDetailDrawerOpen, id } = props && props || null
 
   const userContext = useContext(stateContext)
   const {
@@ -335,8 +335,8 @@ const DetailDrawer = (props) => {
     setIsDrawerOpen(!isDrawerOpen)
 
   }
-
-  const handleSubmitUpdated = async(data) => { 
+console.log('data:', data, 'active:', active)
+  const handleSubmitUpdated = async() => { 
 
     const docData = {
       ...data, 
@@ -366,13 +366,13 @@ const DetailDrawer = (props) => {
   }
 
   const handleRelatedSubmit = async() => {
-
-    const docData = relatedSubmitData
-    const docRef = doc(db, relatedInputData.collection)
+    const colRef = relatedInputData.collection
+    const docData = {...relatedSubmitData}
+    
 
     try {
 
-    await addDoc(docRef, docData)
+      await addDoc(collection(db, relatedInputData.collection), docData)
       console.log(`Successfully saved new ${relatedInputData.label}`)
 
     } catch {
@@ -411,26 +411,18 @@ const handleRelatedSelectChange = (e, relatedDataField) => {
   const {value} = e.target
   
   console.log({[relatedName]: id, [name]: value})
-  setActive({...active, [relatedName]: id, [name]: value})
-  setData({...data, [relatedName]: id, [name]: value})
-  setUpdated(!updated)
+  setActive({...active, [name]: value})
+  setData({...data, [name]: value})
 
-}
-
-const handleGoBack = () => {
-  history.goBack()
 }
 
 const handleClick = (e) => {
-  setLoading(true)
-  history.push({
-    pathname: `/${e.colRef}/${currentCompanyID}/${e.id}`,
-    state: {
-    services: services,
-    locations: locations,
-    accounts: accounts,
-    }
-  }) 
+  toggleLoading(true)
+  setData()
+  setActive({...data})
+  setIsModule(e.colRef)
+  setIsCurrentID(e.id)
+
 }
 const handleArrayMapDrawer = (field) => {
   
@@ -445,10 +437,12 @@ setIsArrayMapDrawerOpen(true)
 }
 
 const handleArrayMapChange = (e) => {
+
   e.preventDefault()
   const {name, value} = e.target
   const mapFieldName = isArrayMapInputData.dataField
   setIsArrayMapData({...isArrayMapData, [name]: value})
+
 }
 
 const handleArrayMapDelete = (e, arr, field) => {
@@ -468,45 +462,37 @@ const handleArrayMapDelete = (e, arr, field) => {
       }
 
 }
-console.log('data:', data, 'active:', active, 'isArrayMapData:', isArrayMapData)
-const handleArrayMapSubmit = async(data) => {
 
-  /**const docD = {
-    [isArrayMapInputData.dataField]: [isArrayMapData]
-  }*/
-
-  setActive({
-    ...data, [isArrayMapInputData.dataField]: [
-      ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
-    ['LastUpdated']: setCurrentDate(), 
-    ['LastUpdateBy']: currentUser
-  })
-  setData({
-    ...data, [isArrayMapInputData.dataField]: [
-      ...data[isArrayMapInputData.dataField], {...isArrayMapData}],
-    ['LastUpdated']: setCurrentDate(), 
-    ['LastUpdateBy']: currentUser
-  })
-
-  const docData = {
+const handleArrayMapSubmit = async() => {
+  
+  console.log('isArrayMapData', isArrayMapData, 'data:', data)
+  const docData = data[isArrayMapInputData.dataField] != undefined ? {
     ...data, 
+    [isArrayMapInputData.dataField]: [
+      {...isArrayMapData},
+      ...data[isArrayMapInputData.dataField]
+    ],
+    ['LastUpdated']: setCurrentDate(), 
+    ['LastUpdateBy']: currentUser
+  } : {
+    ...data, 
+    [isArrayMapInputData.dataField]: [
+      {...isArrayMapData}
+    ],
     ['LastUpdated']: setCurrentDate(), 
     ['LastUpdateBy']: currentUser
   }
-  
-  
-  
-
-  try {     
-    await updateDoc(doc(db, isModule, id), docData)
-    console.log("Successfully saved array value")
+  try {
+    console.log("Submitting", data)
+    const docRef = doc(db, isModule, id)
+    await updateDoc(docRef, docData)
+    
   } catch {
-    console.log("ERROR SAVING CHANGES")
-  } 
-  
+    console.log("Error submitting")
+  }
   setIsArrayMapData()
   setIsArrayMapDrawerOpen(false)
-
+  setUpdated(true)
 }
 
 const handleRelatedDrawer = (field) => {

@@ -372,7 +372,9 @@ return (
       <DetailDrawer
         currentCompanyID={currentCompanyID}
         id={isCurrentDocID}
+        setIsCurrentID={(e)=>setIsCurrentDocID(e)}
         isModule={isModule}
+        setIsModule={(e)=>setIsModule(e)}
         isNew={isNewDoc || false}
         isDrawerActive={isNewDoc || false}
         setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}

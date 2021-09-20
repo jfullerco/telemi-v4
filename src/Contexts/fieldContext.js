@@ -654,7 +654,7 @@ export const FieldProvider = (props) => {
         inputID: "id",
         inputValue: "OrderNum", 
         relatedCollection: "Orders", 
-        relatedDataField: "OrderID",
+        relatedDataField: "ServiceID",
         relatedInputLabel: "Order Number",
         relatedInputFields: [
           {
@@ -1046,7 +1046,7 @@ export const FieldProvider = (props) => {
         label: "Service Location", 
         dataField: "LocationName", 
         inputFieldType: "related-select", 
-        inputSource: "", /** SET BY HANDLEINITIALFIELDMAPPING FN */
+        inputSource: locations, /** SET BY HANDLEINITIALFIELDMAPPING FN */
         inputID: "id", 
         inputValue: "Name",
         relatedCollection: "Locations", 
@@ -1359,7 +1359,7 @@ export const FieldProvider = (props) => {
         label: "Service Location", 
         dataField: "LocationName", 
         inputFieldType: "related-select", 
-        inputSource: "", /** SET BY HANDLEINITIALFIELDMAPPING FN */
+        inputSource: locations, /** SET BY HANDLEINITIALFIELDMAPPING FN */
         inputID: "id", 
         inputValue: "Name",
         relatedCollection: "Locations", 
@@ -1416,13 +1416,15 @@ export const FieldProvider = (props) => {
         dataField: "OrderNum", 
         inputFieldType: "text",
         isHeader: true, 
-        tab: "BASIC INFO" 
+        tab: "BASIC INFO",
+        tabLabel: "BASIC INFO" 
       },
       { 
         label: "Date Ordered", 
         dataField: "OrderDate", 
         inputFieldType: "datepicker", 
-        tab: "BASIC INFO" 
+        tab: "BASIC INFO", 
+        tabLabel: "BASIC INFO"
       },
       { 
         label: "Vendor", 
@@ -1437,7 +1439,8 @@ export const FieldProvider = (props) => {
         label: "Service Name", 
         dataField: "VendorServiceName", 
         inputFieldType: "text", 
-        tab: "BASIC INFO" 
+        tab: "BASIC INFO", 
+        tabLabel: "BASIC INFO"
       },
       {
         label: "Order Type",
