@@ -99,6 +99,7 @@ const DashboardGrids = ({visible}) => {
   const [recent, setRecent] = useState()
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isRelatedDrawerOpen, setIsRelatedDrawerOpen] = useState(false)
   const [isNewDocDrawerOpen, setIsNewDocDrawerOpen] = useState(false)
   const [isNewDoc, setIsNewDoc] = useState(false)
   const [isCurrentDocID, setIsCurrentDocID] = useState()
@@ -178,6 +179,13 @@ const DashboardGrids = ({visible}) => {
     setIsModule("Locations")
     setIsCurrentDocID(id)
     setIsDrawerOpen(true)
+  }
+
+  const handleRelatedClick = (e) => {
+    const {colRef, id} = e
+    setIsModule(colRef)
+    setIsCurrentDocID(id)
+    setIsRelatedDrawerOpen(true)
   }
   
   /** Handle Change when choosing different Grid via Selector */
@@ -372,13 +380,30 @@ return (
       <DetailDrawer
         currentCompanyID={currentCompanyID}
         id={isCurrentDocID}
-        setIsCurrentID={(e)=>setIsCurrentDocID(e)}
         isModule={isModule}
-        setIsModule={(e)=>setIsModule(e)}
+        handleRelatedClick={(e)=>handleRelatedClick(e)}
         isNew={isNewDoc || false}
         isDrawerActive={isNewDoc || false}
         setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
         isDetailDrawerOpen={isDrawerOpen}
+        resetIsNew={()=>setIsNewDoc()}
+      />
+    </SideDrawer>
+    <SideDrawer 
+      direction="right" 
+      checked={isRelatedDrawerOpen} 
+      handleClose={() => setIsRelatedDrawerOpen(!isRelatedDrawerOpen)}
+      title={currentCompany}
+    >
+      <DetailDrawer
+        currentCompanyID={currentCompanyID}
+        id={isCurrentDocID}
+        isModule={isModule}
+        handleRelatedClick={(e)=>handleRelatedClick(e)}
+        isNew={isNewDoc || false}
+        isDrawerActive={isNewDoc || false}
+        setIsDetailDrawerOpen={() => setIsRelatedDrawerOpen(!isRelatedDrawerOpen)}
+        isDetailDrawerOpen={isRelatedDrawerOpen}
         resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>

@@ -23,7 +23,7 @@ const DetailDrawer = (props) => {
 
   const history = useHistory()
   
-  const { isModule, setIsModule, setIsCurrentID, isDetailDrawerOpen, id } = props && props || null
+  const { isModule, handleRelatedClick, isDetailDrawerOpen, id } = props && props || null
 
   const userContext = useContext(stateContext)
   const {
@@ -418,10 +418,7 @@ const handleRelatedSelectChange = (e, relatedDataField) => {
 
 const handleClick = (e) => {
   toggleLoading(true)
-  setData()
-  setActive({...data})
-  setIsModule(e.colRef)
-  setIsCurrentID(e.id)
+  handleRelatedClick(e)
 
 }
 const handleArrayMapDrawer = (field) => {
