@@ -52,11 +52,6 @@ const DetailDrawer = (props) => {
     setServices,
     setUsers,
     setNotes,
-    fetchPage,
-    data,
-    setData,
-    active,
-    setActive,
     refreshServices 
   } = userContext
 
@@ -89,7 +84,8 @@ const DetailDrawer = (props) => {
     userDetailFields
   } = useContext(fieldContext)
 
-  
+  const [data, setData] = useState("")
+  const [active, setActive] = useState("")
   const [tab, setTab] = useState("Essentials")
 
   const [activeSubtitle, setActiveSubtitle] = useState("")
@@ -240,7 +236,7 @@ const DetailDrawer = (props) => {
 
     setTimeout(() => {
       toggleLoading(false)
-    }, 2500)
+    }, 1500)
 
   }
 
@@ -261,7 +257,17 @@ const DetailDrawer = (props) => {
   */
 
 /** Fetch Document from Firebase */  
+  const fetchPage = async(isModule, id) => {
+    
+    const docRef = doc(db, isModule, id)
+    const docSnap = await getDoc(docRef) 
+    console.log(docSnap)
+    const data = docSnap.data()
+    const docID = docSnap.id
+    setActive({id: docID, ...data})
+    setData(data)
   
+  }
 
   const fetchBills = async() => {
 

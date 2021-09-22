@@ -17,7 +17,8 @@ export const FieldProvider = (props) => {
       accounts,
       services,
       notes,
-      tickets
+      tickets,
+      events
     } = userContext.userSession
 
   /** Grid Fields */
@@ -190,12 +191,6 @@ export const FieldProvider = (props) => {
     
     const ticketGridColumns = [
       {
-        docField: 'Status', 
-        headerName: 'Status', 
-        key: "1", 
-        filterable: true
-      },
-      {
         docField: 'TicketNum', 
         headerName: 'Ticket', 
         key: "2", 
@@ -218,7 +213,13 @@ export const FieldProvider = (props) => {
         headerName: 'Details', 
         key: "5", 
         filterable: false
-      }
+      },
+      {
+        docField: 'Status', 
+        headerName: 'Status', 
+        key: "1", 
+        filterable: true
+      },
     ]
     
     const ticketGroupByFields = [
@@ -489,7 +490,7 @@ export const FieldProvider = (props) => {
 /** Page Fields */
     const serviceDetailFields = [
       {
-        label: "Basic Info",
+        label: "Essentials",
         inputFieldType: "tabTitle"
       },
       { 
@@ -545,8 +546,7 @@ export const FieldProvider = (props) => {
           },
         ],
         relatedDataType: "Location",
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO"  
+        tab: "Essentials"  
       },
       { 
         label: "Vendor", 
@@ -555,8 +555,7 @@ export const FieldProvider = (props) => {
         inputSource: vendorList, 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials", 
       },
       { 
         label: "Type", 
@@ -565,15 +564,13 @@ export const FieldProvider = (props) => {
         inputSource: serviceType, 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO"
+        tab: "Essentials",
       },
       { 
         label: "Service Name", 
         dataField: "VendorServiceName", 
         inputFieldType: "text", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials", 
       },
       { 
         label: "Access Type", 
@@ -582,30 +579,26 @@ export const FieldProvider = (props) => {
         inputSource: accessType, 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials", 
       },
       { 
         label: "Asset ID", 
         dataField: "AssetID", 
         inputFieldType: "text", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO", 
+        tab: "Essentials",
         isHeader: true
       },
       { 
         label: "Bandwidth", 
         dataField: "Bandwidth", 
         inputFieldType: "text", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials",
       },
       { 
         label: "Monthly Cost", 
         dataField: "MRC", 
         inputFieldType: "currency", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials", 
       },
       { 
         label: "Status", 
@@ -631,15 +624,13 @@ export const FieldProvider = (props) => {
         ], 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials",
       },
       {
         label: 'Tags',
         dataField: 'Tags',
         inputFieldType: 'tags',
-        tab: 'BASIC INFO',
-        tabLabel: 'BASIC INFO'
+        tab: 'Essentials',
       },
       {
         label: 'Details',
@@ -664,8 +655,7 @@ export const FieldProvider = (props) => {
           }
         ], 
         relatedDataType: 'Order',
-        tab: 'DETAILS',
-        tabLabel: 'DETAILS'
+        tab: 'Details',
       },
       { 
         label: "Related Order ID", 
@@ -674,16 +664,20 @@ export const FieldProvider = (props) => {
         inputSource: orders, 
         inputID: "ID", 
         inputValue: "id", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
+        tab: "Details",
+      },
+      {
+        label: "MCN",
+        dataField: "MCN",
+        inputFieldType: "text",
+        tab: "Details",
       },
       { 
         label: "Service Start Date", 
         dataField: "StartDate", 
         visible: true, 
         inputFieldType: "datepicker", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
+        tab: "Details",
       },
       { 
         label: 'Last Mile', 
@@ -692,23 +686,20 @@ export const FieldProvider = (props) => {
         inputSource: vendorList, 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
+        tab: "Details",
       },
       { 
         label: "LEC Circuit ID", 
         dataField: "LECCircuitID", 
         inputFieldType: "text", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
+        tab: "Details",
       },
       { 
         label: 'Demarc Information', 
         dataField: 'DemarcInfo', 
         visible: true, 
         inputFieldType: "text-area", 
-        tab: "DETAILS",
-        tabLabel: "DETAILS" 
+        tab: "Details", 
       },
       { 
         label: "IP Assignments", 
@@ -853,8 +844,7 @@ export const FieldProvider = (props) => {
           },
           
         ],
-        tab: "DETAILS",
-        tabLabel: "DETAILS",
+        tab: "Details",
         hasBreakBefore: true  
       },
       {
@@ -924,7 +914,7 @@ export const FieldProvider = (props) => {
             ]
           }
         ],
-        tab: "SUPPORT"
+        tab: "Support"
       },
       {
         label: 'Billing',
@@ -949,29 +939,25 @@ export const FieldProvider = (props) => {
           }
         ], 
         relatedDataType: 'Account',
-        tab: 'BILLING',
-        tabLabel: 'BILLING'
+        tab: 'Billing',
       },
       { 
         label: "Sub Account", 
         dataField: "SubAccountNum", 
         inputFieldType: "text", 
-        tab: "BILLING",
-        tabLabel: "BILLING" 
+        tab: "Billing", 
       },
       { 
         label: "Group Number", 
         dataField: "GroupNum", 
         inputFieldType: "text", 
-        tab: "BILLING",
-        tabLabel: "BILLING" 
+        tab: "Billing", 
       },
       { 
         label: "Last Bill Amount", 
         dataField: "LastBillAmount", 
         inputFieldType: "currency", 
-        tab: "BILLING",
-        tabLabel: "BILLING" 
+        tab: "Billing", 
       },
       { 
         label: "Bills", 
@@ -1002,8 +988,7 @@ export const FieldProvider = (props) => {
             inputFieldType: 'currency'
           }
         ], 
-        tab: "BILLING",
-        tabLabel: "BILLING", 
+        tab: "Billing",
       },
       {
         label: 'Notes',
@@ -1028,8 +1013,7 @@ export const FieldProvider = (props) => {
             inputFieldType: 'text-area'
           }, 
         ], 
-        tab: "NOTES",
-        tabLabel: "NOTES", 
+        tab: "Notes", 
       },
       
     ]
@@ -1355,6 +1339,10 @@ export const FieldProvider = (props) => {
       
     ]
     const orderDetailFields = [
+      {
+        label: 'Essentials',
+        inputFieldType: 'tabTitle'
+      },
       { 
         label: "Service Location", 
         dataField: "LocationName", 
@@ -1408,23 +1396,20 @@ export const FieldProvider = (props) => {
           }
         ],
         relatedDataType: "Location",
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO"  
+        tab: "Essentials"  
       },
       { 
         label: "Order Number", 
         dataField: "OrderNum", 
         inputFieldType: "text",
         isHeader: true, 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials", 
       },
       { 
         label: "Date Ordered", 
         dataField: "OrderDate", 
         inputFieldType: "datepicker", 
-        tab: "BASIC INFO", 
-        tabLabel: "BASIC INFO"
+        tab: "Essentials", 
       },
       { 
         label: "Vendor", 
@@ -1433,14 +1418,13 @@ export const FieldProvider = (props) => {
         inputSource: vendorList, 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "BASIC INFO" 
+        tab: "Essentials" 
       },
       { 
         label: "Service Name", 
         dataField: "VendorServiceName", 
         inputFieldType: "text", 
-        tab: "BASIC INFO", 
-        tabLabel: "BASIC INFO"
+        tab: "Essentials", 
       },
       {
         label: "Order Type",
@@ -1463,13 +1447,13 @@ export const FieldProvider = (props) => {
             Value: 'Disconnect'
           }
         ],
-        tab: "BASIC INFO"
+        tab: "Essentials"
       },
       { 
         label: "Monthly Cost", 
         dataField: "MRC", 
         inputFieldType: "currency", 
-        tab: "BASIC INFO" 
+        tab: "Essentials" 
       },
       { 
         label: "Status", 
@@ -1491,13 +1475,13 @@ export const FieldProvider = (props) => {
             Value: "Cancelled"
           }
         ], 
-        tab: "BASIC INFO" 
+        tab: "Essentials" 
       },
       { 
         label: "Bandwidth", 
         dataField: "Bandwidth", 
         inputFieldType: "text", 
-        tab: "DETAILS" 
+        tab: "Details" 
       },
       { 
         label: "Related Service", 
@@ -1522,21 +1506,153 @@ export const FieldProvider = (props) => {
           }
         ], 
         relatedDataType: 'Service',
-        tab: "DETAILS",  
-        tabLabel: 'DETAILS'
+        tab: "Details",  
       },
       { 
         label: "Details", 
         dataField: "Details", 
-        inputFieldType: "array-list", 
-        tab: "DETAILS" 
+        inputFieldType: "text-area", 
+        tab: "Details" 
       },
       {
-        label: "Notes",
-        dataField: "Notes",
-        inputFieldType: "text-area",
-        tab: "NOTES"
-      }
+        label: "Events",
+        dataField: "Events",
+        inputFieldType: "map-list",
+        inputSource: events,
+        inputID: "id",
+        inputValue: "EventName",
+        relatedCollection: "Events",
+        relatedDataField: "OrderID",
+        relatedInputLabel: "Event",
+        relatedInputFields: [
+          {
+            label: "Event",
+            dataField: "EventName",
+            inputFieldType: "text"
+          },
+          {
+            label: "Type",
+            dataField: "Type",
+            inputFieldType: "select",
+            inputID: 'Name',
+            inputValue: 'Value',
+            inputSource: [
+              {
+                Name: "TTU",
+                Value: "TTU"
+              },
+              {
+                Name: "LAN Migration",
+                Value: "LAN Migration"
+              },
+              {
+                Name: "MACD Completion",
+                Value: "MACD Completion"
+              },
+              {
+                Name: "Activation",
+                Value: "Activation"
+              },
+              {
+                Name: "Billing Start",
+                Value: "Billing Start"
+              }
+            ],
+          },
+          {
+            label: "Date",
+            dataField: "Date",
+            inputFieldType: "datepicker",
+          }
+        ],
+        tab: "Details"
+      },
+      {
+        label: "Related Tickets",
+        dataField: "Tickets",
+        inputFieldType: "map-list",
+        inputSource: tickets,
+        inputID: "id",
+        inputValue: "TicketNum",
+        relatedCollection: "Tickets",
+        relatedDataField: "OrderID",
+        relatedInputLabel: "Ticket Number",
+        relatedInputFields: [
+          {
+            label: "Ticket",
+            dataField: "TicketNum",
+            inputFieldType: "text"
+          },
+          {
+            label: "Type",
+            dataField: "Type",
+            inputFieldType: "select",
+            inputID: 'Name',
+            inputValue: 'Value',
+            inputSource: [
+              {
+                Name: "Service",
+                Value: "Service"
+              },
+              {
+                Name: "Billing",
+                Value: "Billing"
+              },
+              {
+                Name: "Disconnect",
+                Value: "Disconnect"
+              }
+            ],
+          },
+          {
+            label: "Status",
+            dataField: "Status",
+            inputFieldType: "select",
+            inputID: 'Name',
+            inputValue: 'Value',
+            inputSource: [
+              {
+                Name: 'Submitted',
+                Value: 'Submitted'
+              },
+              {
+                Name: 'In Process',
+                Value: 'In Process'
+              },
+              {
+                Name: 'Completed',
+                Value: 'Completed'
+              },
+              {
+                Name: 'Closed',
+                Value: 'Closed'
+              }
+            ]
+          }
+        ],
+        tab: "Support"
+      },
+      { 
+        label: "Notes", 
+        dataField: "Notes", 
+        inputFieldType: "map-list", 
+        relatedCollection: "Notes", 
+        relatedDataField: "OrderID",
+        relatedInputLabel: "Note",
+        relatedInputFields: [
+          {
+            label: 'Date', 
+            dataField: 'Date',  
+            inputFieldType: 'datepicker'
+          }, 
+          {
+            label: 'Note', 
+            dataField: 'NoteBody', 
+            inputFieldType: 'text-area'
+          }, 
+        ], 
+        tab: "Notes", 
+      },
     ]
     const billsDetailFields = [
       { 
@@ -1927,6 +2043,53 @@ export const FieldProvider = (props) => {
     },
   ]
 
+  const eventDetailFields = [
+    {
+      label: 'Event',
+      dataField: 'EventName',
+      inputFieldType: 'text',
+      tab: 'BASIC INFO',
+    },
+    {
+      label: 'Date',
+      dataField: 'Date',
+      inputFieldType: 'datepicker',
+      tab: 'BASIC INFO',
+      tabLabel: 'BASIC INFO'
+    },
+    {
+      label: "Type",
+      dataField: "Type",
+      inputFieldType: "select",
+      inputID: 'Name',
+      inputValue: 'Value',
+      inputSource: [
+        {
+          Name: "TTU",
+          Value: "TTU"
+        },
+        {
+          Name: "LAN Migration",
+          Value: "LAN Migration"
+        },
+        {
+          Name: "MACD Completion",
+          Value: "MACD Completion"
+        },
+        {
+          Name: "Activation",
+          Value: "Activation"
+        },
+        {
+          Name: "Billing Start",
+          Value: "Billing Start"
+        }
+      ],
+      tab: "BASIC INFO"
+    },
+    
+  ]
+
 
 
 
@@ -1960,7 +2123,8 @@ return (
       accountDetailFields,
       orderDetailFields,
       billsDetailFields,
-      contactDetailFields}}>
+      contactDetailFields,
+      eventDetailFields}}>
       {props.children}
     </Provider>
   )

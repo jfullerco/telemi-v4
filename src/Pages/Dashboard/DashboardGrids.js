@@ -48,6 +48,8 @@ const DashboardGrids = ({visible}) => {
           setBills,
           setContracts,
           setDataLoading,
+          setCurrentModule,
+          setCurrentDocID,
           setCurrentGrid, } = userContext
 
   const { dataLoading,
@@ -63,7 +65,9 @@ const DashboardGrids = ({visible}) => {
           users,
           userDefaults,
           contracts,
-          currentGrid } = userContext.userSession
+          currentGrid,
+          currentModule,
+          currentDocID } = userContext.userSession
   const {
     serviceGridColumns,
     serviceGroupByFields,
@@ -99,7 +103,7 @@ const DashboardGrids = ({visible}) => {
   const [recent, setRecent] = useState()
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const [isRelatedDrawerOpen, setIsRelatedDrawerOpen] = useState(false)
+  const [isRefreshDrawer, setIsRefreshDrawer] = useState(false)
   const [isNewDocDrawerOpen, setIsNewDocDrawerOpen] = useState(false)
   const [isNewDoc, setIsNewDoc] = useState(false)
   const [isCurrentDocID, setIsCurrentDocID] = useState()
@@ -140,8 +144,8 @@ const DashboardGrids = ({visible}) => {
   }
 
   const handleServiceClick = (id) => {
-    setIsModule("Services")
-    setIsCurrentDocID(id)
+    setCurrentModule("Services")
+    setCurrentDocID(id)
     setIsDrawerOpen(true)
   }
 
@@ -152,8 +156,8 @@ const DashboardGrids = ({visible}) => {
   }
 
   const handleOrderClick = (id) => {
-    setIsModule("Orders")
-    setIsCurrentDocID(id)
+    setCurrentModule("Orders")
+    setCurrentDocID(id)
     setIsDrawerOpen(true)
   }
 
@@ -183,9 +187,9 @@ const DashboardGrids = ({visible}) => {
 
   const handleRelatedClick = (e) => {
     const {colRef, id} = e
-    setIsModule(colRef)
-    setIsCurrentDocID(id)
-    setIsRelatedDrawerOpen(true)
+    setCurrentModule(colRef)
+    setCurrentDocID(id)
+    setIsDrawerOpen(true)
   }
   
   /** Handle Change when choosing different Grid via Selector */
@@ -379,34 +383,18 @@ return (
     >
       <DetailDrawer
         currentCompanyID={currentCompanyID}
-        id={isCurrentDocID}
-        isModule={isModule}
+        id={currentDocID}
+        isModule={currentModule}
         handleRelatedClick={(e)=>handleRelatedClick(e)}
         isNew={isNewDoc || false}
+        isRefreshDrawer={isRefreshDrawer}
         isDrawerActive={isNewDoc || false}
         setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
         isDetailDrawerOpen={isDrawerOpen}
         resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>
-    <SideDrawer 
-      direction="right" 
-      checked={isRelatedDrawerOpen} 
-      handleClose={() => setIsRelatedDrawerOpen(!isRelatedDrawerOpen)}
-      title={currentCompany}
-    >
-      <DetailDrawer
-        currentCompanyID={currentCompanyID}
-        id={isCurrentDocID}
-        isModule={isModule}
-        handleRelatedClick={(e)=>handleRelatedClick(e)}
-        isNew={isNewDoc || false}
-        isDrawerActive={isNewDoc || false}
-        setIsDetailDrawerOpen={() => setIsRelatedDrawerOpen(!isRelatedDrawerOpen)}
-        isDetailDrawerOpen={isRelatedDrawerOpen}
-        resetIsNew={()=>setIsNewDoc()}
-      />
-    </SideDrawer>
+    
     <SideDrawer 
       direction="right" 
       checked={isNewDocDrawerOpen} 

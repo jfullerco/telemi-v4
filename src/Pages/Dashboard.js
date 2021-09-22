@@ -29,6 +29,7 @@ const Dashboard = () => {
           fetchOrders,
           fetchAccounts,
           fetchBills,
+          fetchEvents,
           fetchUsers,
           fetchContracts,
           setLocations,
@@ -114,7 +115,9 @@ const Dashboard = () => {
       await fetchServices(),
       await fetchTickets(),
       await fetchOrders(),
-      await fetchAccounts()
+      await fetchAccounts(),
+      await fetchBills(),
+      await fetchEvents(),
       await fetchUsers()
       await fetchContracts()
       const timer = setTimeout(() => {

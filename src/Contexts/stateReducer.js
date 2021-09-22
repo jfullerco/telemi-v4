@@ -120,6 +120,11 @@ export default (state, action) => {
         ...state,
         bills: action.payload
       };
+    case "SET_EVENTS":
+      return {
+        ...state,
+        events: action.payload
+      };
     case "SET_NOTES":
       return {
         ...state,
@@ -144,6 +149,16 @@ export default (state, action) => {
       return {
         ...state,
         locations: action.payload
+      }; 
+    case "SET_CURRENT_MODULE":
+      return {
+        ...state,
+        currentModule: action.payload
+      }; 
+    case "SET_CURRENT_DOC_ID":
+      return {
+        ...state,
+        currentDocID: action.payload
       }; 
         
   };

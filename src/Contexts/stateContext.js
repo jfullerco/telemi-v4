@@ -1,7 +1,7 @@
 import React, {useState, createContext, useReducer} from 'react'
 import stateReducer from './stateReducer'
 import {db} from './firebase'
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, doc, query, where, getDocs } from 'firebase/firestore'
 
 
 
@@ -23,6 +23,7 @@ export const StateProvider = (props) => {
       accounts: "",
       bills: "",
       orders: "",
+      events: "",
       quotes: "",
       contracts: "",
       notes: "",
@@ -39,13 +40,20 @@ export const StateProvider = (props) => {
       currentOrderID: "",
       currentOrderNum: "",
       currentAccountID: "",
-      currentAccountNum: "",     
+      currentAccountNum: "", 
+      currentModule: "",
+      currentDocID: "",    
       dataLoading: false,
 
     }
     
 
     //** Global Service Calls */
+
+    const fetchCompanies = async(currentUser) => {
+      const q = query(collection(db, "Companies"), where("Users", "array-contains", currentUser))
+      return await getDocs(q)
+    }
 
     const fetchLocations = async() => {
       const q = query(collection(db, "Locations"),
@@ -173,6 +181,26 @@ export const StateProvider = (props) => {
       setBills(bills)
     }
 
+    const fetchEvents = async() => {
+      const q = query(collection(db, "Events"), where("CompanyID", "==", userSession.currentCompanyID))
+      const eventsRef = await getDocs(q)
+      const events = eventsRef.docs.map(doc => ({
+        id: doc.id, 
+        ...doc.data()
+      }))
+      setEvents(events)
+    }
+
+    const refreshEvents = async() => {
+      const q = query(collection(db, "Events"), where("CompanyID", "==", userSession.currentCompanyID))
+      const eventsRef = await getDocs(q)
+      const events = eventsRef.docs.map(doc => ({
+        id: doc.id, 
+        ...doc.data()
+      }))
+      setEvents(events)
+    }
+
     const fetchUsers = async() => {
       const q = query(collection(db, "Users"), where("Companies", "array-contains", userSession.currentCompanyID))
       const usersRef = await getDocs(q)
@@ -228,6 +256,18 @@ export const StateProvider = (props) => {
       setContracts(contracts)
     }
 
+    const fetchPage = async() => {
+    
+      const docRef = doc(db, userSession.currentModule, userSession.currentID)
+      const docSnap = await getDoc(docRef) 
+      console.log(docSnap)
+      const data = docSnap.data()
+      const docID = docSnap.id
+      setActive({id: docID, ...data})
+      setData(data)
+    
+    }
+
     const handleSubmitNew = async(isModule, data) => {
     
       try {
@@ -248,11 +288,9 @@ export const StateProvider = (props) => {
 
     const [toggleAdmin, setToggleAdmin] = useState(false)
     const [toggleDevTools, setToggleDevTools] = useState(false)
-
-    const fetchCompanies = async(currentUser) => {
-      const q = query(collection(db, "Companies"), where("Users", "array-contains", currentUser))
-      return await getDocs(q)
-    }
+    const [data, setData] = useState("")
+    const [active, setActive] = useState("")
+    
     
     const [userSession, dispatch] = useReducer(stateReducer, initialState)
 
@@ -332,6 +370,13 @@ export const StateProvider = (props) => {
           payload: bills
         })
       };
+
+      const setEvents = (events) => {
+        dispatch({
+          type: "SET_EVENTS",
+          payload: events
+        })
+      }
 
       const setUsers = (users) => {
         dispatch({
@@ -453,6 +498,20 @@ export const StateProvider = (props) => {
         })
       };
 
+      const setCurrentModule = (name) => {
+        dispatch({
+          type: "SET_CURRENT_MODULE",
+          payload: name
+        })
+      };
+
+      const setCurrentDocID = (id) => {
+        dispatch({
+          type: "SET_CURRENT_DOC_ID",
+          payload: id
+        })
+      };
+
       const setCurrentDate = () => {
         const currentDate = new Date()
         return currentDate.toISOString().substring(0, 10)
@@ -500,6 +559,8 @@ export const StateProvider = (props) => {
           setCurrentOrderNum,
           setCurrentAccountID,
           setCurrentAccountNum,
+          setCurrentModule,
+          setCurrentDocID,
           
           fetchCompanies,
           fetchLocations,
@@ -514,15 +575,22 @@ export const StateProvider = (props) => {
           refreshAccounts,
           fetchBills,
           refreshBills,
+          fetchEvents,
+          refreshEvents,
           fetchUsers,
           refreshUsers,
           fetchContracts,
           refreshContracts,
           fetchNotes,
           refreshNotes,
+          fetchPage,
           handleSubmitNew,
 
           
+          data,
+          setData,
+          active,
+          setActive,
 
           setDataLoading,
           setCurrentGrid,

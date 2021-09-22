@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {stateContext} from '../Contexts/stateContext'
 
-export function useRefreshDataHook({isModule}) {
+export function useRefreshDataHook() {
   const userContext = useContext(stateContext)
   const {refreshServices,
     refreshOrders,
@@ -12,9 +12,10 @@ export function useRefreshDataHook({isModule}) {
     refreshUsers,
     refreshNotes
   } = userContext
+  const {currentModule} = userContext.userSession
 
-   function refreshModule(isModule) {
-    switch (isModule) {
+   function refreshModule(currentModule) {
+    switch (currentModule) {
       case "Services": 
         return (
           refreshServices() 
