@@ -257,7 +257,7 @@ export const StateProvider = (props) => {
     }
 
     const fetchPage = async() => {
-    
+      console.log('module:', userSession.currentModule, 'id:', currentDID)
       const docRef = doc(db, userSession.currentModule, userSession.currentID)
       const docSnap = await getDoc(docRef) 
       console.log(docSnap)

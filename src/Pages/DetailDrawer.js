@@ -133,11 +133,11 @@ const DetailDrawer = (props) => {
     setPageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
     handlePageFields(isModule)
-    props.isNew === false ? fetchPage(isModule, id) : ""
+    props.isNew === false ? fetchPage() : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     
-  }, [isModule, id, isDetailDrawerOpen])
+  }, [isModule, isDetailDrawerOpen])
 
   useEffect(() => {
     

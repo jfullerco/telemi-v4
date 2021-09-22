@@ -144,8 +144,13 @@ const DashboardGrids = ({visible}) => {
   }
 
   const handleServiceClick = (id) => {
-    setCurrentModule("Services")
-    setCurrentDocID(id)
+    try {
+      setCurrentModule("Services")
+      setCurrentDocID(id)
+      console.log("Successfully set Module and ID")
+    } catch {
+      console.log("Error setting Module and ID")
+    }
     setIsDrawerOpen(true)
   }
 
