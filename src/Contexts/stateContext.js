@@ -1,7 +1,7 @@
 import React, {useState, createContext, useReducer} from 'react'
 import stateReducer from './stateReducer'
 import {db} from './firebase'
-import { collection, doc, query, where, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, query, where, getDocs } from 'firebase/firestore'
 
 
 
@@ -47,7 +47,10 @@ export const StateProvider = (props) => {
 
     }
     
-
+    const [toggleAdmin, setToggleAdmin] = useState(false)
+    const [toggleDevTools, setToggleDevTools] = useState(false)
+    const [data, setData] = useState("")
+    const [active, setActive] = useState("")
     //** Global Service Calls */
 
     const fetchCompanies = async(currentUser) => {
@@ -257,17 +260,29 @@ export const StateProvider = (props) => {
     }
 
     const fetchPage = async() => {
-      console.log('module:', userSession.currentModule, 'id:', currentDID)
-      const docRef = doc(db, userSession.currentModule, userSession.currentID)
+      
+      const docRef = doc(db, userSession.currentModule, userSession.currentDocID)
       const docSnap = await getDoc(docRef) 
       console.log(docSnap)
-      const data = docSnap.data()
+      const docData = docSnap.data()
       const docID = docSnap.id
-      setActive({id: docID, ...data})
-      setData(data)
-    
+      setActive({id: docID, ...docData})
+      setData(docData)
+      
     }
 
+    const refreshPage = async(colRef, id) => {
+      
+      const docRef = doc(db, colRef, id)
+      const docSnap = await getDoc(docRef) 
+      console.log(docSnap)
+      const docData = docSnap.data()
+      const docID = docSnap.id
+      setActive({id: docID, ...docData})
+      setData(docData)
+      
+    }
+    console.log('CONTEXT_DATA', data, 'CONTEXT_ACTIVE', active)
     const handleSubmitNew = async(isModule, data) => {
     
       try {
@@ -285,11 +300,6 @@ export const StateProvider = (props) => {
         bottomBorderColor: "black"
       }
     }
-
-    const [toggleAdmin, setToggleAdmin] = useState(false)
-    const [toggleDevTools, setToggleDevTools] = useState(false)
-    const [data, setData] = useState("")
-    const [active, setActive] = useState("")
     
     
     const [userSession, dispatch] = useReducer(stateReducer, initialState)
@@ -584,6 +594,7 @@ export const StateProvider = (props) => {
           fetchNotes,
           refreshNotes,
           fetchPage,
+          refreshPage,
           handleSubmitNew,
 
           

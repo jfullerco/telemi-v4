@@ -38,6 +38,8 @@ const DashboardGrids = ({visible}) => {
           fetchAccounts,
           fetchBills,
           fetchUsers,
+          fetchPage,
+          refreshPage,
           fetchContracts,
           setLocations,
           setServices,
@@ -192,9 +194,8 @@ const DashboardGrids = ({visible}) => {
 
   const handleRelatedClick = (e) => {
     const {colRef, id} = e
-    setCurrentModule(colRef)
-    setCurrentDocID(id)
-    setIsDrawerOpen(true)
+    
+    refreshPage(colRef, id)
   }
   
   /** Handle Change when choosing different Grid via Selector */

@@ -148,10 +148,10 @@ const PageField = ({
                             {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
                           </a> 
                       : 
-                        fieldData && item.relatedDataType === "Order" ? 
-                        <a onClick={(e)=> handleClick({colRef: "Orders", id: fieldData[item.relatedDataField]})}> 
-                          {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
-                        </a> 
+                      fieldData && item.relatedDataType === "Order" ? 
+                      <a onClick={(e)=> handleClick({colRef: "Orders", id: fieldData[item.relatedDataField]})}> 
+                        {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
+                      </a> 
                       : null
                     }
                   </Column>
@@ -186,7 +186,7 @@ const PageField = ({
                         </a> 
                     : 
                       fieldData && item.relatedDataType === "Order" ? 
-                      <a onClick={(e)=> handleClick({colRef: "Orders", id: fieldData[item.relatedDataField]})}> 
+                      <a onClick={(e)=> handleClick({colRef: "Orders", id: fieldData[item.inputID]})}> 
                         {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--")} 
                       </a> 
                     : null

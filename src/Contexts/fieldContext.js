@@ -645,7 +645,7 @@ export const FieldProvider = (props) => {
         inputID: "id",
         inputValue: "OrderNum", 
         relatedCollection: "Orders", 
-        relatedDataField: "ServiceID",
+        relatedDataField: "OrderID",
         relatedInputLabel: "Order Number",
         relatedInputFields: [
           {

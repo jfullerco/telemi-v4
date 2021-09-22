@@ -57,6 +57,8 @@ const DetailDrawer = (props) => {
     setData,
     active,
     setActive,
+    setCurrentModule,
+    setCurrentDocID,
     refreshServices 
   } = userContext
 
@@ -418,9 +420,18 @@ const handleRelatedSelectChange = (e, relatedDataField) => {
 }
 
 const handleClick = (e) => {
-  toggleLoading(true)
-  handleRelatedClick(e)
-
+  const {colRef, id} = e
+  
+  setCurrentModule(colRef)
+  setCurrentDocID(id)
+  try {
+    fetchPage()
+    
+    console.log("Successfully fetched data")
+  } catch {
+    console.log("Error fetching data")
+  }
+  
 }
 const handleArrayMapDrawer = (field) => {
   

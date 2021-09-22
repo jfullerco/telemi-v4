@@ -7,7 +7,8 @@ const Loading = ({active, children}) => {
         <div className="loading">
         </div>
       </div>
-      {children}
+      {active != false ? "" : children}
+      
     </>
   )
 }
