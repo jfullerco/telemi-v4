@@ -16,7 +16,7 @@ const PageField = ({
     handleClick,
     handleRelatedDrawer,
     handleArrayMapDrawer,
-    handleArrayMapClick,
+    
     handleArrayMapDelete 
   }) => {
   const history = useHistory()
@@ -250,7 +250,7 @@ const PageField = ({
                       headerFields={item.relatedInputFields}
                       data={fieldData[item.dataField]}
                       colRef={item.relatedCollection}
-                      handleClick={(e)=>handleArrayMapClick(e)}
+                      handleClick={(e) => handleArrayMapDrawer(e)}
                       handleDelete={(e, arr)=>handleArrayMapDelete(e, arr)}
                     /> 
                   </Column>

@@ -92,7 +92,7 @@ const AddDocButtonFooter = () => {
      }
      
   }
-  console.log(newDocData)
+  
   return(
     <>
       <div 

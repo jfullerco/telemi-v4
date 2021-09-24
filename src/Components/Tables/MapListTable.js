@@ -41,7 +41,7 @@ const MapListTable = ({
                     value={item[col.dataField]}
                   >
                     {item[col.dataField] === undefined ? "--" :
-                    <a onClick={(e) => handleClick({ colRef: colRef, id: item.id })}>
+                    <a onClick={(e) => handleClick({ key: index, colRef: colRef, id: item.id })}>
                       {col.inputFieldType === 'currency' ? "$" : ""} {item[col.dataField]}
                     </a>
                     }

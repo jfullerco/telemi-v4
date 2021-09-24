@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 
-import {db} from '../../Contexts/firebase'
+import { db, fire, store } from '../../Contexts/firebase'
 import {stateContext} from '../../Contexts/stateContext'
 
 import TextInput from '../../Components/Forms/TextInput'
@@ -16,7 +16,18 @@ const AddCompany = ({open}) => {
   const userContext = useContext(stateContext)
   const { setDataLoading } = userContext
   const { currentUser } = userContext.userSession
-
+  const {
+    collection, 
+    query, 
+    where, 
+    getDocs, 
+    getDoc, 
+    addDoc, 
+    updateDoc, 
+    doc,
+    arrayUnion,
+    arrayRemove
+  } = fire
   const [checked, setChecked] = useState(true)
   
   const [pageError, setPageError] = useState()
@@ -32,7 +43,7 @@ const AddCompany = ({open}) => {
     }  
 
     try {
-      await db.collection("Companies").doc().set(data)
+      await addDoc(collection(db, "Companies"), data)
       setPageSuccess("Company Added! Returning to Dashboard...")
       
     } catch {

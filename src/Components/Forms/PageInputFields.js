@@ -8,6 +8,7 @@ import FileUploadField from './FileUploadField'
 const PageInputFields = ({ 
     pageFields, 
     active,
+    activeValue,
     tab, 
     handleChange, 
     handleRelatedSelectChange,
@@ -20,7 +21,7 @@ const PageInputFields = ({
     currentCompanyID, 
     
   }) => {
-      
+      console.log(activeValue)
   return(
     <>
     

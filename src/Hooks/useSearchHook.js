@@ -14,11 +14,11 @@ export function useSearchHook() {
   const [data, setData] = useState([])
   const [searchResults, setSearchResults] = useState([])
 
-  const searchLocationRef = [...locations]
-  const searchServiceRef = [...services]
-  const searchTicketRef = [...tickets]
-  const searchOrderRef = [...orders]
-  const searchAccountRef = [...accounts]
+  const searchLocationRef = locations ? [...locations] : ""
+  const searchServiceRef = services ? [...services] : ""
+  const searchTicketRef = tickets ? [...tickets] : ""
+  const searchOrderRef = orders ? [...orders] : ""
+  const searchAccountRef = accounts ? [...accounts] : ""
 
   useEffect(() => {
     

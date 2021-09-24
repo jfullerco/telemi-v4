@@ -1575,7 +1575,7 @@ export const FieldProvider = (props) => {
         inputID: "id",
         inputValue: "TicketNum",
         relatedCollection: "Tickets",
-        relatedDataField: "OrderID",
+        relatedDataField: "TicketID",
         relatedInputLabel: "Ticket Number",
         relatedInputFields: [
           {
@@ -1652,6 +1652,52 @@ export const FieldProvider = (props) => {
           }, 
         ], 
         tab: "Notes", 
+      },
+      {
+        label: "Revenue",
+        dataField: "Revenue",
+        inputFieldType: "array-map-list",
+        relatedInputFields: [
+          {
+            label: "Cycle",
+            dataField: "CycleMonth",
+            inputFieldType: "datepicker"
+          },
+          {
+            label: "Order #",
+            dataField: "OrderNum",
+            inputFieldType: "text"
+          },
+          {
+            label: "Type",
+            dataField: "Type",
+            inputFieldType: "select",
+            inputID: 'Name',
+            inputValue: 'Value',
+            inputSource: [
+              {
+                Name: "IN",
+                Value: "IN"
+              },
+              {
+                Name: "OUT",
+                Value: "OUT"
+              }
+            ],
+          },
+          {
+            label: "MRC",
+            dataField: "MRC",
+            inputFieldType: "currency",
+          },
+          {
+            label: "Revenue",
+            dataField: "RevenueAmount",
+            inputFieldType: "currency",
+          }
+        ],
+        tab: "Revenue",
+        permission: "Admin"
       },
     ]
     const billsDetailFields = [

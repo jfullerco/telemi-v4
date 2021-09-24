@@ -38,8 +38,7 @@ const DashboardGrids = ({visible}) => {
           fetchAccounts,
           fetchBills,
           fetchUsers,
-          fetchPage,
-          refreshPage,
+          setData,
           fetchContracts,
           setLocations,
           setServices,
@@ -192,11 +191,6 @@ const DashboardGrids = ({visible}) => {
     setIsDrawerOpen(true)
   }
 
-  const handleRelatedClick = (e) => {
-    const {colRef, id} = e
-    
-    refreshPage(colRef, id)
-  }
   
   /** Handle Change when choosing different Grid via Selector */
 
@@ -217,12 +211,18 @@ const DashboardGrids = ({visible}) => {
 
   /** Add New Document Button */
 
-  const handleAddClick = (id) => {
+  const handleAddClick = () => {
     const isModule = modGridStr(grid)
-    setIsModule(isModule)
+    setCurrentModule(isModule)
     
     setIsNewDocDrawerOpen(true)
     
+  }
+
+  const handleCloseDrawer = () => {
+    setData()
+    setIsDrawerOpen(false)
+    setIsNewDocDrawerOpen(false)
   }
 
   
@@ -384,7 +384,7 @@ return (
     <SideDrawer 
       direction="right" 
       checked={isDrawerOpen} 
-      handleClose={() => setIsDrawerOpen(!isDrawerOpen)}
+      handleClose={() => handleCloseDrawer()}
       title={currentCompany}
     >
       <DetailDrawer
@@ -404,13 +404,13 @@ return (
     <SideDrawer 
       direction="right" 
       checked={isNewDocDrawerOpen} 
-      handleClose={() => setIsNewDocDrawerOpen(!isNewDocDrawerOpen)}
+      handleClose={() => handleCloseDrawer()}
       title={currentCompany}
     >
       <DetailDrawer
         currentCompanyID={currentCompanyID}
         id={isCurrentDocID}
-        isModule={isModule}
+        isModule={currentModule}
         isNew={true}
         isDrawerActive={true}
         setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}

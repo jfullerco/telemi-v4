@@ -20,17 +20,6 @@ const GridGroup = ({ data,
     console.log(sortedArr)
   }
 
-  const groupByOptions = [
-    {
-      Label: 'Type',
-      Value: 'Type',
-     },
-     {
-       Label: 'Location',
-       Value: 'LocationName'
-     } 
-  ]
-
   const arrGroup = (arr, el) => arr && arr.reduce((acc, item) => {
     let key = item[el]
     !acc[key] ? acc[key] = [] :

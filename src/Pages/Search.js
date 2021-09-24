@@ -2,11 +2,13 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSearchHook } from '../Hooks/useSearchHook'
 import { stateContext } from '../Contexts/stateContext'
+import CompanyList from './Companies/CompanyList'
 import Page from '../Components/Page'
 
-const Search = () => {
+const Search = (props) => {
   const userContext = useContext(stateContext)
   const {currentCompanyID} = userContext.userSession
+  const { handleClick } = props
   const [searchResults, setSearchValue] = useSearchHook()
   const [locationResults, setLocationResults] = useState("")
   const [serviceResults, setServiceResults] = useState("")
@@ -18,9 +20,7 @@ const Search = () => {
     setSearchValue(e.target.value.toLowerCase())
   }
 
-  const handleClick = (view, id) => {
-    history.push(`/${view}/${currentCompanyID}/${id}`)
-  }
+  
   
   const handleGoBack = () => {
     history.goBack()
@@ -38,7 +38,7 @@ const Search = () => {
     <Page title="Search" handleGoBack={handleGoBack}>
       <div className="hero is-large">
         <p className="block"/>
-          <input className="input is-rounded" type='text' onChange={(e) => handleSearch(e)} />
+          <input className="input is-rounded" type='text' placeholder="Search" onChange={(e) => handleSearch(e)} />
           <div className="mt-5">
             {locationResults && locationResults != undefined ? locationResults.map(result => 
               <div className="box" key={result.id}>

@@ -1,7 +1,5 @@
-
 :root {
-  --speed: 500ms;
-  
+  --speed: 500ms; 
 }
 
 * {
@@ -10,24 +8,20 @@
 }
 
 body {
-  
   display: flex;
   flex-direction: column;
-  scroll-behavior: smooth;
   background: rgba(240, 240, 240, 0.5);
   margin: 0;
   overscroll-behavior: none
 }
 
 #root {
-  margin: 0;
-  
+  margin: 0; 
 }
 
 .companyList {
   top: 51px;
   background: rgba(240, 240, 240, 0.5);
-  
   position: fixed;
   overflow: hidden;
   z-index: 3000;
@@ -80,7 +74,6 @@ body {
 
 .footerblur {
   background-color: rgba(240, 240, 240, 0.7);
-  
   backdrop-filter: blur(10px);
 }
 
@@ -95,7 +88,6 @@ body {
   display:block;
   width:1000px;
   height:700px;
-  
   background-color:white;
 }
 
@@ -107,16 +99,13 @@ body {
 
 .text-field-label {
   position: absolute;
-  
   font-size: .75rem;
   font-weight: bold;
   padding-left: .85rem;
-  
   transform: translate(0, -16px) scale(1);
 }
 
 .text-field-input {
-  
   position: absolute;
   width: 100%;
   padding-left: .2rem;
@@ -124,23 +113,23 @@ body {
 }
  
 .wrapper {
-          display: flex;
-          min-width: 50vw;
-      }
+  display: flex;
+  min-width: 50vw;
+}
 
 .dropdown {
-          display: flex;
+  display: flex;
+}
 
-      }
 .dropdown-menu {
-          position: absolute;
-          
-      }
+  position: absolute;         
+}
 
 .container {
   min-height: 95vh;
   
 }
+
 .textarea {
   border-radius: 20px;
   white-space: nowrap;
@@ -163,9 +152,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  
 }
-
 
 @-webkit-keyframes rotate {
   /* 100% keyframe for  clockwise. 

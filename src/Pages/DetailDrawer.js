@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
 import { stateContext } from '../Contexts/stateContext'
 import { db, fire, store } from '../Contexts/firebase'
 import { fieldContext } from '../Contexts/fieldContext'
@@ -20,8 +19,6 @@ import Footer from '../Footer'
 
 
 const DetailDrawer = (props) => {
-
-  const history = useHistory()
   
   const { isModule, id, handleRelatedClick, isDetailDrawerOpen } = props && props || null
 
@@ -167,7 +164,7 @@ const DetailDrawer = (props) => {
 /** Map-List - Side Effect to inherit related data  */
 
   useEffect(() => {
-
+    console.log(relatedInputData)
     relatedInputData.pageFields && relatedInputData.pageFields ? 
     handleInheritedData(relatedInputData) : ""
 
@@ -338,7 +335,7 @@ const DetailDrawer = (props) => {
     setIsDrawerOpen(!isDrawerOpen)
 
   }
-console.log('data:', data, 'active:', active)
+
   const handleSubmitUpdated = async() => { 
 
     const docData = {
@@ -353,7 +350,7 @@ console.log('data:', data, 'active:', active)
         
         await updateDoc(docRef, docData)
         
-        console.log("Document updated!")
+        console.log("Successfully updated document")
         
       } catch {
 
@@ -397,7 +394,7 @@ const handleToggle = () => {
 }
 
 const handleChange = (e) => {
-
+  e.preventDefault()
   const {name, value} = e.target
   console.log(name, value)
   setActive({...active, [name]: value})
@@ -425,20 +422,25 @@ const handleClick = (e) => {
   setCurrentModule(colRef)
   setCurrentDocID(id)
   try {
+
     fetchPage()
-    
     console.log("Successfully fetched data")
+
   } catch {
+
     console.log("Error fetching data")
+    
   }
   
 }
+
 const handleArrayMapDrawer = (field) => {
   
   setIsArrayMapInputData({  
     pageFields: field.relatedInputFields, 
     dataField: field.dataField,
-    label: field.label
+    label: field.label,
+    key: field.key
   })
 
 setIsArrayMapDrawerOpen(true)
@@ -492,12 +494,11 @@ const handleArrayMapSubmit = async() => {
     ['LastUpdateBy']: currentUser
   }
   try {
-    console.log("Submitting", data)
+    console.log("Submitting Array Data:", data)
     const docRef = doc(db, isModule, id)
     await updateDoc(docRef, docData)
-    
   } catch {
-    console.log("Error submitting")
+    console.log("Error Submitting Array Data")
   }
   setIsArrayMapData()
   setIsArrayMapDrawerOpen(false)
@@ -519,7 +520,7 @@ const handleRelatedDrawer = (field) => {
     [ 'CreatedDate' ]: setCurrentDate(),
     [ 'CreatedBy' ]: currentUser,
     [field.relatedDataField]: props.id,
-})
+  })
 
 setIsRelatedDrawerOpen(true)
   
@@ -532,6 +533,7 @@ const handleRelatedInputChange = (e) => {
     ...relatedSubmitData,
       [name]: value,
     })
+
 }
 
 const handleInheritedData = (e) => {
@@ -594,7 +596,6 @@ return (
                                 item[field.relatedDataField] === docItem.id).map(i => ({...i}))
                               }
                               toggleViewDrawer={()=>handleToggle()}
-                              
                               isViewRelatedActive={isRelatedActive}
                               handleClick={(e)=>handleClick(e)}
                               handleArrayMapDelete={(e, arr)=>handleArrayMapDelete(e, arr, field)}
@@ -649,7 +650,8 @@ return (
                   handleRelatedSelectChange={(e, related)=> handleRelatedSelectChange(e, related)}
                   handleFileChange={(e)=> handleFileChange(e)}
                   pageFields={isArrayMapInputData.pageFields}
-                  active={active}
+                  active={active[isArrayMapInputData.dataField]}
+                  activeValue={isArrayMapInputData.key}
                   addRelatedValue={addRelatedValue}
                   handleAddRelatedValue={(e)=>handleRelatedDrawer(e)}
                   resetAddRelatedValue={()=>setAddRelatedValue("")}

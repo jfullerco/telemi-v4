@@ -53,6 +53,32 @@ const RelatedPageInputFields = ({
 
               </>
             )
+          
+          case "select":
+            return (
+
+              <SelectField 
+                type="select" 
+                title={related.label} 
+                name={related.dataField} 
+                value={activeData && activeData[related.dataField]} 
+                handleChange={(e) => handleRelatedSelectChange(e, { name: related.dataField, relatedName: related.relatedDataField })} 
+              >
+
+                <option></option>
+
+                {related.inputSource && related.inputSource.map(i =>
+
+                  <option name={i[related.dataField]} key={i[related.inputID]}>
+                    {i[related.inputValue]}
+                  </option>
+
+                )}
+
+              </SelectField>
+
+            )
+
 
           case "text":
             return (

@@ -271,17 +271,7 @@ export const StateProvider = (props) => {
       
     }
 
-    const refreshPage = async(colRef, id) => {
-      
-      const docRef = doc(db, colRef, id)
-      const docSnap = await getDoc(docRef) 
-      console.log(docSnap)
-      const docData = docSnap.data()
-      const docID = docSnap.id
-      setActive({id: docID, ...docData})
-      setData(docData)
-      
-    }
+    
     console.log('CONTEXT_DATA', data, 'CONTEXT_ACTIVE', active)
     const handleSubmitNew = async(isModule, data) => {
     
@@ -594,7 +584,6 @@ export const StateProvider = (props) => {
           fetchNotes,
           refreshNotes,
           fetchPage,
-          refreshPage,
           handleSubmitNew,
 
           
