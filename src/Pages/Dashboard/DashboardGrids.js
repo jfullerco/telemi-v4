@@ -278,7 +278,7 @@ const DashboardGrids = ({visible}) => {
     setDrawers([
       closeDrawer
     ]) : 
-    setDrawers( [drawer[index]: [closeDrawer]])
+    setDrawers( [[index]: closeDrawer])
   }
 
 return (
