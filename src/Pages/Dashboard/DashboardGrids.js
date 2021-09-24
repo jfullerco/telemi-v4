@@ -274,9 +274,9 @@ const DashboardGrids = ({visible}) => {
   }
   const handleClose = (index) => {
     const closeDrawer = {open: false}
-    const drawer = drawers[index]
+    const i = drawers[index]
     console.log(drawers[index])
-    setDrawers([drawer]: closeDrawer)
+    setDrawers([[i]: closeDrawer])
 
   }
 
