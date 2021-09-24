@@ -9,7 +9,7 @@ import { db } from '../../Contexts/firebase'
 import { useSortHook } from '../../Hooks/useSortHook'
 import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
-
+import RenderDrawer, {useDrawer} from '../../Hooks/useDrawer'
 
 import GridComponent from './Components/GridComponent'
 import GridGroup from '../../Components/Grids/GridGroup'
@@ -112,6 +112,7 @@ const DashboardGrids = ({visible}) => {
   
 
   const { sortedArr, sortArr } = useSortHook() 
+  const {drawers, setDrawers} = useDrawer()
 
   /**
    * console.log('isNew:', 'grid:', grid, 'isNewDoc:', isNewDoc, 'isModule:', isModule, 'isCurrentDocID:', isCurrentDocID)
@@ -253,7 +254,26 @@ const DashboardGrids = ({visible}) => {
   sortByDate(recent != undefined ? recent : [])
   const recentUpdates = recent != undefined ? recent.slice(0, 10) : ""
   
-  
+  const handleAddDrawer = (drawerData, drawerFields) => {
+
+    const newDrawer = {
+      open: true,
+      data: drawerData,
+      fields: drawerFields,
+      currentCompany: currentCompany
+      currentCompanyI
+    }
+
+    setDrawers([  
+      newDrawer
+    ])
+  }
+  const handleClose = (index) => {
+    const closeDrawer = {[index]: {open: false}}
+    setDrawers(
+      [closeDrawer]
+    )
+  }
 
 return (
   <>
@@ -292,6 +312,7 @@ return (
       </Column>
       <Column size="is-1">
         <button className="button is-rounded is-link is-small has-text-weight-bold" onClick={()=>handleAddClick()}>Add</button>
+        <button onClick={()=>handleAddDrawer(services, serviceGridColumns)}>Test</button>
       </Column>
       
     </Columns>
@@ -300,6 +321,8 @@ return (
     <Grid title="Monthly Cost">
       <CostBySite />
     </Grid>
+
+    
     
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup2
@@ -418,6 +441,8 @@ return (
         resetIsNew={()=>setIsNewDoc()}
       />
     </SideDrawer>
+
+    <RenderDrawer drawers={drawers} handleClose={(index)=>handleClose(index)} />
     
         {/** Network Graph 
           <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>

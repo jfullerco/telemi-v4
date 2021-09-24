@@ -1,30 +1,33 @@
 import React, { useState } from 'react'
 import SideDrawer from '../Components/Drawers/SideDrawer'
+import DetailDrawer from '../Pages/DetailDrawer'
 
-function useDrawer(props) {
+export function useDrawer() {
   
   const [drawers, setDrawers] = useState([])
-
+  console.log('Hook:', drawers)
   const handleClose = (index) => {
-    setDrawers({
-      ...drawers,
-      drawers[index].open: false
-    })
+    drawers.splice(index, 1)
   }
-  
-  const RenderDrawer = (drawers) => {
+
+  return {drawers, setDrawers}
+}
+
+  const RenderDrawer = (props) => {
+    const {drawers, handleClose} = props
+    console.log('drawer:', drawers)
     return(
-      [drawers].map((drawer, index) => 
+      drawers.map((drawer, index) => 
         <SideDrawer 
           direction="right" 
-          checked={drawer.open} 
+          checked={drawer.open && drawer.open} 
           handleClose={() => handleClose(index)}
-          title={currentCompany}
+          title={drawer.currentCompany && drawer.currentCompany}
         >
-          {/**<DetailDrawer
-            currentCompanyID={currentCompanyID}
-            id={currentDocID}
-            isModule={currentModule}
+          <DetailDrawer
+            currentCompanyID={drawer.currentCompanyID}
+            id={drawer.currentDocID}
+            isModule={drawer.currentModule}
             handleRelatedClick={(e)=>handleRelatedClick(e)}
             isNew={isNewDoc || false}
             isRefreshDrawer={isRefreshDrawer}
@@ -32,11 +35,10 @@ function useDrawer(props) {
             setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
             isDetailDrawerOpen={isDrawerOpen}
             resetIsNew={()=>setIsNewDoc()}
-          />*/}
+          />
         </SideDrawer>
       )
     )
   }
-  return {setDrawers, RenderDrawer}
-}
-export default useDrawer
+  
+export default RenderDrawer
