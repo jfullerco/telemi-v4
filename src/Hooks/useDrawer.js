@@ -28,13 +28,13 @@ export function useDrawer() {
             currentCompanyID={drawer.currentCompanyID}
             id={drawer.currentDocID}
             isModule={drawer.currentModule}
-            handleRelatedClick={(e)=>handleRelatedClick(e)}
-            isNew={isNewDoc || false}
-            isRefreshDrawer={isRefreshDrawer}
-            isDrawerActive={isNewDoc || false}
-            setIsDetailDrawerOpen={() => setIsDrawerOpen(!isDrawerOpen)}
-            isDetailDrawerOpen={isDrawerOpen}
-            resetIsNew={()=>setIsNewDoc()}
+            handleRelatedClick={}
+            isNew={false}
+            
+            
+            setIsDetailDrawerOpen={}
+            isDetailDrawerOpen={drawer.open}
+            resetIsNew={}
           />
         </SideDrawer>
       )

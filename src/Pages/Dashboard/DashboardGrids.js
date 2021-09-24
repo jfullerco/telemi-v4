@@ -255,24 +255,30 @@ const DashboardGrids = ({visible}) => {
   const recentUpdates = recent != undefined ? recent.slice(0, 10) : ""
   
   const handleAddDrawer = (drawerData, drawerFields) => {
-
+    setCurrentModule('Services')
+    setCurrentDocID('vXhE4r7reoju3HbJ1SOi')
     const newDrawer = {
       open: true,
       data: drawerData,
       fields: drawerFields,
       currentCompany: currentCompany,
-      currentCompanyID: ""
-    }
-
+      currentCompanyID: "",
+      currentDocID: 'vXhE4r7reoju3HbJ1SOi',
+      currentModule: 'Services'
+    } 
+    drawers.length < 1 ?
     setDrawers([  
       newDrawer
-    ])
+    ]) : 
+    setDrawers([...drawers, [newDrawer]])
   }
   const handleClose = (index) => {
-    const closeDrawer = {[index]: {open: false}}
-    setDrawers(
-      [closeDrawer]
-    )
+    const closeDrawer = {open: false}
+    drawers.length < 1 ?
+    setDrawers([
+      closeDrawer
+    ]) : 
+    setDrawers([...drawers, index: [closeDrawer]])
   }
 
 return (
