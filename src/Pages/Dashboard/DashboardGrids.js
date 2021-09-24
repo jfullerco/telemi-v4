@@ -260,8 +260,8 @@ const DashboardGrids = ({visible}) => {
       open: true,
       data: drawerData,
       fields: drawerFields,
-      currentCompany: currentCompany
-      currentCompanyI
+      currentCompany: currentCompany,
+      currentCompanyID: ""
     }
 
     setDrawers([  
