@@ -446,7 +446,11 @@ return (
       />
     </SideDrawer>
 
-    <RenderDrawer drawers={drawers} handleAddDrawer={(e)=>handleAddDrawer({id: e.id, modRef: e.colRef})} handleClose={(index)=>handleClose(index)} />
+    <RenderDrawer 
+      drawers={drawers} 
+      handleAddDrawer={(e)=>handleAddDrawer({id: e.id, modRef: e.colRef})} 
+      handleClose={(index)=>handleClose(index)} 
+    />
     
         {/** Network Graph 
           <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
