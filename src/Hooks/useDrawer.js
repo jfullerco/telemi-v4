@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import ReactDom from 'react-dom'
 import {stateContext} from '../Contexts/stateContext'
 import SideDrawer from '../Components/Drawers/SideDrawer'
 import DetailDrawer from '../Pages/DetailDrawer'
@@ -21,7 +20,7 @@ const RenderDrawer = (props) => {
 
     const {drawers, handleAddDrawer, handleClose} = props
     console.log('drawer:', drawers, 'currentModule', currentModule)
-    return ReactDOM.createPortal(
+    return (
       drawers.map((drawer, index) => 
         <SideDrawer 
           direction="right" 
@@ -35,14 +34,14 @@ const RenderDrawer = (props) => {
             isModule={drawer.isModule}
             handleRelatedClick={(e)=>handleAddDrawer(e)}
             isNew={false}
-            
-            
+            id={drawer.docID}
+            drawers={drawers}
             setIsDetailDrawerOpen={}
             isDetailDrawerOpen={drawer.open}
             resetIsNew={}
           />
         </SideDrawer>
-      ,document.b)
+      )
     )
   }
   

@@ -263,7 +263,8 @@ const DashboardGrids = ({visible}) => {
       open: true,
       fields: drawer.colRef,
       currentCompany: currentCompany,
-      isModule: drawer.modRef
+      isModule: drawer.modRef,
+      docID: drawer.id
     } 
 
     const addDrawer = [...drawers]

@@ -120,7 +120,7 @@ const DetailDrawer = (props) => {
     toggleLoading(true)
     handlePageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
-    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchPage(isModule, id) : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
      
@@ -132,16 +132,16 @@ const DetailDrawer = (props) => {
     setPageFields(isModule)
     checkForNew(props.isDrawerActive, props.isNew)
     handlePageFields(isModule)
-    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchPage(isModule, id) : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     
-  }, [isModule, isDetailDrawerOpen])
+  }, [isModule])
 
   useEffect(() => {
     
     handlePageFields(isModule)
-    props.isNew === false ? fetchPage() : ""
+    props.isNew === false ? fetchPage(isModule, id) : ""
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     handleSetHeader()

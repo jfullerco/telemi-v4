@@ -259,9 +259,9 @@ export const StateProvider = (props) => {
       setContracts(contracts)
     }
 
-    const fetchPage = async() => {
+    const fetchPage = async(isModule, id) => {
       
-      const docRef = doc(db, userSession.currentModule, userSession.currentDocID)
+      const docRef = doc(db, isModule, id)
       const docSnap = await getDoc(docRef) 
       console.log(docSnap)
       const docData = docSnap.data()
