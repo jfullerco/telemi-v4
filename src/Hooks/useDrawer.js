@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import ReactDom from 'react-dom'
+import {stateContext} from '../Contexts/stateContext'
 import SideDrawer from '../Components/Drawers/SideDrawer'
 import DetailDrawer from '../Pages/DetailDrawer'
 
@@ -13,10 +15,13 @@ export function useDrawer() {
   return {drawers, setDrawers}
 }
 
-  const RenderDrawer = (props) => {
-    const {drawers, handleClose} = props
-    console.log('drawer:', drawers)
-    return(
+const RenderDrawer = (props) => {
+  const userContext = useContext(stateContext)
+  const {currentModule, currentDocID} = userContext.userSession
+
+    const {drawers, handleAddDrawer, handleClose} = props
+    console.log('drawer:', drawers, 'currentModule', currentModule)
+    return ReactDOM.createPortal(
       drawers.map((drawer, index) => 
         <SideDrawer 
           direction="right" 
@@ -26,9 +31,9 @@ export function useDrawer() {
         >
           <DetailDrawer
             currentCompanyID={drawer.currentCompanyID}
-            id={drawer.currentDocID}
-            isModule={drawer.currentModule}
-            handleRelatedClick={}
+            id={currentDocID}
+            isModule={drawer.isModule}
+            handleRelatedClick={(e)=>handleAddDrawer(e)}
             isNew={false}
             
             
@@ -37,7 +42,7 @@ export function useDrawer() {
             resetIsNew={}
           />
         </SideDrawer>
-      )
+      ,document.b)
     )
   }
   

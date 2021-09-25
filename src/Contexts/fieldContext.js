@@ -1023,7 +1023,7 @@ export const FieldProvider = (props) => {
         label: "Ticket Number", 
         dataField: "TicketNum", 
         inputFieldType: "text", 
-        tab: "BASIC INFO",
+        tab: "Essentials",
         isHeader: true 
       },
       { 
@@ -1079,8 +1079,7 @@ export const FieldProvider = (props) => {
           },
         ],
         relatedDataType: "Location",
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO"  
+        tab: "Essentials",
       },
       { 
         label: "Service Location ID", 
@@ -1089,7 +1088,7 @@ export const FieldProvider = (props) => {
         inputSource: locations, 
         inputID: "ID", 
         inputValue: "id", 
-        tab: "BASIC INFO" 
+        tab: "Essentials" 
       },
       { 
         label: "Related Account", 
@@ -1110,8 +1109,7 @@ export const FieldProvider = (props) => {
           }
         ], 
         relatedDataType: 'Account',
-        tab: 'BILLING',
-        tabLabel: 'BILLING'
+        tab: 'Essentials',
       },
       { 
         label: "Related Account ID", 
@@ -1120,7 +1118,7 @@ export const FieldProvider = (props) => {
         inputSource: accounts, 
         inputID: "ID", 
         inputValue: "id", 
-        tab: "BASIC INFO" 
+        tab: "Essentials" 
       },
 
       { 
@@ -1141,8 +1139,7 @@ export const FieldProvider = (props) => {
           }
         ], 
         relatedDataType: 'Service',
-        tab: "DETAILS",  
-        tabLabel: 'DETAILS'
+        tab: "Essentials",  
       },
       { 
         label: "Vendor", 
@@ -1151,13 +1148,13 @@ export const FieldProvider = (props) => {
         inputSource: vendorList, 
         inputID: "Name", 
         inputValue: "Value", 
-        tab: "BASIC INFO"
+        tab: "Essentials"
       },
       { 
         label: "Date Submitted", 
         dataField: "DateSubmitted", 
         inputFieldType: "datepicker", 
-        tab: "BASIC INFO"
+        tab: "Essentials"
       },
       { 
         label: "Type", 
@@ -1179,8 +1176,7 @@ export const FieldProvider = (props) => {
             Value: "Disconnect" 
           }
         ], 
-        tab: "BASIC INFO",
-        tabLabel: "BASIC INFO" 
+        tab: "Essentials",
       },
       { 
         label: "Status", 
@@ -1206,14 +1202,14 @@ export const FieldProvider = (props) => {
             Value: "Closed" 
           }
         ],  
-        tab: "BASIC INFO",
+        tab: "Essentials",
 
       },
       { 
         label: "Details", 
         dataField: "Details", 
         inputFieldType: "text-area", 
-        tab: "BASIC INFO" 
+        tab: "Essentials" 
       },
       { 
         label: "Notes", 
@@ -1238,8 +1234,7 @@ export const FieldProvider = (props) => {
           }
         ], 
         relatedDataType: 'Note',
-        tab: "NOTES",  
-        tabLabel: 'NOTES'
+        tab: "Notes",  
       },
       
     ]

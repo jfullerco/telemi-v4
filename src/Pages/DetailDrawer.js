@@ -112,7 +112,7 @@ const DetailDrawer = (props) => {
   const [isArrayMapData, setIsArrayMapData] = useState("")
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   
-  const {refreshModule} = useRefreshDataHook(isModule)
+  const {refreshModule} = useRefreshDataHook(currentModule)
   const [loading, toggleLoading] = useLoading(true)
   
   useEffect(() => {
@@ -417,21 +417,7 @@ const handleRelatedSelectChange = (e, relatedDataField) => {
 }
 
 const handleClick = (e) => {
-  const {colRef, id} = e
-  
-  setCurrentModule(colRef)
-  setCurrentDocID(id)
-  try {
-
-    fetchPage()
-    console.log("Successfully fetched data")
-
-  } catch {
-
-    console.log("Error fetching data")
-    
-  }
-  
+  handleRelatedClick(e)
 }
 
 const handleArrayMapDrawer = (field) => {

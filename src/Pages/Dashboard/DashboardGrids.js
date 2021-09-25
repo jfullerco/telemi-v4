@@ -38,6 +38,7 @@ const DashboardGrids = ({visible}) => {
           fetchAccounts,
           fetchBills,
           fetchUsers,
+          data,
           setData,
           fetchContracts,
           setLocations,
@@ -254,32 +255,29 @@ const DashboardGrids = ({visible}) => {
   sortByDate(recent != undefined ? recent : [])
   const recentUpdates = recent != undefined ? recent.slice(0, 10) : ""
   
-  const handleAddDrawer = (drawerData, drawerFields) => {
-    setCurrentModule('Services')
-    setCurrentDocID('vXhE4r7reoju3HbJ1SOi')
+  const handleAddDrawer = (drawer) => {
+    setCurrentModule(drawer.modRef)
+    setCurrentDocID(drawer.id)
+      
     const newDrawer = {
       open: true,
-      data: drawerData,
-      fields: drawerFields,
+      fields: drawer.colRef,
       currentCompany: currentCompany,
-      currentCompanyID: "",
-      currentDocID: 'vXhE4r7reoju3HbJ1SOi',
-      currentModule: 'Services'
+      isModule: drawer.modRef
     } 
-    drawers.length < 1 ?
-    setDrawers([  
-      newDrawer
-    ]) : 
-    setDrawers([...drawers, [newDrawer]])
+
+    const addDrawer = [...drawers]
+    addDrawer.push(newDrawer)
+    setDrawers(addDrawer)
   }
+
   const handleClose = (index) => {
-    const closeDrawer = {open: false}
-    const i = drawers[index]
-    console.log(drawers[index])
-    setDrawers([[i]: closeDrawer])
-
+    const removeDrawer = [...drawers]
+    removeDrawer.splice(index, 1)
+    setDrawers(removeDrawer)
+    
   }
-
+console.log('data', data)
 return (
   <>
     <div className="is-flex is-justify-content-flex-end">
@@ -335,7 +333,7 @@ return (
         isGrid='Services'
         headerFields={serviceGridColumns}
         mobileHeaderFields={serviceMobileGridColumns}
-        handleClick={(e) => handleServiceClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: serviceGridColumns, modRef: "Services"})}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
@@ -346,7 +344,7 @@ return (
         isGrid='Tickets'
         headerFields={ticketGridColumns}
         mobileHeaderFields={ticketMobileGridColumns} 
-        handleClick={(e) => handleTicketClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: ticketGridColumns, modRef: "Tickets"})}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
@@ -447,7 +445,7 @@ return (
       />
     </SideDrawer>
 
-    <RenderDrawer drawers={drawers} handleClose={(index)=>handleClose(index)} />
+    <RenderDrawer drawers={drawers} handleAddDrawer={(e)=>handleAddDrawer({id: e.id, modRef: e.colRef})} handleClose={(index)=>handleClose(index)} />
     
         {/** Network Graph 
           <div className={grid === 'NETWORK' ? "card" : "is-hidden"}>
