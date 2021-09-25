@@ -356,7 +356,7 @@ return (
         isGrid='Orders'
         headerFields={orderGridColumns}
         mobileHeaderFields={orderMobileGridColumns}
-        handleClick={(e) => handleOrderClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: orderGridColumns, modRef: "Orders"})}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy || "ALL"}
       />
@@ -367,7 +367,7 @@ return (
         isGrid='Accounts'
         headerFields={accountGridColumns}
         mobileHeaderFields={accountMobileGridColumns}
-        handleClick={(e) => handleAccountClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: accountGridColumns, modRef: "Accounts"})}
         handleSort={(e)=>handleSorting(e)}
         groupBy={groupBy}
       />
@@ -378,7 +378,7 @@ return (
         isGrid='Locations'
         headerFields={locationGridColumns}
         mobileHeaderFields={locationMobileGridColumns}
-        handleClick={(e) => handleLocationClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: locationGridColumns, modRef: "Locations"})}
         handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}
       />
@@ -389,7 +389,7 @@ return (
         isGrid='Contracts'
         headerFields={contractGridColumns}
         mobileHeaderFields={contractMobileGridColumns}
-        handleClick={(e) => handleContractClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: contractGridColumns, modRef: "Contracts"})}
         handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}
       />
@@ -400,7 +400,7 @@ return (
         isGrid='Users'
         headerFields={userGridColumns}
         mobileHeaderFields={userGridColumns}
-        handleClick={(e) => handleUserClick(e)}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: userGridColumns, modRef: "Users"})}
         handleSort={(sortBy, colRef)=>handleSorting(sortBy, colRef)}
         groupBy={groupBy}
       />

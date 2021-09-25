@@ -12,7 +12,6 @@ body {
   flex-direction: column;
   background: rgba(240, 240, 240, 0.5);
   margin: 0;
-  overscroll-behavior: none
 }
 
 #root {

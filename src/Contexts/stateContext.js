@@ -271,8 +271,6 @@ export const StateProvider = (props) => {
       
     }
 
-    
-    console.log('CONTEXT_DATA', data, 'CONTEXT_ACTIVE', active)
     const handleSubmitNew = async(isModule, data) => {
     
       try {

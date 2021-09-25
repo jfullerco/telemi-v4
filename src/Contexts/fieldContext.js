@@ -1931,8 +1931,7 @@ export const FieldProvider = (props) => {
         label: 'Contract Name',
         dataField: 'Name',
         inputFieldType: 'text',
-        tab: 'BASIC INFO',
-        tabLabel: 'BASIC INFO',
+        tab: 'Essentials',
         isHeader: true
       },
       {
@@ -1942,15 +1941,13 @@ export const FieldProvider = (props) => {
         inputSource: vendorList,
         inputID: "Name", 
         inputValue: "Value",
-        tab: 'BASIC INFO',
-        tablLabel: 'BASIC INFO'
+        tab: 'Essentials',
       },
       {
         label: 'Date Signed',
         dataField: 'Date',
         inputFieldType: 'datepicker',
-        tab: 'BASIC INFO',
-        tabLabel: 'BASIC INFO'
+        tab: 'Essentials',
       },
       {
         label: 'Term',
@@ -1984,15 +1981,13 @@ export const FieldProvider = (props) => {
         ],
         inputID: "Name", 
         inputValue: "Value",
-        tab: 'BASIC INFO',
-        tabLabel: 'BASIC INFO'
+        tab: 'Essentials',
       },
       {
         label: 'File',
         dataField: 'FileURL',
         inputFieldType: 'file-field',
-        tab: 'BASIC INFO',
-        tabLabel: 'BASIC INFO'
+        tab: 'Essentials',
       }
     ]
   const userDetailFields = [
@@ -2000,22 +1995,19 @@ export const FieldProvider = (props) => {
       label: 'Email Address',
       dataField: 'Email',
       inputFieldType: 'text',
-      tab: "BASIC INFO",
-      tabLabel: "BASIC INFO"
+      tab: "Essentials",
     },
     {
       label: 'First Name',
       dataField: 'FirstName',
       inputFieldType: 'text',
-      tab: "BASIC INFO",
-      tabLabel: "BASIC INFO"
+      tab: "Essentials",
     },
     {
       label: 'Last Name',
       dataField: 'LastName',
       inputFieldType: 'text',
-      tab: "BASIC INFO",
-      tabLabel: "BASIC INFO"
+      tab: "Essentials",
     },
     {
       label: 'Type',
@@ -2033,8 +2025,7 @@ export const FieldProvider = (props) => {
       ],
       inputID: "Name",
       inputValue: "Value",
-      tab: "BASIC INFO",
-      tabLabel: "BASIC INFO"
+      tab: "Essentials",
     },
     
   ]
@@ -2044,43 +2035,37 @@ export const FieldProvider = (props) => {
       label: 'First Name',
       dataField: 'FirstName',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
     {
       label: 'Last Name',
       dataField: 'LastName',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
     {
       label: 'Company Name',
       dataField: 'CompanyName',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
     {
       label: 'Title/Position',
       dataField: 'Title',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
     {
       label: 'Phone',
       dataField: 'Phone',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
     {
       label: 'Email',
       dataField: 'Email',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
   ]
 
@@ -2089,14 +2074,13 @@ export const FieldProvider = (props) => {
       label: 'Event',
       dataField: 'EventName',
       inputFieldType: 'text',
-      tab: 'BASIC INFO',
+      tab: 'Essentials',
     },
     {
       label: 'Date',
       dataField: 'Date',
       inputFieldType: 'datepicker',
-      tab: 'BASIC INFO',
-      tabLabel: 'BASIC INFO'
+      tab: 'Essentials',
     },
     {
       label: "Type",
@@ -2126,7 +2110,7 @@ export const FieldProvider = (props) => {
           Value: "Billing Start"
         }
       ],
-      tab: "BASIC INFO"
+      tab: "Essentials"
     },
     
   ]

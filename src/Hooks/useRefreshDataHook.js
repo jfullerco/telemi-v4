@@ -10,6 +10,7 @@ export function useRefreshDataHook() {
     refreshAccounts,
     refreshBills,
     refreshUsers,
+    refreshContracts,
     refreshNotes
   } = userContext
   const {currentModule} = userContext.userSession
