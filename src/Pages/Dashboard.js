@@ -104,8 +104,8 @@ const Dashboard = () => {
 
   const isCurrentCompany = () => {
     userType != "" & userType === "Admin" ?
-    currentCompany == "" ? fetchCompaniesAdmin() : "" : 
-    currentCompany == "" ? fetchCompanies() : ""
+    currentCompany === "" ? fetchCompaniesAdmin() : "" : 
+    currentCompany === "" ? fetchCompanies() : ""
     
   }
 
