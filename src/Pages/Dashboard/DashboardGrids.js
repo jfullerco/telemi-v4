@@ -145,54 +145,6 @@ const DashboardGrids = ({visible}) => {
      setLocations(sortedArr) 
 
   }
-
-  const handleServiceClick = (id) => {
-    try {
-      setCurrentModule("Services")
-      setCurrentDocID(id)
-      console.log("Successfully set Module and ID")
-    } catch {
-      console.log("Error setting Module and ID")
-    }
-    setIsDrawerOpen(true)
-  }
-
-  const handleTicketClick = (id) => {
-    setIsModule("Tickets")
-    setIsCurrentDocID(id)
-    setIsDrawerOpen(true)
-  }
-
-  const handleOrderClick = (id) => {
-    setCurrentModule("Orders")
-    setCurrentDocID(id)
-    setIsDrawerOpen(true)
-  }
-
-  const handleAccountClick = (id) => {
-    setIsModule("Accounts")
-    setIsCurrentDocID(id)
-    setIsDrawerOpen(true)
-  }
-
-  const handleUserClick = (id) => {
-    setIsModule("Users")
-    setIsCurrentDocID(id)
-    setIsDrawerOpen(true)
-  }
-
-  const handleContractClick = (id) => {
-    setIsModule("Contracts")
-    setIsCurrentDocID(id)
-    setIsDrawerOpen(true)
-  }
-
-  const handleLocationClick = (id) => {
-    setIsModule("Locations")
-    setIsCurrentDocID(id)
-    setIsDrawerOpen(true)
-  }
-
   
   /** Handle Change when choosing different Grid via Selector */
 
@@ -256,6 +208,7 @@ const DashboardGrids = ({visible}) => {
   const recentUpdates = recent != undefined ? recent.slice(0, 10) : ""
   
   const handleAddDrawer = (drawer) => {
+    
     setCurrentModule(drawer.modRef)
     setCurrentDocID(drawer.id)
       

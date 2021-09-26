@@ -510,6 +510,11 @@ export const FieldProvider = (props) => {
             inputFieldType: 'text'
           },
           {
+            label: 'Address',
+            dataField: 'SearchAddress',
+            inputFieldType: 'ac-places'
+          },
+          {
             label: "Address 1",
             dataField: "Address1",
             inputFieldType: "text"
@@ -527,7 +532,10 @@ export const FieldProvider = (props) => {
           {
             label: "State",
             dataField: "State",
-            inputFieldType: "text"
+            inputFieldType: "select",
+            inputSource: stateList,
+            inputName: 'Name',
+            inputValue: 'code',
           },
           {
             label: "Province/Region",
@@ -1818,26 +1826,31 @@ export const FieldProvider = (props) => {
         label: 'Location Name',
         dataField: 'Name',
         inputFieldType: 'text',
-        tab: 'BASIC INFO',
+        tab: 'Essentials',
         isHeader: true
+      },
+      {
+        label: 'Address',
+        dataField: 'SearchAddress',
+        inputFieldType: 'ac-places'
       },
       {
         label: 'Address 1',
         dataField: 'Address1',
         inputFieldType: 'text',
-        tab: 'BASIC INFO',
+        tab: 'Essentials',
       },
       {
         label: 'Address 2',
         dataField: 'Address2',
         inputFieldType: 'text',
-        tab: 'BASIC INFO'
+        tab: 'Essentials'
       },
       {
         label: 'City',
         dataField: 'City',
         inputFieldType: 'text',
-        tab: 'BASIC INFO'
+        tab: 'Essentials'
       },
       {
         label: 'State',
@@ -1845,32 +1858,32 @@ export const FieldProvider = (props) => {
         inputFieldType: 'select',
         inputSource: stateList,
         inputValue: "code",
-        tab: 'BASIC INFO'
+        tab: 'Essentials'
       },
       {
         label: "Province/Region",
         dataField: "Region",
         inputFieldType: "text",
-        tab: 'BASIC INFO'
+        tab: 'Essentials'
       },
       {
         label: "Zip",
         dataField: "Zip",
         inputFieldType: "text",
-        tab: 'BASIC INFO'
+        tab: 'Essentials'
       },
       {
         label: "Country",
         dataField: "Country",
         inputFieldType: "text",
-        tab: "BASIC INFO"
+        tab: "Essentials"
       },
       {
         label: 'Full Address',
         dataField: 'FullAddress',
         inputFieldType: 'concat',
         visible: false,
-        tab: 'BASIC INFO'
+        tab: 'Essentials'
       },
     ]
     const notesDetailFields = [
@@ -1894,7 +1907,6 @@ export const FieldProvider = (props) => {
         inputFieldType: 'text'
       }
     ]
-
     const eventsDetailFields = [
       {
         label: 'Date',
@@ -1925,7 +1937,6 @@ export const FieldProvider = (props) => {
         tabLabel: 'EVENTS'
       }
     ]
-
     const contractDetailFields = [
       {
         label: 'Contract Name',
@@ -2027,9 +2038,40 @@ export const FieldProvider = (props) => {
       inputValue: "Value",
       tab: "Essentials",
     },
-    
   ]
-
+  const userProfileFields = [
+    {
+      label: 'Email Address',
+      dataField: 'Email',
+      inputFieldType: 'text',
+      tab: 'Essentials'
+    },
+    {
+      label: 'Change Password',
+      dataField: 'Password',
+      inputFieldType: 'button',
+      tab: 'Essentials'
+    },
+    {
+      label: 'Recent Changes',
+      dataField: '',
+      inputFieldType: 'recent-changes-list',
+      tab: 'Essentials'
+    },
+    {
+      label: 'Tags',
+      dataField: 'Tags',
+      inputFieldType: 'array-map-list',
+      relatedInputFields: [
+        {
+          label: 'Tag',
+          dataField: 'Tag',
+          inputFieldType: 'text'
+        }
+      ],
+      tab: 'Essentials'
+    }
+  ]
   const contactDetailFields = [
     {
       label: 'First Name',
@@ -2068,7 +2110,6 @@ export const FieldProvider = (props) => {
       tab: 'Essentials',
     },
   ]
-
   const eventDetailFields = [
     {
       label: 'Event',
@@ -2139,6 +2180,7 @@ return (
       accountMobileGridColumns,
       userGridColumns,
       userDetailFields, 
+      userProfileFields,
       contractGridColumns,
       contractMobileGridColumns,
       contractDetailFields,

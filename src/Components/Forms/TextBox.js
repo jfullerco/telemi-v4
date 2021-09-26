@@ -2,8 +2,6 @@ import React from 'react'
 import Hint from './Hint'
 import { FaDollarSign } from 'react-icons/fa';
 
-
-
 const TextBox = (props) => {
   const {title, value, type, name, fieldChanged, hint, addOn} = props
   return(

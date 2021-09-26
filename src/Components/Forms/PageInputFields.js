@@ -178,6 +178,18 @@ const PageInputFields = ({
 
               </>
             )
+          case "ac-places":
+            return (
+              <>
+
+                <TextBox 
+                  title={field.label}
+                  handleChange={(e)=>handleACChange(e)} 
+                  value={active && active[field.dataField]} 
+                />
+
+              </>
+            )
 
         }
       }

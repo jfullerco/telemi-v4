@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import Page from '../../Components/Page'
+import Box from '../../'
 
 import {stateContext} from '../../Contexts/stateContext'
 
