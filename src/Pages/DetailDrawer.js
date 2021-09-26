@@ -560,7 +560,7 @@ return (
             />
           </TabBar>
 
-          <div className="box is-rounded mx-2" style={{minHeight: '50vh'}}>
+          <div className="box is-rounded" style={{minHeight: '50vh'}}>
 
             <article className="hero title is-small"> 
               <span className="subtitle is-5">{isModule}</span>

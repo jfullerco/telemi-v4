@@ -35,7 +35,7 @@ const GridGroup = ({ data,
   
     <> 
       {groupBy != "ALL" & groupBy != "Tags" ? groupedKeys.map((group) => 
-        <div className="box is-rounded mx-2">
+        <div className="box is-rounded">
             <div className="columns is-mobile">     {/**Header */}
               <div className="column is-narrow">
                 <div className="is-size-6">{isGrid && isGrid}</div>
@@ -144,7 +144,7 @@ const GridGroup = ({ data,
       
         ) : groupBy == "Tags" ? groupedKeys.map((group) => (
 
-          <div className="box is-rounded mx-2">
+          <div className="box is-rounded">
             <div className="columns is-mobile">     
               <div className="column is-narrow">
                 <div className="is-size-6">{isGrid && isGrid}</div>
@@ -241,7 +241,7 @@ const GridGroup = ({ data,
 
         )) : (
           
-          <div className="box is-rounded mx-2">
+          <div className="box is-rounded">
           <div className="columns is-mobile">     {/**Header */}
             <div className="column is-narrow">
               <div className="title">
