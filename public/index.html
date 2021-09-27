@@ -6,14 +6,8 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no" />
   <title>TELEMI</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   
-
-
-  
-  
-  
-<script type="text/javascript" crossorigin src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
 
 
@@ -21,7 +15,16 @@
   
 <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js'
 
+  // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+  import { analytics } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js'
+
+  // Add Firebase products that you want to use
+  import { auth } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js'
+  import { firestore } from 'https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js'
+</script>
 <div id="root"></div>
 </body>
 

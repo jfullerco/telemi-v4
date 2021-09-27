@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
 import { 
   getFirestore, 
@@ -33,8 +32,6 @@ const firebaseConfig = {
   measurementId: "G-K3F50P2C8N"
 };
 
-
-
 // Initialize Firebase
 const app = initializeApp({
   apiKey: "AIzaSyCLcH3HfDZU-0Qa8k90hHYhQZZRyOAy8j4",
@@ -46,7 +43,7 @@ const app = initializeApp({
   appId: "1:371736927443:web:9d80c3abc38e399db3c826",
   measurementId: "G-1R2QK5MPPK"
 });
-const analytics = getAnalytics(app);
+
 export const fire = {
   collection, 
   query, 
@@ -69,4 +66,3 @@ export const db = getFirestore(app);
 export const store = getStorage(app); 
 
 
-export default app
