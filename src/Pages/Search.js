@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSearchHook } from '../Hooks/useSearchHook'
 import { stateContext } from '../Contexts/stateContext'
 import CompanyList from './Companies/CompanyList'
@@ -14,7 +14,7 @@ const Search = (props) => {
   const [serviceResults, setServiceResults] = useState("")
   const [orderResults, setOrderResults] = useState("")
   const [ticketResults, setTicketResults] = useState("")
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value.toLowerCase())
@@ -23,7 +23,7 @@ const Search = (props) => {
   
   
   const handleGoBack = () => {
-    history.goBack()
+    navigate(-1)
   }
 
   useEffect(() => {

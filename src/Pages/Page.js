@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 import {stateContext} from '../../Contexts/stateContext'
 import { db } from '../../Contexts/firebase'
@@ -18,7 +18,7 @@ import SelectBox from '../../Components/Forms/SelectBox'
 
 const Page = (state) => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const userContext = useContext(stateContext)
 
   const { serviceTypes, 
@@ -95,7 +95,7 @@ const Page = (state) => {
   }
 
   const autoClose = () => {
-    setTimeout(() => {history.push("/dashboard")}, 1500)
+    setTimeout(() => {navigate('/dashboard')}, 1500)
   }
 
   const pageFields = [

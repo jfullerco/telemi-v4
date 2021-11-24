@@ -24,14 +24,18 @@ export function AuthProvider({children}) {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+  const unsubscribe = async() => {
+    onAuthStateChanged(auth, user => {
        
       setCurrentUser(user)
-      userContext.setCurrentUser(user.email)
+      userContext.setCurrentUser(user && user.email)
       setLoading(false)
     })
-    return unsubscribe
+  }
+
+  useEffect(() => {
+    unsubscribe()
+    
   },[])
 
   const logOutUser = () => {

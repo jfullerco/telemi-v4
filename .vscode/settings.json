@@ -1,4 +1,6 @@
 {
+  "editor.fontFamily": "Arial",
+  "git.autoStash": true
   // "editor.theme": "vs-dark",
   /**
    * Render vertical lines at the specified columns.

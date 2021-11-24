@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import {stateContext} from '../../Contexts/stateContext'
 
@@ -12,7 +12,7 @@ import CompanyDropDown from '../../Components/DropDowns/CompanyDropDown'
 
 const CompanyList = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const userContext = useContext(stateContext)
 
@@ -97,7 +97,7 @@ const CompanyList = () => {
   }
 
   const handleAddCompany = () => {
-    history.push("/addcompany")
+    navigate('/addcompany')
   }
   
   return (
@@ -118,7 +118,7 @@ const CompanyList = () => {
         </div>
         : <span className="title has-text-black">{currentCompany}</span>
       }
-      {companies === null ? <button className="button is-rounded is-link" onClick={() => history.push("/addcompany")}>Add a Company Name</button> : null}
+      {companies === null ? <button className="button is-rounded is-link" onClick={() => navigate('/addcompany')}>Add a Company Name</button> : null}
     </>
   )
 }

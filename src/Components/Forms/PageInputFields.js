@@ -36,7 +36,7 @@ const PageInputFields = ({
                 <SelectField
                   type="select"
                   title={field.label}
-                  name={field.dataField, <a className="link is-size-7 pl-1" onClick={() => handleAddValue(field)}>(add)</a>}
+                  name={field.dataField}
                   value={active && active[field.dataField]}
                   handleChange={(e) => handleRelatedSelectChange(e, { name: field.dataField, relatedName: field.relatedDataField })}
                   field={field}

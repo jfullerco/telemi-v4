@@ -1,10 +1,10 @@
 import React, {useState, useContext} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {stateContext} from '../../stateContext'
 import siteServices from '../../Services/siteService'
 
 const AddAsset = ({id}) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const userContext = useContext(stateContext)
   const initialAssetState = {
     id: null,

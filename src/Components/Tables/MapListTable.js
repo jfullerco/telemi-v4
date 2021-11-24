@@ -9,7 +9,7 @@ const MapListTable = ({
 }) => {
   return(
     <>
-      <table className="table is-hoverable is-fullwidth">
+      <table className="table is-hoverable is-bordered is-fullwidth">
         <thead className="is-size-6">
           <tr>
 
@@ -20,13 +20,16 @@ const MapListTable = ({
                 {col.label && col.label}
 
               </th>
+
             )}
+
           </tr>
 
         </thead>
-        <tbody className="is-size-7">
+        <tbody className="is-size-6">
 
-          {data && data != undefined ? data.map((item, index) =>
+          {data && data != undefined ? 
+            data.map((item, index) =>
           
             <tr key={item.id}>
               
@@ -40,16 +43,25 @@ const MapListTable = ({
                     name={col.relatedCollection}
                     value={item[col.dataField]}
                   >
-                    {item[col.dataField] === undefined ? "--" :
-                    <a onClick={(e) => handleClick({ key: index, colRef: colRef, id: item.id })}>
-                      {col.inputFieldType === 'currency' ? "$" : ""} {item[col.dataField]}
-                    </a>
+
+                    {
+                      item[col.dataField] === undefined ? "--" :
+                        <a onClick={(e) => handleClick({ key: index, colRef: colRef, id: item.id })}>
+                          {col.inputFieldType === 'currency' ? "$" : ""} {item[col.dataField]}
+                        </a>
                     }
+
                   </td>
 
                 </>
               )}
-              {handleDelete != undefined ? <td><button className="delete is-small" onClick={()=>handleDelete(index, data, headerFields)}>x</button></td> :
+              {
+                handleDelete != undefined ? 
+                  <td>
+                    <button className="delete is-small" onClick={()=>handleDelete(index, data, headerFields)}>
+                      x
+                    </button>
+                  </td> :
               ""}
             </tr>
           ) : ""}

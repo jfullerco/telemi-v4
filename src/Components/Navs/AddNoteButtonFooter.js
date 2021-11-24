@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { FaRegStickyNote, FaStickyNote } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 
 const AddNoteButtonFooter = () => {
 
   const {isModule, id} = useParams()
-  const history = useHistory()
+  const history = useNavigate()
   const [ toggle, setToggle ] = useState(false)
 
   const handleClick = async() => {
@@ -29,7 +29,7 @@ const AddNoteButtonFooter = () => {
   const autoClose = () => {
 
     setTimeout(() => { 
-      history.push("/dashboard") 
+      navigate("/dashboard") 
     }, 1500 )
 
   }

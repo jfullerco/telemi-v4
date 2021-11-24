@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/jfullerco/telemi-v4static/css/main.6404ab7f.chunk.css",
+    "main.js": "/jfullerco/telemi-v4static/js/main.87e0a8b0.chunk.js",
+    "main.js.map": "/jfullerco/telemi-v4static/js/main.87e0a8b0.chunk.js.map",
+    "runtime-main.js": "/jfullerco/telemi-v4static/js/runtime-main.a06ecef3.js",
+    "runtime-main.js.map": "/jfullerco/telemi-v4static/js/runtime-main.a06ecef3.js.map",
+    "static/js/2.205d94be.chunk.js": "/jfullerco/telemi-v4static/js/2.205d94be.chunk.js",
+    "static/js/2.205d94be.chunk.js.map": "/jfullerco/telemi-v4static/js/2.205d94be.chunk.js.map",
+    "index.html": "/jfullerco/telemi-v4index.html",
+    "static/css/main.6404ab7f.chunk.css.map": "/jfullerco/telemi-v4static/css/main.6404ab7f.chunk.css.map",
+    "static/js/2.205d94be.chunk.js.LICENSE.txt": "/jfullerco/telemi-v4static/js/2.205d94be.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a06ecef3.js",
+    "static/js/2.205d94be.chunk.js",
+    "static/css/main.6404ab7f.chunk.css",
+    "static/js/main.87e0a8b0.chunk.js"
+  ]
+}

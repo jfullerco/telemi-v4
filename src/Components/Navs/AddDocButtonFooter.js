@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { db, fire, store } from '../../Contexts/firebase'
+import { useParams, useNavigate } from 'react-router-dom'
 import { FaPaperclip } from 'react-icons/fa'
-import { db, store } from '../../Contexts/firebase'
+
 import { stateContext } from '../../Contexts/stateContext'
 
 const AddDocButtonFooter = () => {
@@ -9,9 +10,20 @@ const AddDocButtonFooter = () => {
   const userContext = useContext(stateContext)
   const {setCurrentDate} = userContext
   const {currentCompany, currentCompanyID, currentUser} = userContext.userSession
-  
+  const {
+    collection, 
+    query, 
+    where, 
+    getDocs, 
+    getDoc, 
+    addDoc, 
+    updateDoc, 
+    doc,
+    arrayUnion,
+    arrayRemove
+  } = fire
   const {isModule, id} = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [ toggle, setToggle ] = useState(false)
   const [docs, setDocs] = useState("")
   const [newDocData, setNewDocData] = useState("")
@@ -20,16 +32,22 @@ const AddDocButtonFooter = () => {
     fetchDocs()
   },[])
   
-  const fetchDocs = async() => {
-    const docRef = await db.collection("Attachments").where(`${isModule}ID`, "==", `${id}`).get()
-    const docs = docRef.docs.map(doc => ({id: doc.id, ...doc.data()}))
-    setDocs(docs)
+  const fetchDocs = async(isModule, id) => {
+    const q = query(collection(db, "Attachments"),
+    where(`${isModule}ID`, "==", `${id}`))
+    const attachmentRef = await getDocs(q)
+    const attachments = attachmentRef.docs.map(doc => ({
+      id: doc.id, 
+      ...doc.data()
+    }))
+    console.log('Fetched Locations')
+    setDocs(attachments)
   }
 
   const handleClick = async() => {
     
     try {
-
+      await addDoc(collection(db, isModule), data) 
      await db.collection("Attachments").doc().set(newDocData)
     
     setToggle(false)
@@ -46,7 +64,7 @@ const AddDocButtonFooter = () => {
     
     try {
 
-    const res = await db.collection("Attachments").doc(docID).delete()
+    
     console.log(res)
     
     setToggle(false)

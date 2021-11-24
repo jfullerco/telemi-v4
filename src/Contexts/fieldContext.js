@@ -1,4 +1,5 @@
 import React, { useState, createContext, useContext } from 'react'
+import { db, fire, store } from './firebase'
 import { stateContext } from './stateContext'
 import {vendorList} from './vendorList'
 import {stateList} from './states'
@@ -11,6 +12,26 @@ export const FieldProvider = (props) => {
     
     const {Provider} = fieldContext
     const userContext = useContext(stateContext)
+    const [core, setCore] = useState([])
+    
+    const {
+      collection, 
+      query, 
+      where, 
+      getDocs, 
+      getDoc, 
+      addDoc, 
+      updateDoc, 
+      doc,
+      ref,
+      setDoc,
+      deleteDoc,
+      uploadBytes,
+      getDownloadURL,
+      arrayUnion,
+      arrayRemove
+    } = fire
+
     const {
       locations,
       orders,
@@ -21,25 +42,35 @@ export const FieldProvider = (props) => {
       events
     } = userContext.userSession
 
-  /** Grid Fields */
+    const fetchCore = async() => {
+      const q = query(collection(db, 'Core'))
+      const querySnapshot = await getDocs(q)
+      const data = querySnapshot.docs.map(doc => ({module: doc.id, ...doc.data()}))
+      setCore(data)
+    }
+
+/** Grid Fields */
     const serviceGridColumns = [
       {
         docField: 'Vendor', 
         headerName: 'Vendor', 
         key: "1", 
-        filterable: true
+        filterable: true,
+        visible: true
       },
       {
         docField: 'VendorServiceName', 
         headerName: 'Product', 
         key: "2", 
-        filterable: true
+        filterable: true,
+        visible: true
       },
       {
         docField: 'LocationName', 
         headerName: 'Location', 
         key: "3", 
         filterable: true,
+        visible: true,
         mobile: true
       },
       {
@@ -47,19 +78,22 @@ export const FieldProvider = (props) => {
         headerName: 'Asset ID', 
         key: "4", 
         filterable: false,
+        visible: true,
         mobile: true
       },
       {
         docField: 'Type', 
         headerName: 'Type', 
         key: "5", 
-        filterable: true
+        filterable: true,
+        visible: false
       },
       {
         docField: 'Status', 
         headerName: 'Status', 
         key: "6", 
-        filterable: true
+        filterable: true,
+        visible: false
       }
     ]
 
@@ -212,7 +246,8 @@ export const FieldProvider = (props) => {
         docField: 'Details', 
         headerName: 'Details', 
         key: "5", 
-        filterable: false
+        filterable: false,
+        visible: false
       },
       {
         docField: 'Status', 
@@ -497,7 +532,7 @@ export const FieldProvider = (props) => {
         label: "Service Location", 
         dataField: "LocationName", 
         inputFieldType: "related-select", 
-        inputSource: locations, /** SET BY HANDLEINITIALFIELDMAPPING FN */
+        inputSource: locations, 
         inputID: "id", 
         inputValue: "Name",
         relatedCollection: "Locations", 
@@ -508,11 +543,6 @@ export const FieldProvider = (props) => {
             label: 'Location Name',
             dataField: 'Name',
             inputFieldType: 'text'
-          },
-          {
-            label: 'Address',
-            dataField: 'SearchAddress',
-            inputFieldType: 'ac-places'
           },
           {
             label: "Address 1",
@@ -1885,6 +1915,25 @@ export const FieldProvider = (props) => {
         visible: false,
         tab: 'Essentials'
       },
+      {
+        label: 'Related Services',
+        dataField: 'RelatedLocationID',
+        inputFieldType: 'related-array-map',
+        inputSource: services,
+        relatedCollection: 'Services',
+        helperCollection: 'RELATED_KEY',
+        columns: [
+          {
+            label: 'Vendor',
+            dataField: 'Vendor',
+          },
+          {
+            label: 'Asset',
+            dataField: 'AssetID'
+          },
+        ],
+        tab: 'Services'
+      }
     ]
     const notesDetailFields = [
       {
@@ -2110,6 +2159,8 @@ export const FieldProvider = (props) => {
       tab: 'Essentials',
     },
   ]
+
+  
   const eventDetailFields = [
     {
       label: 'Event',
@@ -2191,7 +2242,10 @@ return (
       orderDetailFields,
       billsDetailFields,
       contactDetailFields,
-      eventDetailFields}}>
+      eventDetailFields,
+      fetchCore,
+      core,
+      setCore}}>
       {props.children}
     </Provider>
   )

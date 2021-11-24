@@ -1,5 +1,5 @@
 import React from 'react'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faUpload } from 'react-icons/fa'
 
 const FileUploadField = ({handleFileChange}) => {
   return(

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef, useContext, forwardRef} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import {db} from '../Contexts/firebase'
 import {stateContext} from '../Contexts/stateContext'

@@ -1,39 +1,83 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-import { FaChevronCircleUp, FaChevronCircleDown } from 'react-icons/fa'
-import Columns from '../Layout/Columns'
-import Column from '../Layout/Column'
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa'
+import {
+  Dropdown, 
+  DropdownTrigger, 
+  DropdownButton, 
+  DropdownMenu, 
+  DropdownContent,
+  DropdownMenuItem
+} from './DropdownMenu'
 
-const CompanyDropDown = ({currentCompany, companies, isActive, handleClick, handleToggle}) => {
-  const history = useHistory()
+import {FormControl, Field} from '../Forms/Form'
+
+const CompanyDropDown = ({
+  currentCompany, 
+  companies, 
+  isActive, 
+  handleClick, 
+  handleToggle
+}) => {
+  const navigate = useNavigate()
   return(
-    <div>
-     
-      <div className={isActive === true ? `dropdown is-active` : `dropdown`}>
+    <>
+    <Field params='has-addons'>
+    <FormControl params='is-expanded'>
+        <Dropdown 
+          isActive={isActive}
+        >
+          <DropdownTrigger>
+            <DropdownButton 
+              label={currentCompany}
+              onClick={handleToggle}
+              isActive={isActive}
+              params='is-rounded shaded'
+            />
+          </DropdownTrigger>
+          <DropdownMenu>
+            <DropdownContent>
+                {companies && companies.map(company =>
+                  <a
+                    className={currentCompany === company.Name ? "dropdown-item is-active" : "dropdown-item"}
+                    onClick={() => handleClick({ id: company.id, name: company.Name })}
+                    key={company.id}
+                  >
+                    {company.Name}
+                  </a>
+                )}
+            </DropdownContent>
+          </DropdownMenu>
+        </Dropdown>
+    </FormControl>
+    </Field>
+    
+    {/**---------*/}
+  
+      <div className={`is-hidden`} >
         <div className="dropdown-trigger ">
           
-          <div className="title donotwrap" onClick={handleToggle}>
+          <div className="input" onClick={handleToggle}>
             <span className="pr-1">
               <strong>{currentCompany}</strong>
             </span>
             <span className="icon">
 
-              <FaChevronCircleUp onClick={handleToggle} style={{ marginTop: 'auto' }} className={isActive === true ? "icon is-small" : "is-hidden"} />
-              <FaChevronCircleDown onClick={handleToggle} style={{ marginTop: 'auto' }} className={isActive === false ? "icon is-small" : "is-hidden"} />
+              <FaAngleUp onClick={handleToggle} style={{ marginTop: 'auto' }} className={isActive === true ? "icon" : "is-hidden"} />
+              <FaAngleDown onClick={handleToggle} style={{ marginTop: 'auto' }} className={isActive === false ? "icon" : "is-hidden"} />
             </span>
           </div>
           
         </div>
 
         <div className="dropdown-menu">
-          <div className="dropdown-content ">
-            <a className="dropdown-item" onClick={() => history.push("/addcompany")}>ADD</a>
+          <div className="dropdown-content">
+            <button className="dropdown-item" onClick={() => history.push("/addcompany")}>Add a company</button>
             <hr className="dropdown-divider" />
             {companies && companies.map(company =>
               <a
                 className={currentCompany === company.Name ? "dropdown-item is-active" : "dropdown-item"}
-                style={{ textTransform: "uppercase" }}
                 onClick={() => handleClick({ id: company.id, name: company.Name })}
                 key={company.id}
               >
@@ -44,7 +88,10 @@ const CompanyDropDown = ({currentCompany, companies, isActive, handleClick, hand
         </div>
 
       </div>
-    </div>
+    
+    </>
+    
+    
   )
 }
 export default CompanyDropDown

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FaTrashAlt } from 'react-icons/fa'
 
 import { db } from '../../Contexts/firebase'
@@ -7,7 +7,7 @@ import ConfirmationModal from '../ConfirmationModal'
 
 const DeleteButton = ({ colRef, docRef, size, isIcon }) => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [toggleConfirmation, setToggleConfirmation] = useState(false)
   const [confirmed, setConfirmed ] = useState(false)
@@ -34,7 +34,7 @@ const DeleteButton = ({ colRef, docRef, size, isIcon }) => {
   const autoClose = () => {
 
     setTimeout(() => { 
-      history.push("/dashboard") 
+      navigate('/dashboard') 
     }, 1500 )
 
   }

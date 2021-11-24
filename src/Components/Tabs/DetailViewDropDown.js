@@ -1,12 +1,12 @@
 import React from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FaChevronCircleDown } from "react-icons/fa"
 import { FaChevronCircleUp } from "react-icons/fa"
 import DeleteButton from '../Buttons/DeleteButton'
 
 
 const RelatedFieldDropDown = ({isActive, handleToggle, views, activeView, handleView, value, title, handleEditDrawer}) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const {isModule, id} = useParams()
 
   return(

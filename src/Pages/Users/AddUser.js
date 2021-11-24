@@ -1,5 +1,5 @@
 import React, {useState, useContext, useRef, useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import {stateContext} from '../../Contexts/stateContext'
 import {db} from '../../Contexts/firebase'
@@ -9,7 +9,7 @@ import TextInput from '../../Components/Forms/TextInput'
 
 const AddUsers = () => {
 
-  const history = useHistory()
+  const history = useNavigate()
 
   const userContext = useContext(stateContext)
   const {currentCompanyID} = userContext.userSession

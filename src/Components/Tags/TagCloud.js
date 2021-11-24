@@ -10,7 +10,7 @@ const TagCloud = ({data, handleTagDelete}) => {
               
                 <span className="tag is-rounded">
                   {tag}
-                  <button className="delete is-small is-hidden" onClick={()=>handleTagDelete()}></button>
+                  <button className="delete is-hidden" onClick={()=>handleTagDelete()}></button>
                 </span>
               
             )}

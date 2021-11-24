@@ -3,7 +3,7 @@ import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 import { useAuth } from '../Contexts/AuthContext'
 import {db} from '../Contexts/firebase'
 
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Columns from '../Components/Layout/Columns'
 import Column from '../Components/Layout/Column'
 
@@ -12,7 +12,7 @@ export default function Login() {
   const emailRef = useRef("")
   const passwordRef = useRef("")
   const {login} = useAuth()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [modalState, setModalState] = useState(true)
   const [loginError, setLoginError] = useState('')
@@ -32,7 +32,7 @@ export default function Login() {
         Email: emailRef.current.value,
         Date: new Date()
       })
-      history.push("/dashboard")
+      navigate('/dashboard')
     } catch {
       setLoginError('Email or Password is incorrect')
       console.log('Email or Password is incorrect')
@@ -42,7 +42,7 @@ export default function Login() {
   }
 
   const handleModalClose = () => {
-    history.goBack()
+    navigate(-1)
   }
 
   return(
@@ -83,7 +83,7 @@ export default function Login() {
               </button>
             </Column>
             <Column>
-              <button className="button is-rounded" onClick={()=>history.push("/register")}>
+              <button className="button is-rounded" onClick={()=>navigate("/register")}>
                 Create account 
               </button>
             </Column>

@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react'
 import {stateContext} from '../Contexts/stateContext'
 import SideDrawer from '../Components/Drawers/SideDrawer'
 import DetailDrawer from '../Pages/DetailDrawer'
+import DetailDrawer2 from '../Pages/DetailDrawer2'
 
 export function useDrawer() {
   
   const [drawers, setDrawers] = useState([])
-  console.log('Hook:', drawers)
+  
+  //console.log('Hook:', drawers)
   const handleClose = (index) => {
     drawers.splice(index, 1)
   }
@@ -19,16 +21,19 @@ const RenderDrawer = (props) => {
   const {currentModule, currentDocID} = userContext.userSession
 
     const {drawers, handleAddDrawer, handleClose} = props
-    console.log('drawer:', drawers, 'currentModule', currentModule)
+    const [tab, setTab] = useState('Essentials')
+    
+    //console.log('drawer:', drawers, 'currentModule', currentModule)
     return (
       drawers.map((drawer, index) => 
         <SideDrawer 
           direction="right" 
           checked={drawer.open && drawer.open} 
           handleClose={() => handleClose(index)}
+          handleSetTab={(e)=> setTab(e)}
           title={drawer.currentCompany && drawer.currentCompany}
         >
-          <DetailDrawer
+          <DetailDrawer2
             currentCompanyID={drawer.currentCompanyID}
             id={currentDocID}
             isModule={drawer.isModule}
@@ -36,9 +41,10 @@ const RenderDrawer = (props) => {
             isNew={false}
             id={drawer.docID}
             drawers={drawers}
-            setIsDetailDrawerOpen={}
+            setIsDetailDrawerOpen={""}
             isDetailDrawerOpen={drawer.open}
-            resetIsNew={}
+            resetIsNew={""}
+            tab={tab}
           />
         </SideDrawer>
       )

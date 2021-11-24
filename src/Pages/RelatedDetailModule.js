@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import {useParams, useHistory} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 
 import {stateContext} from '../Contexts/stateContext'
 import { db } from '../Contexts/firebase'
@@ -20,7 +20,7 @@ import DeleteButton from '../Components/Buttons/DeleteButton'
 import TabBar from '../Components/Tabs/TabBar'
 
 import PageField from '../Components/Layout/PageField'
-import AddBill from './Accounts/Bill/AddBill'
+
 import Loading from '../Components/Loading'
 import CheckIfNeedsCache from '../Components/Conditions/CheckIfNeedsCache'
 import QuickAdd from './QuickAdd'
@@ -30,7 +30,7 @@ import FieldLabel from '../Components/Layout/FieldLabel'
 const RelatedDetailModule = (state) => {
 
   const params = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   
   const { isModule } = params.isModule && params || null
 
@@ -197,7 +197,7 @@ console.log(pageFields)
   }
 
   const autoClose = () => {
-    setTimeout(() => {history.push("/dashboard")}, 1500)
+    setTimeout(() => {navigate("/dashboard")}, 1500)
   }
 
   const handleSubmitNew = async(data) => {
@@ -280,7 +280,7 @@ const handleSetCache = (value, setValue) => {
 
 const handleClick = (e) => {
   setLoading(true)
-  history.push({
+  navigate({
     pathname: `/${e.colRef}/${currentCompanyID}/${e.id}`,
     state: {
     

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import {Link, useHistory, Redirect} from 'react-router-dom'
+import {Link, useNavigate, Redirect} from 'react-router-dom'
 
 
 import {stateContext} from '../../../Contexts/stateContext'
@@ -26,7 +26,7 @@ const DataViewer = ({visible}) => {
   const userContext = useContext(stateContext)
   const {dataLoading, currentCompany} = userContext.userSession
 
-  const history = useHistory()
+  const history = useNavigate()
 
   const [locations, setLocations] = useState()
   const [orders, setOrders] = useState()

@@ -58,6 +58,7 @@ export const StateProvider = (props) => {
       return await getDocs(q)
     }
 
+
     const fetchLocations = async() => {
       const q = query(collection(db, "Locations"),
       where("CompanyID", "==", userSession.currentCompanyID))

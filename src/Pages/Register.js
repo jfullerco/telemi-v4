@@ -1,5 +1,5 @@
 import React, {useContext, useRef, useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 import {useAuth} from '../Contexts/AuthContext'
 
@@ -10,7 +10,7 @@ const Register = (props) => {
   const confirmPasswordRef = useRef()
 
   const {signup} = useAuth()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [signupError, setSignupError] = useState('')
   const [loading, setLoading] = useState(false)
   const [modalState, setModalState] = useState(true)
@@ -28,7 +28,7 @@ const Register = (props) => {
       setSignupError('Failed to create an account')
     }
     setLoading(false)
-    history.push('/login')
+    navigate('/login')
     handleModalClose()
   }
 
@@ -62,7 +62,7 @@ const Register = (props) => {
             Register
           </button>
           
-          <button className="button is-rounded" onClick={()=>history.push("/login")}>Login</button>
+          <button className="button is-rounded" onClick={()=>navigate('/login')}>Login</button>
         </div>
         <button className="modal-close is-large" aria-label="close" onClick={handleModalClose}></button>  
         </div>

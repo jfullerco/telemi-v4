@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Columns from './Layout/Columns'
 import Column from './Layout/Column'
@@ -7,7 +7,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 
 const Page = ({title, subtitle, handleGoBack, pageError, pageSuccess, children}) => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const success = "notification is-success is-overlay is-align-content-center"
 
   

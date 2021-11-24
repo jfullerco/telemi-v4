@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { stateContext } from '../Contexts/stateContext'
 import { db, fire, store } from '../Contexts/firebase'
 import { fieldContext } from '../Contexts/fieldContext'
+import { fieldsServices } from '../Contexts/initialFieldContext'
 import { useRefreshDataHook } from '../Hooks/useRefreshDataHook'
 import { useLoading } from '../Hooks/useLoading'
 import Columns from '../Components/Layout/Columns'
@@ -10,13 +11,14 @@ import DrawerPage from '../Components/DrawerPage'
 import DrawerComponent from '../Components/Layout/DrawerComponent'
 import Loading from '../Components/Loading'
 import PageField from '../Components/Layout/PageField'
+import PageField2 from '../Components/Layout/PageField2'
 import TabBar from '../Components/Tabs/TabBar'
 import Tab from '../Components/Tabs/Tab'
+import RelatedFieldDropDown from '../Components/Tabs/DetailViewDropDown'
 
 import PageInputFields from '../Components/Forms/PageInputFields'
 import RelatedPageInputFields from '../Components/Forms/RelatedPageInputFields'
 import Footer from '../Footer'
-
 
 const DetailDrawer = (props) => {
   
@@ -31,7 +33,11 @@ const DetailDrawer = (props) => {
     getDoc, 
     addDoc, 
     updateDoc, 
+    setDoc,
     doc,
+    ref,
+    uploadBytes,
+    getDownloadURL,
     arrayUnion,
     arrayRemove
   } = fire
@@ -80,10 +86,10 @@ const DetailDrawer = (props) => {
     eventDetailFields,
     locationDetailFields,
     contractDetailFields,
-    userDetailFields
+    userDetailFields,
+    core
   } = useContext(fieldContext)
 
-  
   const [tab, setTab] = useState("Essentials")
   const [data, setData] = useState("")
   const [active, setActive] = useState("")
@@ -122,7 +128,7 @@ const DetailDrawer = (props) => {
      
   }, [])
 
-  useEffect(() => {
+  /* useEffect(() => {
 
     toggleLoading(true)
     setPageFields(isModule)
@@ -132,7 +138,7 @@ const DetailDrawer = (props) => {
     props.isNew === false ? fetchBills() : ""
     props.isNew === false ? fetchNotes() : ""
     
-  }, [isModule])
+  }, [isModule]) */
 
   useEffect(() => {
     
@@ -148,15 +154,11 @@ const DetailDrawer = (props) => {
   },[loading])
 
   useEffect(() => {
-
-    toggleLoading(true)
-    refreshModule(isModule)
-    setUpdated(false)
-    handleFinishedLoading()
-
+    updated != false ? handleUpdated() : ""
   },[updated])
   
-
+  const [coreFields] = core?.filter(f=> f.id === isModule).map(c => c.fields)
+console.log('coreFields', coreFields)
 /** Map-List - Side Effect to inherit related data  */
 
   useEffect(() => {
@@ -231,6 +233,204 @@ const DetailDrawer = (props) => {
 
   }
 
+  const handleNewServiceFields = () => {
+
+    const fields = fieldsServices.map(field => {
+      switch(field.key) {
+        case 'LocationName':
+          return({
+            ...field,
+            ['value']: data.LocationName || '',
+            ['ref']: {
+                ...field.ref,
+                ...{'value': data.LocationID || ''}
+              }
+          })
+        case 'Vendor':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.Vendor || ''}
+            }
+          })
+        case 'Type':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.Type || ''}
+            }
+          }
+          )
+        case 'VendorServiceName':
+          return({
+            ...field,
+            ['value']: data.VendorServiceName || '',
+          })
+        case 'AccessType':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.AccessType || ''}
+            }
+          })
+        case 'AssetID':
+          return({
+            ...field,
+            ['value']: data.AssetID || '',
+           })
+        case 'Bandwidth':
+          return({
+            ...field,
+            ['value']: data.Bandwidth || '',
+          })
+        case 'MRC':
+          return({
+            ...field,
+            ['value']: data.MRC || '',
+          })
+        case 'Status':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.Status || ''}
+            }
+          })
+        case 'StartDate':
+          return({
+            ...field,
+            ['value']: data.StartDate || '',
+          })
+        case 'LastMile':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.LastMile || ''}
+            }
+          })
+        case 'LECCircuitID':
+          return({
+            ...field,
+            ['value']: data.LECCircuitID || '',
+          })
+        case 'DemarcInfo':
+          return({
+            ...field,
+            ['value']: data.DemarcInfo || '',
+          })
+        case 'Account':
+          return({
+            ...field,
+            ['value']: data.AccountID || '',
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.id || ''}
+            }
+          })
+        case 'SubAccountNum':
+          return({
+            ...field,
+            ['value']: data.SubAccountNum || '',
+          })
+        case 'GroupNum':
+          return({
+            ...field,
+            ['value']: data.GroupNum || '',
+          })
+        case 'Tickets':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.id || ''}
+            }
+          })
+        case 'Notes':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.id || ''}
+            }
+          })
+        case 'Attachments':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.id || ''}
+            }
+          })
+        case 'Events':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.id || ''}
+            }
+          })
+        case 'Location':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': data.id || ''}
+            }
+          })
+        case 'IPDetails':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': [...data.IPAssignments || '']}
+            }
+          })
+        case 'Tags':
+          return({
+            ...field,
+            ['ref']: {
+              ...field.ref,
+              ...{'value': [...data.Tags || '']}
+            }
+          })  
+      }
+    })
+    
+  console.log('data', data)
+  const mergeFields = [...fields]
+    setData({
+      ...data, 
+      ['fields']: fields
+    }) 
+  }
+
+  const handleSubmitUpdatedFields = async() => {
+    const docData = {
+      ...data
+    }
+
+    const docRef = doc(db, isModule, id)
+
+      try {
+        
+        await updateDoc(docRef, docData)
+        
+        console.log("Successfully updated document")
+        
+      } catch {
+
+        console.log("Error updating document")
+
+      } 
+
+  }
+
+
+
   const handleFinishedLoading = () => {
 
     setTimeout(() => {
@@ -245,6 +445,13 @@ const DetailDrawer = (props) => {
 
   }
 
+  const handleUpdated = () => {
+    toggleLoading(true)
+    refreshModule(isModule)
+    setUpdated(false)
+    handleFinishedLoading()
+  }
+
 /** Map inputSource arrays for initialFields 
   const handleInitialFieldMapping = (field, value, arr) => {
 
@@ -256,7 +463,7 @@ const DetailDrawer = (props) => {
   */
 
 /** Fetch Document from Firebase */  
-  
+  console.log(data)
 const fetchPage = async(isModule, id) => {
       
   const docRef = doc(db, isModule, id)
@@ -305,9 +512,10 @@ const fetchPage = async(isModule, id) => {
   const handleFileChange = async(e) => {
 
     const file = e.target.files[0]
-    const imageRef = store.ref(currentCompanyID).child(`${data.Name && data.Name}'-'${currentCompany}`)
-    await imageRef.put(file)
-    const fileURL = await imageRef.getDownloadURL() 
+    
+    const imageRef = ref(store, `${currentCompany}/${currentCompanyID} - ${data.Name && data.Name }`)
+    await uploadBytes(imageRef, file)
+    const fileURL = await getDownloadURL(imageRef)
      setData({
        ...data,
        ['FileURL']: fileURL
@@ -389,8 +597,8 @@ const fetchPage = async(isModule, id) => {
     }  
 
       setIsRelatedDrawerOpen(!isRelatedDrawerOpen)
-      setUpdated(true)
-      setLoading(!loading) 
+      refreshModule(relatedInputData.collection)
+      setUpdated(true) 
 
   }
 
@@ -545,6 +753,27 @@ const handleInheritedData = (e) => {
 
   }
 
+  const handleDocRelations = async(field) => {
+    
+    console.log('data', data, 'active', active)
+    try {
+
+      await addDoc(collection(db, field.helperCollection), {
+        [field.dataField]: active.id || "",
+        [field.relatedCollection]: [
+          doc(db, `${field.relatedCollection}/XigoVEm5Z0SgkjOlLv8t`)
+        ]
+      })
+
+      console.log(`Successfully saved new related data`)
+
+    } catch {
+
+      console.log(`Error saving new related data`)
+      
+    }  
+  }
+
 return (
 
     <Loading active={loading}>
@@ -568,14 +797,13 @@ return (
                 {[active].map(item => item[activeSubtitle] && item[activeSubtitle])}
               </span>
             </article>
-
               <div className="block">
                 {/** Refactor as ViewPageFields Component */}
                 {active && pageFields.map(field => 
                   <>
                     {[active].map(docItem => 
                       
-                      <div className={field.visible != false & field.tab === tab ? "" : "is-hidden" }> 
+                      <div className={field.visible != false & field?.tab === tab ? "" : "is-hidden" }> 
                       <hr className={field.hasBreakBefore === true ? "" : "is-hidden"} />
                       
                         <Columns options="is-mobile">
@@ -594,6 +822,7 @@ return (
                               handleArrayMapDelete={(e, arr)=>handleArrayMapDelete(e, arr, field)}
                               handleArrayMapDrawer={(field) => handleArrayMapDrawer(field)}
                               handleRelatedDrawer={(field) => handleRelatedDrawer(field)}
+                              handleDocRelations={(field) => handleDocRelations(field)}
                             />
                           </Column>
                         </Columns>
@@ -676,12 +905,13 @@ return (
               {/** Refactor this as LastUpdatedComponent Component with Hook */}
               <Column size="is-narrow">
                 <div className="is-size-7 ml-5" style={{fontVariant: [ 'small-caps' ]}}>
-                  last updated: {active.LastUpdated && active.LastUpdated}
+                  last updated: {active.LastUpdated || ''}
                 </div>
               </Column>
               <Column size="is-narrow">
                 <div className="is-size-7 ml-5" style={{fontVariant: [ 'small-caps' ]}}>
-                  updated by: {active.LastUpdateBy && active.LastUpdateBy}</div>
+                  updated by: {active.LastUpdateBy || ''} {data.fields != undefined ? 'document version 2.01' : 'document version 1.0'}
+                </div>
                 </Column>
              
             </Columns>

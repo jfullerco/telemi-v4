@@ -1,12 +1,19 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FaFileContract } from 'react-icons/fa'
 import MapListTable from '../Tables/MapListTable'
+import RelatedMapTable from '../Tables/RelatedMapTable'
 import TagCloud from '../Tags/TagCloud'
 import Columns from './Columns'
 import Column from './Column'
 import LabeledTextField from '../Fields/LabeledTextField'
 import LabeledTextRelatedField from '../Fields/LabeledTextRelatedField'
+import {
+  Card, 
+  CardHeader, 
+  CardHeaderTitle, 
+  CardContent
+} from '../Layout/Card'
 
 const PageField = ({
     loading,
@@ -16,11 +23,11 @@ const PageField = ({
     handleClick,
     handleRelatedDrawer,
     handleArrayMapDrawer,
-    
+    handleDocRelations,
     handleArrayMapDelete 
   }) => {
-  const history = useHistory()
-  
+  const navigate = useNavigate()
+  console.log('field', field, 'fieldData', fieldData)
   return(
     <>
     {field && [field].map(item => {
@@ -38,7 +45,8 @@ const PageField = ({
                   </Column>
                   <Column size="1 is-narrow">:</Column>
                   <Column size="7">
-                    {[fieldData].map(data => data[item.dataField] != "" || undefined ? data[item.dataField] : "--"  )} 
+                    {[fieldData].map(data => data[item.dataField] != "" || undefined ? 
+                      data[item.dataField] : "--"  )} 
                   </Column>
                 </Columns>
               </div>
@@ -50,6 +58,29 @@ const PageField = ({
             }
             </>  
             )
+
+          case "related-array-map":
+            return (
+              <Card noShadow={false}>
+                <CardHeader>
+                  <CardHeaderTitle>
+                    {item.label}
+                  </CardHeaderTitle>
+                </CardHeader>
+                <CardContent>
+                <a onClick={() => handleDocRelations(field)}>Link Related </a>
+                <RelatedMapTable 
+                        headerFields={item.columns}
+                        data={item.inputSource}
+                        colRef={item.relatedCollection}
+                        helperCollection={item.helperCollection}
+                        handleClick={(e) => handleRelatedDrawer(e)}
+                        handleDelete={(e, arr)=>handleArrayMapDelete(e, arr)}
+                  /> 
+                </CardContent>
+              </Card>
+            )
+
           case "text-area":
             return (
               <>
@@ -125,7 +156,7 @@ const PageField = ({
                               </thead>
                               <tbody>
                                 {location != undefined ? 
-                                  <div className="is-size-7" key={location.id}>
+                                  <div className="is-size-6" key={location.id}>
                                     {`
                                       ${location.Address1 || ""} 
                                       ${location.Address2 || ""} 
@@ -275,9 +306,9 @@ const PageField = ({
                     
                   {[fieldData].map(data => data[item.dataField] != "" || undefined ? (
                   <div key={data[item.label]} className={
-                    data[item.dataField] === 'Active' ? "tag is-success" :
-                    data[item.dataField] === 'Disconnected' ? "tag is-danger" : 
-                    data[item.dataField] === 'Pending Activation' || 'Pending Disconnect' ? "tag is-warning" : ""}>{data[item.dataField]}
+                    data[item.dataField] === 'Active' ? "button is-success" :
+                    data[item.dataField] === 'Disconnected' ? "button is-danger" : 
+                    data[item.dataField] === 'Pending Activation' || 'Pending Disconnect' ? "button is-warning" : ""}>{data[item.dataField]}
                   </div>
                   ) : "--"  )}
                   

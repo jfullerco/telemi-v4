@@ -1,10 +1,10 @@
 import React from 'react'
 import TextBox from '../Forms/TextBox'
 
-const AutoCompletePlaces = (props) => {
+const AutoCompleteText = (props) => {
   return(
     <TextBox 
-
+      
     />
   )
 }

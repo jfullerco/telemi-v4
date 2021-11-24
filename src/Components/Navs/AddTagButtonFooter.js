@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { FaTags } from 'react-icons/fa'
 import { db } from '../../Contexts/firebase'
 import TextBox from '../Forms/TextBox'
@@ -8,7 +8,7 @@ const AddTagButtonFooter = (props) => {
   const values = props.values
   
   
-  const history = useHistory()
+  const navigate = useNavigate()
   const [ toggle, setToggle ] = useState(false)
   const [tags, setTags] = useState("")
   const [addTag, setAddTag] = useState("")

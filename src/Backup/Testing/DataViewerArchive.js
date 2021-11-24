@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 import {stateContext} from '../../../Contexts/stateContext'
 import {db} from '../../../Contexts/firebase'
@@ -26,7 +26,7 @@ const DataViewer = (props) => {
   const userContext = useContext(stateContext)
   const {dataLoading, currentCompany} = userContext.userSession
 
-  const history = useHistory()
+  const history = useNavigate()
 
   const [locations, setLocations] = useState()
   const [orders, setOrders] = useState()

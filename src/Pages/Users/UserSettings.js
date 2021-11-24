@@ -6,34 +6,62 @@ import TileField from '../../Components/Layout/TileField'
 const UserSettings = () => {
   const userContext = useContext(stateContext)
   const { currentUser } = userContext.userSession
-  return(
-    <div className="py-5">
-    <TileField
-      options="is-ancestor"
-    >
-      <TileField
-        options="is-parent is-vertical"
-      >
-        <article className="tile is-child notification is-rounded has-text-black">
-          <p className="title">
-            USER SETTINGS
-          </p>
-          <p>
-            Current Login: {currentUser}
-          </p>
 
-            <div className="control">
-              <label>
-                <input className="checkbox" type="checkbox" name="welcomeScreen" defaultValue={false} /> 
-                  <span className="ml-2">Show Welcome screen</span>
-                </label> 
-            </div>
-          
-        </article>
-        <article className="is-child notification has-text-black"> Thanks for being patient while we incorporate new features! </article>
-      </TileField>
-    </TileField>
-    </div>
+  const fieldState = [
+    {
+      label: 'Module',
+      type: 'text',
+      key: 'name'
+    },
+    {
+      label: 'headers',
+      type: 'ref',
+      key: 'headers',
+      ref: {
+        key: 'id',
+        type: 'local-array',
+        fields: ['key', 'label', 'visible']
+      }
+    },
+    {
+      label: 'Fields',
+      type: 'ref',
+      key: 'fields',
+      ref: {
+        key: 'id',
+        type: 'local-array',
+        fields: [
+          {
+            label: 'Key',
+            type: 'text',
+            key: 'key'
+          }, 
+          {
+            label: 'Label',
+            type: 'text',
+            key: 'label'
+          }, 
+          {
+            label: 'Type',
+            type: 'text',
+            key: 'type'
+          },
+          {
+            label: 'Ref',
+            type: 'local-array',
+            key: 'ref'
+            }
+          ]
+      }
+    }
+
+  ]
+
+
+  return(
+    <>
+      
+    </>
   )
 }
 export default UserSettings

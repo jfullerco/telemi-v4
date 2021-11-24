@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {Link, Switch, useHistory, useParams} from 'react-router-dom'
+import {Link, Switch, useNavigate, useParams} from 'react-router-dom'
 import refreshData from '../../Services/refreshData'
 import getClient from '../../Services/clientService'
 
@@ -7,7 +7,7 @@ import {stateContext} from '../../stateContext'
 
 const ClientList = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const {u} = useParams()
   const user = u
   const userContext = useContext(stateContext)

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { StateProvider, stateContext } from './Contexts/stateContext'
 import { FieldProvider } from './Contexts/fieldContext'
@@ -11,14 +11,9 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import NavBar from './Components/NavBar'
 import AddCompany from './Pages/Companies/AddCompany'
-import DetailModule from './Pages/DetailModule'
-import RelatedDetailModule from './Pages/RelatedDetailModule'
-
 import NotFound from './Components/NotFound'
-import UserSettings from './Pages/Users/UserSettings'
+import Admin from './Pages/Admin/Admin'
 import Search from './Pages/Search'
-import Menu from './Components/Menu/Menu'
-import MenuList from './Components/Menu/MenuList'
 
 export default function App() {
   
@@ -30,36 +25,20 @@ export default function App() {
       <FieldProvider>
       <Router>
       <NavBar />
-       
-      <div className="columns is-variable is-mobile">
-      <div className="column is-1 is-hidden-mobile">
-      </div>
-        <div className="column is-12-mobile is-four-fifths-tablet is-10-desktop is-10-widescreen is-10-fullhd">
-        <div className="container"> 
-
-          <Switch>
+          <Routes>
             
-            <Route exact path="/"  component={Hello} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route exact path="/"  element={<Hello />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             
-            <Route path="/:isModule/:currentCompanyID/:id" component={DetailModule} />
-            <Route path="/Related/:isModule/:currentCompanyID/:id" component={RelatedDetailModule} />
+            <Route path="/addcompany" element={<AddCompany />} />
+            <Route path="/settings" element={<Admin />} />
+            <Route path="/search" element={<Search />} />
             
-            <Route path="/addcompany" component={AddCompany} />
-            <Route path="/settings" component={UserSettings} />
-            <Route path="/search" component={Search} />
-            
-            <Route component={NotFound} />
-            </Switch>
-            
-        </div>
-        </div>
-      <div className="column is-1 is-hidden-mobile"></div>
-      </div>  
-         
+            <Route element={<NotFound />} />
+            </Routes>
     </Router>
     </FieldProvider>
     </AuthProvider>

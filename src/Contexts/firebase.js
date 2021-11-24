@@ -1,11 +1,12 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { 
   getFirestore, 
   collection, 
   query, 
   where, 
+  onSnapshot,
   doc, 
   getDoc, 
   getDocs, 
@@ -16,7 +17,7 @@ import {
   arrayUnion, 
   arrayRemove 
 } from 'firebase/firestore'
-import { getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -57,7 +58,9 @@ export const fire = {
   deleteDoc,
   getStorage,
   ref,
+  onSnapshot,
   uploadBytes,
+  getDownloadURL,
   arrayUnion,
   arrayRemove
 };

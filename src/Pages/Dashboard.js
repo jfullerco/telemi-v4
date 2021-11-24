@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { stateContext } from '../Contexts/stateContext'
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, onSnapshot, query, where, getDocs } from 'firebase/firestore'
 import { db } from '../Contexts/firebase'
 
 import CompanyList from './Companies/CompanyList'
-
+import Columns from '../Components/Layout/Columns'
+import Column from '../Components/Layout/Column'
 import Loading from '../Components/Loading'
 
 import DashboardGrids from './Dashboard/DashboardGrids'
-
+import CompanyMenu from '../Components/Menu/Menu'
 import Login from './Login'
 
 
@@ -57,7 +58,7 @@ const Dashboard = () => {
           users,
           contracts } = userContext.userSession
     
-  const history = useHistory()
+  
 
   const isUserLoggedIn = currentUser != undefined ? currentUser : ""
   const isUserAdmin = userType != undefined ? userType : ""
@@ -82,8 +83,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     loading != false ? fetchPageData() : ""
-    
-
   },[loading])
 
   useEffect(()=> {
@@ -94,11 +93,11 @@ const Dashboard = () => {
     
     const q = query(collection(db, "Users"), where("Email", "==", email))
     const userRef = await getDocs(q)
-    const user = await userRef.docs.map(doc => ({id: doc.id, FirstName: doc.FirstName, Type: doc.Type, ...doc.data()}))
-    console.log(user)
-    await setUserFirstName(user[0].FirstName)
-    await setUserType(user[0].Type)
-    await setUserDefaults(user[0].Defaults && user[0].Defaults)
+    const user = userRef.docs.map(doc => ({id: doc.id, FirstName: doc.FirstName, Type: doc.Type, ...doc.data()}))
+    //console.log(user)
+    await setUserFirstName(user[0]?.FirstName)
+    await setUserType(user[0]?.Type)
+    await setUserDefaults(user[0]?.Defaults)
     
   }
 
@@ -134,54 +133,70 @@ const Dashboard = () => {
      
     const companies = await companiesRef.docs.map(doc => ({id: doc.id, ...doc.data()}))
     
-    setCurrentCompanyID(companies[0].id)
-    setCurrentCompany(companies[0].Name)
+    setCurrentCompanyID(companies[0]?.id)
+    setCurrentCompany(companies[0]?.Name)
     setCompanies(companies)
-    
-    
   }
 
   const fetchCompaniesAdmin = async() => {
-    
+
+    const q = query(collection(db, 'Companies'))
+
     const companiesRef = await getDocs(collection(db, "Companies"))
-    
+
     const companies = await companiesRef.docs.map(doc => ({id: doc.id, ...doc.data()}))
     
     setCurrentCompanyID(companies[0].id)
     setCurrentCompany(companies[0].Name)
     setCompanies(companies)
-    
-    
+  }
+
+  const handleCompanyMenuClick = (e) => {
+    setLoading(true)
+    const {id, Name} = e
+    setCurrentCompany(Name)
+    setCurrentCompanyID(id)
   }
   
   return (   
     <Loading active={loading}>
 
       {currentUser != undefined ?
+        <Columns options="is-12 is-mobile ">
+          <Column size="is-3 is-hidden-mobile">
+          
+            <CompanyMenu 
+              data={companies && companies}
+              handleClick={(e) => handleCompanyMenuClick(e)}
+              active={currentCompanyID}
+            />
+          
+          </Column>
+          <Column size="is-hidden"></Column>
+        <Column>
         <>
-          <section className="hero is-small">
-            <div className="hero-body">
-
+          
+            <div className="pt-4 pl-4 is-hidden-tablet">
               <CompanyList /> 
-
             </div>
-          </section>
-
           
 
-          <div className="">
+          <div className="block">
 
             <DashboardGrids />
             
-
           </div>
         </>
+        </Column>
+        <Column size="is-hidden"></Column>
+        </Columns>
         :
         <>
 
           <Login />
 
         </>
+        
       }
     </Loading>
   )

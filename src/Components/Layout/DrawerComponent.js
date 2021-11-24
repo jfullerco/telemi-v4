@@ -1,5 +1,5 @@
 import React from 'react'
-import Drawer from '@material-ui/core/Drawer'
+import Drawer from '@mui/material/Drawer'
 
 const DrawerComponent = ({
     title, 
@@ -30,6 +30,12 @@ const DrawerComponent = ({
         
         </div>
         {children}
+        <div className={hideBtns === true ? "is-hidden" : "drawer-footer-menu mb-2"}>
+        
+          <button className="button is-rounded is-link" type="submit" onClick={handleSubmit}>Save</button>
+          <button className="button is-rounded ml-2" onClick={handleClose}>Close</button>
+        
+        </div>
       </div>
       
     </Drawer>

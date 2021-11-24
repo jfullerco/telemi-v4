@@ -1,15 +1,15 @@
 import React, {useState, useContext} from 'react'
-import {Link, Redirect, useHistory} from 'react-router-dom'
+import {Link, Redirect, useNavigate} from 'react-router-dom'
 
 import {stateContext} from '../Contexts/stateContext'
 import {useAuth} from '../Contexts/AuthContext'
 import {auth} from '../Contexts/firebase'
 
-import {FaSearch, FaUser} from 'react-icons/fa'
+import {FaSearch, FaUser, FaCog} from 'react-icons/fa'
 
 const NavBar = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const userContext = useContext(stateContext)
   const {userFirstName} = userContext.userSession
   const {currentUser, logOutUser} = useAuth()
@@ -17,14 +17,14 @@ const NavBar = () => {
   const [isActive, setIsActive] = useState(false)
 
   const handleNewUserButton = () => {
-    history.push("/register")
+    navigate('/register')
   }
 
   const logOut = async() => {
     
     await auth.signOut()
     logOutUser()
-    history.push("/")
+    navigate('/')
     
   }
 
@@ -33,9 +33,10 @@ const NavBar = () => {
     <div className="navbar-brand">
 
       <div className="navbar-item">
-        <Link to="/dashboard" className="has-text-white is-size-4">
+        <a onClick={()=>navigate('/')} className='has-text-white is-size-4'>
           <strong>TELEMI</strong>
-        </Link><span className="is-size-7 pl-1">beta</span>
+        </a>
+        <span className="is-size-7 pl-1">beta</span>
       </div>
     
     <a 
@@ -61,15 +62,15 @@ const NavBar = () => {
         
         {currentUser != undefined ? ( 
           <>
-            <a className="navbar-item" onClick={()=> history.push("/search")}>
+            <a className="navbar-item" onClick={()=> navigate("/search")}>
               <span className="icon is-medium">
                 <FaSearch />
               </span>
             </a>
             
             <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link" onClick={()=>history.push("/dashboard")} ><span className="icon is-medium"><FaUser /></span></a>
-          
+            <a className="navbar-link" onClick={()=>navigate("/dashboard")} ><span className="icon is-medium"><FaUser /></span></a>
+            <a className="navbar-link" onClick={()=>navigate("/settings")} ><span className="icon is-medium"><FaCog /></span></a>
           <div className="navbar-dropdown">
           <a onClick={()=>logOut()} className="navbar-item">
             Logout 
@@ -82,9 +83,9 @@ const NavBar = () => {
           <div className="navbar-item" onClick={()=>handleNewUserButton()}>
           <button className="button is-small is-rounded has-background-grey-lighter">Create Account</button>
           </div>
-          <Link to="/login" className="navbar-item" >
+          <a onClick={()=> navigate('/login')} className="navbar-item" >
             Login
-          </Link>
+          </a>
           </>
         )}
 

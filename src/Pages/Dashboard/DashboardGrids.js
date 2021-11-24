@@ -1,34 +1,33 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import Drawer from '@material-ui/core/Drawer';
-import Paper from '@material-ui/core/Paper';
+import { useNavigate, Link } from 'react-router-dom'
+import Drawer from '@mui/material/Drawer';
+import Paper from '@mui/material/Paper';
 
 import { stateContext } from '../../Contexts/stateContext'
 import { fieldContext } from '../../Contexts/fieldContext'
-import { db } from '../../Contexts/firebase'
+
 import { useSortHook } from '../../Hooks/useSortHook'
 import {useGroupBy, handleIsGroupReducer} from '../../Hooks/useGroupBy'
 import {useFilterArray} from '../../Components/Tables/useFilterArray'
 import RenderDrawer, {useDrawer} from '../../Hooks/useDrawer'
 
-import GridComponent from './Components/GridComponent'
-import GridGroup from '../../Components/Grids/GridGroup'
 import GridGroup2 from '../../Components/Grids/GridGroup2'
+import GridTable from '../../Components/Grids/GridTable'
 import Grid from '../../Components/Grids/Grid'
-import CardGrid from '../../Components/Grids/CardGrid'
+
 import CostBySite from '../../Components/Graphs/CostBySite'
-import NetworkGraphComponent from '../../Components/NetworkGraph/NetworkGraphComponent'
+
 import SelectView from '../../Components/Grids/SelectView'
 import Columns from '../../Components/Layout/Columns'
 import Column from '../../Components/Layout/Column'
 import SideDrawer from '../../Components/Drawers/SideDrawer'
 import DetailDrawer from '../DetailDrawer'
-import SquareSelectField from '../../Components/Forms/SquareSelectField'
+
 
 const DashboardGrids = ({visible}) => {
 
   const userContext = useContext(stateContext)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const { isStyle, 
           fetchLocations,
@@ -91,7 +90,10 @@ const DashboardGrids = ({visible}) => {
     userDetailFields,
     contractGridColumns,
     contractMobileGridColumns,
-    contractGroupByFields
+    contractGroupByFields,
+    fetchCore,
+    core,
+    setCore
   } = useContext(fieldContext)
 
   const searchRef = useRef("")
@@ -111,7 +113,7 @@ const DashboardGrids = ({visible}) => {
   const [isCurrentDocID, setIsCurrentDocID] = useState()
   const [isModule, setIsModule] = useState()
   
-
+  const [testing, setTesting] = useState([])
   const { sortedArr, sortArr } = useSortHook() 
   const {drawers, setDrawers} = useDrawer()
 
@@ -120,9 +122,9 @@ const DashboardGrids = ({visible}) => {
    * */
 
   useEffect(() => {
-   recentUpdatesArr("SERVICES") 
-  },[services])
-
+   fetchCore()
+  },[])
+console.log(core)
   useEffect(() => {
     
   },[isDrawerOpen])
@@ -134,7 +136,6 @@ const DashboardGrids = ({visible}) => {
     grid === 'ACCOUNTS' ? setGroupByOptions(accountGroupByFields) :
     grid === 'LOCATIONS' ? setGroupByOptions(locationGroupByFields) :
     grid === 'CONTRACTS' ? setGroupByOptions(contractGroupByFields) :
-    grid === 'NETWORK' ? setNetworkMap(!networkMap) :
     setGroupByOptions(serviceGroupByFields)
     recentUpdatesArr("SERVICES")
   },[grid])
@@ -156,7 +157,7 @@ const DashboardGrids = ({visible}) => {
     
   }
   
-  /** Modifty Grid Name to Title Case */
+  /** Modify Grid Name to Title Case */
 
   const modGridStr = (str) => {
     const strLower = str.toLowerCase()
@@ -231,14 +232,17 @@ const DashboardGrids = ({visible}) => {
     setDrawers(removeDrawer)
     
   }
-console.log('data', data)
+
+const headerArr = users && [...users].filter(f => f.Email === currentUser).map(m => m._sys._modules)
+
+console.log('users', users, 'headerArr', headerArr)
 return (
   <>
-    <div className="is-flex is-justify-content-flex-end">
+    <div className="pt-4 is-flex is-justify-content-flex-end">
     <Columns options="is-mobile pr-3 pb-3 is-gapless">
       <Column size="is-narrow mr-2 mt-1 is-hidden-mobile">View</Column>
       <Column size="is-narrow mr-2">
-        <SelectView onChange={(e)=>handleGridChange(e)} value={grid}>
+        <SelectView onChange={(e)=>handleGridChange(e)} params='shaded' value={grid}>
         <option value="SERVICES">Services</option>
         <option value="TICKETS">Tickets</option>
         <option value="ORDERS">Orders</option>
@@ -251,8 +255,8 @@ return (
       </Column>
 
       <Column size="is-narrow mr-2">
-
-        <div className="select is-rounded is-small">
+        
+        <div className="select ">
         <select onChange={(e) => setGroupBy(e.target.value)} value={groupBy}>
 
           <option value="ALL">Show All</option>
@@ -264,23 +268,31 @@ return (
           ))}
 
         </select>
+        
         </div>
 
       </Column>
       <Column size="is-1">
-        <button className="button is-rounded is-link is-small has-text-weight-bold" onClick={()=>handleAddClick()}>Add</button>
-        <button onClick={()=>handleAddDrawer(services, serviceGridColumns)}>Test</button>
+        <button className="button is-rounded is-link" onClick={()=>handleAddClick()}>Add</button>
+        
       </Column>
       
     </Columns>
     </div>
-    
-    <Grid title="Monthly Cost">
-      <CostBySite />
-    </Grid>
-
-    
-    
+    {/* {!checkForFields ? '' : 
+    <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
+      <GridTable
+        data={grid === "SERVICES" ? services : null}
+        isGrid='Services'
+        headerFields={headerArr}
+        mobileHeaderFields={serviceMobileGridColumns}
+        handleClick={(e) => handleAddDrawer({id: e, colRef: serviceGridColumns, modRef: "Services"})}
+        handleSort={(e)=>handleSorting(e)}
+        groupBy={groupBy}
+        currUser = {currentUser}
+      />
+    </div>   
+    } */}
     <div className={grid === 'SERVICES' ? "" : "is-hidden"}>
       <GridGroup2
         data={grid === "SERVICES" ? services : null}

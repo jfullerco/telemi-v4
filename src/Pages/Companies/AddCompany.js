@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef, useContext} from 'react'
-import { useHistory } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
+import {fieldsCompanies} from '../../Contexts/initialFieldContext'
 import { db, fire, store } from '../../Contexts/firebase'
 import {stateContext} from '../../Contexts/stateContext'
 
@@ -12,7 +12,7 @@ import Column from '../../Components/Layout/Column'
 
 
 const AddCompany = ({open}) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const userContext = useContext(stateContext)
   const { setDataLoading } = userContext
   const { currentUser } = userContext.userSession
@@ -34,26 +34,28 @@ const AddCompany = ({open}) => {
   const [pageSuccess, setPageSuccess] = useState()
   
   const companyName = useRef("")
-
+  
+  
   const handleSubmit = async(e) => {
+    const nameField = fieldsCompanies ? fieldsCompanies.filter(f=> f.uid === 'Name').map(field => {
+      value: companyName.current.value
+    }) : ''
+    const userField = fieldsCompanies ? fieldsCompanies.filter(f=> f.uid === 'Users').map(field => {
+      value: [currentUser]
+    }) : ''
 
-    const data = {
-      Name: companyName.current.value,
-      Users: [currentUser]
+    const docData = {
+      fields: [
+        ...fieldsCompanies,
+        nameField,
+        userField
+      ]
     }  
-
-    try {
-      await addDoc(collection(db, "Companies"), data)
-      setPageSuccess("Company Added! Returning to Dashboard...")
-      
-    } catch {
-      setPageError("Error Adding Company")
-    }
-    autoClose()
+    console.log('name', nameField, 'data', docData)
   }
 
   const autoClose = () => {
-    setTimeout(() => {history.push('/dashboard')}, 1500)
+    setTimeout(() => {navigate('/dashboard')}, 1500)
   }
   
 
@@ -72,7 +74,7 @@ const AddCompany = ({open}) => {
             <Button label="Add" handleSubmit={handleSubmit} options="is-link" />
           </Column>
           <Column size="is-narrow">
-            <Button label="Cancel" handleSubmit={() => history.push('/dashboard')} />
+            <Button label="Cancel" handleSubmit={() => navigate('/dashboard')} />
           </Column>
 
         </Columns>
