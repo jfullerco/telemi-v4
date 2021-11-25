@@ -1,3 +1,2 @@
-# telemi-v3-rkqngq
+# Telemi
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/telemi-v3-rkqngq)
